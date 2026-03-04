@@ -25,7 +25,7 @@ x-i18n:
 
 ```bash
 openclaw logs
-openclaw logs --follow
+sudoclaw logs --follow
 openclaw logs --json
 openclaw logs --limit 500
 ```

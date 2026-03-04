@@ -17,7 +17,7 @@ import java.util.UUID
 
 class SecurePrefs(context: Context) {
   companion object {
-    val defaultWakeWords: List<String> = listOf("openclaw", "claude")
+    val defaultWakeWords: List<String> = listOf("sudoclaw", "claude")
     private const val displayNameKey = "node.displayName"
     private const val voiceWakeModeKey = "voiceWake.mode"
     private const val plainPrefsName = "openclaw.node"

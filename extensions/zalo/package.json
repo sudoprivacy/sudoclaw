@@ -6,7 +6,7 @@
   "dependencies": {
     "undici": "7.22.0"
   },
-  "openclaw": {
+  "sudoclaw": {
     "extensions": [
       "./index.ts"
     ],

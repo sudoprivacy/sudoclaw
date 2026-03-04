@@ -57,7 +57,7 @@ openclaw plugins install ./extensions/twitch
   channels: {
     twitch: {
       enabled: true,
-      username: "openclaw", // 机器人的 Twitch 账户
+      username: "sudoclaw", // 机器人的 Twitch 账户
       accessToken: "oauth:abc123...", // OAuth Access Token（或使用 OPENCLAW_TWITCH_ACCESS_TOKEN 环境变量）
       clientId: "xyz789...", // Token Generator 中的 Client ID
       channel: "vevisk", // 要加入的 Twitch 频道聊天（必填）
@@ -101,7 +101,7 @@ OPENCLAW_TWITCH_ACCESS_TOKEN=oauth:abc123...
   channels: {
     twitch: {
       enabled: true,
-      username: "openclaw",
+      username: "sudoclaw",
       accessToken: "oauth:abc123...",
       clientId: "xyz789...",
       channel: "vevisk",
@@ -163,13 +163,13 @@ OPENCLAW_TWITCH_ACCESS_TOKEN=oauth:abc123...
     twitch: {
       accounts: {
         channel1: {
-          username: "openclaw",
+          username: "sudoclaw",
           accessToken: "oauth:abc123...",
           clientId: "xyz789...",
           channel: "vevisk",
         },
         channel2: {
-          username: "openclaw",
+          username: "sudoclaw",
           accessToken: "oauth:def456...",
           clientId: "uvw012...",
           channel: "secondchannel",
@@ -258,7 +258,7 @@ OPENCLAW_TWITCH_ACCESS_TOKEN=oauth:abc123...
 首先，运行诊断命令：
 
 ```bash
-openclaw doctor
+sudoclaw doctor
 openclaw channels status --probe
 ```
 
@@ -323,7 +323,7 @@ Access token refreshed for user 123456 (expires in 14400s)
   channels: {
     twitch: {
       enabled: true,
-      username: "openclaw",
+      username: "sudoclaw",
       accessToken: "oauth:abc123...",
       clientId: "xyz789...",
       channel: "vevisk",

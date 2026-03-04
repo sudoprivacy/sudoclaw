@@ -19,7 +19,7 @@ OpenClaw has two log “surfaces”:
 
 - Default rolling log file is under `/tmp/openclaw/` (one file per day): `openclaw-YYYY-MM-DD.log`
   - Date uses the gateway host's local timezone.
-- The log file path and level can be configured via `~/.openclaw/openclaw.json`:
+- The log file path and level can be configured via `~/.sudoclaw/sudoclaw.json`:
   - `logging.file`
   - `logging.level`
 
@@ -29,7 +29,7 @@ The Control UI Logs tab tails this file via the gateway (`logs.tail`).
 CLI can do the same:
 
 ```bash
-openclaw logs --follow
+sudoclaw logs --follow
 ```
 
 **Verbose vs. log levels**

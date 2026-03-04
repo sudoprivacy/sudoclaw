@@ -52,7 +52,7 @@ Select **Gateway service** when prompted.
 Repair/migrate:
 
 ```
-openclaw doctor
+sudoclaw doctor
 ```
 
 ## Advanced: expose WSL services over LAN (portproxy)

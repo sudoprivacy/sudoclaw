@@ -9,7 +9,7 @@ import Testing
         let segments = makeSegments(
             transcript: transcript,
             words: [("hello", 0.0, 0.1), ("world", 0.2, 0.1)])
-        #expect(VoiceWakeManager.extractCommand(from: transcript, segments: segments, triggers: ["openclaw"]) == nil)
+        #expect(VoiceWakeManager.extractCommand(from: transcript, segments: segments, triggers: ["sudoclaw"]) == nil)
     }
 
     @Test func extractCommandTrimsTokensAndResult() {
@@ -18,7 +18,7 @@ import Testing
             transcript: transcript,
             words: [
                 ("hey", 0.0, 0.1),
-                ("openclaw", 0.2, 0.1),
+                ("sudoclaw", 0.2, 0.1),
                 ("do", 0.9, 0.1),
                 ("thing", 1.1, 0.1),
             ])
@@ -36,14 +36,14 @@ import Testing
             transcript: transcript,
             words: [
                 ("hey", 0.0, 0.1),
-                ("openclaw", 0.2, 0.1),
+                ("sudoclaw", 0.2, 0.1),
                 ("do", 0.35, 0.1),
                 ("thing", 0.5, 0.1),
             ])
         let cmd = VoiceWakeManager.extractCommand(
             from: transcript,
             segments: segments,
-            triggers: ["openclaw"],
+            triggers: ["sudoclaw"],
             minPostTriggerGap: 0.3)
         #expect(cmd == nil)
     }
@@ -52,8 +52,8 @@ import Testing
         let transcript = "hey openclaw"
         let segments = makeSegments(
             transcript: transcript,
-            words: [("hey", 0.0, 0.1), ("openclaw", 0.2, 0.1)])
-        #expect(VoiceWakeManager.extractCommand(from: transcript, segments: segments, triggers: ["openclaw"]) == nil)
+            words: [("hey", 0.0, 0.1), ("sudoclaw", 0.2, 0.1)])
+        #expect(VoiceWakeManager.extractCommand(from: transcript, segments: segments, triggers: ["sudoclaw"]) == nil)
     }
 
     @Test func extractCommandIgnoresEmptyTriggers() {
@@ -62,14 +62,14 @@ import Testing
             transcript: transcript,
             words: [
                 ("hey", 0.0, 0.1),
-                ("openclaw", 0.2, 0.1),
+                ("sudoclaw", 0.2, 0.1),
                 ("do", 0.9, 0.1),
                 ("thing", 1.1, 0.1),
             ])
         let cmd = VoiceWakeManager.extractCommand(
             from: transcript,
             segments: segments,
-            triggers: ["", "   ", "openclaw"],
+            triggers: ["", "   ", "sudoclaw"],
             minPostTriggerGap: 0.3)
         #expect(cmd == "do thing")
     }

@@ -52,10 +52,10 @@ openclaw gateway uninstall
 3. 删除状态 + 配置：
 
 ```bash
-rm -rf "${OPENCLAW_STATE_DIR:-$HOME/.openclaw}"
+rm -rf "${SUDOCLAW_STATE_DIR:-$HOME/.openclaw}"
 ```
 
-如果你将 `OPENCLAW_CONFIG_PATH` 设置为状态目录外的自定义位置，也请删除该文件。
+如果你将 `SUDOCLAW_CONFIG_PATH` 设置为状态目录外的自定义位置，也请删除该文件。
 
 4. 删除你的工作区（可选，移除智能体文件）：
 
@@ -79,7 +79,7 @@ rm -rf /Applications/OpenClaw.app
 
 注意事项：
 
-- 如果你使用了配置文件（`--profile` / `OPENCLAW_PROFILE`），对每个状态目录重复步骤 3（默认为 `~/.openclaw-<profile>`）。
+- 如果你使用了配置文件（`--profile` / `SUDOCLAW_PROFILE`），对每个状态目录重复步骤 3（默认为 `~/.openclaw-<profile>`）。
 - 在远程模式下，状态目录位于 **Gateway 网关主机**上，因此也需要在那里运行步骤 1-4。
 
 ## 手动服务移除（CLI 未安装）
@@ -123,7 +123,7 @@ Remove-Item -Force "$env:USERPROFILE\.openclaw\gateway.cmd"
 
 ### 普通安装（install.sh / npm / pnpm / bun）
 
-如果你使用了 `https://openclaw.ai/install.sh` 或 `install.ps1`，CLI 是通过 `npm install -g openclaw@latest` 安装的。
+如果你使用了 `https://sudoclaw.ai/install.sh` 或 `install.ps1`，CLI 是通过 `npm install -g openclaw@latest` 安装的。
 使用 `npm rm -g openclaw` 移除（或 `pnpm remove -g` / `bun remove -g`，如果你是用那种方式安装的）。
 
 ### 源码检出（git clone）

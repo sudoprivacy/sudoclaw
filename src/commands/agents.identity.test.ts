@@ -83,7 +83,7 @@ describe("agents set-identity command", () => {
 
     expect(configMocks.writeConfigFile).toHaveBeenCalledTimes(1);
     expect(getWrittenMainIdentity()).toEqual({
-      name: "OpenClaw",
+      name: "sudoclaw",
       theme: "helpful sloth",
       emoji: ":)",
       avatar: "avatars/openclaw.png",

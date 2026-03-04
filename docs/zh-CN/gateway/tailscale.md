@@ -27,7 +27,7 @@ OpenClaw 可以为 Gateway 网关仪表盘和 WebSocket 端口自动配置 Tails
 
 设置 `gateway.auth.mode` 来控制握手：
 
-- `token`（设置 `OPENCLAW_GATEWAY_TOKEN` 时的默认值）
+- `token`（设置 `SUDOCLAW_GATEWAY_TOKEN` 时的默认值）
 - `password`（通过 `OPENCLAW_GATEWAY_PASSWORD` 或配置的共享密钥）
 
 当 `tailscale.mode = "serve"` 且 `gateway.auth.allowTailscale` 为 `true` 时，

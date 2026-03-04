@@ -252,8 +252,8 @@ Run this ladder first:
 ```bash
 openclaw status
 openclaw gateway status
-openclaw logs --follow
-openclaw doctor
+sudoclaw logs --follow
+sudoclaw doctor
 openclaw channels status --probe
 ```
 

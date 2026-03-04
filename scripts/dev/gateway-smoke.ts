@@ -2,13 +2,13 @@ import { createArgReader, createGatewayWsClient, resolveGatewayUrl } from "./gat
 
 const { get: getArg } = createArgReader();
 const urlRaw = getArg("--url") ?? process.env.OPENCLAW_GATEWAY_URL;
-const token = getArg("--token") ?? process.env.OPENCLAW_GATEWAY_TOKEN;
+const token = getArg("--token") ?? process.env.SUDOCLAW_GATEWAY_TOKEN;
 
 if (!urlRaw || !token) {
   // eslint-disable-next-line no-console
   console.error(
     "Usage: bun scripts/dev/gateway-smoke.ts --url <wss://host[:port]> --token <gateway.auth.token>\n" +
-      "Or set env: OPENCLAW_GATEWAY_URL / OPENCLAW_GATEWAY_TOKEN",
+      "Or set env: OPENCLAW_GATEWAY_URL / SUDOCLAW_GATEWAY_TOKEN",
   );
   process.exit(1);
 }

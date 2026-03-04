@@ -20,7 +20,7 @@ openclaw onboard
 
 <Info>
 Fastest first chat: open the Control UI (no channel setup needed). Run
-`openclaw dashboard` and chat in the browser. Docs: [Dashboard](/web/dashboard).
+`sudoclaw dashboard` and chat in the browser. Docs: [Dashboard](/web/dashboard).
 </Info>
 
 To reconfigure later:
@@ -78,7 +78,7 @@ The wizard starts with **QuickStart** (defaults) vs **Advanced** (full control).
 <Note>
 Re-running the wizard does **not** wipe anything unless you explicitly choose **Reset** (or pass `--reset`).
 CLI `--reset` defaults to config, credentials, and sessions; use `--reset-scope full` to include workspace.
-If the config is invalid or contains legacy keys, the wizard asks you to run `openclaw doctor` first.
+If the config is invalid or contains legacy keys, the wizard asks you to run `sudoclaw doctor` first.
 </Note>
 
 **Remote mode** only configures the local client to connect to a Gateway elsewhere.

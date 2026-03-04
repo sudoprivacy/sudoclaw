@@ -71,7 +71,7 @@ curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
 apt install -y nodejs
 
 # Install OpenClaw
-curl -fsSL https://openclaw.ai/install.sh | bash
+curl -fsSL https://sudoclaw.ai/install.sh | bash
 
 # Verify
 openclaw --version
@@ -235,7 +235,7 @@ For the full setup guide, see [Oracle Cloud](/platforms/oracle). For signup tips
 
 ```bash
 openclaw gateway status
-openclaw doctor --non-interactive
+sudoclaw doctor --non-interactive
 journalctl -u openclaw --no-pager -n 50
 ```
 

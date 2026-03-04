@@ -9,7 +9,7 @@
     "https-proxy-agent": "^7.0.6",
     "zod": "^4.3.6"
   },
-  "openclaw": {
+  "sudoclaw": {
     "extensions": [
       "./index.ts"
     ],

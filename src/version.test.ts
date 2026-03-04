@@ -44,7 +44,7 @@ function expectVersionMetadataToBeMissing(moduleUrl: string) {
 describe("version resolution", () => {
   it("resolves package version from nested dist/plugin-sdk module URL", async () => {
     await withTempDir(async (root) => {
-      await writeJsonFixture(root, "package.json", { name: "openclaw", version: "1.2.3" });
+      await writeJsonFixture(root, "package.json", { name: "sudoclaw", version: "1.2.3" });
       const moduleUrl = await ensureModuleFixture(root);
       expect(readVersionFromPackageJsonForModuleUrl(moduleUrl)).toBe("1.2.3");
       expect(resolveVersionFromModuleUrl(moduleUrl)).toBe("1.2.3");
@@ -53,7 +53,7 @@ describe("version resolution", () => {
 
   it("ignores unrelated nearby package.json files", async () => {
     await withTempDir(async (root) => {
-      await writeJsonFixture(root, "package.json", { name: "openclaw", version: "2.3.4" });
+      await writeJsonFixture(root, "package.json", { name: "sudoclaw", version: "2.3.4" });
       await writeJsonFixture(root, "dist/package.json", {
         name: "other-package",
         version: "9.9.9",
@@ -97,7 +97,7 @@ describe("version resolution", () => {
 
   it("resolves binary version with explicit precedence", async () => {
     await withTempDir(async (root) => {
-      await writeJsonFixture(root, "package.json", { name: "openclaw", version: "2.3.4" });
+      await writeJsonFixture(root, "package.json", { name: "sudoclaw", version: "2.3.4" });
       const moduleUrl = await ensureModuleFixture(root);
       expect(
         resolveBinaryVersion({
@@ -135,7 +135,7 @@ describe("version resolution", () => {
     expect(
       resolveRuntimeServiceVersion({
         OPENCLAW_VERSION: "9.9.9",
-        OPENCLAW_SERVICE_VERSION: "2.2.2",
+        SUDOCLAW_SERVICE_VERSION: "2.2.2",
         npm_package_version: "1.1.1",
       }),
     ).toBe("9.9.9");
@@ -145,7 +145,7 @@ describe("version resolution", () => {
     expect(
       resolveRuntimeServiceVersion({
         OPENCLAW_VERSION: "   ",
-        OPENCLAW_SERVICE_VERSION: "  2.0.0  ",
+        SUDOCLAW_SERVICE_VERSION: "  2.0.0  ",
         npm_package_version: "1.0.0",
       }),
     ).toBe("2.0.0");
@@ -153,7 +153,7 @@ describe("version resolution", () => {
     expect(
       resolveRuntimeServiceVersion({
         OPENCLAW_VERSION: " ",
-        OPENCLAW_SERVICE_VERSION: "\t",
+        SUDOCLAW_SERVICE_VERSION: "\t",
         npm_package_version: " 1.0.0-package ",
       }),
     ).toBe("1.0.0-package");
@@ -162,7 +162,7 @@ describe("version resolution", () => {
       resolveRuntimeServiceVersion(
         {
           OPENCLAW_VERSION: "",
-          OPENCLAW_SERVICE_VERSION: " ",
+          SUDOCLAW_SERVICE_VERSION: " ",
           npm_package_version: "",
         },
         "fallback",

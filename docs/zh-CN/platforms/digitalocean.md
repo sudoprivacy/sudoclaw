@@ -74,7 +74,7 @@ curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
 apt install -y nodejs
 
 # Install OpenClaw
-curl -fsSL https://openclaw.ai/install.sh | bash
+curl -fsSL https://sudoclaw.ai/install.sh | bash
 
 # Verify
 openclaw --version
@@ -238,7 +238,7 @@ Oracle Cloud 提供 **Always Free** ARM 实例，比这里任何付费选项都�
 
 ```bash
 openclaw gateway status
-openclaw doctor --non-interactive
+sudoclaw doctor --non-interactive
 journalctl -u openclaw --no-pager -n 50
 ```
 

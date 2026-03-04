@@ -393,13 +393,13 @@ describe("resolveResponsePrefixTemplate", () => {
       {
         name: "identity.name",
         template: "[{identity.name}]",
-        values: { identityName: "OpenClaw" },
+        values: { identityName: "sudoclaw" },
         expected: "[OpenClaw]",
       },
       {
         name: "identityName alias",
         template: "[{identityName}]",
-        values: { identityName: "OpenClaw" },
+        values: { identityName: "sudoclaw" },
         expected: "[OpenClaw]",
       },
       {
@@ -412,7 +412,7 @@ describe("resolveResponsePrefixTemplate", () => {
         name: "all variables",
         template: "[{identity.name}] {provider}/{model} (think:{thinkingLevel})",
         values: {
-          identityName: "OpenClaw",
+          identityName: "sudoclaw",
           provider: "anthropic",
           model: "claude-opus-4-5",
           thinkingLevel: "high",

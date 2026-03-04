@@ -1,78 +1,78 @@
 ---
-summary: "CLI reference for `openclaw devices` (device pairing + token rotation/revocation)"
+summary: "CLI reference for `sudoclaw devices` (device pairing + token rotation/revocation)"
 read_when:
   - You are approving device pairing requests
   - You need to rotate or revoke device tokens
 title: "devices"
 ---
 
-# `openclaw devices`
+# `sudoclaw devices`
 
 Manage device pairing requests and device-scoped tokens.
 
 ## Commands
 
-### `openclaw devices list`
+### `sudoclaw devices list`
 
 List pending pairing requests and paired devices.
 
 ```
-openclaw devices list
-openclaw devices list --json
+sudoclaw devices list
+sudoclaw devices list --json
 ```
 
-### `openclaw devices remove <deviceId>`
+### `sudoclaw devices remove <deviceId>`
 
 Remove one paired device entry.
 
 ```
-openclaw devices remove <deviceId>
-openclaw devices remove <deviceId> --json
+sudoclaw devices remove <deviceId>
+sudoclaw devices remove <deviceId> --json
 ```
 
-### `openclaw devices clear --yes [--pending]`
+### `sudoclaw devices clear --yes [--pending]`
 
 Clear paired devices in bulk.
 
 ```
-openclaw devices clear --yes
-openclaw devices clear --yes --pending
-openclaw devices clear --yes --pending --json
+sudoclaw devices clear --yes
+sudoclaw devices clear --yes --pending
+sudoclaw devices clear --yes --pending --json
 ```
 
-### `openclaw devices approve [requestId] [--latest]`
+### `sudoclaw devices approve [requestId] [--latest]`
 
 Approve a pending device pairing request. If `requestId` is omitted, OpenClaw
 automatically approves the most recent pending request.
 
 ```
-openclaw devices approve
-openclaw devices approve <requestId>
-openclaw devices approve --latest
+sudoclaw devices approve
+sudoclaw devices approve <requestId>
+sudoclaw devices approve --latest
 ```
 
-### `openclaw devices reject <requestId>`
+### `sudoclaw devices reject <requestId>`
 
 Reject a pending device pairing request.
 
 ```
-openclaw devices reject <requestId>
+sudoclaw devices reject <requestId>
 ```
 
-### `openclaw devices rotate --device <id> --role <role> [--scope <scope...>]`
+### `sudoclaw devices rotate --device <id> --role <role> [--scope <scope...>]`
 
 Rotate a device token for a specific role (optionally updating scopes).
 
 ```
-openclaw devices rotate --device <deviceId> --role operator --scope operator.read --scope operator.write
+sudoclaw devices rotate --device <deviceId> --role operator --scope operator.read --scope operator.write
 ```
 
-### `openclaw devices revoke --device <id> --role <role>`
+### `sudoclaw devices revoke --device <id> --role <role>`
 
 Revoke a device token for a specific role.
 
 ```
-openclaw devices revoke --device <deviceId> --role node
+sudoclaw devices revoke --device <deviceId> --role node
 ```
 
 ## Common options

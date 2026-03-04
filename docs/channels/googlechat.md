@@ -28,7 +28,7 @@ Status: ready for DMs + spaces via Google Chat API webhooks (HTTP only).
 5. Create a Google Chat app in the [Google Cloud Console Chat Configuration](https://console.cloud.google.com/apis/api/chat.googleapis.com/hangouts-chat):
    - Fill in the **Application info**:
      - **App name**: (e.g. `OpenClaw`)
-     - **Avatar URL**: (e.g. `https://openclaw.ai/logo.png`)
+     - **Avatar URL**: (e.g. `https://sudoclaw.ai/logo.png`)
      - **Description**: (e.g. `Personal AI Assistant`)
    - Enable **Interactive features**.
    - Under **Functionality**, check **Join spaces and group conversations**.
@@ -63,7 +63,7 @@ Once the gateway is running and your email is added to the visibility list:
 
 ## Public URL (Webhook-only)
 
-Google Chat webhooks require a public HTTPS endpoint. For security, **only expose the `/googlechat` path** to the internet. Keep the OpenClaw dashboard and other sensitive endpoints on your private network.
+Google Chat webhooks require a public HTTPS endpoint. For security, **only expose the `/googlechat` path** to the internet. Keep the sudoclaw dashboard and other sensitive endpoints on your private network.
 
 ### Option A: Tailscale Funnel (Recommended)
 
@@ -250,7 +250,7 @@ openclaw channels status
 - Check `openclaw channels status --probe` for auth errors or missing audience config.
 - If no messages arrive, confirm the Chat app's webhook URL + event subscriptions.
 - If mention gating blocks replies, set `botUser` to the app's user resource name and verify `requireMention`.
-- Use `openclaw logs --follow` while sending a test message to see if requests reach the gateway.
+- Use `sudoclaw logs --follow` while sending a test message to see if requests reach the gateway.
 
 Related docs:
 

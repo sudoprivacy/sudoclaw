@@ -1,7 +1,7 @@
 import { createRequire } from "node:module";
 
 declare const __OPENCLAW_VERSION__: string | undefined;
-const CORE_PACKAGE_NAME = "openclaw";
+const CORE_PACKAGE_NAME = "sudoclaw";
 
 const PACKAGE_JSON_CANDIDATES = [
   "../package.json",
@@ -97,7 +97,7 @@ export function resolveRuntimeServiceVersion(
   return (
     firstNonEmpty(
       env["OPENCLAW_VERSION"],
-      env["OPENCLAW_SERVICE_VERSION"],
+      env["SUDOCLAW_SERVICE_VERSION"],
       env["npm_package_version"],
     ) ?? fallback
   );

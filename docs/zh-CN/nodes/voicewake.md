@@ -30,7 +30,7 @@ OpenClaw 将**唤醒词作为单一全局列表**，由 **Gateway 网关**拥有
 结构：
 
 ```json
-{ "triggers": ["openclaw", "claude", "computer"], "updatedAtMs": 1730000000000 }
+{ "triggers": ["sudoclaw", "claude", "computer"], "updatedAtMs": 1730000000000 }
 ```
 
 ## 协议

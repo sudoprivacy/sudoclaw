@@ -20,7 +20,7 @@ type TestCase = {
 };
 
 const gatewayEnv = {
-  OPENCLAW_GATEWAY_TOKEN: "env-token",
+  SUDOCLAW_GATEWAY_TOKEN: "env-token",
   OPENCLAW_GATEWAY_PASSWORD: "env-password",
 } as NodeJS.ProcessEnv;
 
@@ -39,7 +39,7 @@ function makeRemoteGatewayConfig(remote: { token?: string; password?: string }):
 
 function withGatewayAuthEnv<T>(env: NodeJS.ProcessEnv, fn: () => T): T {
   const keys = [
-    "OPENCLAW_GATEWAY_TOKEN",
+    "SUDOCLAW_GATEWAY_TOKEN",
     "OPENCLAW_GATEWAY_PASSWORD",
     "CLAWDBOT_GATEWAY_TOKEN",
     "CLAWDBOT_GATEWAY_PASSWORD",
@@ -82,7 +82,7 @@ describe("gateway credential precedence parity", () => {
         },
       } as OpenClawConfig,
       env: {
-        OPENCLAW_GATEWAY_TOKEN: "env-token",
+        SUDOCLAW_GATEWAY_TOKEN: "env-token",
         OPENCLAW_GATEWAY_PASSWORD: "env-password",
       } as NodeJS.ProcessEnv,
       expected: {

@@ -24,9 +24,9 @@ inside a sandbox workspace under `~/.openclaw/sandboxes`, not your host workspac
 ## Default location
 
 - Default: `~/.openclaw/workspace`
-- If `OPENCLAW_PROFILE` is set and not `"default"`, the default becomes
+- If `SUDOCLAW_PROFILE` is set and not `"default"`, the default becomes
   `~/.openclaw/workspace-<profile>`.
-- Override in `~/.openclaw/openclaw.json`:
+- Override in `~/.sudoclaw/sudoclaw.json`:
 
 ```json5
 {
@@ -57,7 +57,7 @@ extra folders, archive or move them to Trash (for example `trash ~/openclaw`).
 If you intentionally keep multiple workspaces, make sure
 `agents.defaults.workspace` points to the active one.
 
-`openclaw doctor` warns when it detects extra workspace directories.
+`sudoclaw doctor` warns when it detects extra workspace directories.
 
 ## Workspace file map (what each file means)
 
@@ -125,7 +125,7 @@ files.
 
 These live under `~/.openclaw/` and should NOT be committed to the workspace repo:
 
-- `~/.openclaw/openclaw.json` (config)
+- `~/.sudoclaw/sudoclaw.json` (config)
 - `~/.openclaw/credentials/` (OAuth tokens, API keys)
 - `~/.openclaw/agents/<agentId>/sessions/` (session transcripts + metadata)
 - `~/.openclaw/skills/` (managed skills)
@@ -221,7 +221,7 @@ Suggested `.gitignore` starter:
 ## Moving the workspace to a new machine
 
 1. Clone the repo to the desired path (default `~/.openclaw/workspace`).
-2. Set `agents.defaults.workspace` to that path in `~/.openclaw/openclaw.json`.
+2. Set `agents.defaults.workspace` to that path in `~/.sudoclaw/sudoclaw.json`.
 3. Run `openclaw setup --workspace <path>` to seed any missing files.
 4. If you need sessions, copy `~/.openclaw/agents/<agentId>/sessions/` from the
    old machine separately.

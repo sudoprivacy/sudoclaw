@@ -5,9 +5,9 @@
   "description": "OpenClaw core memory search plugin",
   "type": "module",
   "peerDependencies": {
-    "openclaw": ">=2026.1.26"
+    "sudoclaw": ">=2026.1.26"
   },
-  "openclaw": {
+  "sudoclaw": {
     "extensions": [
       "./index.ts"
     ]

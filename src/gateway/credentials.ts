@@ -36,7 +36,7 @@ function readGatewayTokenEnv(
   env: NodeJS.ProcessEnv,
   includeLegacyEnv: boolean,
 ): string | undefined {
-  const primary = trimToUndefined(env.OPENCLAW_GATEWAY_TOKEN);
+  const primary = trimToUndefined(env.SUDOCLAW_GATEWAY_TOKEN);
   if (primary) {
     return primary;
   }

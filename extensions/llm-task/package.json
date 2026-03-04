@@ -4,7 +4,7 @@
   "private": true,
   "description": "OpenClaw JSON-only LLM task plugin",
   "type": "module",
-  "openclaw": {
+  "sudoclaw": {
     "extensions": [
       "./index.ts"
     ]

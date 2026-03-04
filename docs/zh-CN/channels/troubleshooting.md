@@ -18,7 +18,7 @@ x-i18n:
 首先运行：
 
 ```bash
-openclaw doctor
+sudoclaw doctor
 openclaw channels status --probe
 ```
 

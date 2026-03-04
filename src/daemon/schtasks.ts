@@ -23,7 +23,7 @@ function resolveTaskName(env: GatewayServiceEnv): string {
   if (override) {
     return override;
   }
-  return resolveGatewayWindowsTaskName(env.OPENCLAW_PROFILE);
+  return resolveGatewayWindowsTaskName(env.SUDOCLAW_PROFILE);
 }
 
 export function resolveTaskScriptPath(env: GatewayServiceEnv): string {

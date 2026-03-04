@@ -29,9 +29,9 @@ creates a device pairing request for `role: node`. Approve via the devices CLI (
 Quick CLI:
 
 ```bash
-openclaw devices list
-openclaw devices approve <requestId>
-openclaw devices reject <requestId>
+sudoclaw devices list
+sudoclaw devices approve <requestId>
+sudoclaw devices reject <requestId>
 openclaw nodes status
 openclaw nodes describe --node <idOrNameOrIp>
 ```
@@ -75,14 +75,14 @@ Example (node host -> gateway host):
 ssh -N -L 18790:127.0.0.1:18789 user@gateway-host
 
 # Terminal B: export the gateway token and connect through the tunnel
-export OPENCLAW_GATEWAY_TOKEN="<gateway-token>"
+export SUDOCLAW_GATEWAY_TOKEN="<gateway-token>"
 openclaw node run --host 127.0.0.1 --port 18790 --display-name "Build Node"
 ```
 
 Notes:
 
-- The token is `gateway.auth.token` from the gateway config (`~/.openclaw/openclaw.json` on the gateway host).
-- `openclaw node run` reads `OPENCLAW_GATEWAY_TOKEN` for auth.
+- The token is `gateway.auth.token` from the gateway config (`~/.sudoclaw/sudoclaw.json` on the gateway host).
+- `openclaw node run` reads `SUDOCLAW_GATEWAY_TOKEN` for auth.
 
 ### Start a node host (service)
 

@@ -32,12 +32,12 @@ describe("resolveAcpClientSpawnEnv", () => {
   it("sets OPENCLAW_SHELL marker and preserves existing env values", () => {
     const env = resolveAcpClientSpawnEnv({
       PATH: "/usr/bin",
-      USER: "openclaw",
+      USER: "sudoclaw",
     });
 
     expect(env.OPENCLAW_SHELL).toBe("acp-client");
     expect(env.PATH).toBe("/usr/bin");
-    expect(env.USER).toBe("openclaw");
+    expect(env.USER).toBe("sudoclaw");
   });
 
   it("overrides pre-existing OPENCLAW_SHELL to acp-client", () => {

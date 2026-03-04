@@ -29,7 +29,7 @@ describe("stageSandboxMedia", () => {
   it("stages allowed media and blocks unsafe paths", async () => {
     await withSandboxMediaTempHome("openclaw-triggers-", async (home) => {
       const cfg = createSandboxMediaStageConfig(home);
-      const workspaceDir = join(home, "openclaw");
+      const workspaceDir = join(home, "sudoclaw");
       const sandboxDir = join(home, "sandboxes", "session");
       vi.mocked(ensureSandboxWorkspaceForSession).mockResolvedValue({
         workspaceDir: sandboxDir,
@@ -37,7 +37,7 @@ describe("stageSandboxMedia", () => {
       });
 
       {
-        const inboundDir = join(home, ".openclaw", "media", "inbound");
+        const inboundDir = join(home, ".sudoclaw", "media", "inbound");
         await fs.mkdir(inboundDir, { recursive: true });
         const mediaPath = join(inboundDir, "photo.jpg");
         await fs.writeFile(mediaPath, "test");

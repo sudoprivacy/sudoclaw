@@ -13,7 +13,7 @@ import { loggingState } from "./state.js";
 export const DEFAULT_LOG_DIR = resolvePreferredOpenClawTmpDir();
 export const DEFAULT_LOG_FILE = path.join(DEFAULT_LOG_DIR, "openclaw.log"); // legacy single-file path
 
-const LOG_PREFIX = "openclaw";
+const LOG_PREFIX = "sudoclaw";
 const LOG_SUFFIX = ".log";
 const MAX_LOG_AGE_MS = 24 * 60 * 60 * 1000; // 24h
 const DEFAULT_MAX_LOG_FILE_BYTES = 500 * 1024 * 1024; // 500 MB
@@ -106,7 +106,7 @@ function buildLogger(settings: ResolvedSettings): TsLogger<LogObj> {
   let currentFileBytes = getCurrentLogFileBytes(settings.file);
   let warnedAboutSizeCap = false;
   const logger = new TsLogger<LogObj>({
-    name: "openclaw",
+    name: "sudoclaw",
     minLevel: levelToMinLevel(settings.level),
     type: "hidden", // no ansi formatting
   });

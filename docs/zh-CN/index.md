@@ -17,13 +17,13 @@ x-i18n:
 <p align="center">
     <img
         src="/assets/openclaw-logo-text-dark.png"
-        alt="OpenClaw"
+        alt="sudoclaw"
         width="500"
         class="dark:hidden"
     />
     <img
         src="/assets/openclaw-logo-text.png"
-        alt="OpenClaw"
+        alt="sudoclaw"
         width="500"
         class="hidden dark:block"
     />
@@ -118,12 +118,12 @@ Gateway 网关启动后，打开浏览器控制界面。
 - 远程访问：[Web 界面](/web)和 [Tailscale](/gateway/tailscale)
 
 <p align="center">
-  <img src="whatsapp-openclaw.jpg" alt="OpenClaw" width="420" />
+  <img src="whatsapp-openclaw.jpg" alt="sudoclaw" width="420" />
 </p>
 
 ## 配置（可选）
 
-配置文件位于 `~/.openclaw/openclaw.json`。
+配置文件位于 `~/.sudoclaw/sudoclaw.json`。
 
 - 如果你**不做任何修改**，OpenClaw 将使用内置的 Pi 二进制文件以 RPC 模式运行，并按发送者创建独立会话。
 - 如果你想要限制访问，可以从 `channels.whatsapp.allowFrom` 和（针对群组的）提及规则开始配置。

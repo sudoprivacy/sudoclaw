@@ -13,12 +13,12 @@ Generate shell completion scripts and optionally install them into your shell pr
 ## Usage
 
 ```bash
-openclaw completion
-openclaw completion --shell zsh
-openclaw completion --install
-openclaw completion --shell fish --install
-openclaw completion --write-state
-openclaw completion --shell bash --write-state
+sudoclaw completion
+sudoclaw completion --shell zsh
+sudoclaw completion --install
+sudoclaw completion --shell fish --install
+sudoclaw completion --write-state
+sudoclaw completion --shell bash --write-state
 ```
 
 ## Options

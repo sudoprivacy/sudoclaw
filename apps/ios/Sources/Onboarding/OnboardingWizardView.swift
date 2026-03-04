@@ -545,11 +545,11 @@ struct OnboardingWizardView: View {
                         if let id = self.issue.requestId, !id.isEmpty {
                             return "Request ID: \(id)"
                         }
-                        return "Request ID: check `openclaw devices list`."
+                        return "Request ID: check `sudoclaw devices list`."
                     }()
                     Text(
                         "Approve this device on the gateway.\n"
-                            + "1) `openclaw devices approve` (or `openclaw devices approve <requestId>`)\n"
+                            + "1) `sudoclaw devices approve` (or `sudoclaw devices approve <requestId>`)\n"
                             + "2) `/pair approve` in Telegram\n"
                             + "\(requestLine)\n"
                             + "OpenClaw will also retry automatically when you return to this app.")

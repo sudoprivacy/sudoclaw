@@ -42,7 +42,7 @@ type DiscordUser = {
 
 const execFileAsync = promisify(execFile);
 
-type DriverMode = "token" | "webhook" | "openclaw";
+type DriverMode = "token" | "webhook" | "sudoclaw";
 
 type Args = {
   channelId: string;
@@ -121,14 +121,14 @@ function parseNumber(value: string | undefined, fallback: number): number {
 }
 
 function resolveStateDir(): string {
-  const override = process.env.OPENCLAW_STATE_DIR?.trim() || process.env.CLAWDBOT_STATE_DIR?.trim();
+  const override = process.env.SUDOCLAW_STATE_DIR?.trim() || process.env.CLAWDBOT_STATE_DIR?.trim();
   if (override) {
     return override.startsWith("~")
       ? path.resolve(process.env.HOME || "", override.slice(1))
       : path.resolve(override);
   }
   const home = process.env.OPENCLAW_HOME?.trim() || process.env.HOME || "";
-  return path.join(home, ".openclaw");
+  return path.join(home, ".sudoclaw");
 }
 
 function resolveArg(flag: string): string | undefined {
@@ -202,8 +202,8 @@ function parseArgs(): Args {
   const driverMode: DriverMode =
     normalizedDriverMode === "webhook"
       ? "webhook"
-      : normalizedDriverMode === "openclaw"
-        ? "openclaw"
+      : normalizedDriverMode === "sudoclaw"
+        ? "sudoclaw"
         : normalizedDriverMode === "token"
           ? "token"
           : "token";
@@ -253,7 +253,7 @@ function parseArgs(): Args {
     process.env.OPENCLAW_DISCORD_SMOKE_THREAD_BINDINGS_PATH ||
     defaultBindingsPath;
   const openclawBin =
-    resolveArg("--openclaw-bin") || process.env.OPENCLAW_DISCORD_SMOKE_OPENCLAW_BIN || "openclaw";
+    resolveArg("--openclaw-bin") || process.env.OPENCLAW_DISCORD_SMOKE_OPENCLAW_BIN || "sudoclaw";
   const json = hasFlag("--json");
 
   if (!channelId) {
@@ -715,7 +715,7 @@ async function run(): Promise<SuccessResult | FailureResult> {
       let parentRecent: DiscordMessage[] = [];
       try {
         parentRecent =
-          args.driverMode === "openclaw"
+          args.driverMode === "sudoclaw"
             ? await readMessagesWithOpenclaw({
                 openclawBin: args.openclawBin,
                 target: args.channelId,
@@ -752,7 +752,7 @@ async function run(): Promise<SuccessResult | FailureResult> {
     while (Date.now() < deadline && !ackMessage) {
       try {
         const threadMessages =
-          args.driverMode === "openclaw"
+          args.driverMode === "sudoclaw"
             ? await readMessagesWithOpenclaw({
                 openclawBin: args.openclawBin,
                 target: threadId,
@@ -783,7 +783,7 @@ async function run(): Promise<SuccessResult | FailureResult> {
       let parentRecent: DiscordMessage[] = [];
       try {
         parentRecent =
-          args.driverMode === "openclaw"
+          args.driverMode === "sudoclaw"
             ? await readMessagesWithOpenclaw({
                 openclawBin: args.openclawBin,
                 target: args.channelId,

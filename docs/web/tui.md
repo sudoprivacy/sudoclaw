@@ -19,7 +19,7 @@ openclaw gateway
 2. Open the TUI.
 
 ```bash
-openclaw tui
+sudoclaw tui
 ```
 
 3. Type a message and press Enter.
@@ -27,7 +27,7 @@ openclaw tui
 Remote Gateway:
 
 ```bash
-openclaw tui --url ws://<host>:<port> --token <gateway-token>
+sudoclaw tui --url ws://<host>:<port> --token <gateway-token>
 ```
 
 Use `--password` if your Gateway uses password auth.
@@ -58,7 +58,7 @@ Use `--password` if your Gateway uses password auth.
 - Turn delivery on:
   - `/deliver on`
   - or the Settings panel
-  - or start with `openclaw tui --deliver`
+  - or start with `sudoclaw tui --deliver`
 
 ## Pickers + overlays
 
@@ -151,7 +151,7 @@ Pass `--token` or `--password` explicitly. Missing explicit credentials is an er
 No output after sending a message:
 
 - Run `/status` in the TUI to confirm the Gateway is connected and idle/busy.
-- Check the Gateway logs: `openclaw logs --follow`.
+- Check the Gateway logs: `sudoclaw logs --follow`.
 - Confirm the agent can run: `openclaw status` and `openclaw models status`.
 - If you expect messages in a chat channel, enable delivery (`/deliver on` or `--deliver`).
 - `--history-limit <n>`: History entries to load (default 200)

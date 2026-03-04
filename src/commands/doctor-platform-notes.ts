@@ -18,7 +18,7 @@ export async function noteMacLaunchAgentOverrides() {
     return;
   }
   const home = resolveHomeDir();
-  const markerCandidates = [path.join(home, ".openclaw", "disable-launchagent")];
+  const markerCandidates = [path.join(home, ".sudoclaw", "disable-launchagent")];
   const markerPath = markerCandidates.find((candidate) => fs.existsSync(candidate));
   if (!markerPath) {
     return;
@@ -88,7 +88,7 @@ export async function noteMacLaunchctlGatewayEnvOverrides(
   }
 
   const tokenEntries = [
-    ["OPENCLAW_GATEWAY_TOKEN", await getenv("OPENCLAW_GATEWAY_TOKEN")],
+    ["SUDOCLAW_GATEWAY_TOKEN", await getenv("SUDOCLAW_GATEWAY_TOKEN")],
   ] as const;
   const passwordEntries = [
     ["OPENCLAW_GATEWAY_PASSWORD", await getenv("OPENCLAW_GATEWAY_PASSWORD")],

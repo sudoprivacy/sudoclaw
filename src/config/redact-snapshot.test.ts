@@ -22,7 +22,7 @@ function makeSnapshot<TConfig extends Record<string, unknown>>(
   raw?: string,
 ): TestSnapshot<TConfig> {
   return {
-    path: "/home/user/.openclaw/config.json5",
+    path: "/home/user/.sudoclaw/config.json5",
     exists: true,
     raw: raw ?? JSON.stringify(config),
     parsed: config,

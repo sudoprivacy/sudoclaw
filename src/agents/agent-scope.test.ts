@@ -43,8 +43,8 @@ describe("resolveAgentConfig", () => {
           {
             id: "main",
             name: "Main Agent",
-            workspace: "~/openclaw",
-            agentDir: "~/.openclaw/agents/main",
+            workspace: "~/sudoclaw",
+            agentDir: "~/.sudoclaw/agents/main",
             model: "anthropic/claude-opus-4",
           },
         ],
@@ -415,16 +415,16 @@ describe("resolveAgentConfig", () => {
     vi.stubEnv("OPENCLAW_HOME", home);
 
     const workspace = resolveAgentWorkspaceDir({} as OpenClawConfig, "main");
-    expect(workspace).toBe(path.join(path.resolve(home), ".openclaw", "workspace"));
+    expect(workspace).toBe(path.join(path.resolve(home), ".sudoclaw", "workspace"));
   });
 
   it("uses OPENCLAW_HOME for default agentDir", () => {
     const home = path.join(path.sep, "srv", "openclaw-home");
     vi.stubEnv("OPENCLAW_HOME", home);
     // Clear state dir so it falls back to OPENCLAW_HOME
-    vi.stubEnv("OPENCLAW_STATE_DIR", "");
+    vi.stubEnv("SUDOCLAW_STATE_DIR", "");
 
     const agentDir = resolveAgentDir({} as OpenClawConfig, "main");
-    expect(agentDir).toBe(path.join(path.resolve(home), ".openclaw", "agents", "main", "agent"));
+    expect(agentDir).toBe(path.join(path.resolve(home), ".sudoclaw", "agents", "main", "agent"));
   });
 });

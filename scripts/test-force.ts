@@ -44,7 +44,7 @@ function runTests() {
 }
 
 function main() {
-  const port = Number.parseInt(process.env.OPENCLAW_GATEWAY_PORT ?? `${DEFAULT_PORT}`, 10);
+  const port = Number.parseInt(process.env.SUDOCLAW_GATEWAY_PORT ?? `${DEFAULT_PORT}`, 10);
 
   console.log(`🧹 test:force - clearing gateway on port ${port}`);
   const killed = killGatewayListeners(port);

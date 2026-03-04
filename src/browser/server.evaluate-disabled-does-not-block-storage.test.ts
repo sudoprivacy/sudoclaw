@@ -43,7 +43,7 @@ vi.mock("../config/config.js", async (importOriginal) => {
       browser: {
         enabled: true,
         evaluateEnabled: false,
-        defaultProfile: "openclaw",
+        defaultProfile: "sudoclaw",
         profiles: {
           openclaw: { cdpPort: testPort + 1, color: "#FF4500" },
         },
@@ -82,11 +82,11 @@ async function getFreePort(): Promise<number> {
 describe("browser control evaluate gating", () => {
   beforeEach(async () => {
     testPort = await getFreePort();
-    prevGatewayPort = process.env.OPENCLAW_GATEWAY_PORT;
-    process.env.OPENCLAW_GATEWAY_PORT = String(testPort - 2);
-    prevGatewayToken = process.env.OPENCLAW_GATEWAY_TOKEN;
+    prevGatewayPort = process.env.SUDOCLAW_GATEWAY_PORT;
+    process.env.SUDOCLAW_GATEWAY_PORT = String(testPort - 2);
+    prevGatewayToken = process.env.SUDOCLAW_GATEWAY_TOKEN;
     prevGatewayPassword = process.env.OPENCLAW_GATEWAY_PASSWORD;
-    delete process.env.OPENCLAW_GATEWAY_TOKEN;
+    delete process.env.SUDOCLAW_GATEWAY_TOKEN;
     delete process.env.OPENCLAW_GATEWAY_PASSWORD;
 
     pwMocks.cookiesGetViaPlaywright.mockClear();
@@ -99,14 +99,14 @@ describe("browser control evaluate gating", () => {
   afterEach(async () => {
     vi.restoreAllMocks();
     if (prevGatewayPort === undefined) {
-      delete process.env.OPENCLAW_GATEWAY_PORT;
+      delete process.env.SUDOCLAW_GATEWAY_PORT;
     } else {
-      process.env.OPENCLAW_GATEWAY_PORT = prevGatewayPort;
+      process.env.SUDOCLAW_GATEWAY_PORT = prevGatewayPort;
     }
     if (prevGatewayToken === undefined) {
-      delete process.env.OPENCLAW_GATEWAY_TOKEN;
+      delete process.env.SUDOCLAW_GATEWAY_TOKEN;
     } else {
-      process.env.OPENCLAW_GATEWAY_TOKEN = prevGatewayToken;
+      process.env.SUDOCLAW_GATEWAY_TOKEN = prevGatewayToken;
     }
     if (prevGatewayPassword === undefined) {
       delete process.env.OPENCLAW_GATEWAY_PASSWORD;

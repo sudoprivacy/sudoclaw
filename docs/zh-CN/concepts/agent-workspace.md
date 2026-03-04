@@ -26,9 +26,9 @@ x-i18n:
 ## 默认位置
 
 - 默认：`~/.openclaw/workspace`
-- 如果设置了 `OPENCLAW_PROFILE` 且不是 `"default"`，默认值变为
+- 如果设置了 `SUDOCLAW_PROFILE` 且不是 `"default"`，默认值变为
   `~/.openclaw/workspace-<profile>`。
-- 在 `~/.openclaw/openclaw.json` 中覆盖：
+- 在 `~/.sudoclaw/sudoclaw.json` 中覆盖：
 
 ```json5
 {
@@ -53,7 +53,7 @@ x-i18n:
 **建议：** 保持单个活动工作区。如果你不再使用额外的文件夹，请归档或移至废纸篓（例如 `trash ~/openclaw`）。
 如果你有意保留多个工作区，请确保 `agents.defaults.workspace` 指向活动的那个。
 
-`openclaw doctor` 在检测到额外工作区目录时会发出警告。
+`sudoclaw doctor` 在检测到额外工作区目录时会发出警告。
 
 ## 工作区文件映射（每个文件的含义）
 
@@ -117,7 +117,7 @@ x-i18n:
 
 这些位于 `~/.openclaw/` 下，不应提交到工作区仓库：
 
-- `~/.openclaw/openclaw.json`（配置）
+- `~/.sudoclaw/sudoclaw.json`（配置）
 - `~/.openclaw/credentials/`（OAuth token、API 密钥）
 - `~/.openclaw/agents/<agentId>/sessions/`（会话记录 + 元数据）
 - `~/.openclaw/skills/`（托管的 Skills）
@@ -208,7 +208,7 @@ git push
 ## 将工作区迁移到新机器
 
 1. 将仓库克隆到所需路径（默认 `~/.openclaw/workspace`）。
-2. 在 `~/.openclaw/openclaw.json` 中将 `agents.defaults.workspace` 设置为该路径。
+2. 在 `~/.sudoclaw/sudoclaw.json` 中将 `agents.defaults.workspace` 设置为该路径。
 3. 运行 `openclaw setup --workspace <path>` 来填充任何缺失的文件。
 4. 如果你需要会话，请单独从旧机器复制 `~/.openclaw/agents/<agentId>/sessions/`。
 

@@ -163,7 +163,7 @@ export async function configureGatewayForOnboarding(
     if (flow === "quickstart") {
       gatewayToken =
         (quickstartGateway.token ??
-          normalizeGatewayTokenInput(process.env.OPENCLAW_GATEWAY_TOKEN)) ||
+          normalizeGatewayTokenInput(process.env.SUDOCLAW_GATEWAY_TOKEN)) ||
         randomToken();
     } else {
       const tokenInput = await prompter.text({
@@ -171,7 +171,7 @@ export async function configureGatewayForOnboarding(
         placeholder: "Needed for multi-machine or non-loopback access",
         initialValue:
           quickstartGateway.token ??
-          normalizeGatewayTokenInput(process.env.OPENCLAW_GATEWAY_TOKEN) ??
+          normalizeGatewayTokenInput(process.env.SUDOCLAW_GATEWAY_TOKEN) ??
           "",
       });
       gatewayToken = normalizeGatewayTokenInput(tokenInput) || randomToken();

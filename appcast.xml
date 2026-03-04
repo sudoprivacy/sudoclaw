@@ -1,19 +1,19 @@
 <?xml version="1.0" standalone="yes"?>
 <rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
     <channel>
-        <title>OpenClaw</title>
+        <title>SudoClaw</title>
         <item>
             <title>2026.2.14</title>
             <pubDate>Sun, 15 Feb 2026 04:24:34 +0100</pubDate>
-            <link>https://raw.githubusercontent.com/openclaw/openclaw/main/appcast.xml</link>
+            <link>https://raw.githubusercontent.com/sudoprivacy/sudoclaw/main/appcast.xml</link>
             <sparkle:version>202602140</sparkle:version>
             <sparkle:shortVersionString>2026.2.14</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>15.0</sparkle:minimumSystemVersion>
-            <description><![CDATA[<h2>OpenClaw 2026.2.14</h2>
+            <description><![CDATA[<h2>SudoClaw 2026.2.14</h2>
 <h3>Changes</h3>
 <ul>
 <li>Telegram: add poll sending via <code>openclaw message poll</code> (duration seconds, silent delivery, anonymity controls). (#16209) Thanks @robbyczgw-cla.</li>
-<li>Slack/Discord: add <code>dmPolicy</code> + <code>allowFrom</code> config aliases for DM access control; legacy <code>dm.policy</code> + <code>dm.allowFrom</code> keys remain supported and <code>openclaw doctor --fix</code> can migrate them.</li>
+<li>Slack/Discord: add <code>dmPolicy</code> + <code>allowFrom</code> config aliases for DM access control; legacy <code>dm.policy</code> + <code>dm.allowFrom</code> keys remain supported and <code>sudoclaw doctor --fix</code> can migrate them.</li>
 <li>Discord: allow exec approval prompts to target channels or both DM+channel via <code>channels.discord.execApprovals.target</code>. (#16051) Thanks @leonnardo.</li>
 <li>Sandbox: add <code>sandbox.browser.binds</code> to configure browser-container bind mounts separately from exec containers. (#16230) Thanks @seheepeak.</li>
 <li>Discord: add debug logging for message routing decisions to improve <code>--debug</code> tracing. (#16202) Thanks @jayleekr.</li>
@@ -34,8 +34,8 @@
 <li>BlueBubbles: include sender identity in group chat envelopes and pass clean message text to the agent prompt, aligning with iMessage/Signal formatting. (#16210) Thanks @zerone0x.</li>
 <li>CLI: fix lazy core command registration so top-level maintenance commands (<code>doctor</code>, <code>dashboard</code>, <code>reset</code>, <code>uninstall</code>) resolve correctly instead of exposing a non-functional <code>maintenance</code> placeholder command.</li>
 <li>CLI/Dashboard: when <code>gateway.bind=lan</code>, generate localhost dashboard URLs to satisfy browser secure-context requirements while preserving non-LAN bind behavior. (#16434) Thanks @BinHPdev.</li>
-<li>TUI/Gateway: resolve local gateway target URL from <code>gateway.bind</code> mode (tailnet/lan) instead of hardcoded localhost so <code>openclaw tui</code> connects when gateway is non-loopback. (#16299) Thanks @cortexuvula.</li>
-<li>TUI: honor explicit <code>--session <key></code> in <code>openclaw tui</code> even when <code>session.scope</code> is <code>global</code>, so named sessions no longer collapse into shared global history. (#16575) Thanks @cinqu.</li>
+<li>TUI/Gateway: resolve local gateway target URL from <code>gateway.bind</code> mode (tailnet/lan) instead of hardcoded localhost so <code>sudoclaw tui</code> connects when gateway is non-loopback. (#16299) Thanks @cortexuvula.</li>
+<li>TUI: honor explicit <code>--session <key></code> in <code>sudoclaw tui</code> even when <code>session.scope</code> is <code>global</code>, so named sessions no longer collapse into shared global history. (#16575) Thanks @cinqu.</li>
 <li>TUI: use available terminal width for session name display in searchable select lists. (#16238) Thanks @robbyczgw-cla.</li>
 <li>TUI: refactor searchable select list description layout and add regression coverage for ANSI-highlight width bounds.</li>
 <li>TUI: preserve in-flight streaming replies when a different run finalizes concurrently (avoid clearing active run or reloading history mid-stream). (#10704) Thanks @axschr73.</li>
@@ -88,7 +88,7 @@
 <li>Outbound/Memory: bound directory cache growth with max-size eviction and proactive TTL pruning to prevent long-running gateways from accumulating unbounded directory entries. (#5140) Thanks @coygeek and @vignesh07.</li>
 <li>Skills/Memory: remove disconnected nodes from remote-skills cache to prevent stale node metadata from accumulating over long uptimes. (#6760) Thanks @coygeek.</li>
 <li>Sandbox/Tools: make sandbox file tools bind-mount aware (including absolute container paths) and enforce read-only bind semantics for writes. (#16379) Thanks @tasaankaeris.</li>
-<li>Media/Security: allow local media reads from OpenClaw state <code>workspace/</code> and <code>sandboxes/</code> roots by default so generated workspace media can be delivered without unsafe global path bypasses. (#15541) Thanks @lanceji.</li>
+<li>Media/Security: allow local media reads from SudoClaw state <code>workspace/</code> and <code>sandboxes/</code> roots by default so generated workspace media can be delivered without unsafe global path bypasses. (#15541) Thanks @lanceji.</li>
 <li>Media/Security: harden local media allowlist bypasses by requiring an explicit <code>readFile</code> override when callers mark paths as validated, and reject filesystem-root <code>localRoots</code> entries. (#16739)</li>
 <li>Discord/Security: harden voice message media loading (SSRF + allowed-local-root checks) so tool-supplied paths/URLs cannot be used to probe internal URLs or read arbitrary local files.</li>
 <li>Security/BlueBubbles: require explicit <code>mediaLocalRoots</code> allowlists for local outbound media path reads to prevent local file disclosure. (#16322) Thanks @mbelinky.</li>
@@ -98,7 +98,7 @@
 <li>Security/Zalo: reject ambiguous shared-path webhook routing when multiple webhook targets match the same secret.</li>
 <li>Security/Nostr: require loopback source and block cross-origin profile mutation/import attempts. Thanks @vincentkoc.</li>
 <li>Security/Signal: harden signal-cli archive extraction during install to prevent path traversal outside the install root.</li>
-<li>Security/Hooks: restrict hook transform modules to <code>~/.openclaw/hooks/transforms</code> (prevents path traversal/escape module loads via config). Config note: <code>hooks.transformsDir</code> must now be within that directory. Thanks @akhmittra.</li>
+<li>Security/Hooks: restrict hook transform modules to <code>~/.sudoclaw/hooks/transforms</code> (prevents path traversal/escape module loads via config). Config note: <code>hooks.transformsDir</code> must now be within that directory. Thanks @akhmittra.</li>
 <li>Security/Hooks: ignore hook package manifest entries that point outside the package directory (prevents out-of-tree handler loads during hook discovery).</li>
 <li>Security/Archive: enforce archive extraction entry/size limits to prevent resource exhaustion from high-expansion ZIP/TAR archives. Thanks @vincentkoc.</li>
 <li>Security/Media: reject oversized base64-backed input media before decoding to avoid large allocations. Thanks @vincentkoc.</li>
@@ -108,7 +108,7 @@
 <li>Security/iMessage: keep DM pairing-store identities out of group allowlist authorization (prevents cross-context command authorization). Thanks @vincentkoc.</li>
 <li>Security/Google Chat: deprecate <code>users/<email></code> allowlists (treat <code>users/...</code> as immutable user id only); keep raw email allowlists for usability. Thanks @vincentkoc.</li>
 <li>Security/Google Chat: reject ambiguous shared-path webhook routing when multiple webhook targets verify successfully (prevents cross-account policy-context misrouting). Thanks @vincentkoc.</li>
-<li>Telegram/Security: require numeric Telegram sender IDs for allowlist authorization (reject <code>@username</code> principals), auto-resolve <code>@username</code> to IDs in <code>openclaw doctor --fix</code> (when possible), and warn in <code>openclaw security audit</code> when legacy configs contain usernames. Thanks @vincentkoc.</li>
+<li>Telegram/Security: require numeric Telegram sender IDs for allowlist authorization (reject <code>@username</code> principals), auto-resolve <code>@username</code> to IDs in <code>sudoclaw doctor --fix</code> (when possible), and warn in <code>sudoclaw security audit</code> when legacy configs contain usernames. Thanks @vincentkoc.</li>
 <li>Telegram/Security: reject Telegram webhook startup when <code>webhookSecret</code> is missing or empty (prevents unauthenticated webhook request forgery). Thanks @yueyueL.</li>
 <li>Security/Windows: avoid shell invocation when spawning child processes to prevent cmd.exe metacharacter injection via untrusted CLI arguments (e.g. agent prompt text).</li>
 <li>Telegram: set webhook callback timeout handling to <code>onTimeout: "return"</code> (10s) so long-running update processing no longer emits webhook 500s and retry storms. (#16763) Thanks @chansearrington.</li>
@@ -229,7 +229,7 @@
 </ul>
 <h3>Fixes</h3>
 <ul>
-<li>Telegram/DM allowlist runtime inheritance: enforce <code>dmPolicy: "allowlist"</code> <code>allowFrom</code> requirements using effective account-plus-parent config across account-capable channels (Telegram, Discord, Slack, Signal, iMessage, IRC, BlueBubbles, WhatsApp), and align <code>openclaw doctor</code> checks to the same inheritance logic so DM traffic is not silently dropped after upgrades. (#27936) Thanks @widingmarcus-cyber.</li>
+<li>Telegram/DM allowlist runtime inheritance: enforce <code>dmPolicy: "allowlist"</code> <code>allowFrom</code> requirements using effective account-plus-parent config across account-capable channels (Telegram, Discord, Slack, Signal, iMessage, IRC, BlueBubbles, WhatsApp), and align <code>sudoclaw doctor</code> checks to the same inheritance logic so DM traffic is not silently dropped after upgrades. (#27936) Thanks @widingmarcus-cyber.</li>
 <li>Delivery queue/recovery backoff: prevent retry starvation by persisting <code>lastAttemptAt</code> on failed sends and deferring recovery retries until each entry's <code>lastAttemptAt + backoff</code> window is eligible, while continuing to recover ready entries behind deferred ones. Landed from contributor PR #27710 by @Jimmy-xuzimo. Thanks @Jimmy-xuzimo.</li>
 <li>Google Chat/Lifecycle: keep Google Chat <code>startAccount</code> pending until abort in webhook mode so startup is no longer interpreted as immediate exit, preventing auto-restart loops and webhook-target churn. (#27384) thanks @junsuwhy.</li>
 <li>Temp dirs/Linux umask: force <code>0700</code> permissions after temp-dir creation and self-heal existing writable temp dirs before trust checks so <code>umask 0002</code> installs no longer crash-loop on startup. Landed from contributor PR #27860 by @stakeswky. (#27853) Thanks @stakeswky.</li>
@@ -272,7 +272,7 @@
 <li>CLI/Gateway <code>--force</code> in non-root Docker: recover from <code>lsof</code> permission failures (<code>EACCES</code>/<code>EPERM</code>) by falling back to <code>fuser</code> kill + probe-based port checks, so <code>openclaw gateway --force</code> works for default container <code>node</code> user flows. (#27941)</li>
 <li>Gateway/Bind visibility: emit a startup warning when binding to non-loopback addresses so operators get explicit exposure guidance in runtime logs. (#25397) thanks @let5sne.</li>
 <li>Sessions cleanup/Doctor: add <code>openclaw sessions cleanup --fix-missing</code> to prune store entries whose transcript files are missing, including doctor guidance and CLI coverage. Landed from contributor PR #27508 by @Sid-Qin. (#27422)</li>
-<li>Doctor/State integrity: ignore metadata-only slash routing sessions when checking recent missing transcripts so <code>openclaw doctor</code> no longer reports false-positive transcript-missing warnings for <code>*:slash:*</code> keys. (#27375) thanks @gumadeiras.</li>
+<li>Doctor/State integrity: ignore metadata-only slash routing sessions when checking recent missing transcripts so <code>sudoclaw doctor</code> no longer reports false-positive transcript-missing warnings for <code>*:slash:*</code> keys. (#27375) thanks @gumadeiras.</li>
 <li>CLI/Gateway status: force local <code>gateway status</code> probe host to <code>127.0.0.1</code> for <code>bind=lan</code> so co-located probes do not trip non-loopback plaintext WebSocket checks. (#26997) thanks @chikko80.</li>
 <li>CLI/Gateway auth: align <code>gateway run --auth</code> parsing/help text with supported gateway auth modes by accepting <code>none</code> and <code>trusted-proxy</code> (in addition to <code>token</code>/<code>password</code>) for CLI overrides. (#27469) thanks @s1korrrr.</li>
 <li>CLI/Daemon status TLS probe: use <code>wss://</code> and forward local TLS certificate fingerprint for TLS-enabled gateway daemon probes so <code>openclaw daemon status</code> works with <code>gateway.bind=lan</code> + <code>gateway.tls.enabled=true</code>. (#24234) thanks @liuy.</li>
@@ -302,7 +302,7 @@
 <li>Android/Node invoke: remove native gateway WebSocket <code>Origin</code> header to avoid false origin rejections, unify invoke command registry/policy/error parsing paths, and keep command availability checks centralized to reduce dispatcher/advertisement drift. (#27257) Thanks @obviyus.</li>
 <li>Gateway shared-auth scopes: preserve requested operator scopes for shared-token clients when device identity is unavailable, instead of clearing scopes during auth handling. Landed from contributor PR #27498 by @kevinWangSheng. (#27494)</li>
 <li>Cron/Hooks isolated routing: preserve canonical <code>agent:*</code> session keys in isolated runs so already-qualified keys are not double-prefixed (for example <code>agent:main:main</code> no longer becomes <code>agent:main:agent:main:main</code>). Landed from contributor PR #27333 by @MaheshBhushan. (#27289, #27282)</li>
-<li>Channels/Multi-account config: when adding a non-default channel account to a single-account top-level channel setup, move existing account-scoped top-level single-account values into <code>channels.<channel>.accounts.default</code> before writing the new account so the original account keeps working without duplicated account values at channel root; <code>openclaw doctor --fix</code> now repairs previously mixed channel account shapes the same way. (#27334) thanks @gumadeiras.</li>
+<li>Channels/Multi-account config: when adding a non-default channel account to a single-account top-level channel setup, move existing account-scoped top-level single-account values into <code>channels.<channel>.accounts.default</code> before writing the new account so the original account keeps working without duplicated account values at channel root; <code>sudoclaw doctor --fix</code> now repairs previously mixed channel account shapes the same way. (#27334) thanks @gumadeiras.</li>
 <li>iOS/Talk mode: stop injecting the voice directive hint into iOS Talk prompts and remove the Voice Directive Hint setting, reducing model bias toward tool-style TTS directives and keeping relay responses text-first by default. (#27543) thanks @ngutman.</li>
 <li>CI/Windows: shard the Windows <code>checks-windows</code> test lane into two matrix jobs and honor explicit shard index overrides in <code>scripts/test-parallel.mjs</code> to reduce CI critical-path wall time. (#27234) Thanks @joshavant.</li>
 </ul>

@@ -19,10 +19,10 @@ OpenClaw 发展迅速（尚未到"1.0"）。将更新视为发布基础设施：
 
 ## 推荐：重新运行网站安装程序（原地升级）
 
-**首选**的更新路径是重新运行网站上的安装程序。它会检测现有安装、原地升级，并在需要时运行 `openclaw doctor`。
+**首选**的更新路径是重新运行网站上的安装程序。它会检测现有安装、原地升级，并在需要时运行 `sudoclaw doctor`。
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash
+curl -fsSL https://sudoclaw.ai/install.sh | bash
 ```
 
 说明：
@@ -30,7 +30,7 @@ curl -fsSL https://openclaw.ai/install.sh | bash
 - 如果你不想再次运行新手引导向导，添加 `--no-onboard`。
 - 对于**源码安装**，使用：
   ```bash
-  curl -fsSL https://openclaw.ai/install.sh | bash -s -- --install-method git --no-onboard
+  curl -fsSL https://sudoclaw.ai/install.sh | bash -s -- --install-method git --no-onboard
   ```
   安装程序**仅**在仓库干净时才会执行 `git pull --rebase`。
 - 对于**全局安装**，脚本底层使用 `npm install -g openclaw@latest`。
@@ -41,7 +41,7 @@ curl -fsSL https://openclaw.ai/install.sh | bash
 - 了解你的安装方式：**全局**（npm/pnpm）还是**源码**（git clone）。
 - 了解你的 Gateway 网关运行方式：**前台终端**还是**受管理服务**（launchd/systemd）。
 - 快照你的定制内容：
-  - 配置：`~/.openclaw/openclaw.json`
+  - 配置：`~/.sudoclaw/sudoclaw.json`
   - 凭证：`~/.openclaw/credentials/`
   - 工作区：`~/.openclaw/workspace`
 
@@ -76,7 +76,7 @@ openclaw update --channel stable
 然后：
 
 ```bash
-openclaw doctor
+sudoclaw doctor
 openclaw gateway restart
 openclaw health
 ```
@@ -99,7 +99,7 @@ openclaw update
 - 需要干净的工作树。
 - 切换到选定的渠道（标签或分支）。
 - 获取并 rebase 到配置的上游（dev 渠道）。
-- 安装依赖、构建、构建控制 UI，并运行 `openclaw doctor`。
+- 安装依赖、构建、构建控制 UI，并运行 `sudoclaw doctor`。
 - 默认重启 Gateway 网关（使用 `--no-restart` 跳过）。
 
 如果你通过 **npm/pnpm** 安装（没有 git 元数据），`openclaw update` 将尝试通过你的包管理器更新。如果无法检测到安装，请改用"更新（全局安装）"。
@@ -131,7 +131,7 @@ git pull
 pnpm install
 pnpm build
 pnpm ui:build # 首次运行时自动安装 UI 依赖
-openclaw doctor
+sudoclaw doctor
 openclaw health
 ```
 
@@ -140,13 +140,13 @@ openclaw health
 - 当你运行打包的 `openclaw` 二进制文件（[`openclaw.mjs`](https://github.com/openclaw/openclaw/blob/main/openclaw.mjs)）或使用 Node 运行 `dist/` 时，`pnpm build` 很重要。
 - 如果你从仓库 checkout 运行而没有全局安装，CLI 命令使用 `pnpm openclaw ...`。
 - 如果你直接从 TypeScript 运行（`pnpm openclaw ...`），通常不需要重新构建，但**配置迁移仍然适用** → 运行 doctor。
-- 在全局和 git 安装之间切换很容易：安装另一种方式，然后运行 `openclaw doctor` 以便将 Gateway 网关服务入口点重写为当前安装。
+- 在全局和 git 安装之间切换很容易：安装另一种方式，然后运行 `sudoclaw doctor` 以便将 Gateway 网关服务入口点重写为当前安装。
 
-## 始终运行：`openclaw doctor`
+## 始终运行：`sudoclaw doctor`
 
 Doctor 是"安全更新"命令。它故意很无聊：修复 + 迁移 + 警告。
 
-注意：如果你是**源码安装**（git checkout），`openclaw doctor` 会提供先运行 `openclaw update`。
+注意：如果你是**源码安装**（git checkout），`sudoclaw doctor` 会提供先运行 `openclaw update`。
 
 它通常做的事情：
 
@@ -167,7 +167,7 @@ openclaw gateway status
 openclaw gateway stop
 openclaw gateway restart
 openclaw gateway --port 18789
-openclaw logs --follow
+sudoclaw logs --follow
 ```
 
 如果你使用受管理服务：
@@ -198,7 +198,7 @@ pnpm add -g openclaw@<version>
 然后重启 + 重新运行 doctor：
 
 ```bash
-openclaw doctor
+sudoclaw doctor
 openclaw gateway restart
 ```
 
@@ -228,6 +228,6 @@ git pull
 
 ## 如果你卡住了
 
-- 再次运行 `openclaw doctor` 并仔细阅读输出（它通常会告诉你修复方法）。
+- 再次运行 `sudoclaw doctor` 并仔细阅读输出（它通常会告诉你修复方法）。
 - 查看：[故障排除](/gateway/troubleshooting)
 - 在 Discord 上提问：https://discord.gg/clawd

@@ -19,13 +19,13 @@ echo "Running plugins Docker E2E..."
 	    ls -la dist || true
 	    exit 1
 	  fi
-	  export OPENCLAW_ENTRY
+	  export SUDOCLAW_ENTRY
 
-	  home_dir=$(mktemp -d "/tmp/openclaw-plugins-e2e.XXXXXX")
+	  home_dir=$(mktemp -d "/tmp/sudoclaw-plugins-e2e.XXXXXX")
 	  export HOME="$home_dir"
-  mkdir -p "$HOME/.openclaw/extensions/demo-plugin"
+  mkdir -p "$HOME/.sudoclaw/extensions/demo-plugin"
 
-  cat > "$HOME/.openclaw/extensions/demo-plugin/index.js" <<'"'"'JS'"'"'
+  cat > "$HOME/.sudoclaw/extensions/demo-plugin/index.js" <<'"'"'JS'"'"'
 module.exports = {
   id: "demo-plugin",
   name: "Demo Plugin",
@@ -86,7 +86,7 @@ NODE
 {
   "name": "@openclaw/demo-plugin-tgz",
   "version": "0.0.1",
-  "openclaw": { "extensions": ["./index.js"] }
+  "sudoclaw": { "extensions": ["./index.js"] }
 }
 JSON
   cat > "$pack_dir/package/index.js" <<'"'"'JS'"'"'
@@ -133,7 +133,7 @@ NODE
 {
   "name": "@openclaw/demo-plugin-dir",
   "version": "0.0.1",
-  "openclaw": { "extensions": ["./index.js"] }
+  "sudoclaw": { "extensions": ["./index.js"] }
 }
 JSON
   cat > "$dir_plugin/index.js" <<'"'"'JS'"'"'
@@ -180,7 +180,7 @@ NODE
 {
   "name": "@openclaw/demo-plugin-file",
   "version": "0.0.1",
-  "openclaw": { "extensions": ["./index.js"] }
+  "sudoclaw": { "extensions": ["./index.js"] }
 }
 JSON
   cat > "$file_pack_dir/package/index.js" <<'"'"'JS'"'"'

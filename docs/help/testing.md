@@ -328,7 +328,7 @@ Live tests discover credentials the same way the CLI does. Practical implication
 - If a live test says “no creds”, debug the same way you’d debug `openclaw models list` / model selection.
 
 - Profile store: `~/.openclaw/credentials/` (preferred; what “profile keys” means in the tests)
-- Config: `~/.openclaw/openclaw.json` (or `OPENCLAW_CONFIG_PATH`)
+- Config: `~/.sudoclaw/sudoclaw.json` (or `SUDOCLAW_CONFIG_PATH`)
 
 If you want to rely on env keys (e.g. exported in your `~/.profile`), run local tests after `source ~/.profile`, or use the Docker runners below (they can mount `~/.profile` into the container).
 

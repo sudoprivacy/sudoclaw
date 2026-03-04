@@ -15,7 +15,7 @@ x-i18n:
 
 # `openclaw setup`
 
-初始化 `~/.openclaw/openclaw.json` 和智能体工作区。
+初始化 `~/.sudoclaw/sudoclaw.json` 和智能体工作区。
 
 相关内容：
 

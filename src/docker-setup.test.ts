@@ -69,9 +69,9 @@ function createEnv(
     LC_ALL: process.env.LC_ALL,
     TMPDIR: process.env.TMPDIR,
     DOCKER_STUB_LOG: sandbox.logPath,
-    OPENCLAW_GATEWAY_TOKEN: "test-token",
+    SUDOCLAW_GATEWAY_TOKEN: "test-token",
     OPENCLAW_CONFIG_DIR: join(sandbox.rootDir, "config"),
-    OPENCLAW_WORKSPACE_DIR: join(sandbox.rootDir, "openclaw"),
+    OPENCLAW_WORKSPACE_DIR: join(sandbox.rootDir, "sudoclaw"),
   };
 
   for (const [key, value] of Object.entries(overrides)) {
@@ -195,25 +195,25 @@ describe("docker-setup.sh", () => {
     expect(onboardIdx).toBeGreaterThan(chownIdx);
   });
 
-  it("reuses existing config token when OPENCLAW_GATEWAY_TOKEN is unset", async () => {
+  it("reuses existing config token when SUDOCLAW_GATEWAY_TOKEN is unset", async () => {
     const activeSandbox = requireSandbox(sandbox);
     const configDir = join(activeSandbox.rootDir, "config-token-reuse");
     const workspaceDir = join(activeSandbox.rootDir, "workspace-token-reuse");
     await mkdir(configDir, { recursive: true });
     await writeFile(
-      join(configDir, "openclaw.json"),
+      join(configDir, "sudoclaw.json"),
       JSON.stringify({ gateway: { auth: { mode: "token", token: "config-token-123" } } }),
     );
 
     const result = runDockerSetup(activeSandbox, {
-      OPENCLAW_GATEWAY_TOKEN: undefined,
+      SUDOCLAW_GATEWAY_TOKEN: undefined,
       OPENCLAW_CONFIG_DIR: configDir,
       OPENCLAW_WORKSPACE_DIR: workspaceDir,
     });
 
     expect(result.status).toBe(0);
     const envFile = await readFile(join(activeSandbox.rootDir, ".env"), "utf8");
-    expect(envFile).toContain("OPENCLAW_GATEWAY_TOKEN=config-token-123");
+    expect(envFile).toContain("SUDOCLAW_GATEWAY_TOKEN=config-token-123");
   });
 
   it("rejects injected multiline OPENCLAW_EXTRA_MOUNTS values", async () => {

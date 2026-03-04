@@ -4,14 +4,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "OpenClaw",
+    name: "sudoclaw",
     platforms: [
         .macOS(.v15),
     ],
     products: [
         .library(name: "OpenClawIPC", targets: ["OpenClawIPC"]),
         .library(name: "OpenClawDiscovery", targets: ["OpenClawDiscovery"]),
-        .executable(name: "OpenClaw", targets: ["OpenClaw"]),
+        .executable(name: "sudoclaw", targets: ["sudoclaw"]),
         .executable(name: "openclaw-mac", targets: ["OpenClawMacCLI"]),
     ],
     dependencies: [
@@ -40,7 +40,7 @@ let package = Package(
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
         .executableTarget(
-            name: "OpenClaw",
+            name: "sudoclaw",
             dependencies: [
                 "OpenClawIPC",
                 "OpenClawDiscovery",
@@ -80,7 +80,7 @@ let package = Package(
             name: "OpenClawIPCTests",
             dependencies: [
                 "OpenClawIPC",
-                "OpenClaw",
+                "sudoclaw",
                 "OpenClawDiscovery",
                 .product(name: "OpenClawProtocol", package: "OpenClawKit"),
                 .product(name: "SwabbleKit", package: "swabble"),

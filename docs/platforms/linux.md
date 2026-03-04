@@ -59,7 +59,7 @@ Select **Gateway service** when prompted.
 Repair/migrate:
 
 ```
-openclaw doctor
+sudoclaw doctor
 ```
 
 ## System control (systemd user unit)

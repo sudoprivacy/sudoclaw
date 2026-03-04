@@ -22,7 +22,7 @@ Tailscale provides HTTPS, routing, and (for Serve) identity headers.
 
 Set `gateway.auth.mode` to control the handshake:
 
-- `token` (default when `OPENCLAW_GATEWAY_TOKEN` is set)
+- `token` (default when `SUDOCLAW_GATEWAY_TOKEN` is set)
 - `password` (shared secret via `OPENCLAW_GATEWAY_PASSWORD` or config)
 
 When `tailscale.mode = "serve"` and `gateway.auth.allowTailscale` is `true`,

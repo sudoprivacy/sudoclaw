@@ -217,9 +217,9 @@ Create `.env` in the repository root.
 
 ```bash
 OPENCLAW_IMAGE=openclaw:latest
-OPENCLAW_GATEWAY_TOKEN=change-me-now
+SUDOCLAW_GATEWAY_TOKEN=change-me-now
 OPENCLAW_GATEWAY_BIND=lan
-OPENCLAW_GATEWAY_PORT=18789
+SUDOCLAW_GATEWAY_PORT=18789
 
 OPENCLAW_CONFIG_DIR=/home/$USER/.openclaw
 OPENCLAW_WORKSPACE_DIR=/home/$USER/.openclaw/workspace
@@ -255,8 +255,8 @@ services:
       - NODE_ENV=production
       - TERM=xterm-256color
       - OPENCLAW_GATEWAY_BIND=${OPENCLAW_GATEWAY_BIND}
-      - OPENCLAW_GATEWAY_PORT=${OPENCLAW_GATEWAY_PORT}
-      - OPENCLAW_GATEWAY_TOKEN=${OPENCLAW_GATEWAY_TOKEN}
+      - SUDOCLAW_GATEWAY_PORT=${SUDOCLAW_GATEWAY_PORT}
+      - SUDOCLAW_GATEWAY_TOKEN=${SUDOCLAW_GATEWAY_TOKEN}
       - GOG_KEYRING_PASSWORD=${GOG_KEYRING_PASSWORD}
       - XDG_CONFIG_HOME=${XDG_CONFIG_HOME}
       - PATH=/home/linuxbrew/.linuxbrew/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -266,7 +266,7 @@ services:
     ports:
       # Recommended: keep the Gateway loopback-only on the VM; access via SSH tunnel.
       # To expose it publicly, remove the `127.0.0.1:` prefix and firewall accordingly.
-      - "127.0.0.1:${OPENCLAW_GATEWAY_PORT}:18789"
+      - "127.0.0.1:${SUDOCLAW_GATEWAY_PORT}:18789"
     command:
       [
         "node",
@@ -275,7 +275,7 @@ services:
         "--bind",
         "${OPENCLAW_GATEWAY_BIND}",
         "--port",
-        "${OPENCLAW_GATEWAY_PORT}",
+        "${SUDOCLAW_GATEWAY_PORT}",
       ]
 ```
 

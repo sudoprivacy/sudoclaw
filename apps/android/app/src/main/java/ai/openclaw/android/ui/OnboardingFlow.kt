@@ -1564,8 +1564,8 @@ private fun FinalStep(
       } else {
         GuideBlock(title = "Pairing Required") {
           Text("Run these on the gateway host:", style = onboardingCalloutStyle, color = onboardingTextSecondary)
-          CommandBlock("openclaw devices list")
-          CommandBlock("openclaw devices approve <requestId>")
+          CommandBlock("sudoclaw devices list")
+          CommandBlock("sudoclaw devices approve <requestId>")
           Text("Then tap Connect again.", style = onboardingCalloutStyle, color = onboardingTextSecondary)
         }
       }

@@ -60,9 +60,9 @@ openclaw pairing approve telegram <CODE>
 ### 批准节点设备
 
 ```bash
-openclaw devices list
-openclaw devices approve <requestId>
-openclaw devices reject <requestId>
+sudoclaw devices list
+sudoclaw devices approve <requestId>
+sudoclaw devices reject <requestId>
 ```
 
 ### 状态存储位置

@@ -35,7 +35,7 @@ x-i18n:
 5. 在 [Google Cloud Console Chat Configuration](https://console.cloud.google.com/apis/api/chat.googleapis.com/hangouts-chat) 中创建一个 Google Chat 应用：
    - 填写 **Application info**：
      - **App name**：（例如 `OpenClaw`）
-     - **Avatar URL**：（例如 `https://openclaw.ai/logo.png`）
+     - **Avatar URL**：（例如 `https://sudoclaw.ai/logo.png`）
      - **Description**：（例如 `Personal AI Assistant`）
    - 启用 **Interactive features**。
    - 在 **Functionality** 下，勾选 **Join spaces and group conversations**。
@@ -248,7 +248,7 @@ openclaw channels status
 - 检查 `openclaw channels status --probe` 以查看认证错误或缺少 audience 配置。
 - 如果没有收到消息，请确认 Chat 应用的 webhook URL 和事件订阅。
 - 如果提及门控阻止了回复，请将 `botUser` 设置为应用的用户资源名称并验证 `requireMention`。
-- 在发送测试消息时使用 `openclaw logs --follow` 查看请求是否到达 Gateway 网关。
+- 在发送测试消息时使用 `sudoclaw logs --follow` 查看请求是否到达 Gateway 网关。
 
 相关文档：
 

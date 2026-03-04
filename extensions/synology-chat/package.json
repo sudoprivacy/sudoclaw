@@ -6,7 +6,7 @@
   "dependencies": {
     "zod": "^4.3.6"
   },
-  "openclaw": {
+  "sudoclaw": {
     "extensions": [
       "./index.ts"
     ],
@@ -16,7 +16,7 @@
       "selectionLabel": "Synology Chat (Webhook)",
       "docsPath": "/channels/synology-chat",
       "docsLabel": "synology-chat",
-      "blurb": "Connect your Synology NAS Chat to OpenClaw with full agent capabilities.",
+      "blurb": "Connect your Synology NAS Chat to SudoClaw with full agent capabilities.",
       "order": 90
     },
     "install": {

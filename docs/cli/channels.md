@@ -53,7 +53,7 @@ Routing behavior stays consistent:
 - `channels add` does not auto-create or rewrite bindings in non-interactive mode.
 - Interactive setup can optionally add account-scoped bindings.
 
-If your config was already in a mixed state (named accounts present, missing `default`, and top-level single-account values still set), run `openclaw doctor --fix` to move account-scoped values into `accounts.default`.
+If your config was already in a mixed state (named accounts present, missing `default`, and top-level single-account values still set), run `sudoclaw doctor --fix` to move account-scoped values into `accounts.default`.
 
 ## Login / logout (interactive)
 
@@ -65,7 +65,7 @@ openclaw channels logout --channel whatsapp
 ## Troubleshooting
 
 - Run `openclaw status --deep` for a broad probe.
-- Use `openclaw doctor` for guided fixes.
+- Use `sudoclaw doctor` for guided fixes.
 - `openclaw channels list` prints `Claude: HTTP 403 ... user:profile` → usage snapshot needs the `user:profile` scope. Use `--no-usage`, or provide a claude.ai session key (`CLAUDE_WEB_SESSION_KEY` / `CLAUDE_WEB_COOKIE`), or re-auth via Claude Code CLI.
 
 ## Capabilities probe

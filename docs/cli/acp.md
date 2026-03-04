@@ -105,7 +105,7 @@ Add a custom ACP agent in `~/.config/zed/settings.json` (or use Zed’s Settings
   "agent_servers": {
     "OpenClaw ACP": {
       "type": "custom",
-      "command": "openclaw",
+      "command": "sudoclaw",
       "args": ["acp"],
       "env": {}
     }
@@ -120,7 +120,7 @@ To target a specific Gateway or agent:
   "agent_servers": {
     "OpenClaw ACP": {
       "type": "custom",
-      "command": "openclaw",
+      "command": "sudoclaw",
       "args": [
         "acp",
         "--url",
@@ -178,7 +178,7 @@ Learn more about session keys at [/concepts/session](/concepts/session).
 Security note:
 
 - `--token` and `--password` can be visible in local process listings on some systems.
-- Prefer `--token-file`/`--password-file` or environment variables (`OPENCLAW_GATEWAY_TOKEN`, `OPENCLAW_GATEWAY_PASSWORD`).
+- Prefer `--token-file`/`--password-file` or environment variables (`SUDOCLAW_GATEWAY_TOKEN`, `OPENCLAW_GATEWAY_PASSWORD`).
 - ACP runtime backend child processes receive `OPENCLAW_SHELL=acp`, which can be used for context-specific shell/profile rules.
 - `openclaw acp client` sets `OPENCLAW_SHELL=acp-client` on the spawned bridge process.
 

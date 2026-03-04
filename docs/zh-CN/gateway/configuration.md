@@ -1,7 +1,7 @@
 ---
 read_when:
   - 添加或修改配置字段时
-summary: ~/.openclaw/openclaw.json 的所有配置选项及示例
+summary: ~/.sudoclaw/sudoclaw.json 的所有配置选项及示例
 title: 配置
 x-i18n:
   generated_at: "2026-02-01T21:29:41Z"
@@ -14,7 +14,7 @@ x-i18n:
 
 # 配置 🔧
 
-OpenClaw 从 `~/.openclaw/openclaw.json` 读取可选的 **JSON5** 配置（支持注释和尾逗号）。
+OpenClaw 从 `~/.sudoclaw/sudoclaw.json` 读取可选的 **JSON5** 配置（支持注释和尾逗号）。
 
 如果文件不存在，OpenClaw 使用安全的默认值（内置 Pi 智能体 + 按发送者分会话 + 工作区 `~/.openclaw/workspace`）。通常只在以下情况需要配置：
 
@@ -35,9 +35,9 @@ OpenClaw 只接受完全匹配 schema 的配置。
 验证失败时：
 
 - Gateway 网关不会启动。
-- 只允许诊断命令（例如：`openclaw doctor`、`openclaw logs`、`openclaw health`、`openclaw status`、`openclaw service`、`openclaw help`）。
-- 运行 `openclaw doctor` 查看具体问题。
-- 运行 `openclaw doctor --fix`（或 `--yes`）应用迁移/修复。
+- 只允许诊断命令（例如：`sudoclaw doctor`、`openclaw logs`、`openclaw health`、`openclaw status`、`openclaw service`、`openclaw help`）。
+- 运行 `sudoclaw doctor` 查看具体问题。
+- 运行 `sudoclaw doctor --fix`（或 `--yes`）应用迁移/修复。
 
 Doctor 不会写入任何更改，除非你明确选择了 `--fix`/`--yes`。
 
@@ -57,7 +57,7 @@ Gateway 网关通过 `config.schema` 暴露配置的 JSON Schema 表示，供 UI
 它会写入重启哨兵文件，并在 Gateway 网关恢复后 ping 最后活跃的会话。
 
 警告：`config.apply` 会替换**整个配置**。如果你只想更改部分键，
-请使用 `config.patch` 或 `openclaw config set`。请备份 `~/.openclaw/openclaw.json`。
+请使用 `config.patch` 或 `openclaw config set`。请备份 `~/.sudoclaw/sudoclaw.json`。
 
 参数：
 
@@ -161,7 +161,7 @@ scripts/sandbox-setup.sh
 ### 基本用法
 
 ```json5
-// ~/.openclaw/openclaw.json
+// ~/.sudoclaw/sudoclaw.json
 {
   gateway: { port: 18789 },
 
@@ -231,7 +231,7 @@ scripts/sandbox-setup.sh
 ### 示例：多客户法律事务设置
 
 ```json5
-// ~/.openclaw/openclaw.json
+// ~/.sudoclaw/sudoclaw.json
 {
   gateway: { port: 18789, auth: { token: "secret" } },
 
@@ -332,7 +332,7 @@ OpenClaw 从父进程（shell、launchd/systemd、CI 等）读取环境变量。
   },
   gateway: {
     auth: {
-      token: "${OPENCLAW_GATEWAY_TOKEN}",
+      token: "${SUDOCLAW_GATEWAY_TOKEN}",
     },
   },
 }
@@ -377,7 +377,7 @@ OpenClaw 在以下位置存储**每个智能体的**认证配置文件（OAuth +
 
 旧版智能体目录（多智能体之前）：
 
-- `~/.openclaw/agent/*`（由 `openclaw doctor` 迁移到 `~/.openclaw/agents/<defaultAgentId>/agent/*`）
+- `~/.openclaw/agent/*`（由 `sudoclaw doctor` 迁移到 `~/.openclaw/agents/<defaultAgentId>/agent/*`）
 
 覆盖：
 
@@ -558,7 +558,7 @@ OpenClaw 在以下位置存储**每个智能体的**认证配置文件（OAuth +
 说明：
 
 - 出站命令默认使用 `default` 账号（如果存在）；否则使用第一个配置的账号 id（排序后）。
-- 旧版单账号 Baileys 认证目录由 `openclaw doctor` 迁移到 `whatsapp/default`。
+- 旧版单账号 Baileys 认证目录由 `sudoclaw doctor` 迁移到 `whatsapp/default`。
 
 ### `channels.telegram.accounts` / `channels.discord.accounts` / `channels.googlechat.accounts` / `channels.slack.accounts` / `channels.mattermost.accounts` / `channels.signal.accounts` / `channels.imessage.accounts`
 
@@ -606,7 +606,7 @@ OpenClaw 在以下位置存储**每个智能体的**认证配置文件（OAuth +
     groupChat: { historyLimit: 50 },
   },
   agents: {
-    list: [{ id: "main", groupChat: { mentionPatterns: ["@openclaw", "openclaw"] } }],
+    list: [{ id: "main", groupChat: { mentionPatterns: ["@openclaw", "sudoclaw"] } }],
   },
 }
 ```
@@ -1275,7 +1275,7 @@ Slack 以 Socket Mode 运行，需要机器人 token 和应用 token：
       },
       slashCommand: {
         enabled: true,
-        name: "openclaw",
+        name: "sudoclaw",
         sessionPrefix: "slack:slash",
         ephemeral: true,
       },
@@ -2866,7 +2866,7 @@ OpenClaw 可以为 OpenClaw 启动一个**专用、隔离的** Chrome/Brave/Edge
     // 可选：控制台 UI 助手身份覆盖。
     // 如果未设置，控制台 UI 使用活跃智能体的身份（配置或 IDENTITY.md）。
     assistant: {
-      name: "OpenClaw",
+      name: "sudoclaw",
       avatar: "CB", // 表情、短文本，或图片 URL/data URI
     },
   },
@@ -2923,7 +2923,7 @@ OpenClaw 可以为 OpenClaw 启动一个**专用、隔离的** Chrome/Brave/Edge
 - `openclaw gateway` 拒绝启动，除非 `gateway.mode` 设为 `local`（或你传递了覆盖标志）。
 - `gateway.port` 控制用于 WebSocket + HTTP（控制台 UI、hooks、A2UI）的单一多路复用端口。
 - OpenAI Chat Completions 端点：**默认禁用**；通过 `gateway.http.endpoints.chatCompletions.enabled: true` 启用。
-- 优先级：`--port` > `OPENCLAW_GATEWAY_PORT` > `gateway.port` > 默认 `18789`。
+- 优先级：`--port` > `SUDOCLAW_GATEWAY_PORT` > `gateway.port` > 默认 `18789`。
 - 默认需要 Gateway 网关认证（token/密码或 Tailscale Serve 身份）。非 local loopback 绑定需要共享 token/密码。
 - 新手引导向导默认生成 gateway token（即使在 local loopback 上）。
 - `gateway.remote.token` **仅**用于远程 CLI 调用；它不启用本地 gateway 认证。`gateway.token` 被忽略。
@@ -2953,7 +2953,7 @@ OpenClaw 可以为 OpenClaw 启动一个**专用、隔离的** Chrome/Brave/Edge
 
 macOS 应用行为：
 
-- OpenClaw.app 监视 `~/.openclaw/openclaw.json`，当 `gateway.mode` 或 `gateway.remote.url` 变更时实时切换模式。
+- OpenClaw.app 监视 `~/.sudoclaw/sudoclaw.json`，当 `gateway.mode` 或 `gateway.remote.url` 变更时实时切换模式。
 - 如果 `gateway.mode` 未设置但 `gateway.remote.url` 已设置，macOS 应用将其视为远程模式。
 - 当你在 macOS 应用中更改连接模式时，它会将 `gateway.mode`（以及远程模式下的 `gateway.remote.url` + `gateway.remote.transport`）写回配置文件。
 
@@ -2987,7 +2987,7 @@ macOS 应用行为：
 
 ### `gateway.reload`（配置热重载）
 
-Gateway 网关监视 `~/.openclaw/openclaw.json`（或 `OPENCLAW_CONFIG_PATH`）并自动应用更改。
+Gateway 网关监视 `~/.sudoclaw/sudoclaw.json`（或 `SUDOCLAW_CONFIG_PATH`）并自动应用更改。
 
 模式：
 
@@ -3011,7 +3011,7 @@ Gateway 网关监视 `~/.openclaw/openclaw.json`（或 `OPENCLAW_CONFIG_PATH`）
 
 监视的文件：
 
-- `~/.openclaw/openclaw.json`（或 `OPENCLAW_CONFIG_PATH`）
+- `~/.sudoclaw/sudoclaw.json`（或 `SUDOCLAW_CONFIG_PATH`）
 
 热应用（无需完全重启 Gateway 网关）：
 
@@ -3036,8 +3036,8 @@ Gateway 网关监视 `~/.openclaw/openclaw.json`（或 `OPENCLAW_CONFIG_PATH`）
 
 要在一台主机上运行多个 Gateway 网关（用于冗余或救援机器人），请隔离每个实例的状态 + 配置并使用唯一端口：
 
-- `OPENCLAW_CONFIG_PATH`（每实例配置）
-- `OPENCLAW_STATE_DIR`（会话/凭据）
+- `SUDOCLAW_CONFIG_PATH`（每实例配置）
+- `SUDOCLAW_STATE_DIR`（会话/凭据）
 - `agents.defaults.workspace`（记忆）
 - `gateway.port`（每实例唯一）
 
@@ -3052,8 +3052,8 @@ Gateway 网关监视 `~/.openclaw/openclaw.json`（或 `OPENCLAW_CONFIG_PATH`）
 示例：
 
 ```bash
-OPENCLAW_CONFIG_PATH=~/.openclaw/a.json \
-OPENCLAW_STATE_DIR=~/.openclaw-a \
+SUDOCLAW_CONFIG_PATH=~/.openclaw/a.json \
+SUDOCLAW_STATE_DIR=~/.openclaw-a \
 openclaw gateway --port 19001
 ```
 

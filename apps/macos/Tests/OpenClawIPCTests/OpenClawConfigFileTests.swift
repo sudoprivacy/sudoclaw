@@ -8,10 +8,10 @@ struct OpenClawConfigFileTests {
     func configPathRespectsEnvOverride() async {
         let override = FileManager().temporaryDirectory
             .appendingPathComponent("openclaw-config-\(UUID().uuidString)")
-            .appendingPathComponent("openclaw.json")
+            .appendingPathComponent("sudoclaw.json")
             .path
 
-        await TestIsolation.withEnvValues(["OPENCLAW_CONFIG_PATH": override]) {
+        await TestIsolation.withEnvValues(["SUDOCLAW_CONFIG_PATH": override]) {
             #expect(OpenClawConfigFile.url().path == override)
         }
     }
@@ -21,10 +21,10 @@ struct OpenClawConfigFileTests {
     func remoteGatewayPortParsesAndMatchesHost() async {
         let override = FileManager().temporaryDirectory
             .appendingPathComponent("openclaw-config-\(UUID().uuidString)")
-            .appendingPathComponent("openclaw.json")
+            .appendingPathComponent("sudoclaw.json")
             .path
 
-        await TestIsolation.withEnvValues(["OPENCLAW_CONFIG_PATH": override]) {
+        await TestIsolation.withEnvValues(["SUDOCLAW_CONFIG_PATH": override]) {
             OpenClawConfigFile.saveDict([
                 "gateway": [
                     "remote": [
@@ -44,10 +44,10 @@ struct OpenClawConfigFileTests {
     func setRemoteGatewayUrlPreservesScheme() async {
         let override = FileManager().temporaryDirectory
             .appendingPathComponent("openclaw-config-\(UUID().uuidString)")
-            .appendingPathComponent("openclaw.json")
+            .appendingPathComponent("sudoclaw.json")
             .path
 
-        await TestIsolation.withEnvValues(["OPENCLAW_CONFIG_PATH": override]) {
+        await TestIsolation.withEnvValues(["SUDOCLAW_CONFIG_PATH": override]) {
             OpenClawConfigFile.saveDict([
                 "gateway": [
                     "remote": [
@@ -67,10 +67,10 @@ struct OpenClawConfigFileTests {
     func clearRemoteGatewayUrlRemovesOnlyUrlField() async {
         let override = FileManager().temporaryDirectory
             .appendingPathComponent("openclaw-config-\(UUID().uuidString)")
-            .appendingPathComponent("openclaw.json")
+            .appendingPathComponent("sudoclaw.json")
             .path
 
-        await TestIsolation.withEnvValues(["OPENCLAW_CONFIG_PATH": override]) {
+        await TestIsolation.withEnvValues(["SUDOCLAW_CONFIG_PATH": override]) {
             OpenClawConfigFile.saveDict([
                 "gateway": [
                     "remote": [
@@ -94,8 +94,8 @@ struct OpenClawConfigFileTests {
             .path
 
         await TestIsolation.withEnvValues([
-            "OPENCLAW_CONFIG_PATH": nil,
-            "OPENCLAW_STATE_DIR": dir,
+            "SUDOCLAW_CONFIG_PATH": nil,
+            "SUDOCLAW_STATE_DIR": dir,
         ]) {
             #expect(OpenClawConfigFile.stateDirURL().path == dir)
             #expect(OpenClawConfigFile.url().path == "\(dir)/openclaw.json")
@@ -107,14 +107,14 @@ struct OpenClawConfigFileTests {
     func saveDictAppendsConfigAuditLog() async throws {
         let stateDir = FileManager().temporaryDirectory
             .appendingPathComponent("openclaw-state-\(UUID().uuidString)", isDirectory: true)
-        let configPath = stateDir.appendingPathComponent("openclaw.json")
+        let configPath = stateDir.appendingPathComponent("sudoclaw.json")
         let auditPath = stateDir.appendingPathComponent("logs/config-audit.jsonl")
 
         defer { try? FileManager().removeItem(at: stateDir) }
 
         try await TestIsolation.withEnvValues([
-            "OPENCLAW_STATE_DIR": stateDir.path,
-            "OPENCLAW_CONFIG_PATH": configPath.path,
+            "SUDOCLAW_STATE_DIR": stateDir.path,
+            "SUDOCLAW_CONFIG_PATH": configPath.path,
         ]) {
             OpenClawConfigFile.saveDict([
                 "gateway": ["mode": "local"],

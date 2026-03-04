@@ -35,7 +35,7 @@ export function restartGatewayProcessWithFreshPid(): GatewayRespawnResult {
   if (isLikelySupervisedProcess(process.env)) {
     // On macOS under launchd, actively kickstart the supervised service to
     // bypass ThrottleInterval delays for intentional restarts.
-    if (process.platform === "darwin" && process.env.OPENCLAW_LAUNCHD_LABEL?.trim()) {
+    if (process.platform === "darwin" && process.env.SUDOCLAW_LAUNCHD_LABEL?.trim()) {
       const restart = triggerOpenClawRestart();
       if (!restart.ok) {
         return {

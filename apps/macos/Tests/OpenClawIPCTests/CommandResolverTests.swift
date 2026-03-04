@@ -74,7 +74,7 @@ import Testing
         CommandResolver.setProjectRoot(tmp.path)
 
         let binDir = tmp.appendingPathComponent("bin")
-        let openclawPath = binDir.appendingPathComponent("openclaw")
+        let openclawPath = binDir.appendingPathComponent("sudoclaw")
         let pnpmPath = binDir.appendingPathComponent("pnpm")
         try self.makeExec(at: openclawPath)
         try self.makeExec(at: pnpmPath)
@@ -96,7 +96,7 @@ import Testing
         CommandResolver.setProjectRoot(tmp.path)
 
         let binDir = tmp.appendingPathComponent("bin")
-        let openclawPath = binDir.appendingPathComponent("openclaw")
+        let openclawPath = binDir.appendingPathComponent("sudoclaw")
         try self.makeExec(at: openclawPath)
 
         let cmd = CommandResolver.openclawCommand(
@@ -124,7 +124,7 @@ import Testing
             configRoot: [:],
             searchPaths: [tmp.appendingPathComponent("node_modules/.bin").path])
 
-        #expect(cmd.prefix(4).elementsEqual([pnpmPath.path, "--silent", "openclaw", "rpc"]))
+        #expect(cmd.prefix(4).elementsEqual([pnpmPath.path, "--silent", "sudoclaw", "rpc"]))
     }
 
     @Test func pnpmKeepsExtraArgsAfterSubcommand() throws {
@@ -144,7 +144,7 @@ import Testing
             configRoot: [:],
             searchPaths: [tmp.appendingPathComponent("node_modules/.bin").path])
 
-        #expect(cmd.prefix(5).elementsEqual([pnpmPath.path, "--silent", "openclaw", "health", "--json"]))
+        #expect(cmd.prefix(5).elementsEqual([pnpmPath.path, "--silent", "sudoclaw", "health", "--json"]))
         #expect(cmd.suffix(2).elementsEqual(["--timeout", "5"]))
     }
 
@@ -180,7 +180,7 @@ import Testing
         if let script = cmd.last {
             #expect(script.contains("PRJ='/srv/openclaw'"))
             #expect(script.contains("cd \"$PRJ\""))
-            #expect(script.contains("openclaw"))
+            #expect(script.contains("sudoclaw"))
             #expect(script.contains("status"))
             #expect(script.contains("--json"))
             #expect(script.contains("CLI="))

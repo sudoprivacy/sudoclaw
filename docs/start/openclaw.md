@@ -55,7 +55,7 @@ openclaw channels login
 openclaw gateway --port 18789
 ```
 
-3. Put a minimal config in `~/.openclaw/openclaw.json`:
+3. Put a minimal config in `~/.sudoclaw/sudoclaw.json`:
 
 ```json5
 {
@@ -65,7 +65,7 @@ openclaw gateway --port 18789
 
 Now message the assistant number from your allowlisted phone.
 
-When onboarding finishes, we auto-open the dashboard and print a clean (non-tokenized) link. If it prompts for auth, paste the token from `gateway.auth.token` into Control UI settings. To reopen later: `openclaw dashboard`.
+When onboarding finishes, we auto-open the dashboard and print a clean (non-tokenized) link. If it prompts for auth, paste the token from `gateway.auth.token` into Control UI settings. To reopen later: `sudoclaw dashboard`.
 
 ## Give the agent a workspace (AGENTS)
 
@@ -133,7 +133,7 @@ Example:
   },
   routing: {
     groupChat: {
-      mentionPatterns: ["@openclaw", "openclaw"],
+      mentionPatterns: ["@openclaw", "sudoclaw"],
     },
   },
   session: {

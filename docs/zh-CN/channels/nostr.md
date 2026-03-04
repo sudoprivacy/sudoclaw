@@ -100,8 +100,8 @@ export NOSTR_PRIVATE_KEY="nsec1..."
     "nostr": {
       "privateKey": "${NOSTR_PRIVATE_KEY}",
       "profile": {
-        "name": "openclaw",
-        "displayName": "OpenClaw",
+        "name": "sudoclaw",
+        "displayName": "sudoclaw",
         "about": "Personal assistant DM bot",
         "picture": "https://example.com/avatar.png",
         "banner": "https://example.com/banner.png",

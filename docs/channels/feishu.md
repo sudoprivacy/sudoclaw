@@ -49,7 +49,7 @@ The wizard guides you through:
 ✅ **After configuration**, check gateway status:
 
 - `openclaw gateway status`
-- `openclaw logs --follow`
+- `sudoclaw logs --follow`
 
 ### Method 2: CLI setup
 
@@ -65,7 +65,7 @@ Choose **Feishu**, then enter the App ID and App Secret.
 
 - `openclaw gateway status`
 - `openclaw gateway restart`
-- `openclaw logs --follow`
+- `sudoclaw logs --follow`
 
 ---
 
@@ -175,7 +175,7 @@ Choose **Feishu** and paste your App ID + App Secret.
 
 ### Configure via config file
 
-Edit `~/.openclaw/openclaw.json`:
+Edit `~/.sudoclaw/sudoclaw.json`:
 
 ```json5
 {
@@ -391,7 +391,7 @@ Group IDs look like `oc_xxx`.
 **Method 1 (recommended)**
 
 1. Start the gateway and @mention the bot in the group
-2. Run `openclaw logs --follow` and look for `chat_id`
+2. Run `sudoclaw logs --follow` and look for `chat_id`
 
 **Method 2**
 
@@ -404,7 +404,7 @@ User IDs look like `ou_xxx`.
 **Method 1 (recommended)**
 
 1. Start the gateway and DM the bot
-2. Run `openclaw logs --follow` and look for `open_id`
+2. Run `sudoclaw logs --follow` and look for `open_id`
 
 **Method 2**
 
@@ -434,7 +434,7 @@ openclaw pairing list feishu
 | `openclaw gateway install` | Install/start gateway service |
 | `openclaw gateway stop`    | Stop gateway service          |
 | `openclaw gateway restart` | Restart gateway service       |
-| `openclaw logs --follow`   | Tail gateway logs             |
+| `sudoclaw logs --follow`   | Tail gateway logs             |
 
 ---
 
@@ -445,7 +445,7 @@ openclaw pairing list feishu
 1. Ensure the bot is added to the group
 2. Ensure you @mention the bot (default behavior)
 3. Check `groupPolicy` is not set to `"disabled"`
-4. Check logs: `openclaw logs --follow`
+4. Check logs: `sudoclaw logs --follow`
 
 ### Bot does not receive messages
 
@@ -454,7 +454,7 @@ openclaw pairing list feishu
 3. Ensure **long connection** is enabled
 4. Ensure app permissions are complete
 5. Ensure the gateway is running: `openclaw gateway status`
-6. Check logs: `openclaw logs --follow`
+6. Check logs: `sudoclaw logs --follow`
 
 ### App Secret leak
 

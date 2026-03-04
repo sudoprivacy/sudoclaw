@@ -17,10 +17,10 @@ Related:
 ## Audit
 
 ```bash
-openclaw security audit
-openclaw security audit --deep
-openclaw security audit --fix
-openclaw security audit --json
+sudoclaw security audit
+sudoclaw security audit --deep
+sudoclaw security audit --fix
+sudoclaw security audit --json
 ```
 
 The audit warns when multiple DM senders share the main session and recommends **secure DM mode**: `session.dmScope="per-channel-peer"` (or `per-account-channel-peer` for multi-account channels) for shared inboxes.
@@ -45,14 +45,14 @@ For the complete dangerous-parameter inventory, see the "Insecure or dangerous f
 Use `--json` for CI/policy checks:
 
 ```bash
-openclaw security audit --json | jq '.summary'
-openclaw security audit --deep --json | jq '.findings[] | select(.severity=="critical") | .checkId'
+sudoclaw security audit --json | jq '.summary'
+sudoclaw security audit --deep --json | jq '.findings[] | select(.severity=="critical") | .checkId'
 ```
 
 If `--fix` and `--json` are combined, output includes both fix actions and final report:
 
 ```bash
-openclaw security audit --fix --json | jq '{fix: .fix.ok, summary: .report.summary}'
+sudoclaw security audit --fix --json | jq '{fix: .fix.ok, summary: .report.summary}'
 ```
 
 ## What `--fix` changes

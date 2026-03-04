@@ -17,13 +17,13 @@ x-i18n:
 <p align="center">
     <img
         src="/assets/openclaw-logo-text-dark.png"
-        alt="OpenClaw"
+        alt="sudoclaw"
         width="500"
         class="dark:hidden"
     />
     <img
         src="/assets/openclaw-logo-text.png"
-        alt="OpenClaw"
+        alt="sudoclaw"
         width="500"
         class="hidden dark:block"
     />
@@ -118,12 +118,12 @@ Gatewayの起動後、ブラウザでControl UIを開きます。
 - リモートアクセス: [Webサーフェス](/web)および[Tailscale](/gateway/tailscale)
 
 <p align="center">
-  <img src="whatsapp-openclaw.jpg" alt="OpenClaw" width="420" />
+  <img src="whatsapp-openclaw.jpg" alt="sudoclaw" width="420" />
 </p>
 
 ## 設定（オプション）
 
-設定は`~/.openclaw/openclaw.json`にあります。
+設定は`~/.sudoclaw/sudoclaw.json`にあります。
 
 - **何もしなければ**、OpenClawはバンドルされたPiバイナリをRPCモードで使用し、送信者ごとのセッションを作成します。
 - 制限を設けたい場合は、`channels.whatsapp.allowFrom`と（グループの場合）メンションルールから始めてください。

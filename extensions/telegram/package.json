@@ -4,7 +4,7 @@
   "private": true,
   "description": "OpenClaw Telegram channel plugin",
   "type": "module",
-  "openclaw": {
+  "sudoclaw": {
     "extensions": [
       "./index.ts"
     ]

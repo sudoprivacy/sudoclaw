@@ -19,7 +19,7 @@ x-i18n:
 ## 快速设置（新手）
 
 1. 如果可能，使用**单独的手机号码**（推荐）。
-2. 在 `~/.openclaw/openclaw.json` 中配置 WhatsApp。
+2. 在 `~/.sudoclaw/sudoclaw.json` 中配置 WhatsApp。
 3. 运行 `openclaw channels login` 扫描二维码（关联设备）。
 4. 启动 Gateway 网关。
 
@@ -403,7 +403,7 @@ WhatsApp 将音频作为**语音消息**（PTT 气泡）发送。
 **已关联但断开连接 / 重连循环**
 
 - 症状：`channels status` 显示 `running, disconnected` 或警告"Linked but disconnected"。
-- 修复：`openclaw doctor`（或重启 Gateway 网关）。如果问题持续，通过 `channels login` 重新关联并检查 `openclaw logs --follow`。
+- 修复：`sudoclaw doctor`（或重启 Gateway 网关）。如果问题持续，通过 `channels login` 重新关联并检查 `sudoclaw logs --follow`。
 
 **Bun 运行时**
 

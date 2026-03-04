@@ -63,37 +63,37 @@ describe("systemd runtime parsing", () => {
 describe("resolveSystemdUserUnitPath", () => {
   it.each([
     {
-      name: "uses default service name when OPENCLAW_PROFILE is unset",
+      name: "uses default service name when SUDOCLAW_PROFILE is unset",
       env: { HOME: "/home/test" },
       expected: "/home/test/.config/systemd/user/openclaw-gateway.service",
     },
     {
-      name: "uses profile-specific service name when OPENCLAW_PROFILE is set to a custom value",
-      env: { HOME: "/home/test", OPENCLAW_PROFILE: "jbphoenix" },
+      name: "uses profile-specific service name when SUDOCLAW_PROFILE is set to a custom value",
+      env: { HOME: "/home/test", SUDOCLAW_PROFILE: "jbphoenix" },
       expected: "/home/test/.config/systemd/user/openclaw-gateway-jbphoenix.service",
     },
     {
-      name: "prefers OPENCLAW_SYSTEMD_UNIT over OPENCLAW_PROFILE",
+      name: "prefers SUDOCLAW_SYSTEMD_UNIT over SUDOCLAW_PROFILE",
       env: {
         HOME: "/home/test",
-        OPENCLAW_PROFILE: "jbphoenix",
-        OPENCLAW_SYSTEMD_UNIT: "custom-unit",
+        SUDOCLAW_PROFILE: "jbphoenix",
+        SUDOCLAW_SYSTEMD_UNIT: "custom-unit",
       },
       expected: "/home/test/.config/systemd/user/custom-unit.service",
     },
     {
-      name: "handles OPENCLAW_SYSTEMD_UNIT with .service suffix",
+      name: "handles SUDOCLAW_SYSTEMD_UNIT with .service suffix",
       env: {
         HOME: "/home/test",
-        OPENCLAW_SYSTEMD_UNIT: "custom-unit.service",
+        SUDOCLAW_SYSTEMD_UNIT: "custom-unit.service",
       },
       expected: "/home/test/.config/systemd/user/custom-unit.service",
     },
     {
-      name: "trims whitespace from OPENCLAW_SYSTEMD_UNIT",
+      name: "trims whitespace from SUDOCLAW_SYSTEMD_UNIT",
       env: {
         HOME: "/home/test",
-        OPENCLAW_SYSTEMD_UNIT: "  custom-unit  ",
+        SUDOCLAW_SYSTEMD_UNIT: "  custom-unit  ",
       },
       expected: "/home/test/.config/systemd/user/custom-unit.service",
     },
@@ -118,7 +118,7 @@ describe("splitArgsPreservingQuotes", () => {
       splitArgsPreservingQuotes('openclaw --name "My \\"Bot\\"" --foo bar', {
         escapeMode: "backslash",
       }),
-    ).toEqual(["openclaw", "--name", 'My "Bot"', "--foo", "bar"]);
+    ).toEqual(["sudoclaw", "--name", 'My "Bot"', "--foo", "bar"]);
   });
 
   it("supports schtasks-style escaped quotes while preserving other backslashes", () => {
@@ -126,13 +126,13 @@ describe("splitArgsPreservingQuotes", () => {
       splitArgsPreservingQuotes('openclaw --path "C:\\\\Program Files\\\\OpenClaw"', {
         escapeMode: "backslash-quote-only",
       }),
-    ).toEqual(["openclaw", "--path", "C:\\\\Program Files\\\\OpenClaw"]);
+    ).toEqual(["sudoclaw", "--path", "C:\\\\Program Files\\\\OpenClaw"]);
 
     expect(
       splitArgsPreservingQuotes('openclaw --label "My \\"Quoted\\" Name"', {
         escapeMode: "backslash-quote-only",
       }),
-    ).toEqual(["openclaw", "--label", 'My "Quoted" Name']);
+    ).toEqual(["sudoclaw", "--label", 'My "Quoted" Name']);
   });
 });
 
@@ -180,7 +180,7 @@ describe("systemd service control", () => {
     const write = vi.fn();
     const stdout = { write } as unknown as NodeJS.WritableStream;
 
-    await restartSystemdService({ stdout, env: { OPENCLAW_PROFILE: "work" } });
+    await restartSystemdService({ stdout, env: { SUDOCLAW_PROFILE: "work" } });
 
     expect(write).toHaveBeenCalledTimes(1);
     expect(String(write.mock.calls[0]?.[0])).toContain("Restarted systemd service");

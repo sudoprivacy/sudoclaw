@@ -233,7 +233,7 @@ export async function gatherDaemonStatus(
         url: probeUrl,
         token:
           opts.rpc.token ||
-          mergedDaemonEnv.OPENCLAW_GATEWAY_TOKEN ||
+          mergedDaemonEnv.SUDOCLAW_GATEWAY_TOKEN ||
           daemonCfg.gateway?.auth?.token,
         password:
           opts.rpc.password ||

@@ -97,7 +97,7 @@ current limits and pricing.
 ### Where to set the key (recommended)
 
 **Recommended:** run `openclaw configure --section web`. It stores the key in
-`~/.openclaw/openclaw.json` under `tools.web.search.apiKey`.
+`~/.sudoclaw/sudoclaw.json` under `tools.web.search.apiKey`.
 
 **Environment alternative:** set `BRAVE_API_KEY` in the Gateway process
 environment. For a gateway install, put it in `~/.openclaw/.env` (or your

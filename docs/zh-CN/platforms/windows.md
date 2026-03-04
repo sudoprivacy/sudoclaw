@@ -55,7 +55,7 @@ openclaw configure
 修复/迁移：
 
 ```
-openclaw doctor
+sudoclaw doctor
 ```
 
 ## 高级：通过 LAN 暴露 WSL 服务（portproxy）

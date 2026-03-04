@@ -13,7 +13,7 @@ struct CLIInstallerTests {
 
         let binDir = root.appendingPathComponent("bin")
         try fm.createDirectory(at: binDir, withIntermediateDirectories: true)
-        let cli = binDir.appendingPathComponent("openclaw")
+        let cli = binDir.appendingPathComponent("sudoclaw")
         fm.createFile(atPath: cli.path, contents: Data())
         try fm.setAttributes([.posixPermissions: 0o755], ofItemAtPath: cli.path)
 

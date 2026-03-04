@@ -17,7 +17,7 @@ final class PeekabooBridgeHostCoordinator {
         let fileManager = FileManager.default
         let base = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
             ?? fileManager.homeDirectoryForCurrentUser.appendingPathComponent("Library/Application Support")
-        let directory = base.appendingPathComponent("OpenClaw", isDirectory: true)
+        let directory = base.appendingPathComponent("sudoclaw", isDirectory: true)
         return directory.appendingPathComponent(PeekabooBridgeConstants.socketName, isDirectory: false).path
     }
 

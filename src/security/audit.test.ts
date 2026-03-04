@@ -148,7 +148,7 @@ describe("security audit", () => {
     await fs.rm(credentialsDir, { recursive: true, force: true });
     await fs.mkdir(credentialsDir, { recursive: true, mode: 0o700 });
     await withEnvAsync(
-      { OPENCLAW_STATE_DIR: channelSecurityStateDir },
+      { SUDOCLAW_STATE_DIR: channelSecurityStateDir },
       async () => await fn(channelSecurityStateDir),
     );
   };
@@ -190,9 +190,9 @@ describe("security audit", () => {
 
   it("flags non-loopback bind without auth as critical", async () => {
     // Clear env tokens so resolveGatewayAuth defaults to mode=none
-    const prevToken = process.env.OPENCLAW_GATEWAY_TOKEN;
+    const prevToken = process.env.SUDOCLAW_GATEWAY_TOKEN;
     const prevPassword = process.env.OPENCLAW_GATEWAY_PASSWORD;
-    delete process.env.OPENCLAW_GATEWAY_TOKEN;
+    delete process.env.SUDOCLAW_GATEWAY_TOKEN;
     delete process.env.OPENCLAW_GATEWAY_PASSWORD;
 
     try {
@@ -209,9 +209,9 @@ describe("security audit", () => {
     } finally {
       // Restore env
       if (prevToken === undefined) {
-        delete process.env.OPENCLAW_GATEWAY_TOKEN;
+        delete process.env.SUDOCLAW_GATEWAY_TOKEN;
       } else {
-        process.env.OPENCLAW_GATEWAY_TOKEN = prevToken;
+        process.env.SUDOCLAW_GATEWAY_TOKEN = prevToken;
       }
       if (prevPassword === undefined) {
         delete process.env.OPENCLAW_GATEWAY_PASSWORD;
@@ -542,7 +542,7 @@ describe("security audit", () => {
     const tmp = await makeTmpDir("win");
     const stateDir = path.join(tmp, "state");
     await fs.mkdir(stateDir, { recursive: true });
-    const configPath = path.join(stateDir, "openclaw.json");
+    const configPath = path.join(stateDir, "sudoclaw.json");
     await fs.writeFile(configPath, "{}\n", "utf-8");
 
     const user = "DESKTOP-TEST\\Tester";
@@ -579,7 +579,7 @@ describe("security audit", () => {
     const tmp = await makeTmpDir("win-open");
     const stateDir = path.join(tmp, "state");
     await fs.mkdir(stateDir, { recursive: true });
-    const configPath = path.join(stateDir, "openclaw.json");
+    const configPath = path.join(stateDir, "sudoclaw.json");
     await fs.writeFile(configPath, "{}\n", "utf-8");
 
     const user = "DESKTOP-TEST\\Tester";
@@ -619,7 +619,7 @@ describe("security audit", () => {
     const tmp = await makeTmpDir("browser-hash-labels");
     const stateDir = path.join(tmp, "state");
     await fs.mkdir(stateDir, { recursive: true, mode: 0o700 });
-    const configPath = path.join(stateDir, "openclaw.json");
+    const configPath = path.join(stateDir, "sudoclaw.json");
     await fs.writeFile(configPath, "{}\n", "utf-8");
     await fs.chmod(configPath, 0o600);
 
@@ -673,7 +673,7 @@ describe("security audit", () => {
     const tmp = await makeTmpDir("browser-hash-labels-skip");
     const stateDir = path.join(tmp, "state");
     await fs.mkdir(stateDir, { recursive: true, mode: 0o700 });
-    const configPath = path.join(stateDir, "openclaw.json");
+    const configPath = path.join(stateDir, "sudoclaw.json");
     await fs.writeFile(configPath, "{}\n", "utf-8");
     await fs.chmod(configPath, 0o600);
 
@@ -698,7 +698,7 @@ describe("security audit", () => {
     const tmp = await makeTmpDir("browser-non-loopback-publish");
     const stateDir = path.join(tmp, "state");
     await fs.mkdir(stateDir, { recursive: true, mode: 0o700 });
-    const configPath = path.join(stateDir, "openclaw.json");
+    const configPath = path.join(stateDir, "sudoclaw.json");
     await fs.writeFile(configPath, "{}\n", "utf-8");
     await fs.chmod(configPath, 0o600);
 
@@ -758,7 +758,7 @@ describe("security audit", () => {
     await fs.writeFile(targetConfigPath, "{}\n", "utf-8");
     await fs.chmod(targetConfigPath, 0o444);
 
-    const configPath = path.join(stateDir, "openclaw.json");
+    const configPath = path.join(stateDir, "sudoclaw.json");
     await fs.symlink(targetConfigPath, configPath);
 
     const res = await runSecurityAudit({
@@ -1685,7 +1685,7 @@ describe("security audit", () => {
         "channels.discord.guilds.123.channels.general.users:security-team",
       );
       expect(finding?.detail).toContain(
-        "~/.openclaw/credentials/discord-allowFrom.json:team.owner",
+        "~/.sudoclaw/credentials/discord-allowFrom.json:team.owner",
       );
       expect(finding?.detail).not.toContain("<@123456789012345678>");
     });
@@ -2105,8 +2105,8 @@ describe("security audit", () => {
   });
 
   it("flags hooks token reuse of the gateway env token as critical", async () => {
-    const prevToken = process.env.OPENCLAW_GATEWAY_TOKEN;
-    process.env.OPENCLAW_GATEWAY_TOKEN = "shared-gateway-token-1234567890";
+    const prevToken = process.env.SUDOCLAW_GATEWAY_TOKEN;
+    process.env.SUDOCLAW_GATEWAY_TOKEN = "shared-gateway-token-1234567890";
     const cfg: OpenClawConfig = {
       hooks: { enabled: true, token: "shared-gateway-token-1234567890" },
     };
@@ -2116,9 +2116,9 @@ describe("security audit", () => {
       expectFinding(res, "hooks.token_reuse_gateway_token", "critical");
     } finally {
       if (prevToken === undefined) {
-        delete process.env.OPENCLAW_GATEWAY_TOKEN;
+        delete process.env.SUDOCLAW_GATEWAY_TOKEN;
       } else {
-        process.env.OPENCLAW_GATEWAY_TOKEN = prevToken;
+        process.env.SUDOCLAW_GATEWAY_TOKEN = prevToken;
       }
     }
   });
@@ -2257,8 +2257,8 @@ describe("security audit", () => {
     const cfg: OpenClawConfig = {};
 
     const res = await audit(cfg, {
-      stateDir: "/Users/test/Dropbox/.openclaw",
-      configPath: "/Users/test/Dropbox/.openclaw/openclaw.json",
+      stateDir: "/Users/test/Dropbox/.sudoclaw",
+      configPath: "/Users/test/Dropbox/.sudoclaw/sudoclaw.json",
     });
 
     expectFinding(res, "fs.synced_dir", "warn");
@@ -2279,7 +2279,7 @@ describe("security audit", () => {
       await fs.chmod(includePath, 0o644);
     }
 
-    const configPath = path.join(stateDir, "openclaw.json");
+    const configPath = path.join(stateDir, "sudoclaw.json");
     await fs.writeFile(configPath, `{ "$include": "./extra.json5" }\n`, "utf-8");
     await fs.chmod(configPath, 0o600);
 
@@ -2352,7 +2352,7 @@ describe("security audit", () => {
         includeFilesystem: true,
         includeChannelSecurity: false,
         stateDir,
-        configPath: path.join(stateDir, "openclaw.json"),
+        configPath: path.join(stateDir, "sudoclaw.json"),
       });
 
       expect(res.findings).toEqual(
@@ -2415,7 +2415,7 @@ describe("security audit", () => {
       includeFilesystem: true,
       includeChannelSecurity: false,
       stateDir,
-      configPath: path.join(stateDir, "openclaw.json"),
+      configPath: path.join(stateDir, "sudoclaw.json"),
     });
 
     expect(hasFinding(res, "plugins.installs_unpinned_npm_specs", "warn")).toBe(true);
@@ -2457,7 +2457,7 @@ describe("security audit", () => {
       includeFilesystem: true,
       includeChannelSecurity: false,
       stateDir,
-      configPath: path.join(stateDir, "openclaw.json"),
+      configPath: path.join(stateDir, "sudoclaw.json"),
     });
 
     expect(hasFinding(res, "plugins.installs_unpinned_npm_specs")).toBe(false);
@@ -2514,7 +2514,7 @@ describe("security audit", () => {
       includeFilesystem: true,
       includeChannelSecurity: false,
       stateDir,
-      configPath: path.join(stateDir, "openclaw.json"),
+      configPath: path.join(stateDir, "sudoclaw.json"),
     });
 
     expect(hasFinding(res, "plugins.installs_version_drift", "warn")).toBe(true);
@@ -2537,7 +2537,7 @@ describe("security audit", () => {
       includeFilesystem: true,
       includeChannelSecurity: false,
       stateDir,
-      configPath: path.join(stateDir, "openclaw.json"),
+      configPath: path.join(stateDir, "sudoclaw.json"),
     });
 
     expect(res.findings).toEqual(
@@ -2567,7 +2567,7 @@ describe("security audit", () => {
       includeFilesystem: true,
       includeChannelSecurity: false,
       stateDir,
-      configPath: path.join(stateDir, "openclaw.json"),
+      configPath: path.join(stateDir, "sudoclaw.json"),
     });
 
     expect(
@@ -2596,7 +2596,7 @@ describe("security audit", () => {
         includeFilesystem: true,
         includeChannelSecurity: false,
         stateDir,
-        configPath: path.join(stateDir, "openclaw.json"),
+        configPath: path.join(stateDir, "sudoclaw.json"),
       });
 
       expect(res.findings).toEqual(
@@ -2886,7 +2886,7 @@ description: test skill
     const makeProbeEnv = (env?: { token?: string; password?: string }) => {
       const probeEnv: NodeJS.ProcessEnv = {};
       if (env?.token !== undefined) {
-        probeEnv.OPENCLAW_GATEWAY_TOKEN = env.token;
+        probeEnv.SUDOCLAW_GATEWAY_TOKEN = env.token;
       }
       if (env?.password !== undefined) {
         probeEnv.OPENCLAW_GATEWAY_PASSWORD = env.password;

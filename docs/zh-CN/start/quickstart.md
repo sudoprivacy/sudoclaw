@@ -55,7 +55,7 @@ OpenClaw 需要 Node 22 或更新版本。
 
 <Info>
 之后在 npm 安装和 git 安装之间切换非常简单。安装另一种方式后，运行
-`openclaw doctor` 即可更新 Gateway 网关服务入口点。
+`sudoclaw doctor` 即可更新 Gateway 网关服务入口点。
 </Info>
 
 ## 从源码安装（开发）
@@ -74,8 +74,8 @@ openclaw onboard --install-daemon
 ## 多实例快速开始（可选）
 
 ```bash
-OPENCLAW_CONFIG_PATH=~/.openclaw/a.json \
-OPENCLAW_STATE_DIR=~/.openclaw-a \
+SUDOCLAW_CONFIG_PATH=~/.openclaw/a.json \
+SUDOCLAW_STATE_DIR=~/.openclaw-a \
 openclaw gateway --port 19001
 ```
 

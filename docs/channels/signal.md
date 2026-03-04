@@ -22,7 +22,7 @@ Status: external CLI integration. Gateway talks to `signal-cli` over HTTP JSON-R
 1. Use a **separate Signal number** for the bot (recommended).
 2. Install `signal-cli` (Java required if you use the JVM build).
 3. Choose one setup path:
-   - **Path A (QR link):** `signal-cli link -n "OpenClaw"` and scan with Signal.
+   - **Path A (QR link):** `signal-cli link -n "sudoclaw"` and scan with Signal.
    - **Path B (SMS register):** register a dedicated number with captcha + SMS verification.
 4. Configure OpenClaw and restart the gateway.
 5. Send a first DM and approve pairing (`openclaw pairing approve signal <CODE>`).
@@ -80,7 +80,7 @@ Disable with:
 
 1. Install `signal-cli` (JVM or native build).
 2. Link a bot account:
-   - `signal-cli link -n "OpenClaw"` then scan the QR in Signal.
+   - `signal-cli link -n "sudoclaw"` then scan the QR in Signal.
 3. Configure Signal and start the gateway.
 
 Example:
@@ -145,7 +145,7 @@ signal-cli -a +<BOT_PHONE_NUMBER> verify <VERIFICATION_CODE>
 systemctl --user restart openclaw-gateway
 
 # Then verify:
-openclaw doctor
+sudoclaw doctor
 openclaw channels status --probe
 ```
 
@@ -255,8 +255,8 @@ Run this ladder first:
 ```bash
 openclaw status
 openclaw gateway status
-openclaw logs --follow
-openclaw doctor
+sudoclaw logs --follow
+sudoclaw doctor
 openclaw channels status --probe
 ```
 
@@ -271,7 +271,7 @@ Common failures:
 - Daemon reachable but no replies: verify account/daemon settings (`httpUrl`, `account`) and receive mode.
 - DMs ignored: sender is pending pairing approval.
 - Group messages ignored: group sender/mention gating blocks delivery.
-- Config validation errors after edits: run `openclaw doctor --fix`.
+- Config validation errors after edits: run `sudoclaw doctor --fix`.
 - Signal missing from diagnostics: confirm `channels.signal.enabled: true`.
 
 Extra checks:

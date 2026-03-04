@@ -79,9 +79,9 @@ Treat the setup code like a password while it is valid.
 ### Approve a node device
 
 ```bash
-openclaw devices list
-openclaw devices approve <requestId>
-openclaw devices reject <requestId>
+sudoclaw devices list
+sudoclaw devices approve <requestId>
+sudoclaw devices reject <requestId>
 ```
 
 ### Node pairing state storage

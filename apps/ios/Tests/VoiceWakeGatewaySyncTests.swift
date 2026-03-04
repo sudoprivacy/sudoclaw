@@ -6,7 +6,7 @@ import Testing
     @Test func decodeGatewayTriggersFromJSONSanitizes() {
         let payload = #"{"triggers":[" openclaw  ","", "computer"]}"#
         let triggers = VoiceWakePreferences.decodeGatewayTriggers(from: payload)
-        #expect(triggers == ["openclaw", "computer"])
+        #expect(triggers == ["sudoclaw", "computer"])
     }
 
     @Test func decodeGatewayTriggersFromJSONFallsBackWhenEmpty() {

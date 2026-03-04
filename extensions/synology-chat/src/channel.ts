@@ -32,7 +32,7 @@ export function createSynologyChatPlugin() {
       selectionLabel: "Synology Chat (Webhook)",
       detailLabel: "Synology Chat (Webhook)",
       docsPath: "/channels/synology-chat",
-      blurb: "Connect your Synology NAS Chat to OpenClaw",
+      blurb: "Connect your Synology NAS Chat to SudoClaw",
       order: 90,
     },
 

@@ -145,7 +145,7 @@ Example:
 2. Create an **Azure Bot** (App ID + secret + tenant ID).
 3. Build a **Teams app package** that references the bot and includes the RSC permissions below.
 4. Upload/install the Teams app into a team (or personal scope for DMs).
-5. Configure `msteams` in `~/.openclaw/openclaw.json` (or env vars) and start the gateway.
+5. Configure `msteams` in `~/.sudoclaw/sudoclaw.json` (or env vars) and start the gateway.
 6. The gateway listens for Bot Framework webhook traffic on `/api/messages` by default.
 
 ## Azure Bot Setup (Prerequisites)
@@ -318,7 +318,7 @@ Minimal, valid example with the required fields. Replace IDs and URLs.
   "manifestVersion": "1.23",
   "version": "1.0.0",
   "id": "00000000-0000-0000-0000-000000000000",
-  "name": { "short": "OpenClaw" },
+  "name": { "short": "sudoclaw" },
   "developer": {
     "name": "Your Org",
     "websiteUrl": "https://example.com",

@@ -231,7 +231,7 @@ private fun TopStatusBar(
       horizontalArrangement = Arrangement.SpaceBetween,
     ) {
       Text(
-        text = "OpenClaw",
+        text = "sudoclaw",
         style = mobileTitle2,
         color = mobileText,
       )

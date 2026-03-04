@@ -10,7 +10,7 @@ struct ExecApprovalsStoreRefactorTests {
             .appendingPathComponent("openclaw-state-\(UUID().uuidString)", isDirectory: true)
         defer { try? FileManager().removeItem(at: stateDir) }
 
-        try await TestIsolation.withEnvValues(["OPENCLAW_STATE_DIR": stateDir.path]) {
+        try await TestIsolation.withEnvValues(["SUDOCLAW_STATE_DIR": stateDir.path]) {
             _ = ExecApprovalsStore.ensureFile()
             let url = ExecApprovalsStore.fileURL()
             let firstWriteDate = try Self.modificationDate(at: url)
@@ -29,7 +29,7 @@ struct ExecApprovalsStoreRefactorTests {
             .appendingPathComponent("openclaw-state-\(UUID().uuidString)", isDirectory: true)
         defer { try? FileManager().removeItem(at: stateDir) }
 
-        await TestIsolation.withEnvValues(["OPENCLAW_STATE_DIR": stateDir.path]) {
+        await TestIsolation.withEnvValues(["SUDOCLAW_STATE_DIR": stateDir.path]) {
             let rejected = ExecApprovalsStore.updateAllowlist(
                 agentId: "main",
                 allowlist: [
@@ -51,7 +51,7 @@ struct ExecApprovalsStoreRefactorTests {
             .appendingPathComponent("openclaw-state-\(UUID().uuidString)", isDirectory: true)
         defer { try? FileManager().removeItem(at: stateDir) }
 
-        await TestIsolation.withEnvValues(["OPENCLAW_STATE_DIR": stateDir.path]) {
+        await TestIsolation.withEnvValues(["SUDOCLAW_STATE_DIR": stateDir.path]) {
             let rejected = ExecApprovalsStore.updateAllowlist(
                 agentId: "main",
                 allowlist: [
@@ -76,7 +76,7 @@ struct ExecApprovalsStoreRefactorTests {
         try FileManager().createDirectory(at: stateDir, withIntermediateDirectories: true)
         try FileManager().setAttributes([.posixPermissions: 0o755], ofItemAtPath: stateDir.path)
 
-        try await TestIsolation.withEnvValues(["OPENCLAW_STATE_DIR": stateDir.path]) {
+        try await TestIsolation.withEnvValues(["SUDOCLAW_STATE_DIR": stateDir.path]) {
             _ = ExecApprovalsStore.ensureFile()
             let attrs = try FileManager().attributesOfItem(atPath: stateDir.path)
             let permissions = (attrs[.posixPermissions] as? NSNumber)?.intValue ?? -1

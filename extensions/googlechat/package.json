@@ -8,9 +8,9 @@
     "google-auth-library": "^10.6.1"
   },
   "peerDependencies": {
-    "openclaw": ">=2026.1.26"
+    "sudoclaw": ">=2026.1.26"
   },
-  "openclaw": {
+  "sudoclaw": {
     "extensions": [
       "./index.ts"
     ],

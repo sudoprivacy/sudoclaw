@@ -40,7 +40,7 @@ function isDisabledByEnv() {
 
 function safeServiceName(name: string) {
   const trimmed = name.trim();
-  return trimmed.length > 0 ? trimmed : "OpenClaw";
+  return trimmed.length > 0 ? trimmed : "sudoclaw";
 }
 
 function prettifyInstanceName(name: string) {
@@ -97,12 +97,12 @@ export async function startGatewayBonjourAdvertiser(
   const hostnameRaw =
     process.env.OPENCLAW_MDNS_HOSTNAME?.trim() ||
     process.env.CLAWDBOT_MDNS_HOSTNAME?.trim() ||
-    "openclaw";
+    "sudoclaw";
   const hostname =
     hostnameRaw
       .replace(/\.local$/i, "")
       .split(".")[0]
-      .trim() || "openclaw";
+      .trim() || "sudoclaw";
   const instanceName =
     typeof opts.instanceName === "string" && opts.instanceName.trim()
       ? opts.instanceName.trim()

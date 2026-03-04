@@ -50,7 +50,7 @@ Minimal config:
   channels: {
     twitch: {
       enabled: true,
-      username: "openclaw", // Bot's Twitch account
+      username: "sudoclaw", // Bot's Twitch account
       accessToken: "oauth:abc123...", // OAuth Access Token (or use OPENCLAW_TWITCH_ACCESS_TOKEN env var)
       clientId: "xyz789...", // Client ID from Token Generator
       channel: "vevisk", // Which Twitch channel's chat to join (required)
@@ -94,7 +94,7 @@ OPENCLAW_TWITCH_ACCESS_TOKEN=oauth:abc123...
   channels: {
     twitch: {
       enabled: true,
-      username: "openclaw",
+      username: "sudoclaw",
       accessToken: "oauth:abc123...",
       clientId: "xyz789...",
       channel: "vevisk",
@@ -156,13 +156,13 @@ Example (one bot account in two channels):
     twitch: {
       accounts: {
         channel1: {
-          username: "openclaw",
+          username: "sudoclaw",
           accessToken: "oauth:abc123...",
           clientId: "xyz789...",
           channel: "vevisk",
         },
         channel2: {
-          username: "openclaw",
+          username: "sudoclaw",
           accessToken: "oauth:def456...",
           clientId: "uvw012...",
           channel: "secondchannel",
@@ -251,7 +251,7 @@ By default, `requireMention` is `true`. To disable and respond to all messages:
 First, run diagnostic commands:
 
 ```bash
-openclaw doctor
+sudoclaw doctor
 openclaw channels status --probe
 ```
 
@@ -317,7 +317,7 @@ Full example:
   channels: {
     twitch: {
       enabled: true,
-      username: "openclaw",
+      username: "sudoclaw",
       accessToken: "oauth:abc123...",
       clientId: "xyz789...",
       channel: "vevisk",

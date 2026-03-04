@@ -244,7 +244,7 @@ Optional per-id errors:
 
 ## In-scope fields (v1)
 
-### `~/.openclaw/openclaw.json`
+### `~/.sudoclaw/sudoclaw.json`
 
 - `models.providers.<provider>.apiKey`
 - `skills.entries.<skillKey>.apiKey`

@@ -22,7 +22,7 @@ x-i18n:
 1. 为 bot 使用**单独的 Signal 号码**（推荐）。
 2. 安装 `signal-cli`（需要 Java）。
 3. 链接 bot 设备并启动守护进程：
-   - `signal-cli link -n "OpenClaw"`
+   - `signal-cli link -n "sudoclaw"`
 4. 配置 OpenClaw 并启动 Gateway 网关。
 
 最小配置：
@@ -69,7 +69,7 @@ x-i18n:
 
 1. 安装 `signal-cli`（需要 Java）。
 2. 链接 bot 账户：
-   - `signal-cli link -n "OpenClaw"` 然后在 Signal 中扫描二维码。
+   - `signal-cli link -n "sudoclaw"` 然后在 Signal 中扫描二维码。
 3. 配置 Signal 并启动 Gateway 网关。
 
 示例：

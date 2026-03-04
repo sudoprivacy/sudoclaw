@@ -218,8 +218,8 @@ TRASH
     local home_dir="$1"
     export HOME="$home_dir"
     export OPENCLAW_HOME="$home_dir"
-    export OPENCLAW_STATE_DIR="$home_dir/.openclaw"
-    export OPENCLAW_CONFIG_PATH="$OPENCLAW_STATE_DIR/openclaw.json"
+    export SUDOCLAW_STATE_DIR="$home_dir/.sudoclaw"
+    export SUDOCLAW_CONFIG_PATH="$OPENCLAW_STATE_DIR/sudoclaw.json"
     mkdir -p "$OPENCLAW_STATE_DIR"
   }
 

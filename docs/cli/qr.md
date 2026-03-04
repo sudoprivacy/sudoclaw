@@ -35,5 +35,5 @@ openclaw qr --url wss://gateway.example/ws --token '<token>'
 
 - `--token` and `--password` are mutually exclusive.
 - After scanning, approve device pairing with:
-  - `openclaw devices list`
-  - `openclaw devices approve <requestId>`
+  - `sudoclaw devices list`
+  - `sudoclaw devices approve <requestId>`

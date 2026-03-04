@@ -27,7 +27,7 @@ import {
 const channel = "slack" as const;
 
 function buildSlackManifest(botName: string) {
-  const safeName = botName.trim() || "OpenClaw";
+  const safeName = botName.trim() || "sudoclaw";
   const manifest = {
     display_information: {
       name: safeName,
@@ -259,7 +259,7 @@ export const slackOnboardingAdapter: ChannelOnboardingAdapter = {
     const slackBotName = String(
       await prompter.text({
         message: "Slack bot display name (used for manifest)",
-        initialValue: "OpenClaw",
+        initialValue: "sudoclaw",
       }),
     ).trim();
     if (!accountConfigured) {

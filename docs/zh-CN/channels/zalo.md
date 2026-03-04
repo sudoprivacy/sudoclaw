@@ -156,7 +156,7 @@ Zalo 是一款专注于越南市场的即时通讯应用；其 Bot API 让 Gatew
 
 - 检查 token 是否有效：`openclaw channels status --probe`
 - 验证发送者已被批准（配对或 allowFrom）
-- 检查 Gateway 网关日志：`openclaw logs --follow`
+- 检查 Gateway 网关日志：`sudoclaw logs --follow`
 
 **Webhook 未收到事件：**
 

@@ -2,7 +2,7 @@
 summary: "OpenClaw is a multi-channel gateway for AI agents that runs on any OS."
 read_when:
   - Introducing OpenClaw to newcomers
-title: "OpenClaw"
+title: "sudoclaw"
 ---
 
 # OpenClaw 🦞
@@ -10,13 +10,13 @@ title: "OpenClaw"
 <p align="center">
     <img
         src="/assets/openclaw-logo-text-dark.png"
-        alt="OpenClaw"
+        alt="sudoclaw"
         width="500"
         class="dark:hidden"
     />
     <img
         src="/assets/openclaw-logo-text.png"
-        alt="OpenClaw"
+        alt="sudoclaw"
         width="500"
         class="hidden dark:block"
     />
@@ -124,12 +124,12 @@ Open the browser Control UI after the Gateway starts.
 - Remote access: [Web surfaces](/web) and [Tailscale](/gateway/tailscale)
 
 <p align="center">
-  <img src="whatsapp-openclaw.jpg" alt="OpenClaw" width="420" />
+  <img src="whatsapp-openclaw.jpg" alt="sudoclaw" width="420" />
 </p>
 
 ## Configuration (optional)
 
-Config lives at `~/.openclaw/openclaw.json`.
+Config lives at `~/.sudoclaw/sudoclaw.json`.
 
 - If you **do nothing**, OpenClaw uses the bundled Pi binary in RPC mode with per-sender sessions.
 - If you want to lock it down, start with `channels.whatsapp.allowFrom` and (for groups) mention rules.

@@ -214,7 +214,7 @@ Discord 到处使用数字 ID；OpenClaw 配置优先使用 ID。
 
 ### 故障排除
 
-- 首先：运行 `openclaw doctor` 和 `openclaw channels status --probe`（可操作的警告 + 快速审计）。
+- 首先：运行 `sudoclaw doctor` 和 `openclaw channels status --probe`（可操作的警告 + 快速审计）。
 - **"Used disallowed intents"**：在开发者门户中启用 **Message Content Intent**（可能还需要 **Server Members Intent**），然后重启 Gateway 网关。
 - **机器人连接但从不在服务器频道回复**：
   - 缺少 **Message Content Intent**，或

@@ -166,12 +166,12 @@ HTTP 模式使用 Events API + Interactivity + Slash Commands，共享一个请�
 ```json
 {
   "display_information": {
-    "name": "OpenClaw",
+    "name": "sudoclaw",
     "description": "Slack connector for OpenClaw"
   },
   "features": {
     "bot_user": {
-      "display_name": "OpenClaw",
+      "display_name": "sudoclaw",
       "always_online": false
     },
     "app_home": {
@@ -343,7 +343,7 @@ Slack 仅使用 Socket Mode（无 HTTP webhook 服务器）。提供两个令牌
     },
     "slashCommand": {
       "enabled": true,
-      "name": "openclaw",
+      "name": "sudoclaw",
       "sessionPrefix": "slack:slash",
       "ephemeral": true
     },

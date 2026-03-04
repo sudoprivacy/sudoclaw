@@ -8,7 +8,7 @@ title: "setup"
 
 # `openclaw setup`
 
-Initialize `~/.openclaw/openclaw.json` and the agent workspace.
+Initialize `~/.sudoclaw/sudoclaw.json` and the agent workspace.
 
 Related:
 

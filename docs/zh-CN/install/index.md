@@ -20,13 +20,13 @@ x-i18n:
 ## 快速安装（推荐）
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash
+curl -fsSL https://sudoclaw.ai/install.sh | bash
 ```
 
 Windows（PowerShell）：
 
 ```powershell
-iwr -useb https://openclaw.ai/install.ps1 | iex
+iwr -useb https://sudoclaw.ai/install.ps1 | iex
 ```
 
 下一步（如果你跳过了新手引导）：
@@ -48,13 +48,13 @@ openclaw onboard --install-daemon
 通过 npm 全局安装 `openclaw` 并运行新手引导。
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash
+curl -fsSL https://sudoclaw.ai/install.sh | bash
 ```
 
 安装器标志：
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --help
+curl -fsSL https://sudoclaw.ai/install.sh | bash -s -- --help
 ```
 
 详情：[安装器内部原理](/install/installer)。
@@ -62,7 +62,7 @@ curl -fsSL https://openclaw.ai/install.sh | bash -s -- --help
 非交互式（跳过新手引导）：
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --no-onboard
+curl -fsSL https://sudoclaw.ai/install.sh | bash -s -- --no-onboard
 ```
 
 ### 2）全局安装（手动）
@@ -120,9 +120,9 @@ openclaw onboard --install-daemon
 ## 安装后
 
 - 运行新手引导：`openclaw onboard --install-daemon`
-- 快速检查：`openclaw doctor`
+- 快速检查：`sudoclaw doctor`
 - 检查 Gateway 网关健康状态：`openclaw status` + `openclaw health`
-- 打开仪表板：`openclaw dashboard`
+- 打开仪表板：`sudoclaw dashboard`
 
 ## 安装方式：npm vs git（安装器）
 
@@ -135,10 +135,10 @@ openclaw onboard --install-daemon
 
 ```bash
 # 显式 npm
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --install-method npm
+curl -fsSL https://sudoclaw.ai/install.sh | bash -s -- --install-method npm
 
 # 从 GitHub 安装（源代码 checkout）
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --install-method git
+curl -fsSL https://sudoclaw.ai/install.sh | bash -s -- --install-method git
 ```
 
 常用标志：

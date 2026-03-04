@@ -60,7 +60,7 @@ async function runGatewayHealthCheck(params: {
   });
   const remoteUrl = params.cfg.gateway?.remote?.url?.trim();
   const wsUrl = params.cfg.gateway?.mode === "remote" && remoteUrl ? remoteUrl : localLinks.wsUrl;
-  const token = params.cfg.gateway?.auth?.token ?? process.env.OPENCLAW_GATEWAY_TOKEN;
+  const token = params.cfg.gateway?.auth?.token ?? process.env.SUDOCLAW_GATEWAY_TOKEN;
   const password = params.cfg.gateway?.auth?.password ?? process.env.OPENCLAW_GATEWAY_PASSWORD;
 
   await waitForGatewayReachable({
@@ -77,8 +77,8 @@ async function runGatewayHealthCheck(params: {
     note(
       [
         "Docs:",
-        "https://docs.openclaw.ai/gateway/health",
-        "https://docs.openclaw.ai/gateway/troubleshooting",
+        "https://docs.sudoclaw.ai/gateway/health",
+        "https://docs.sudoclaw.ai/gateway/troubleshooting",
       ].join("\n"),
       "Health check help",
     );
@@ -140,7 +140,7 @@ async function promptWebToolsConfig(
     [
       "Web search lets your agent look things up online using the `web_search` tool.",
       "It requires a Brave Search API key (you can store it in the config or set BRAVE_API_KEY in the Gateway environment).",
-      "Docs: https://docs.openclaw.ai/tools/web",
+      "Docs: https://docs.sudoclaw.ai/tools/web",
     ].join("\n"),
     "Web search",
   );
@@ -176,7 +176,7 @@ async function promptWebToolsConfig(
         [
           "No key stored yet, so web_search will stay unavailable.",
           "Store a key here or set BRAVE_API_KEY in the Gateway environment.",
-          "Docs: https://docs.openclaw.ai/tools/web",
+          "Docs: https://docs.sudoclaw.ai/tools/web",
         ].join("\n"),
         "Web search",
       );
@@ -229,14 +229,14 @@ export async function runConfigureWizard(
           [
             ...snapshot.issues.map((iss) => `- ${iss.path}: ${iss.message}`),
             "",
-            "Docs: https://docs.openclaw.ai/gateway/configuration",
+            "Docs: https://docs.sudoclaw.ai/gateway/configuration",
           ].join("\n"),
           "Config issues",
         );
       }
       if (!snapshot.valid) {
         outro(
-          `Config invalid. Run \`${formatCliCommand("openclaw doctor")}\` to repair it, then re-run configure.`,
+          `Config invalid. Run \`${formatCliCommand("sudoclaw doctor")}\` to repair it, then re-run configure.`,
         );
         runtime.exit(1);
         return;
@@ -246,7 +246,7 @@ export async function runConfigureWizard(
     const localUrl = "ws://127.0.0.1:18789";
     const localProbe = await probeGatewayReachable({
       url: localUrl,
-      token: baseConfig.gateway?.auth?.token ?? process.env.OPENCLAW_GATEWAY_TOKEN,
+      token: baseConfig.gateway?.auth?.token ?? process.env.SUDOCLAW_GATEWAY_TOKEN,
       password: baseConfig.gateway?.auth?.password ?? process.env.OPENCLAW_GATEWAY_PASSWORD,
     });
     const remoteUrl = baseConfig.gateway?.remote?.url?.trim() ?? "";
@@ -314,7 +314,7 @@ export async function runConfigureWizard(
     let gatewayToken: string | undefined =
       nextConfig.gateway?.auth?.token ??
       baseConfig.gateway?.auth?.token ??
-      process.env.OPENCLAW_GATEWAY_TOKEN;
+      process.env.SUDOCLAW_GATEWAY_TOKEN;
 
     const persistConfig = async () => {
       nextConfig = applyWizardMetadata(nextConfig, {
@@ -536,7 +536,7 @@ export async function runConfigureWizard(
     // Try both new and old passwords since gateway may still have old config.
     const newPassword = nextConfig.gateway?.auth?.password ?? process.env.OPENCLAW_GATEWAY_PASSWORD;
     const oldPassword = baseConfig.gateway?.auth?.password ?? process.env.OPENCLAW_GATEWAY_PASSWORD;
-    const token = nextConfig.gateway?.auth?.token ?? process.env.OPENCLAW_GATEWAY_TOKEN;
+    const token = nextConfig.gateway?.auth?.token ?? process.env.SUDOCLAW_GATEWAY_TOKEN;
 
     let gatewayProbe = await probeGatewayReachable({
       url: links.wsUrl,
@@ -560,7 +560,7 @@ export async function runConfigureWizard(
         `Web UI: ${links.httpUrl}`,
         `Gateway WS: ${links.wsUrl}`,
         gatewayStatusLine,
-        "Docs: https://docs.openclaw.ai/web/control-ui",
+        "Docs: https://docs.sudoclaw.ai/web/control-ui",
       ].join("\n"),
       "Control UI",
     );

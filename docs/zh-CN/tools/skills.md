@@ -29,7 +29,7 @@ Skills 从**三个**位置加载：
 
 `<workspace>/skills`（最高）→ `~/.openclaw/skills` → 内置 Skills（最低）
 
-此外，你可以通过 `~/.openclaw/openclaw.json` 中的 `skills.load.extraDirs` 配置额外的 Skills 文件夹（最低优先级）。
+此外，你可以通过 `~/.sudoclaw/sudoclaw.json` 中的 `skills.load.extraDirs` 配置额外的 Skills 文件夹（最低优先级）。
 
 ## 单智能体 vs 共享 Skills
 
@@ -105,7 +105,7 @@ name: nano-banana-pro
 description: Generate or edit images via Gemini 3 Pro Image
 metadata:
   {
-    "openclaw":
+    "sudoclaw":
       {
         "requires": { "bins": ["uv"], "env": ["GEMINI_API_KEY"], "config": ["browser.enabled"] },
         "primaryEnv": "GEMINI_API_KEY",
@@ -140,7 +140,7 @@ name: gemini
 description: Use Gemini CLI for coding assistance and Google search lookups.
 metadata:
   {
-    "openclaw":
+    "sudoclaw":
       {
         "emoji": "♊️",
         "requires": { "bins": ["gemini"] },
@@ -170,7 +170,7 @@ metadata:
 
 如果没有 `metadata.openclaw`，该 Skills 始终有资格（除非在配置中禁用或被 `skills.allowBundled` 阻止用于内置 Skills）。
 
-## 配置覆盖（`~/.openclaw/openclaw.json`）
+## 配置覆盖（`~/.sudoclaw/sudoclaw.json`）
 
 内置/托管 Skills 可以被切换并提供环境变量值：
 

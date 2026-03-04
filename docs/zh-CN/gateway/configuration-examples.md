@@ -29,7 +29,7 @@ x-i18n:
 }
 ```
 
-保存到 `~/.openclaw/openclaw.json`，你就可以从该号码私信机器人了。
+保存到 `~/.sudoclaw/sudoclaw.json`，你就可以从该号码私信机器人了。
 
 ### 推荐的入门配置
 
@@ -113,7 +113,7 @@ x-i18n:
   // 路由 + 队列
   routing: {
     groupChat: {
-      mentionPatterns: ["@openclaw", "openclaw"],
+      mentionPatterns: ["@openclaw", "sudoclaw"],
       historyLimit: 50,
     },
     queue: {
@@ -219,7 +219,7 @@ x-i18n:
       dm: { enabled: true, allowFrom: ["U123"] },
       slashCommand: {
         enabled: true,
-        name: "openclaw",
+        name: "sudoclaw",
         sessionPrefix: "slack:slash",
         ephemeral: true,
       },

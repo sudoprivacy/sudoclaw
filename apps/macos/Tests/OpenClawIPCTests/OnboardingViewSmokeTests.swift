@@ -30,10 +30,10 @@ struct OnboardingViewSmokeTests {
     @Test func selectRemoteGatewayClearsStaleSshTargetWhenEndpointUnresolved() async {
         let override = FileManager().temporaryDirectory
             .appendingPathComponent("openclaw-config-\(UUID().uuidString)")
-            .appendingPathComponent("openclaw.json")
+            .appendingPathComponent("sudoclaw.json")
             .path
 
-        await TestIsolation.withEnvValues(["OPENCLAW_CONFIG_PATH": override]) {
+        await TestIsolation.withEnvValues(["SUDOCLAW_CONFIG_PATH": override]) {
             let state = AppState(preview: true)
             state.remoteTransport = .ssh
             state.remoteTarget = "user@old-host:2222"

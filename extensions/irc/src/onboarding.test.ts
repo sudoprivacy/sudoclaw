@@ -30,7 +30,7 @@ describe("irc onboarding", () => {
           return "openclaw-bot";
         }
         if (message === "IRC username") {
-          return "openclaw";
+          return "sudoclaw";
         }
         if (message === "IRC real name") {
           return "OpenClaw Bot";

@@ -28,7 +28,7 @@ export type AcpServerOptions = {
 };
 
 export const ACP_AGENT_INFO = {
-  name: "openclaw-acp",
-  title: "OpenClaw ACP Gateway",
+  name: "sudoclaw-acp",
+  title: "SudoClaw ACP Gateway",
   version: VERSION,
 };

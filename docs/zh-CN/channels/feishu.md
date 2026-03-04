@@ -49,7 +49,7 @@ openclaw onboard
 ✅ **完成配置后**，您可以使用以下命令检查网关状态：
 
 - `openclaw gateway status` - 查看网关运行状态
-- `openclaw logs --follow` - 查看实时日志
+- `sudoclaw logs --follow` - 查看实时日志
 
 ### 方式二：通过命令行添加
 
@@ -65,7 +65,7 @@ openclaw channels add
 
 - `openclaw gateway status` - 查看网关运行状态
 - `openclaw gateway restart` - 重启网关以应用新配置
-- `openclaw logs --follow` - 查看实时日志
+- `sudoclaw logs --follow` - 查看实时日志
 
 ---
 
@@ -181,7 +181,7 @@ openclaw channels add
 
 ### 通过配置文件配置
 
-编辑 `~/.openclaw/openclaw.json`：
+编辑 `~/.sudoclaw/sudoclaw.json`：
 
 ```json5
 {
@@ -345,7 +345,7 @@ openclaw pairing approve feishu <配对码>
 **方法一**（推荐）：
 
 1. 启动网关并在群组中 @机器人发消息
-2. 运行 `openclaw logs --follow` 查看日志中的 `chat_id`
+2. 运行 `sudoclaw logs --follow` 查看日志中的 `chat_id`
 
 **方法二**：
 使用飞书 API 调试工具获取机器人所在群组列表。
@@ -357,7 +357,7 @@ openclaw pairing approve feishu <配对码>
 **方法一**（推荐）：
 
 1. 启动网关并给机器人发消息
-2. 运行 `openclaw logs --follow` 查看日志中的 `open_id`
+2. 运行 `sudoclaw logs --follow` 查看日志中的 `open_id`
 
 **方法二**：
 查看配对请求列表，其中包含用户的 Open ID：
@@ -388,7 +388,7 @@ openclaw pairing list feishu
 | `openclaw gateway install` | 安装/启动网关服务 |
 | `openclaw gateway stop`    | 停止网关服务      |
 | `openclaw gateway restart` | 重启网关服务      |
-| `openclaw logs --follow`   | 实时查看日志输出  |
+| `sudoclaw logs --follow`   | 实时查看日志输出  |
 
 ---
 
@@ -399,7 +399,7 @@ openclaw pairing list feishu
 1. 检查机器人是否已添加到群组
 2. 检查是否 @了机器人（默认需要 @提及）
 3. 检查 `groupPolicy` 是否为 `"disabled"`
-4. 查看日志：`openclaw logs --follow`
+4. 查看日志：`sudoclaw logs --follow`
 
 ### 机器人收不到消息
 
@@ -408,7 +408,7 @@ openclaw pairing list feishu
 3. 检查是否选择了 **长连接** 模式
 4. 检查应用权限是否完整
 5. 检查网关是否正在运行：`openclaw gateway status`
-6. 查看实时日志：`openclaw logs --follow`
+6. 查看实时日志：`sudoclaw logs --follow`
 
 ### App Secret 泄露怎么办
 

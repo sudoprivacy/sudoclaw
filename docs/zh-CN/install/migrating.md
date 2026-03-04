@@ -35,7 +35,7 @@ x-i18n:
 但如果你使用以下方式，可能会不同：
 
 - `--profile <name>`（通常变成 `~/.openclaw-<profile>/`）
-- `OPENCLAW_STATE_DIR=/some/path`
+- `SUDOCLAW_STATE_DIR=/some/path`
 
 如果你不确定，在**旧**机器上运行：
 
@@ -43,7 +43,7 @@ x-i18n:
 openclaw status
 ```
 
-在输出中查找 `OPENCLAW_STATE_DIR` / profile 的提及。如果你运行多个 Gateway 网关，对每个配置文件重复此操作。
+在输出中查找 `SUDOCLAW_STATE_DIR` / profile 的提及。如果你运行多个 Gateway 网关，对每个配置文件重复此操作。
 
 ### 2）确定你的工作区
 
@@ -125,7 +125,7 @@ tar -czf openclaw-workspace.tgz .openclaw/workspace
 在**新**机器上：
 
 ```bash
-openclaw doctor
+sudoclaw doctor
 ```
 
 Doctor 是"安全可靠"的命令。它修复服务、应用配置迁移，并警告不匹配问题。
@@ -141,7 +141,7 @@ openclaw status
 
 ### 陷阱：配置文件/状态目录不匹配
 
-如果你在旧 Gateway 网关上使用了配置文件（或 `OPENCLAW_STATE_DIR`），而新 Gateway 网关使用了不同的配置，你会看到如下症状：
+如果你在旧 Gateway 网关上使用了配置文件（或 `SUDOCLAW_STATE_DIR`），而新 Gateway 网关使用了不同的配置，你会看到如下症状：
 
 - 配置更改不生效
 - 渠道丢失/已登出
@@ -150,7 +150,7 @@ openclaw status
 修复：使用你迁移的**相同**配置文件/状态目录运行 Gateway 网关/服务，然后重新运行：
 
 ```bash
-openclaw doctor
+sudoclaw doctor
 ```
 
 ### 陷阱：只复制 `openclaw.json`

@@ -74,7 +74,7 @@ enum GatewayEnvironment {
     private static let supportedBindModes: Set<String> = ["loopback", "tailnet", "lan", "auto"]
 
     static func gatewayPort() -> Int {
-        if let raw = ProcessInfo.processInfo.environment["OPENCLAW_GATEWAY_PORT"] {
+        if let raw = ProcessInfo.processInfo.environment["SUDOCLAW_GATEWAY_PORT"] {
             let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
             if let parsed = Int(trimmed), parsed > 0 { return parsed }
         }

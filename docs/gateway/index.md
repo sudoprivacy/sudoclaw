@@ -44,7 +44,7 @@ openclaw gateway --force
 ```bash
 openclaw gateway status
 openclaw status
-openclaw logs --follow
+sudoclaw logs --follow
 ```
 
 Healthy baseline: `Runtime: running` and `RPC probe: ok`.
@@ -61,7 +61,7 @@ openclaw channels status --probe
 </Steps>
 
 <Note>
-Gateway config reload watches the active config file path (resolved from profile/state defaults, or `OPENCLAW_CONFIG_PATH` when set).
+Gateway config reload watches the active config file path (resolved from profile/state defaults, or `SUDOCLAW_CONFIG_PATH` when set).
 Default mode is `gateway.reload.mode="hybrid"`.
 </Note>
 
@@ -73,13 +73,13 @@ Default mode is `gateway.reload.mode="hybrid"`.
   - HTTP APIs (OpenAI-compatible, Responses, tools invoke)
   - Control UI and hooks
 - Default bind mode: `loopback`.
-- Auth is required by default (`gateway.auth.token` / `gateway.auth.password`, or `OPENCLAW_GATEWAY_TOKEN` / `OPENCLAW_GATEWAY_PASSWORD`).
+- Auth is required by default (`gateway.auth.token` / `gateway.auth.password`, or `SUDOCLAW_GATEWAY_TOKEN` / `OPENCLAW_GATEWAY_PASSWORD`).
 
 ### Port and bind precedence
 
 | Setting      | Resolution order                                              |
 | ------------ | ------------------------------------------------------------- |
-| Gateway port | `--port` → `OPENCLAW_GATEWAY_PORT` → `gateway.port` → `18789` |
+| Gateway port | `--port` → `SUDOCLAW_GATEWAY_PORT` → `gateway.port` → `18789` |
 | Bind mode    | CLI/override → `gateway.bind` → `loopback`                    |
 
 ### Hot reload modes
@@ -101,8 +101,8 @@ openclaw gateway install
 openclaw gateway restart
 openclaw gateway stop
 openclaw secrets reload
-openclaw logs --follow
-openclaw doctor
+sudoclaw logs --follow
+sudoclaw doctor
 ```
 
 ## Remote access
@@ -136,7 +136,7 @@ openclaw gateway restart
 openclaw gateway stop
 ```
 
-LaunchAgent labels are `ai.openclaw.gateway` (default) or `ai.openclaw.<profile>` (named profile). `openclaw doctor` audits and repairs service config drift.
+LaunchAgent labels are `ai.openclaw.gateway` (default) or `ai.openclaw.<profile>` (named profile). `sudoclaw doctor` audits and repairs service config drift.
 
   </Tab>
 
@@ -176,15 +176,15 @@ Use multiple only for strict isolation/redundancy (for example a rescue profile)
 Checklist per instance:
 
 - Unique `gateway.port`
-- Unique `OPENCLAW_CONFIG_PATH`
-- Unique `OPENCLAW_STATE_DIR`
+- Unique `SUDOCLAW_CONFIG_PATH`
+- Unique `SUDOCLAW_STATE_DIR`
 - Unique `agents.defaults.workspace`
 
 Example:
 
 ```bash
-OPENCLAW_CONFIG_PATH=~/.openclaw/a.json OPENCLAW_STATE_DIR=~/.openclaw-a openclaw gateway --port 19001
-OPENCLAW_CONFIG_PATH=~/.openclaw/b.json OPENCLAW_STATE_DIR=~/.openclaw-b openclaw gateway --port 19002
+SUDOCLAW_CONFIG_PATH=~/.openclaw/a.json SUDOCLAW_STATE_DIR=~/.openclaw-a openclaw gateway --port 19001
+SUDOCLAW_CONFIG_PATH=~/.openclaw/b.json SUDOCLAW_STATE_DIR=~/.openclaw-b openclaw gateway --port 19002
 ```
 
 See: [Multiple gateways](/gateway/multiple-gateways).

@@ -39,10 +39,10 @@ export function getBrowserControlServerBaseUrl(): string {
 
 export function restoreGatewayPortEnv(prevGatewayPort: string | undefined): void {
   if (prevGatewayPort === undefined) {
-    delete process.env.OPENCLAW_GATEWAY_PORT;
+    delete process.env.SUDOCLAW_GATEWAY_PORT;
     return;
   }
-  process.env.OPENCLAW_GATEWAY_PORT = prevGatewayPort;
+  process.env.SUDOCLAW_GATEWAY_PORT = prevGatewayPort;
 }
 
 export function setBrowserControlServerCreateTargetId(targetId: string | null): void {
@@ -158,7 +158,7 @@ vi.mock("../config/config.js", async (importOriginal) => {
         color: "#FF4500",
         attachOnly: state.cfgAttachOnly,
         headless: true,
-        defaultProfile: "openclaw",
+        defaultProfile: "sudoclaw",
         profiles: {
           openclaw: { cdpPort: state.testPort + 1, color: "#FF4500" },
         },
@@ -258,13 +258,13 @@ export async function resetBrowserControlServerTestContext(): Promise<void> {
 
   state.testPort = await getFreePort();
   state.cdpBaseUrl = `http://127.0.0.1:${state.testPort + 1}`;
-  state.prevGatewayPort = process.env.OPENCLAW_GATEWAY_PORT;
-  process.env.OPENCLAW_GATEWAY_PORT = String(state.testPort - 2);
+  state.prevGatewayPort = process.env.SUDOCLAW_GATEWAY_PORT;
+  process.env.SUDOCLAW_GATEWAY_PORT = String(state.testPort - 2);
   // Avoid flaky auth coupling: some suites temporarily set gateway env auth
   // which would make the browser control server require auth.
-  state.prevGatewayToken = process.env.OPENCLAW_GATEWAY_TOKEN;
+  state.prevGatewayToken = process.env.SUDOCLAW_GATEWAY_TOKEN;
   state.prevGatewayPassword = process.env.OPENCLAW_GATEWAY_PASSWORD;
-  delete process.env.OPENCLAW_GATEWAY_TOKEN;
+  delete process.env.SUDOCLAW_GATEWAY_TOKEN;
   delete process.env.OPENCLAW_GATEWAY_PASSWORD;
 }
 
@@ -273,9 +273,9 @@ export function restoreGatewayAuthEnv(
   prevGatewayPassword: string | undefined,
 ): void {
   if (prevGatewayToken === undefined) {
-    delete process.env.OPENCLAW_GATEWAY_TOKEN;
+    delete process.env.SUDOCLAW_GATEWAY_TOKEN;
   } else {
-    process.env.OPENCLAW_GATEWAY_TOKEN = prevGatewayToken;
+    process.env.SUDOCLAW_GATEWAY_TOKEN = prevGatewayToken;
   }
   if (prevGatewayPassword === undefined) {
     delete process.env.OPENCLAW_GATEWAY_PASSWORD;

@@ -17,7 +17,7 @@ x-i18n:
 
 目标：尽快从**零**到**第一个可用聊天**（使用合理的默认值）。
 
-最快聊天：打开 Control UI（无需渠道设置）。运行 `openclaw dashboard` 并在浏览器中聊天，或在 Gateway 网关主机上打开 `http://127.0.0.1:18789/`。文档：[Dashboard](/web/dashboard) 和 [Control UI](/web/control-ui)。
+最快聊天：打开 Control UI（无需渠道设置）。运行 `sudoclaw dashboard` 并在浏览器中聊天，或在 Gateway 网关主机上打开 `http://127.0.0.1:18789/`。文档：[Dashboard](/web/dashboard) 和 [Control UI](/web/control-ui)。
 
 推荐路径：使用 **CLI 新手引导向导**（`openclaw onboard`）。它设置：
 
@@ -57,7 +57,7 @@ Windows：使用 **WSL2**（推荐 Ubuntu）。强烈推荐 WSL2；原生 Window
 ## 1) 安装 CLI（推荐）
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash
+curl -fsSL https://sudoclaw.ai/install.sh | bash
 ```
 
 安装程序选项（安装方法、非交互式、从 GitHub）：[安装](/install)。
@@ -65,7 +65,7 @@ curl -fsSL https://openclaw.ai/install.sh | bash
 Windows (PowerShell)：
 
 ```powershell
-iwr -useb https://openclaw.ai/install.ps1 | iex
+iwr -useb https://sudoclaw.ai/install.ps1 | iex
 ```
 
 替代方案（全局安装）：
@@ -128,7 +128,7 @@ Dashboard（local loopback）：`http://127.0.0.1:18789/`
 ```bash
 openclaw status
 openclaw health
-openclaw security audit --deep
+sudoclaw security audit --deep
 ```
 
 ## 4) 配对 + 连接你的第一个聊天界面

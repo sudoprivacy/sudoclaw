@@ -44,7 +44,7 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 sudo apt --fix-broken install -y  # if there are dependency errors
 ```
 
-然后更新你的 OpenClaw 配置（`~/.openclaw/openclaw.json`）：
+然后更新你的 OpenClaw 配置（`~/.sudoclaw/sudoclaw.json`）：
 
 ```json
 {
@@ -135,7 +135,7 @@ curl -s http://127.0.0.1:18791/tabs
 修复选项：
 
 1. **使用托管浏览器：** `openclaw browser start --browser-profile openclaw`
-   （或设置 `browser.defaultProfile: "openclaw"`）。
+   （或设置 `browser.defaultProfile: "sudoclaw"`）。
 2. **使用扩展中继：** 安装扩展，打开一个标签页，然后点击 OpenClaw 扩展图标来附加它。
 
 注意事项：

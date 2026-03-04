@@ -58,7 +58,7 @@ openclaw agents set-identity --workspace ~/.openclaw/workspace --from-identity
 显式覆盖字段：
 
 ```bash
-openclaw agents set-identity --agent main --name "OpenClaw" --emoji "🦞" --avatar avatars/openclaw.png
+openclaw agents set-identity --agent main --name "sudoclaw" --emoji "🦞" --avatar avatars/openclaw.png
 ```
 
 配置示例：
@@ -70,7 +70,7 @@ openclaw agents set-identity --agent main --name "OpenClaw" --emoji "🦞" --ava
       {
         id: "main",
         identity: {
-          name: "OpenClaw",
+          name: "sudoclaw",
           theme: "space lobster",
           emoji: "🦞",
           avatar: "avatars/openclaw.png",

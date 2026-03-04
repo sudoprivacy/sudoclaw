@@ -221,7 +221,7 @@ For actions/directory reads, user token can be preferred when configured. For wr
 Default slash command settings:
 
 - `enabled: false`
-- `name: "openclaw"`
+- `name: "sudoclaw"`
 - `sessionPrefix: "slack:slash"`
 - `ephemeral: true`
 
@@ -331,12 +331,12 @@ Notes:
 ```json
 {
   "display_information": {
-    "name": "OpenClaw",
+    "name": "sudoclaw",
     "description": "Slack connector for OpenClaw"
   },
   "features": {
     "bot_user": {
-      "display_name": "OpenClaw",
+      "display_name": "sudoclaw",
       "always_online": false
     },
     "app_home": {
@@ -431,8 +431,8 @@ Notes:
 
 ```bash
 openclaw channels status --probe
-openclaw logs --follow
-openclaw doctor
+sudoclaw logs --follow
+sudoclaw doctor
 ```
 
   </Accordion>

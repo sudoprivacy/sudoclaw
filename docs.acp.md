@@ -66,7 +66,7 @@ Add a custom ACP agent in `~/.config/zed/settings.json`:
   "agent_servers": {
     "OpenClaw ACP": {
       "type": "custom",
-      "command": "openclaw",
+      "command": "sudoclaw",
       "args": ["acp"],
       "env": {}
     }
@@ -81,7 +81,7 @@ To target a specific Gateway or agent:
   "agent_servers": {
     "OpenClaw ACP": {
       "type": "custom",
-      "command": "openclaw",
+      "command": "sudoclaw",
       "args": [
         "acp",
         "--url",

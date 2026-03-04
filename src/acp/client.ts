@@ -411,7 +411,7 @@ export async function createAcpClient(opts: AcpClientOptions = {}): Promise<AcpC
   const serverArgs = buildServerArgs(opts);
 
   const entryPath = resolveSelfEntryPath();
-  const serverCommand = opts.serverCommand ?? (entryPath ? process.execPath : "openclaw");
+  const serverCommand = opts.serverCommand ?? (entryPath ? process.execPath : "sudoclaw");
   const effectiveArgs = opts.serverCommand || !entryPath ? serverArgs : [entryPath, ...serverArgs];
 
   log(`spawning: ${serverCommand} ${effectiveArgs.join(" ")}`);

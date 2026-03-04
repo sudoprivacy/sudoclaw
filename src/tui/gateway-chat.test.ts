@@ -13,7 +13,7 @@ describe("resolveGatewayConnection", () => {
   let envSnapshot: ReturnType<typeof captureEnv>;
 
   beforeEach(() => {
-    envSnapshot = captureEnv(["OPENCLAW_GATEWAY_TOKEN", "OPENCLAW_GATEWAY_PASSWORD"]);
+    envSnapshot = captureEnv(["SUDOCLAW_GATEWAY_TOKEN", "OPENCLAW_GATEWAY_PASSWORD"]);
     loadConfig.mockClear();
     resolveGatewayPort.mockClear();
     pickPrimaryTailnetIPv4.mockClear();
@@ -21,7 +21,7 @@ describe("resolveGatewayConnection", () => {
     resolveGatewayPort.mockReturnValue(18789);
     pickPrimaryTailnetIPv4.mockReturnValue(undefined);
     pickPrimaryLanIPv4.mockReturnValue(undefined);
-    delete process.env.OPENCLAW_GATEWAY_TOKEN;
+    delete process.env.SUDOCLAW_GATEWAY_TOKEN;
     delete process.env.OPENCLAW_GATEWAY_PASSWORD;
   });
 
@@ -83,10 +83,10 @@ describe("resolveGatewayConnection", () => {
     expect(result.url).toBe("ws://127.0.0.1:18800");
   });
 
-  it("uses OPENCLAW_GATEWAY_TOKEN for local mode", () => {
+  it("uses SUDOCLAW_GATEWAY_TOKEN for local mode", () => {
     loadConfig.mockReturnValue({ gateway: { mode: "local" } });
 
-    withEnv({ OPENCLAW_GATEWAY_TOKEN: "env-token" }, () => {
+    withEnv({ SUDOCLAW_GATEWAY_TOKEN: "env-token" }, () => {
       const result = resolveGatewayConnection({});
       expect(result.token).toBe("env-token");
     });

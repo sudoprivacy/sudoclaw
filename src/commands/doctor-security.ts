@@ -10,12 +10,12 @@ import { resolveDefaultChannelAccountContext } from "./channel-account-context.j
 
 export async function noteSecurityWarnings(cfg: OpenClawConfig) {
   const warnings: string[] = [];
-  const auditHint = `- Run: ${formatCliCommand("openclaw security audit --deep")}`;
+  const auditHint = `- Run: ${formatCliCommand("sudoclaw security audit --deep")}`;
 
   if (cfg.approvals?.exec?.enabled === false) {
     warnings.push(
       "- Note: approvals.exec.enabled=false disables approval forwarding only.",
-      "  Host exec gating still comes from ~/.openclaw/exec-approvals.json.",
+      "  Host exec gating still comes from ~/.sudoclaw/exec-approvals.json.",
       `  Check local policy with: ${formatCliCommand("openclaw approvals get --gateway")}`,
     );
   }
@@ -53,7 +53,7 @@ export async function noteSecurityWarnings(cfg: OpenClawConfig) {
   const saferRemoteAccessLines = [
     "  Safer remote access: keep bind loopback and use Tailscale Serve/Funnel or an SSH tunnel.",
     "  Example tunnel: ssh -N -L 18789:127.0.0.1:18789 user@gateway-host",
-    "  Docs: https://docs.openclaw.ai/gateway/remote",
+    "  Docs: https://docs.sudoclaw.ai/gateway/remote",
   ];
 
   if (isExposed) {
@@ -65,7 +65,7 @@ export async function noteSecurityWarnings(cfg: OpenClawConfig) {
               `  Or switch to token: ${formatCliCommand("openclaw config set gateway.auth.mode token")}`,
             ]
           : [
-              `  Fix: ${formatCliCommand("openclaw doctor --fix")} to generate a token`,
+              `  Fix: ${formatCliCommand("sudoclaw doctor --fix")} to generate a token`,
               `  Or set token directly: ${formatCliCommand(
                 "openclaw config set gateway.auth.mode token",
               )}`,

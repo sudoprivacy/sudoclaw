@@ -18,15 +18,15 @@ Run these first, in this order:
 ```bash
 openclaw status
 openclaw gateway status
-openclaw logs --follow
-openclaw doctor
+sudoclaw logs --follow
+sudoclaw doctor
 openclaw channels status --probe
 ```
 
 Expected healthy signals:
 
 - `openclaw gateway status` shows `Runtime: running` and `RPC probe: ok`.
-- `openclaw doctor` reports no blocking config/service issues.
+- `sudoclaw doctor` reports no blocking config/service issues.
 - `openclaw channels status --probe` shows connected/ready channels.
 
 ## Anthropic 429 extra usage required for long context
@@ -35,7 +35,7 @@ Use this when logs/errors include:
 `HTTP 429: rate_limit_error: Extra usage is required for long context requests`.
 
 ```bash
-openclaw logs --follow
+sudoclaw logs --follow
 openclaw models status
 openclaw config get agents.defaults.models
 ```
@@ -67,7 +67,7 @@ openclaw status
 openclaw channels status --probe
 openclaw pairing list --channel <channel> [--account <id>]
 openclaw config get channels
-openclaw logs --follow
+sudoclaw logs --follow
 ```
 
 Look for:
@@ -95,8 +95,8 @@ When dashboard/control UI will not connect, validate URL, auth mode, and secure 
 ```bash
 openclaw gateway status
 openclaw status
-openclaw logs --follow
-openclaw doctor
+sudoclaw logs --follow
+sudoclaw doctor
 openclaw gateway status --json
 ```
 
@@ -120,7 +120,7 @@ Device auth v2 migration check:
 
 ```bash
 openclaw --version
-openclaw doctor
+sudoclaw doctor
 openclaw gateway status
 ```
 
@@ -143,8 +143,8 @@ Use this when service is installed but process does not stay up.
 ```bash
 openclaw gateway status
 openclaw status
-openclaw logs --follow
-openclaw doctor
+sudoclaw logs --follow
+sudoclaw doctor
 openclaw gateway status --deep
 ```
 
@@ -156,7 +156,7 @@ Look for:
 
 Common signatures:
 
-- `Gateway start blocked: set gateway.mode=local` → local gateway mode is not enabled. Fix: set `gateway.mode="local"` in your config (or run `openclaw configure`). If you are running OpenClaw via Podman using the dedicated `openclaw` user, the config lives at `~openclaw/.openclaw/openclaw.json`.
+- `Gateway start blocked: set gateway.mode=local` → local gateway mode is not enabled. Fix: set `gateway.mode="local"` in your config (or run `openclaw configure`). If you are running OpenClaw via Podman using the dedicated `openclaw` user, the config lives at `~openclaw/.sudoclaw/sudoclaw.json`.
 - `refusing to bind gateway ... without auth` → non-loopback bind without token/password.
 - `another gateway instance is already listening` / `EADDRINUSE` → port conflict.
 
@@ -174,7 +174,7 @@ If channel state is connected but message flow is dead, focus on policy, permiss
 openclaw channels status --probe
 openclaw pairing list --channel <channel> [--account <id>]
 openclaw status --deep
-openclaw logs --follow
+sudoclaw logs --follow
 openclaw config get channels
 ```
 
@@ -206,7 +206,7 @@ openclaw cron status
 openclaw cron list
 openclaw cron runs --id <jobId> --limit 20
 openclaw system heartbeat last
-openclaw logs --follow
+sudoclaw logs --follow
 ```
 
 Look for:
@@ -237,7 +237,7 @@ If a node is paired but tools fail, isolate foreground, permission, and approval
 openclaw nodes status
 openclaw nodes describe --node <idOrNameOrIp>
 openclaw approvals get --node <idOrNameOrIp>
-openclaw logs --follow
+sudoclaw logs --follow
 openclaw status
 ```
 
@@ -268,8 +268,8 @@ Use this when browser tool actions fail even though the gateway itself is health
 openclaw browser status
 openclaw browser start --browser-profile openclaw
 openclaw browser profiles
-openclaw logs --follow
-openclaw doctor
+sudoclaw logs --follow
+sudoclaw doctor
 ```
 
 Look for:
@@ -320,7 +320,7 @@ Common signatures:
 openclaw config get gateway.bind
 openclaw config get gateway.auth.token
 openclaw gateway status
-openclaw logs --follow
+sudoclaw logs --follow
 ```
 
 What to check:
@@ -336,10 +336,10 @@ Common signatures:
 ### 3) Pairing and device identity state changed
 
 ```bash
-openclaw devices list
+sudoclaw devices list
 openclaw pairing list --channel <channel> [--account <id>]
-openclaw logs --follow
-openclaw doctor
+sudoclaw logs --follow
+sudoclaw doctor
 ```
 
 What to check:

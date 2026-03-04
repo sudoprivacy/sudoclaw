@@ -43,14 +43,14 @@ unauthorized access.
 
 ```bash
 # List pending requests
-openclaw devices list
+sudoclaw devices list
 
 # Approve by request ID
-openclaw devices approve <requestId>
+sudoclaw devices approve <requestId>
 ```
 
 Once approved, the device is remembered and won't require re-approval unless
-you revoke it with `openclaw devices revoke --device <id> --role <role>`. See
+you revoke it with `sudoclaw devices revoke --device <id> --role <role>`. See
 [Devices CLI](/cli/devices) for token rotation and revocation.
 
 **Notes:**
@@ -71,7 +71,7 @@ you revoke it with `openclaw devices revoke --device <id> --role <role>`. See
 - Skills: status, enable/disable, install, API key updates (`skills.*`)
 - Nodes: list + caps (`node.list`)
 - Exec approvals: edit gateway or node allowlists + ask policy for `exec host=gateway/node` (`exec.approvals.*`)
-- Config: view/edit `~/.openclaw/openclaw.json` (`config.get`, `config.set`)
+- Config: view/edit `~/.sudoclaw/sudoclaw.json` (`config.get`, `config.set`)
 - Config: apply + restart with validation (`config.apply`) and wake the last active session
 - Config writes include a base-hash guard to prevent clobbering concurrent edits
 - Config schema + form rendering (`config.schema`, including plugin + channel schemas); Raw JSON editor remains available

@@ -263,9 +263,9 @@ Note: plugins can add additional top-level commands (for example `openclaw voice
 
 ## Security
 
-- `openclaw security audit` — audit config + local state for common security foot-guns.
-- `openclaw security audit --deep` — best-effort live Gateway probe.
-- `openclaw security audit --fix` — tighten safe defaults and chmod state/config.
+- `sudoclaw security audit` — audit config + local state for common security foot-guns.
+- `sudoclaw security audit --deep` — best-effort live Gateway probe.
+- `sudoclaw security audit --fix` — tighten safe defaults and chmod state/config.
 
 ## Secrets
 
@@ -411,7 +411,7 @@ Subcommands:
 
 - `channels list`: show configured channels and auth profiles.
 - `channels status`: check gateway reachability and channel health (`--probe` runs extra checks; use `openclaw health` or `openclaw status --deep` for gateway health probes).
-- Tip: `channels status` prints warnings with suggested fixes when it can detect common misconfigurations (then points you to `openclaw doctor`).
+- Tip: `channels status` prints warnings with suggested fixes when it can detect common misconfigurations (then points you to `sudoclaw doctor`).
 - `channels logs`: show recent channel logs from the gateway log file.
 - `channels add`: wizard-style setup when no flags are passed; flags switch to non-interactive mode.
   - When adding a non-default account to a channel still using single-account top-level config, OpenClaw moves account-scoped values into `channels.<channel>.accounts.default` before writing the new account.
@@ -790,7 +790,7 @@ Notes:
 Examples:
 
 ```bash
-openclaw logs --follow
+sudoclaw logs --follow
 openclaw logs --limit 200
 openclaw logs --plain
 openclaw logs --json

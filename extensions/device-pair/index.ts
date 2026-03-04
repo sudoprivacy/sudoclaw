@@ -82,7 +82,7 @@ function parsePositiveInteger(raw: string | undefined): number | null {
 
 function resolveGatewayPort(cfg: OpenClawPluginApi["config"]): number {
   const envPort =
-    parsePositiveInteger(process.env.OPENCLAW_GATEWAY_PORT?.trim()) ??
+    parsePositiveInteger(process.env.SUDOCLAW_GATEWAY_PORT?.trim()) ??
     parsePositiveInteger(process.env.CLAWDBOT_GATEWAY_PORT?.trim());
   if (envPort) {
     return envPort;
@@ -185,7 +185,7 @@ function resolveAuth(cfg: OpenClawPluginApi["config"]): ResolveAuthResult {
   const mode = cfg.gateway?.auth?.mode;
   const token =
     pickFirstDefined([
-      process.env.OPENCLAW_GATEWAY_TOKEN,
+      process.env.SUDOCLAW_GATEWAY_TOKEN,
       process.env.CLAWDBOT_GATEWAY_TOKEN,
       cfg.gateway?.auth?.token,
     ]) ?? undefined;

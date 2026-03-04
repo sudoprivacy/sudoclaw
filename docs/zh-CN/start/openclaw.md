@@ -88,7 +88,7 @@ openclaw channels login
 openclaw gateway --port 18789
 ```
 
-3. 在 `~/.openclaw/openclaw.json` 中放置最小配置：
+3. 在 `~/.sudoclaw/sudoclaw.json` 中放置最小配置：
 
 ```json5
 {
@@ -98,7 +98,7 @@ openclaw gateway --port 18789
 
 现在从你允许列表中的手机向助手号码发消息。
 
-新手引导完成后，我们会自动打开带有 Gateway 网关令牌的仪表板并打印带令牌的链接。稍后重新打开：`openclaw dashboard`。
+新手引导完成后，我们会自动打开带有 Gateway 网关令牌的仪表板并打印带令牌的链接。稍后重新打开：`sudoclaw dashboard`。
 
 ## 给智能体一个工作区（AGENTS）
 
@@ -166,7 +166,7 @@ OpenClaw 默认为良好的助手设置，但你通常需要调整：
   },
   routing: {
     groupChat: {
-      mentionPatterns: ["@openclaw", "openclaw"],
+      mentionPatterns: ["@openclaw", "sudoclaw"],
     },
   },
   session: {

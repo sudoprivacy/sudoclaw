@@ -19,9 +19,9 @@ openclaw status
 openclaw status --all
 openclaw gateway probe
 openclaw gateway status
-openclaw doctor
+sudoclaw doctor
 openclaw channels status --probe
-openclaw logs --follow
+sudoclaw logs --follow
 ```
 
 Good output in one line:
@@ -30,9 +30,9 @@ Good output in one line:
 - `openclaw status --all` → full report is present and shareable.
 - `openclaw gateway probe` → expected gateway target is reachable.
 - `openclaw gateway status` → `Runtime: running` and `RPC probe: ok`.
-- `openclaw doctor` → no blocking config/service errors.
+- `sudoclaw doctor` → no blocking config/service errors.
 - `openclaw channels status --probe` → channels report `connected` or `ready`.
-- `openclaw logs --follow` → steady activity, no repeating fatal errors.
+- `sudoclaw logs --follow` → steady activity, no repeating fatal errors.
 
 ## Anthropic long context 429
 
@@ -69,7 +69,7 @@ flowchart TD
     openclaw gateway status
     openclaw channels status --probe
     openclaw pairing list --channel <channel> [--account <id>]
-    openclaw logs --follow
+    sudoclaw logs --follow
     ```
 
     Good output looks like:
@@ -97,8 +97,8 @@ flowchart TD
     ```bash
     openclaw status
     openclaw gateway status
-    openclaw logs --follow
-    openclaw doctor
+    sudoclaw logs --follow
+    sudoclaw doctor
     openclaw channels status --probe
     ```
 
@@ -126,8 +126,8 @@ flowchart TD
     ```bash
     openclaw status
     openclaw gateway status
-    openclaw logs --follow
-    openclaw doctor
+    sudoclaw logs --follow
+    sudoclaw doctor
     openclaw channels status --probe
     ```
 
@@ -155,8 +155,8 @@ flowchart TD
     ```bash
     openclaw status
     openclaw gateway status
-    openclaw logs --follow
-    openclaw doctor
+    sudoclaw logs --follow
+    sudoclaw doctor
     openclaw channels status --probe
     ```
 
@@ -186,7 +186,7 @@ flowchart TD
     openclaw cron status
     openclaw cron list
     openclaw cron runs --id <jobId> --limit 20
-    openclaw logs --follow
+    sudoclaw logs --follow
     ```
 
     Good output looks like:
@@ -216,7 +216,7 @@ flowchart TD
     openclaw gateway status
     openclaw nodes status
     openclaw nodes describe --node <idOrNameOrIp>
-    openclaw logs --follow
+    sudoclaw logs --follow
     ```
 
     Good output looks like:
@@ -245,8 +245,8 @@ flowchart TD
     openclaw status
     openclaw gateway status
     openclaw browser status
-    openclaw logs --follow
-    openclaw doctor
+    sudoclaw logs --follow
+    sudoclaw doctor
     ```
 
     Good output looks like:

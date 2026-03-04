@@ -6,7 +6,7 @@
   "dependencies": {
     "acpx": "0.1.15"
   },
-  "openclaw": {
+  "sudoclaw": {
     "extensions": [
       "./index.ts"
     ]

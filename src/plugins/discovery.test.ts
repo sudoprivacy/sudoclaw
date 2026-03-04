@@ -18,7 +18,7 @@ function makeTempDir() {
 async function withStateDir<T>(stateDir: string, fn: () => Promise<T>) {
   return await withEnvAsync(
     {
-      OPENCLAW_STATE_DIR: stateDir,
+      SUDOCLAW_STATE_DIR: stateDir,
       CLAWDBOT_STATE_DIR: undefined,
       OPENCLAW_BUNDLED_PLUGINS_DIR: "/nonexistent/bundled/plugins",
     },
@@ -45,7 +45,7 @@ describe("discoverOpenClawPlugins", () => {
     fs.mkdirSync(globalExt, { recursive: true });
     fs.writeFileSync(path.join(globalExt, "alpha.ts"), "export default function () {}", "utf-8");
 
-    const workspaceExt = path.join(workspaceDir, ".openclaw", "extensions");
+    const workspaceExt = path.join(workspaceDir, ".sudoclaw", "extensions");
     fs.mkdirSync(workspaceExt, { recursive: true });
     fs.writeFileSync(path.join(workspaceExt, "beta.ts"), "export default function () {}", "utf-8");
 

@@ -162,7 +162,7 @@ Multi-account support: use `channels.zalo.accounts` with per-account tokens and 
 
 - Check that the token is valid: `openclaw channels status --probe`
 - Verify the sender is approved (pairing or allowFrom)
-- Check gateway logs: `openclaw logs --follow`
+- Check gateway logs: `sudoclaw logs --follow`
 
 **Webhook not receiving events:**
 

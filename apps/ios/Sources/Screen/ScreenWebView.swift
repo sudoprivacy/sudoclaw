@@ -141,7 +141,7 @@ private final class ScreenNavigationDelegate: NSObject, WKNavigationDelegate {
         }
 
         // Intercept openclaw:// deep links.
-        if url.scheme?.lowercased() == "openclaw" {
+        if url.scheme?.lowercased() == "sudoclaw" {
             decisionHandler(.cancel)
             self.controller?.onDeepLink?(url)
             return

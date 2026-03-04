@@ -41,7 +41,7 @@ Then restart the daemon (or restart your Gateway process) and re-check:
 
 ```bash
 openclaw models status
-openclaw doctor
+sudoclaw doctor
 ```
 
 If you’d rather not manage env vars yourself, the onboarding wizard can store
@@ -106,7 +106,7 @@ Optional ops scripts (systemd/Termux) are documented here:
 
 ```bash
 openclaw models status
-openclaw doctor
+sudoclaw doctor
 ```
 
 ## API key rotation behavior (gateway)

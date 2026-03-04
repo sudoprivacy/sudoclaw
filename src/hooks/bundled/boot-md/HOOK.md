@@ -1,10 +1,10 @@
 ---
 name: boot-md
 description: "Run BOOT.md on gateway startup"
-homepage: https://docs.openclaw.ai/automation/hooks#boot-md
+homepage: https://docs.sudoclaw.ai/automation/hooks#boot-md
 metadata:
   {
-    "openclaw":
+    "sudoclaw":
       {
         "emoji": "🚀",
         "events": ["gateway:startup"],

@@ -223,9 +223,9 @@ mkdir -p ~/.openclaw/workspace
 
 ```bash
 OPENCLAW_IMAGE=openclaw:latest
-OPENCLAW_GATEWAY_TOKEN=change-me-now
+SUDOCLAW_GATEWAY_TOKEN=change-me-now
 OPENCLAW_GATEWAY_BIND=lan
-OPENCLAW_GATEWAY_PORT=18789
+SUDOCLAW_GATEWAY_PORT=18789
 
 OPENCLAW_CONFIG_DIR=/home/$USER/.openclaw
 OPENCLAW_WORKSPACE_DIR=/home/$USER/.openclaw/workspace
@@ -261,8 +261,8 @@ services:
       - NODE_ENV=production
       - TERM=xterm-256color
       - OPENCLAW_GATEWAY_BIND=${OPENCLAW_GATEWAY_BIND}
-      - OPENCLAW_GATEWAY_PORT=${OPENCLAW_GATEWAY_PORT}
-      - OPENCLAW_GATEWAY_TOKEN=${OPENCLAW_GATEWAY_TOKEN}
+      - SUDOCLAW_GATEWAY_PORT=${SUDOCLAW_GATEWAY_PORT}
+      - SUDOCLAW_GATEWAY_TOKEN=${SUDOCLAW_GATEWAY_TOKEN}
       - GOG_KEYRING_PASSWORD=${GOG_KEYRING_PASSWORD}
       - XDG_CONFIG_HOME=${XDG_CONFIG_HOME}
       - PATH=/home/linuxbrew/.linuxbrew/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -272,7 +272,7 @@ services:
     ports:
       # 推荐：在 VM 上保持 Gateway 网关仅绑定 loopback；通过 SSH 隧道访问。
       # 要公开暴露，移除 `127.0.0.1:` 前缀并相应配置防火墙。
-      - "127.0.0.1:${OPENCLAW_GATEWAY_PORT}:18789"
+      - "127.0.0.1:${SUDOCLAW_GATEWAY_PORT}:18789"
 
       # 可选：仅当你针对此 VM 运行 iOS/Android 节点并需要 Canvas 主机时。
       # 如果你公开暴露此端口，请阅读 /gateway/security 并相应配置防火墙。
@@ -285,7 +285,7 @@ services:
         "--bind",
         "${OPENCLAW_GATEWAY_BIND}",
         "--port",
-        "${OPENCLAW_GATEWAY_PORT}",
+        "${SUDOCLAW_GATEWAY_PORT}",
       ]
 ```
 

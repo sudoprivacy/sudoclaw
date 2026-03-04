@@ -23,17 +23,17 @@ OpenClaw security guidance assumes a **personal assistant** deployment: one trus
 
 This page explains hardening **within that model**. It does not claim hostile multi-tenant isolation on one shared gateway.
 
-## Quick check: `openclaw security audit`
+## Quick check: `sudoclaw security audit`
 
 See also: [Formal Verification (Security Models)](/security/formal-verification/)
 
 Run this regularly (especially after changing config or exposing network surfaces):
 
 ```bash
-openclaw security audit
-openclaw security audit --deep
-openclaw security audit --fix
-openclaw security audit --json
+sudoclaw security audit
+sudoclaw security audit --deep
+sudoclaw security audit --fix
+sudoclaw security audit --json
 ```
 
 It flags common footguns (Gateway auth exposure, browser control exposure, elevated allowlists, filesystem permissions).
@@ -269,11 +269,11 @@ For break-glass scenarios only, `gateway.controlUi.dangerouslyDisableDeviceAuth`
 disables device identity checks entirely. This is a severe security downgrade;
 keep it off unless you are actively debugging and can revert quickly.
 
-`openclaw security audit` warns when this setting is enabled.
+`sudoclaw security audit` warns when this setting is enabled.
 
 ## Insecure or dangerous flags summary
 
-`openclaw security audit` includes `config.insecure_or_dangerous_flags` when
+`sudoclaw security audit` includes `config.insecure_or_dangerous_flags` when
 known insecure/dangerous debug switches are enabled. That check currently
 aggregates:
 
@@ -587,17 +587,17 @@ Guidance:
 
 Keep config + state private on the gateway host:
 
-- `~/.openclaw/openclaw.json`: `600` (user read/write only)
+- `~/.sudoclaw/sudoclaw.json`: `600` (user read/write only)
 - `~/.openclaw`: `700` (user only)
 
-`openclaw doctor` can warn and offer to tighten these permissions.
+`sudoclaw doctor` can warn and offer to tighten these permissions.
 
 ### 0.4) Network exposure (bind + port + firewall)
 
 The Gateway multiplexes **WebSocket + HTTP** on a single port:
 
 - Default: `18789`
-- Config/flags/env: `gateway.port`, `--port`, `OPENCLAW_GATEWAY_PORT`
+- Config/flags/env: `gateway.port`, `--port`, `SUDOCLAW_GATEWAY_PORT`
 
 This HTTP surface includes the Control UI and the canvas host:
 
@@ -684,7 +684,7 @@ Set a token so **all** WS clients must authenticate:
 }
 ```
 
-Doctor can generate one for you: `openclaw doctor --generate-gateway-token`.
+Doctor can generate one for you: `sudoclaw doctor --generate-gateway-token`.
 
 Note: `gateway.remote.token` / `.password` are client credential sources. They
 do **not** protect local WS access by themselves.
@@ -1086,7 +1086,7 @@ If your AI does something bad:
 1. Check Gateway logs: `/tmp/openclaw/openclaw-YYYY-MM-DD.log` (or `logging.file`).
 2. Review the relevant transcript(s): `~/.openclaw/agents/<agentId>/sessions/*.jsonl`.
 3. Review recent config changes (anything that could have widened access: `gateway.bind`, `gateway.auth`, dm/group policies, `tools.elevated`, plugin changes).
-4. Re-run `openclaw security audit --deep` and confirm critical findings are resolved.
+4. Re-run `sudoclaw security audit --deep` and confirm critical findings are resolved.
 
 ### Collect for a report
 

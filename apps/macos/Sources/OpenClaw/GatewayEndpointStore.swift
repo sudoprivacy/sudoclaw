@@ -152,7 +152,7 @@ actor GatewayEndpointStore {
         env: [String: String],
         launchdSnapshot: LaunchAgentPlistSnapshot?) -> String?
     {
-        let raw = env["OPENCLAW_GATEWAY_TOKEN"] ?? ""
+        let raw = env["SUDOCLAW_GATEWAY_TOKEN"] ?? ""
         let trimmed = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         if !trimmed.isEmpty {
             if let configToken = self.resolveConfigToken(isRemote: isRemote, root: root),
@@ -161,7 +161,7 @@ actor GatewayEndpointStore {
             {
                 self.warnEnvOverrideOnce(
                     kind: .token,
-                    envVar: "OPENCLAW_GATEWAY_TOKEN",
+                    envVar: "SUDOCLAW_GATEWAY_TOKEN",
                     configKey: isRemote ? "gateway.remote.token" : "gateway.auth.token")
             }
             return trimmed

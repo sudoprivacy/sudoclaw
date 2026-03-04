@@ -103,9 +103,9 @@ export async function spawnGatewayInstance(name: string): Promise<GatewayInstanc
   const hookToken = `token-${name}-${randomUUID()}`;
   const gatewayToken = `gateway-${name}-${randomUUID()}`;
   const homeDir = await fs.mkdtemp(path.join(os.tmpdir(), `openclaw-e2e-${name}-`));
-  const configDir = path.join(homeDir, ".openclaw");
+  const configDir = path.join(homeDir, ".sudoclaw");
   await fs.mkdir(configDir, { recursive: true });
-  const configPath = path.join(configDir, "openclaw.json");
+  const configPath = path.join(configDir, "sudoclaw.json");
   const stateDir = path.join(configDir, "state");
   const config = {
     gateway: {
@@ -138,9 +138,9 @@ export async function spawnGatewayInstance(name: string): Promise<GatewayInstanc
         env: {
           ...process.env,
           HOME: homeDir,
-          OPENCLAW_CONFIG_PATH: configPath,
-          OPENCLAW_STATE_DIR: stateDir,
-          OPENCLAW_GATEWAY_TOKEN: "",
+          SUDOCLAW_CONFIG_PATH: configPath,
+          SUDOCLAW_STATE_DIR: stateDir,
+          SUDOCLAW_GATEWAY_TOKEN: "",
           OPENCLAW_GATEWAY_PASSWORD: "",
           OPENCLAW_SKIP_CHANNELS: "1",
           OPENCLAW_SKIP_PROVIDERS: "1",

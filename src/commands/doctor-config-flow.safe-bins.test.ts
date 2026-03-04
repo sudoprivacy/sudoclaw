@@ -86,7 +86,7 @@ describe("doctor config flow safe bins", () => {
       "Doctor warnings",
     );
     expect(noteSpy).toHaveBeenCalledWith(
-      expect.stringContaining("openclaw doctor --fix"),
+      expect.stringContaining("sudoclaw doctor --fix"),
       "Doctor warnings",
     );
   });

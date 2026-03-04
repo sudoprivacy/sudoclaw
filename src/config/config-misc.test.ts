@@ -14,11 +14,11 @@ import { OpenClawSchema } from "./zod-schema.js";
 describe("$schema key in config (#14998)", () => {
   it("accepts config with $schema string", () => {
     const result = OpenClawSchema.safeParse({
-      $schema: "https://openclaw.ai/config.json",
+      $schema: "https://sudoclaw.ai/config.json",
     });
     expect(result.success).toBe(true);
     if (result.success) {
-      expect(result.data.$schema).toBe("https://openclaw.ai/config.json");
+      expect(result.data.$schema).toBe("https://sudoclaw.ai/config.json");
     }
   });
 
@@ -304,10 +304,10 @@ describe("config strict validation", () => {
 
   it("flags legacy config entries without auto-migrating", async () => {
     await withTempHome(async (home) => {
-      const configDir = path.join(home, ".openclaw");
+      const configDir = path.join(home, ".sudoclaw");
       await fs.mkdir(configDir, { recursive: true });
       await fs.writeFile(
-        path.join(configDir, "openclaw.json"),
+        path.join(configDir, "sudoclaw.json"),
         JSON.stringify({
           agents: { list: [{ id: "pi" }] },
           routing: { allowFrom: ["+15555550123"] },
@@ -324,10 +324,10 @@ describe("config strict validation", () => {
 
   it("does not mark resolved-only gateway.bind aliases as auto-migratable legacy", async () => {
     await withTempHome(async (home) => {
-      const configDir = path.join(home, ".openclaw");
+      const configDir = path.join(home, ".sudoclaw");
       await fs.mkdir(configDir, { recursive: true });
       await fs.writeFile(
-        path.join(configDir, "openclaw.json"),
+        path.join(configDir, "sudoclaw.json"),
         JSON.stringify({
           gateway: { bind: "${OPENCLAW_BIND}" },
         }),
@@ -353,10 +353,10 @@ describe("config strict validation", () => {
 
   it("still marks literal gateway.bind host aliases as legacy", async () => {
     await withTempHome(async (home) => {
-      const configDir = path.join(home, ".openclaw");
+      const configDir = path.join(home, ".sudoclaw");
       await fs.mkdir(configDir, { recursive: true });
       await fs.writeFile(
-        path.join(configDir, "openclaw.json"),
+        path.join(configDir, "sudoclaw.json"),
         JSON.stringify({
           gateway: { bind: "0.0.0.0" },
         }),

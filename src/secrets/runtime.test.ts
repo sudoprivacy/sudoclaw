@@ -321,10 +321,10 @@ describe("secrets runtime snapshot", () => {
 
   it("does not write inherited auth stores during runtime secret activation", async () => {
     const root = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-secrets-runtime-"));
-    const stateDir = path.join(root, ".openclaw");
+    const stateDir = path.join(root, ".sudoclaw");
     const mainAgentDir = path.join(stateDir, "agents", "main", "agent");
     const workerStorePath = path.join(stateDir, "agents", "worker", "agent", "auth-profiles.json");
-    const prevStateDir = process.env.OPENCLAW_STATE_DIR;
+    const prevStateDir = process.env.SUDOCLAW_STATE_DIR;
 
     try {
       await fs.mkdir(mainAgentDir, { recursive: true });
@@ -342,7 +342,7 @@ describe("secrets runtime snapshot", () => {
         }),
         "utf8",
       );
-      process.env.OPENCLAW_STATE_DIR = stateDir;
+      process.env.SUDOCLAW_STATE_DIR = stateDir;
 
       await prepareSecretsRuntimeSnapshot({
         config: {
@@ -356,9 +356,9 @@ describe("secrets runtime snapshot", () => {
       await expect(fs.access(workerStorePath)).rejects.toMatchObject({ code: "ENOENT" });
     } finally {
       if (prevStateDir === undefined) {
-        delete process.env.OPENCLAW_STATE_DIR;
+        delete process.env.SUDOCLAW_STATE_DIR;
       } else {
-        process.env.OPENCLAW_STATE_DIR = prevStateDir;
+        process.env.SUDOCLAW_STATE_DIR = prevStateDir;
       }
       await fs.rm(root, { recursive: true, force: true });
     }

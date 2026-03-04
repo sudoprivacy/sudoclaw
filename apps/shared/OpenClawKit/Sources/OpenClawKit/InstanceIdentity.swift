@@ -42,14 +42,14 @@ public enum InstanceIdentity {
         let name = Self.readMainActor {
             UIDevice.current.name.trimmingCharacters(in: .whitespacesAndNewlines)
         }
-        return name.isEmpty ? "openclaw" : name
+        return name.isEmpty ? "sudoclaw" : name
 #else
         if let name = Host.current().localizedName?.trimmingCharacters(in: .whitespacesAndNewlines),
            !name.isEmpty
         {
             return name
         }
-        return "openclaw"
+        return "sudoclaw"
 #endif
     }()
 

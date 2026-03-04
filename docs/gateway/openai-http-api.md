@@ -24,7 +24,7 @@ Uses the Gateway auth configuration. Send a bearer token:
 
 Notes:
 
-- When `gateway.auth.mode="token"`, use `gateway.auth.token` (or `OPENCLAW_GATEWAY_TOKEN`).
+- When `gateway.auth.mode="token"`, use `gateway.auth.token` (or `SUDOCLAW_GATEWAY_TOKEN`).
 - When `gateway.auth.mode="password"`, use `gateway.auth.password` (or `OPENCLAW_GATEWAY_PASSWORD`).
 - If `gateway.auth.rateLimit` is configured and too many auth failures occur, the endpoint returns `429` with `Retry-After`.
 
@@ -111,7 +111,7 @@ curl -sS http://127.0.0.1:18789/v1/chat/completions \
   -H 'Content-Type: application/json' \
   -H 'x-openclaw-agent-id: main' \
   -d '{
-    "model": "openclaw",
+    "model": "sudoclaw",
     "messages": [{"role":"user","content":"hi"}]
   }'
 ```
@@ -124,7 +124,7 @@ curl -N http://127.0.0.1:18789/v1/chat/completions \
   -H 'Content-Type: application/json' \
   -H 'x-openclaw-agent-id: main' \
   -d '{
-    "model": "openclaw",
+    "model": "sudoclaw",
     "stream": true,
     "messages": [{"role":"user","content":"hi"}]
   }'

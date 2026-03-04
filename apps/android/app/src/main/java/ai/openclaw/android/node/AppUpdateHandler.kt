@@ -107,7 +107,7 @@ class AppUpdateHandler(
       val url = updateRequest.url
       val expectedSha256 = updateRequest.expectedSha256
 
-      android.util.Log.w("openclaw", "app.update: downloading from $url")
+      android.util.Log.w("sudoclaw", "app.update: downloading from $url")
 
       val notifId = 9001
       val channelId = "app_update"
@@ -199,11 +199,11 @@ class AppUpdateHandler(
             }
           }
 
-          android.util.Log.w("openclaw", "app.update: downloaded ${file.length()} bytes")
+          android.util.Log.w("sudoclaw", "app.update: downloaded ${file.length()} bytes")
           val actualSha256 = sha256Hex(file)
           if (actualSha256 != expectedSha256) {
             android.util.Log.e(
-              "openclaw",
+              "sudoclaw",
               "app.update: sha256 mismatch expected=$expectedSha256 actual=$actualSha256",
             )
             file.delete()
@@ -223,7 +223,7 @@ class AppUpdateHandler(
           // Verify file is a valid APK (basic check: ZIP magic bytes)
           val magic = file.inputStream().use { it.read().toByte() to it.read().toByte() }
           if (magic.first != 0x50.toByte() || magic.second != 0x4B.toByte()) {
-            android.util.Log.e("openclaw", "app.update: invalid APK (bad magic: ${magic.first}, ${magic.second})")
+            android.util.Log.e("sudoclaw", "app.update: invalid APK (bad magic: ${magic.first}, ${magic.second})")
             file.delete()
             notifManager.cancel(notifId)
             notifManager.notify(notifId, android.app.Notification.Builder(appContext, channelId)
@@ -267,9 +267,9 @@ class AppUpdateHandler(
             android.app.PendingIntent.FLAG_UPDATE_CURRENT or android.app.PendingIntent.FLAG_MUTABLE
           )
           session.commit(pi.intentSender)
-          android.util.Log.w("openclaw", "app.update: PackageInstaller session committed, waiting for user confirmation")
+          android.util.Log.w("sudoclaw", "app.update: PackageInstaller session committed, waiting for user confirmation")
         } catch (err: Throwable) {
-          android.util.Log.e("openclaw", "app.update: async error", err)
+          android.util.Log.e("sudoclaw", "app.update: async error", err)
           notifManager.cancel(notifId)
           notifManager.notify(notifId, android.app.Notification.Builder(appContext, channelId)
             .setSmallIcon(android.R.drawable.stat_notify_error)
@@ -288,7 +288,7 @@ class AppUpdateHandler(
           put("sha256", expectedSha256)
         }.toString())
     } catch (err: Throwable) {
-      android.util.Log.e("openclaw", "app.update: error", err)
+      android.util.Log.e("sudoclaw", "app.update: error", err)
       return GatewaySession.InvokeResult.error(code = "UNAVAILABLE", message = err.message ?: "update failed")
     }
   }

@@ -74,16 +74,16 @@ If the user grants read-only permission, run the OS-appropriate checks by defaul
    - macOS: `/usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate` and `pfctl -s info`.
 4. Backups (macOS): `tmutil status` (if Time Machine is used).
 
-### 2) Run OpenClaw security audits (read-only)
+### 2) Run sudoclaw security audits (read-only)
 
-As part of the default read-only checks, run `openclaw security audit --deep`. Only offer alternatives if the user requests them:
+As part of the default read-only checks, run `sudoclaw security audit --deep`. Only offer alternatives if the user requests them:
 
-1. `openclaw security audit` (faster, non-probing)
-2. `openclaw security audit --json` (structured output)
+1. `sudoclaw security audit` (faster, non-probing)
+2. `sudoclaw security audit --json` (structured output)
 
 Offer to apply OpenClaw safe defaults (numbered):
 
-1. `openclaw security audit --fix`
+1. `sudoclaw security audit --fix`
 
 Be explicit that `--fix` only tightens OpenClaw defaults and file permissions. It does not change host firewall, SSH, or OS update policies.
 
@@ -146,7 +146,7 @@ Re-check:
 - Firewall status
 - Listening ports
 - Remote access still works
-- OpenClaw security audit (re-run)
+- sudoclaw security audit (re-run)
 
 Deliver a final posture report and note any deferred items.
 
@@ -170,8 +170,8 @@ If unsure, ask.
 
 After OpenClaw install or first hardening pass, run at least one baseline audit and version check:
 
-- `openclaw security audit`
-- `openclaw security audit --deep`
+- `sudoclaw security audit`
+- `sudoclaw security audit --deep`
 - `openclaw update status`
 
 Ongoing monitoring is recommended. Use the OpenClaw cron tool/CLI to schedule periodic audits (Gateway scheduler). Do not create scheduled tasks without explicit approval. Store outputs in a user-approved location and avoid secrets in logs.
@@ -205,7 +205,7 @@ Also offer a periodic version check so the user can decide when to update (numbe
 
 Use only supported commands and flags:
 
-- `openclaw security audit [--deep] [--fix] [--json]`
+- `sudoclaw security audit [--deep] [--fix] [--json]`
 - `openclaw status` / `openclaw status --deep`
 - `openclaw health --json`
 - `openclaw update status`

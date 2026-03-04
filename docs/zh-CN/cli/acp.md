@@ -96,7 +96,7 @@ openclaw acp --session agent:qa:bug-123
   "agent_servers": {
     "OpenClaw ACP": {
       "type": "custom",
-      "command": "openclaw",
+      "command": "sudoclaw",
       "args": ["acp"],
       "env": {}
     }
@@ -111,7 +111,7 @@ openclaw acp --session agent:qa:bug-123
   "agent_servers": {
     "OpenClaw ACP": {
       "type": "custom",
-      "command": "openclaw",
+      "command": "sudoclaw",
       "args": [
         "acp",
         "--url",

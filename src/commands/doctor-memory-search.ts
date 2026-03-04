@@ -10,7 +10,7 @@ import { resolveUserPath } from "../utils.js";
 
 /**
  * Check whether memory search has a usable embedding provider.
- * Runs as part of `openclaw doctor` — config-only, no network calls.
+ * Runs as part of `sudoclaw doctor` — config-only, no network calls.
  */
 export async function noteMemorySearchHealth(
   cfg: OpenClawConfig,

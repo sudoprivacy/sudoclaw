@@ -23,7 +23,7 @@ If a skill name conflicts, precedence is:
 `<workspace>/skills` (highest) → `~/.openclaw/skills` → bundled skills (lowest)
 
 Additionally, you can configure extra skill folders (lowest precedence) via
-`skills.load.extraDirs` in `~/.openclaw/openclaw.json`.
+`skills.load.extraDirs` in `~/.sudoclaw/sudoclaw.json`.
 
 ## Per-agent vs shared skills
 
@@ -112,7 +112,7 @@ name: nano-banana-pro
 description: Generate or edit images via Gemini 3 Pro Image
 metadata:
   {
-    "openclaw":
+    "sudoclaw":
       {
         "requires": { "bins": ["uv"], "env": ["GEMINI_API_KEY"], "config": ["browser.enabled"] },
         "primaryEnv": "GEMINI_API_KEY",
@@ -152,7 +152,7 @@ name: gemini
 description: Use Gemini CLI for coding assistance and Google search lookups.
 metadata:
   {
-    "openclaw":
+    "sudoclaw":
       {
         "emoji": "♊️",
         "requires": { "bins": ["gemini"] },
@@ -185,7 +185,7 @@ Notes:
 If no `metadata.openclaw` is present, the skill is always eligible (unless
 disabled in config or blocked by `skills.allowBundled` for bundled skills).
 
-## Config overrides (`~/.openclaw/openclaw.json`)
+## Config overrides (`~/.sudoclaw/sudoclaw.json`)
 
 Bundled/managed skills can be toggled and supplied with env values:
 

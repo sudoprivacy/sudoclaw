@@ -66,7 +66,7 @@ openclaw configure
 修复/迁移：
 
 ```
-openclaw doctor
+sudoclaw doctor
 ```
 
 ## 系统控制（systemd 用户单元）

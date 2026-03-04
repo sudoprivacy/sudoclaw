@@ -391,8 +391,8 @@ Behavior notes:
     Fix:
 
     ```bash
-    openclaw doctor
-    openclaw logs --follow
+    sudoclaw doctor
+    sudoclaw logs --follow
     ```
 
     If needed, re-link with `channels login`.

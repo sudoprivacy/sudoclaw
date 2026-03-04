@@ -45,7 +45,7 @@ Use one of these (all supported):
 - Wizard (recommended): `openclaw onboard --install-daemon`
 - Direct: `openclaw gateway install`
 - Configure flow: `openclaw configure` → select **Gateway service**
-- Repair/migrate: `openclaw doctor` (offers to install or fix the service)
+- Repair/migrate: `sudoclaw doctor` (offers to install or fix the service)
 
 The service target depends on OS:
 

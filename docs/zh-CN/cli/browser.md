@@ -63,7 +63,7 @@ openclaw browser --browser-profile work tabs
 
 ```bash
 openclaw browser tabs
-openclaw browser open https://docs.openclaw.ai
+openclaw browser open https://docs.sudoclaw.ai
 openclaw browser focus <targetId>
 openclaw browser close <targetId>
 ```

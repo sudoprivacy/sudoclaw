@@ -106,7 +106,7 @@ tailscale status
 ## 5) 安装 OpenClaw
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash
+curl -fsSL https://sudoclaw.ai/install.sh | bash
 source ~/.bashrc
 ```
 
@@ -124,7 +124,7 @@ openclaw config set gateway.bind loopback
 
 # 要求 Gateway 网关 + 控制 UI 的认证
 openclaw config set gateway.auth.mode token
-openclaw doctor --generate-gateway-token
+sudoclaw doctor --generate-gateway-token
 
 # 通过 Tailscale Serve 暴露（HTTPS + tailnet 访问）
 openclaw config set gateway.tailscale.mode serve
@@ -185,7 +185,7 @@ https://openclaw.<tailnet-name>.ts.net/
 
 通过锁定 VCN（仅开放 UDP 41641）并将 Gateway 网关绑定到 loopback，你获得了强大的纵深防御：公共流量在网络边缘被阻止，管理访问通过你的 tailnet 进行。
 
-此设置通常消除了纯粹为了阻止互联网范围的 SSH 暴力破解而需要额外的基于主机的防火墙规则的*需求*——但你仍应保持操作系统更新，运行 `openclaw security audit`，并验证你没有意外地在公共接口上监听。
+此设置通常消除了纯粹为了阻止互联网范围的 SSH 暴力破解而需要额外的基于主机的防火墙规则的*需求*——但你仍应保持操作系统更新，运行 `sudoclaw security audit`，并验证你没有意外地在公共接口上监听。
 
 ### 已经受保护的内容
 
@@ -201,7 +201,7 @@ https://openclaw.<tailnet-name>.ts.net/
 ### 仍然推荐
 
 - **凭证权限：** `chmod 700 ~/.openclaw`
-- **安全审计：** `openclaw security audit`
+- **安全审计：** `sudoclaw security audit`
 - **系统更新：** 定期 `sudo apt update && sudo apt upgrade`
 - **监控 Tailscale：** 在 [Tailscale 管理控制台](https://login.tailscale.com/admin) 中查看设备
 
@@ -257,7 +257,7 @@ sudo tailscale up --ssh --hostname=openclaw --reset
 
 ```bash
 openclaw gateway status
-openclaw doctor --non-interactive
+sudoclaw doctor --non-interactive
 journalctl --user -u openclaw-gateway -n 50
 ```
 

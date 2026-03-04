@@ -2,7 +2,7 @@ import Foundation
 
 enum CommandResolver {
     private static let projectRootDefaultsKey = "openclaw.gatewayProjectRootPath"
-    private static let helperName = "openclaw"
+    private static let helperName = "sudoclaw"
 
     static func gatewayEntrypoint(in root: URL) -> String? {
         let distEntry = root.appendingPathComponent("dist/index.js").path
@@ -101,7 +101,7 @@ enum CommandResolver {
 
     private static func openclawManagedPaths(home: URL) -> [String] {
         let bases = [
-            home.appendingPathComponent(".openclaw"),
+            home.appendingPathComponent(".sudoclaw"),
         ]
         var paths: [String] = []
         for base in bases {
@@ -270,7 +270,7 @@ enum CommandResolver {
 
         if let pnpm = self.findExecutable(named: "pnpm", searchPaths: searchPaths) {
             // Use --silent to avoid pnpm lifecycle banners that would corrupt JSON outputs.
-            return [pnpm, "--silent", "openclaw", subcommand] + extraArgs
+            return [pnpm, "--silent", "sudoclaw", subcommand] + extraArgs
         }
 
         switch runtimeResult {

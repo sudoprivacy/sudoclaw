@@ -31,7 +31,7 @@ OpenClaw 的 Gateway 网关可以提供一个小型的 OpenAI 兼容 Chat Comple
 
 注意事项：
 
-- 当 `gateway.auth.mode="token"` 时，使用 `gateway.auth.token`（或 `OPENCLAW_GATEWAY_TOKEN`）。
+- 当 `gateway.auth.mode="token"` 时，使用 `gateway.auth.token`（或 `SUDOCLAW_GATEWAY_TOKEN`）。
 - 当 `gateway.auth.mode="password"` 时，使用 `gateway.auth.password`（或 `OPENCLAW_GATEWAY_PASSWORD`）。
 
 ## 选择智能体
@@ -105,7 +105,7 @@ curl -sS http://127.0.0.1:18789/v1/chat/completions \
   -H 'Content-Type: application/json' \
   -H 'x-openclaw-agent-id: main' \
   -d '{
-    "model": "openclaw",
+    "model": "sudoclaw",
     "messages": [{"role":"user","content":"hi"}]
   }'
 ```
@@ -118,7 +118,7 @@ curl -N http://127.0.0.1:18789/v1/chat/completions \
   -H 'Content-Type: application/json' \
   -H 'x-openclaw-agent-id: main' \
   -d '{
-    "model": "openclaw",
+    "model": "sudoclaw",
     "stream": true,
     "messages": [{"role":"user","content":"hi"}]
   }'

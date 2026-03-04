@@ -6,7 +6,7 @@
   "dependencies": {
     "@urbit/aura": "^3.0.0"
   },
-  "openclaw": {
+  "sudoclaw": {
     "extensions": [
       "./index.ts"
     ],

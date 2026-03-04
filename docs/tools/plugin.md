@@ -139,7 +139,7 @@ A plugin directory may include a `package.json` with `openclaw.extensions`:
 ```json
 {
   "name": "my-pack",
-  "openclaw": {
+  "sudoclaw": {
     "extensions": ["./src/safety.ts", "./src/tools.ts"]
   }
 }
@@ -169,7 +169,7 @@ Example:
 ```json
 {
   "name": "@openclaw/nextcloud-talk",
-  "openclaw": {
+  "sudoclaw": {
     "extensions": ["./index.ts"],
     "channel": {
       "id": "nextcloud-talk",
@@ -199,7 +199,7 @@ registry export). Drop a JSON file at one of:
 
 Or point `OPENCLAW_PLUGIN_CATALOG_PATHS` (or `OPENCLAW_MPM_CATALOG_PATHS`) at
 one or more JSON files (comma/semicolon/`PATH`-delimited). Each file should
-contain `{ "entries": [ { "name": "@scope/pkg", "openclaw": { "channel": {...}, "install": {...} } } ] }`.
+contain `{ "entries": [ { "name": "@scope/pkg", "sudoclaw": { "channel": {...}, "install": {...} } } ] }`.
 
 ## Plugin IDs
 

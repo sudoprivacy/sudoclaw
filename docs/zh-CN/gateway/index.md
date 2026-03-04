@@ -34,7 +34,7 @@ openclaw gateway --force
 pnpm gateway:watch
 ```
 
-- 配置热重载监视 `~/.openclaw/openclaw.json`（或 `OPENCLAW_CONFIG_PATH`）。
+- 配置热重载监视 `~/.sudoclaw/sudoclaw.json`（或 `SUDOCLAW_CONFIG_PATH`）。
   - 默认模式：`gateway.reload.mode="hybrid"`（热应用安全更改，关键更改时重启）。
   - 热重载在需要时通过 **SIGUSR1** 使用进程内重启。
   - 使用 `gateway.reload.mode="off"` 禁用。
@@ -49,9 +49,9 @@ pnpm gateway:watch
 - `--force` 使用 `lsof` 查找所选端口上的监听器，发送 SIGTERM，记录它终止了什么，然后启动 Gateway 网关（如果缺少 `lsof` 则快速失败）。
 - 如果你在 supervisor（launchd/systemd/mac 应用子进程模式）下运行，stop/restart 通常发送 **SIGTERM**；旧版本可能将其显示为 `pnpm` `ELIFECYCLE` 退出码 **143**（SIGTERM），这是正常关闭，不是崩溃。
 - **SIGUSR1** 在授权时触发进程内重启（Gateway 网关工具/配置应用/更新，或启用 `commands.restart` 以进行手动重启）。
-- 默认需要 Gateway 网关认证：设置 `gateway.auth.token`（或 `OPENCLAW_GATEWAY_TOKEN`）或 `gateway.auth.password`。客户端必须发送 `connect.params.auth.token/password`，除非使用 Tailscale Serve 身份。
+- 默认需要 Gateway 网关认证：设置 `gateway.auth.token`（或 `SUDOCLAW_GATEWAY_TOKEN`）或 `gateway.auth.password`。客户端必须发送 `connect.params.auth.token/password`，除非使用 Tailscale Serve 身份。
 - 向导现在默认生成令牌，即使在 loopback 上也是如此。
-- 端口优先级：`--port` > `OPENCLAW_GATEWAY_PORT` > `gateway.port` > 默认 `18789`。
+- 端口优先级：`--port` > `SUDOCLAW_GATEWAY_PORT` > `gateway.port` > 默认 `18789`。
 
 ## 远程访问
 
@@ -76,9 +76,9 @@ pnpm gateway:watch
 
 安装元数据嵌入在服务配置中：
 
-- `OPENCLAW_SERVICE_MARKER=openclaw`
-- `OPENCLAW_SERVICE_KIND=gateway`
-- `OPENCLAW_SERVICE_VERSION=<version>`
+- `SUDOCLAW_SERVICE_MARKER=openclaw`
+- `SUDOCLAW_SERVICE_KIND=gateway`
+- `SUDOCLAW_SERVICE_VERSION=<version>`
 
 救援机器人模式：保持第二个 Gateway 网关隔离，使用自己的配置文件、状态目录、工作区和基础端口间隔。完整指南：[救援机器人指南](/gateway/multiple-gateways#rescue-bot-guide)。
 
@@ -96,16 +96,16 @@ openclaw --dev health
 
 默认值（可通过 env/flags/config 覆盖）：
 
-- `OPENCLAW_STATE_DIR=~/.openclaw-dev`
-- `OPENCLAW_CONFIG_PATH=~/.openclaw-dev/openclaw.json`
-- `OPENCLAW_GATEWAY_PORT=19001`（Gateway 网关 WS + HTTP）
+- `SUDOCLAW_STATE_DIR=~/.openclaw-dev`
+- `SUDOCLAW_CONFIG_PATH=~/.openclaw-dev/openclaw.json`
+- `SUDOCLAW_GATEWAY_PORT=19001`（Gateway 网关 WS + HTTP）
 - 浏览器控制服务端口 = `19003`（派生：`gateway.port+2`，仅 loopback）
 - `canvasHost.port=19005`（派生：`gateway.port+4`）
 - 当你在 `--dev` 下运行 `setup`/`onboard` 时，`agents.defaults.workspace` 默认变为 `~/.openclaw/workspace-dev`。
 
 派生端口（经验法则）：
 
-- 基础端口 = `gateway.port`（或 `OPENCLAW_GATEWAY_PORT` / `--port`）
+- 基础端口 = `gateway.port`（或 `SUDOCLAW_GATEWAY_PORT` / `--port`）
 - 浏览器控制服务端口 = 基础 + 2（仅 loopback）
 - `canvasHost.port = 基础 + 4`（或 `OPENCLAW_CANVAS_HOST_PORT` / 配置覆盖）
 - 浏览器配置文件 CDP 端口从 `browser.controlPort + 9 .. + 108` 自动分配（按配置文件持久化）。
@@ -113,8 +113,8 @@ openclaw --dev health
 每个实例的检查清单：
 
 - 唯一的 `gateway.port`
-- 唯一的 `OPENCLAW_CONFIG_PATH`
-- 唯一的 `OPENCLAW_STATE_DIR`
+- 唯一的 `SUDOCLAW_CONFIG_PATH`
+- 唯一的 `SUDOCLAW_STATE_DIR`
 - 唯一的 `agents.defaults.workspace`
 - 单独的 WhatsApp 号码（如果使用 WA）
 
@@ -128,8 +128,8 @@ openclaw --profile rescue gateway install
 示例：
 
 ```bash
-OPENCLAW_CONFIG_PATH=~/.openclaw/a.json OPENCLAW_STATE_DIR=~/.openclaw-a openclaw gateway --port 19001
-OPENCLAW_CONFIG_PATH=~/.openclaw/b.json OPENCLAW_STATE_DIR=~/.openclaw-b openclaw gateway --port 19002
+SUDOCLAW_CONFIG_PATH=~/.openclaw/a.json SUDOCLAW_STATE_DIR=~/.openclaw-a openclaw gateway --port 19001
+SUDOCLAW_CONFIG_PATH=~/.openclaw/b.json SUDOCLAW_STATE_DIR=~/.openclaw-b openclaw gateway --port 19002
 ```
 
 ## 协议（运维视角）
@@ -213,7 +213,7 @@ OPENCLAW_CONFIG_PATH=~/.openclaw/b.json OPENCLAW_STATE_DIR=~/.openclaw-b opencla
 - LaunchAgents 是按用户的，需要已登录的会话；对于无头设置，使用自定义 LaunchDaemon（未随附）。
   - `openclaw gateway install` 写入 `~/Library/LaunchAgents/bot.molt.gateway.plist`
     （或 `bot.molt.<profile>.plist`；旧版 `com.openclaw.*` 会被清理）。
-  - `openclaw doctor` 审计 LaunchAgent 配置，可以将其更新为当前默认值。
+  - `sudoclaw doctor` 审计 LaunchAgent 配置，可以将其更新为当前默认值。
 
 ## Gateway 网关服务管理（CLI）
 
@@ -224,7 +224,7 @@ openclaw gateway status
 openclaw gateway install
 openclaw gateway stop
 openclaw gateway restart
-openclaw logs --follow
+sudoclaw logs --follow
 ```
 
 注意事项：
@@ -239,7 +239,7 @@ openclaw logs --follow
 - `logs` 通过 RPC 尾随 Gateway 网关文件日志（无需手动 `tail`/`grep`）。
 - 如果检测到其他类似 Gateway 网关的服务，CLI 会发出警告，除非它们是 OpenClaw 配置文件服务。
   我们仍然建议大多数设置**每台机器一个 Gateway 网关**；使用隔离的配置文件/端口进行冗余或救援机器人。参见[多个 Gateway 网关](/gateway/multiple-gateways)。
-  - 清理：`openclaw gateway uninstall`（当前服务）和 `openclaw doctor`（旧版迁移）。
+  - 清理：`openclaw gateway uninstall`（当前服务）和 `sudoclaw doctor`（旧版迁移）。
 - `gateway install` 在已安装时是无操作的；使用 `openclaw gateway install --force` 重新安装（配置文件/env/路径更改）。
 
 捆绑的 mac 应用：
@@ -258,7 +258,7 @@ OpenClaw 在 Linux/WSL2 上默认安装 **systemd 用户服务**。我们
 对于多用户或常驻服务器使用**系统服务**（无需 lingering，
 共享监管）。
 
-`openclaw gateway install` 写入用户单元。`openclaw doctor` 审计
+`openclaw gateway install` 写入用户单元。`sudoclaw doctor` 审计
 单元并可以将其更新以匹配当前推荐的默认值。
 
 创建 `~/.config/systemd/user/openclaw-gateway[-<profile>].service`：
@@ -273,7 +273,7 @@ Wants=network-online.target
 ExecStart=/usr/local/bin/openclaw gateway --port 18789
 Restart=always
 RestartSec=5
-Environment=OPENCLAW_GATEWAY_TOKEN=
+Environment=SUDOCLAW_GATEWAY_TOKEN=
 WorkingDirectory=/home/youruser
 
 [Install]

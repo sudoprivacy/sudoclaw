@@ -71,7 +71,7 @@ export async function doctorCommand(
 ) {
   const prompter = createDoctorPrompter({ runtime, options });
   printWizardHeader(runtime);
-  intro("OpenClaw doctor");
+  intro("sudoclaw doctor");
 
   const root = await resolveOpenClawPackageRoot({
     moduleUrl: import.meta.url,
@@ -304,7 +304,7 @@ export async function doctorCommand(
       runtime.log(`Backup: ${shortenHomePath(backupPath)}`);
     }
   } else if (!prompter.shouldRepair) {
-    runtime.log(`Run "${formatCliCommand("openclaw doctor --fix")}" to apply changes.`);
+    runtime.log(`Run "${formatCliCommand("sudoclaw doctor --fix")}" to apply changes.`);
   }
 
   if (options.workspaceSuggestions !== false) {

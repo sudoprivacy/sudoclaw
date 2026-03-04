@@ -11,7 +11,7 @@ title: "Getting Started"
 Goal: go from zero to a first working chat with minimal setup.
 
 <Info>
-Fastest chat: open the Control UI (no channel setup needed). Run `openclaw dashboard`
+Fastest chat: open the Control UI (no channel setup needed). Run `sudoclaw dashboard`
 and chat in the browser, or open `http://127.0.0.1:18789/` on the
 <Tooltip headline="Gateway host" tip="The machine running the OpenClaw gateway service.">gateway host</Tooltip>.
 Docs: [Dashboard](/web/dashboard) and [Control UI](/web/control-ui).
@@ -32,7 +32,7 @@ Check your Node version with `node --version` if you are unsure.
     <Tabs>
       <Tab title="macOS/Linux">
         ```bash
-        curl -fsSL https://openclaw.ai/install.sh | bash
+        curl -fsSL https://sudoclaw.ai/install.sh | bash
         ```
         <img
   src="/assets/install-script.svg"
@@ -42,7 +42,7 @@ Check your Node version with `node --version` if you are unsure.
       </Tab>
       <Tab title="Windows (PowerShell)">
         ```powershell
-        iwr -useb https://openclaw.ai/install.ps1 | iex
+        iwr -useb https://sudoclaw.ai/install.ps1 | iex
         ```
       </Tab>
     </Tabs>
@@ -71,7 +71,7 @@ Check your Node version with `node --version` if you are unsure.
   </Step>
   <Step title="Open the Control UI">
     ```bash
-    openclaw dashboard
+    sudoclaw dashboard
     ```
   </Step>
 </Steps>
@@ -106,8 +106,8 @@ If the Control UI loads, your Gateway is ready for use.
 If you run OpenClaw as a service account or want custom config/state locations:
 
 - `OPENCLAW_HOME` sets the home directory used for internal path resolution.
-- `OPENCLAW_STATE_DIR` overrides the state directory.
-- `OPENCLAW_CONFIG_PATH` overrides the config file path.
+- `SUDOCLAW_STATE_DIR` overrides the state directory.
+- `SUDOCLAW_CONFIG_PATH` overrides the config file path.
 
 Full environment variable reference: [Environment vars](/help/environment).
 

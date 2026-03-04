@@ -24,9 +24,9 @@ x-i18n:
 ## 审计
 
 ```bash
-openclaw security audit
-openclaw security audit --deep
-openclaw security audit --fix
+sudoclaw security audit
+sudoclaw security audit --deep
+sudoclaw security audit --fix
 ```
 
 当多个私信发送者共享主会话时，审计会发出警告，并建议对共享收件箱使用 `session.dmScope="per-channel-peer"`（或多账户渠道使用 `per-account-channel-peer`）。

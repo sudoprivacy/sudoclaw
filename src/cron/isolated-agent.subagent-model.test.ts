@@ -24,7 +24,7 @@ async function withTempHome<T>(fn: (home: string) => Promise<T>): Promise<T> {
 }
 
 async function writeSessionStore(home: string) {
-  const dir = path.join(home, ".openclaw", "sessions");
+  const dir = path.join(home, ".sudoclaw", "sessions");
   await fs.mkdir(dir, { recursive: true });
   const storePath = path.join(dir, "sessions.json");
   await fs.writeFile(
@@ -55,7 +55,7 @@ function makeCfg(
     agents: {
       defaults: {
         model: "anthropic/claude-sonnet-4-5",
-        workspace: path.join(home, "openclaw"),
+        workspace: path.join(home, "sudoclaw"),
       },
     },
     session: { store: storePath, mainKey: "main" },
@@ -116,7 +116,7 @@ describe("runCronIsolatedAgentTurn: subagent model resolution (#11461)", () => {
           agents: {
             defaults: {
               model: "anthropic/claude-sonnet-4-5",
-              workspace: path.join(home, "openclaw"),
+              workspace: path.join(home, "sudoclaw"),
               subagents: { model: "ollama/llama3.2:3b" },
             },
           },
@@ -147,7 +147,7 @@ describe("runCronIsolatedAgentTurn: subagent model resolution (#11461)", () => {
           agents: {
             defaults: {
               model: "anthropic/claude-sonnet-4-5",
-              workspace: path.join(home, "openclaw"),
+              workspace: path.join(home, "sudoclaw"),
               subagents: { model: "ollama/llama3.2:3b" },
             },
           },
@@ -195,7 +195,7 @@ describe("runCronIsolatedAgentTurn: subagent model resolution (#11461)", () => {
           agents: {
             defaults: {
               model: "anthropic/claude-sonnet-4-5",
-              workspace: path.join(home, "openclaw"),
+              workspace: path.join(home, "sudoclaw"),
               subagents: { model: { primary: "google/gemini-2.5-flash" } },
             },
           },

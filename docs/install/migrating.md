@@ -28,7 +28,7 @@ Most installs use the default:
 But it may be different if you use:
 
 - `--profile <name>` (often becomes `~/.openclaw-<profile>/`)
-- `OPENCLAW_STATE_DIR=/some/path`
+- `SUDOCLAW_STATE_DIR=/some/path`
 
 If you’re not sure, run on the **old** machine:
 
@@ -36,7 +36,7 @@ If you’re not sure, run on the **old** machine:
 openclaw status
 ```
 
-Look for mentions of `OPENCLAW_STATE_DIR` / profile in the output. If you run multiple gateways, repeat for each profile.
+Look for mentions of `SUDOCLAW_STATE_DIR` / profile in the output. If you run multiple gateways, repeat for each profile.
 
 ### 2) Identify your workspace
 
@@ -118,7 +118,7 @@ After copying, ensure:
 On the **new** machine:
 
 ```bash
-openclaw doctor
+sudoclaw doctor
 ```
 
 Doctor is the “safe boring” command. It repairs services, applies config migrations, and warns about mismatches.
@@ -134,7 +134,7 @@ openclaw status
 
 ### Footgun: profile / state-dir mismatch
 
-If you ran the old gateway with a profile (or `OPENCLAW_STATE_DIR`), and the new gateway uses a different one, you’ll see symptoms like:
+If you ran the old gateway with a profile (or `SUDOCLAW_STATE_DIR`), and the new gateway uses a different one, you’ll see symptoms like:
 
 - config changes not taking effect
 - channels missing / logged out
@@ -143,7 +143,7 @@ If you ran the old gateway with a profile (or `OPENCLAW_STATE_DIR`), and the new
 Fix: run the gateway/service using the **same** profile/state dir you migrated, then rerun:
 
 ```bash
-openclaw doctor
+sudoclaw doctor
 ```
 
 ### Footgun: copying only `openclaw.json`

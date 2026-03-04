@@ -291,7 +291,7 @@ Mitigation patterns:
 }
 ```
 
-Legacy `agent.*` configs are migrated by `openclaw doctor`; prefer `agents.defaults` + `agents.list` going forward.
+Legacy `agent.*` configs are migrated by `sudoclaw doctor`; prefer `agents.defaults` + `agents.list` going forward.
 
 ---
 
@@ -365,7 +365,7 @@ After configuring multi-agent sandbox and tools:
 4. **Monitor logs:**
 
    ```exec
-   tail -f "${OPENCLAW_STATE_DIR:-$HOME/.openclaw}/logs/gateway.log" | grep -E "routing|sandbox|tools"
+   tail -f "${SUDOCLAW_STATE_DIR:-$HOME/.openclaw}/logs/gateway.log" | grep -E "routing|sandbox|tools"
    ```
 
 ---

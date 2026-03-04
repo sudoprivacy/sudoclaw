@@ -43,7 +43,7 @@ EOF
 
 ```bash
 openclaw models status
-openclaw doctor
+sudoclaw doctor
 ```
 
 如果你不想自己管理环境变量，新手引导向导可以为守护进程使用存储 API 密钥：`openclaw onboard`。
@@ -99,7 +99,7 @@ openclaw models status --check
 
 ```bash
 openclaw models status
-openclaw doctor
+sudoclaw doctor
 ```
 
 ## 控制使用哪个凭证

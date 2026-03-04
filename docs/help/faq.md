@@ -23,7 +23,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
   - [It is stuck on "wake up my friend" / onboarding will not hatch. What now?](#it-is-stuck-on-wake-up-my-friend-onboarding-will-not-hatch-what-now)
   - [Can I migrate my setup to a new machine (Mac mini) without redoing onboarding?](#can-i-migrate-my-setup-to-a-new-machine-mac-mini-without-redoing-onboarding)
   - [Where do I see what is new in the latest version?](#where-do-i-see-what-is-new-in-the-latest-version)
-  - [I can't access docs.openclaw.ai (SSL error). What now?](#i-cant-access-docsopenclawai-ssl-error-what-now)
+  - [I can't access docs.sudoclaw.ai (SSL error). What now?](#i-cant-access-docsopenclawai-ssl-error-what-now)
   - [What's the difference between stable and beta?](#whats-the-difference-between-stable-and-beta)
   - [How do I install the beta version, and what's the difference between beta and dev?](#how-do-i-install-the-beta-version-and-whats-the-difference-between-beta-and-dev)
   - [How do I try the latest bits?](#how-do-i-try-the-latest-bits)
@@ -235,7 +235,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
 5. **Tail the latest log**
 
    ```bash
-   openclaw logs --follow
+   sudoclaw logs --follow
    ```
 
    If RPC is down, fall back to:
@@ -249,7 +249,7 @@ Quick answers plus deeper troubleshooting for real-world setups (local dev, VPS,
 6. **Run the doctor (repairs)**
 
    ```bash
-   openclaw doctor
+   sudoclaw doctor
    ```
 
    Repairs/migrates config/state + runs health checks. See [Doctor](/gateway/doctor).
@@ -279,7 +279,7 @@ setup (PATH, services, permissions, auth files). Give them the **full source che
 the hackable (git) install:
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --install-method git
+curl -fsSL https://sudoclaw.ai/install.sh | bash -s -- --install-method git
 ```
 
 This installs OpenClaw **from a git checkout**, so the agent can read the code + docs and
@@ -298,16 +298,16 @@ Start with these commands (share outputs when asking for help):
 ```bash
 openclaw status
 openclaw models status
-openclaw doctor
+sudoclaw doctor
 ```
 
 What they do:
 
 - `openclaw status`: quick snapshot of gateway/agent health + basic config.
 - `openclaw models status`: checks provider auth + model availability.
-- `openclaw doctor`: validates and repairs common config/state issues.
+- `sudoclaw doctor`: validates and repairs common config/state issues.
 
-Other useful CLI checks: `openclaw status --all`, `openclaw logs --follow`,
+Other useful CLI checks: `openclaw status --all`, `sudoclaw logs --follow`,
 `openclaw gateway status`, `openclaw health --verbose`.
 
 Quick debug loop: [First 60 seconds if something's broken](#first-60-seconds-if-somethings-broken).
@@ -318,7 +318,7 @@ Install docs: [Install](/install), [Installer flags](/install/installer), [Updat
 The repo recommends running from source and using the onboarding wizard:
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash
+curl -fsSL https://sudoclaw.ai/install.sh | bash
 openclaw onboard --install-daemon
 ```
 
@@ -346,8 +346,8 @@ The wizard opens your browser with a clean (non-tokenized) dashboard URL right a
 **Localhost (same machine):**
 
 - Open `http://127.0.0.1:18789/`.
-- If it asks for auth, paste the token from `gateway.auth.token` (or `OPENCLAW_GATEWAY_TOKEN`) into Control UI settings.
-- Retrieve it from the gateway host: `openclaw config get gateway.auth.token` (or generate one: `openclaw doctor --generate-gateway-token`).
+- If it asks for auth, paste the token from `gateway.auth.token` (or `SUDOCLAW_GATEWAY_TOKEN`) into Control UI settings.
+- Retrieve it from the gateway host: `openclaw config get gateway.auth.token` (or generate one: `sudoclaw doctor --generate-gateway-token`).
 
 **Not on localhost:**
 
@@ -400,13 +400,13 @@ openclaw gateway restart
 ```bash
 openclaw status
 openclaw models status
-openclaw logs --follow
+sudoclaw logs --follow
 ```
 
 3. If it still hangs, run:
 
 ```bash
-openclaw doctor
+sudoclaw doctor
 ```
 
 If the Gateway is remote, ensure the tunnel/Tailscale connection is up and that the UI
@@ -421,7 +421,7 @@ state) as long as you copy **both** locations:
 1. Install OpenClaw on the new machine.
 2. Copy `$OPENCLAW_STATE_DIR` (default: `~/.openclaw`) from the old machine.
 3. Copy your workspace (default: `~/.openclaw/workspace`).
-4. Run `openclaw doctor` and restart the Gateway service.
+4. Run `sudoclaw doctor` and restart the Gateway service.
 
 That preserves config, auth profiles, WhatsApp creds, sessions, and memory. If you're in
 remote mode, remember the gateway host owns the session store and workspace.
@@ -443,10 +443,10 @@ Newest entries are at the top. If the top section is marked **Unreleased**, the 
 section is the latest shipped version. Entries are grouped by **Highlights**, **Changes**, and
 **Fixes** (plus docs/other sections when needed).
 
-### I can't access docs.openclaw.ai SSL error What now
+### I can't access docs.sudoclaw.ai SSL error What now
 
-Some Comcast/Xfinity connections incorrectly block `docs.openclaw.ai` via Xfinity
-Advanced Security. Disable it or allowlist `docs.openclaw.ai`, then retry. More
+Some Comcast/Xfinity connections incorrectly block `docs.sudoclaw.ai` via Xfinity
+Advanced Security. Disable it or allowlist `docs.sudoclaw.ai`, then retry. More
 detail: [Troubleshooting](/help/troubleshooting#docsopenclawai-shows-an-ssl-error-comcastxfinity).
 Please help us unblock it by reporting here: [https://spa.xfinity.com/check_url_status](https://spa.xfinity.com/check_url_status).
 
@@ -475,15 +475,15 @@ See what changed:
 One-liners (macOS/Linux):
 
 ```bash
-curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install.sh | bash -s -- --beta
+curl -fsSL --proto '=https' --tlsv1.2 https://sudoclaw.ai/install.sh | bash -s -- --beta
 ```
 
 ```bash
-curl -fsSL --proto '=https' --tlsv1.2 https://openclaw.ai/install.sh | bash -s -- --install-method git
+curl -fsSL --proto '=https' --tlsv1.2 https://sudoclaw.ai/install.sh | bash -s -- --install-method git
 ```
 
 Windows installer (PowerShell):
-[https://openclaw.ai/install.ps1](https://openclaw.ai/install.ps1)
+[https://sudoclaw.ai/install.ps1](https://sudoclaw.ai/install.ps1)
 
 More detail: [Development channels](/install/development-channels) and [Installer flags](/install/installer).
 
@@ -512,7 +512,7 @@ This switches to the `main` branch and updates from source.
 2. **Hackable install (from the installer site):**
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --install-method git
+curl -fsSL https://sudoclaw.ai/install.sh | bash -s -- --install-method git
 ```
 
 That gives you a local repo you can edit, then update via git.
@@ -534,19 +534,19 @@ Docs: [Update](/cli/update), [Development channels](/install/development-channel
 Re-run the installer with **verbose output**:
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --verbose
+curl -fsSL https://sudoclaw.ai/install.sh | bash -s -- --verbose
 ```
 
 Beta install with verbose:
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --beta --verbose
+curl -fsSL https://sudoclaw.ai/install.sh | bash -s -- --beta --verbose
 ```
 
 For a hackable (git) install:
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --install-method git --verbose
+curl -fsSL https://sudoclaw.ai/install.sh | bash -s -- --install-method git --verbose
 ```
 
 Windows (PowerShell) equivalent:
@@ -554,7 +554,7 @@ Windows (PowerShell) equivalent:
 ```powershell
 # install.ps1 has no dedicated -Verbose flag yet.
 Set-PSDebug -Trace 1
-& ([scriptblock]::Create((iwr -useb https://openclaw.ai/install.ps1))) -NoOnboard
+& ([scriptblock]::Create((iwr -useb https://sudoclaw.ai/install.ps1))) -NoOnboard
 Set-PSDebug -Trace 0
 ```
 
@@ -590,7 +590,7 @@ Use the **hackable (git) install** so you have the full source and docs locally,
 your bot (or Claude/Codex) _from that folder_ so it can read the repo and answer precisely.
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --install-method git
+curl -fsSL https://sudoclaw.ai/install.sh | bash -s -- --install-method git
 ```
 
 More detail: [Install](/install) and [Installer flags](/install/installer).
@@ -810,7 +810,7 @@ The onboarding wizard accepts `@username` input and resolves it to a numeric ID,
 
 Safer (no third-party bot):
 
-- DM your bot, then run `openclaw logs --follow` and read `from.id`.
+- DM your bot, then run `sudoclaw logs --follow` and read `from.id`.
 
 Official Bot API:
 
@@ -866,7 +866,7 @@ git clone https://github.com/openclaw/openclaw.git
 cd openclaw
 pnpm install
 pnpm build
-openclaw doctor
+sudoclaw doctor
 openclaw gateway restart
 ```
 
@@ -874,7 +874,7 @@ From git → npm:
 
 ```bash
 npm install -g openclaw@latest
-openclaw doctor
+sudoclaw doctor
 openclaw gateway restart
 ```
 
@@ -1013,17 +1013,17 @@ Advantages:
 - **Always-on Gateway** (run on a VPS, interact from anywhere)
 - **Nodes** for local browser/screen/camera/exec
 
-Showcase: [https://openclaw.ai/showcase](https://openclaw.ai/showcase)
+Showcase: [https://sudoclaw.ai/showcase](https://sudoclaw.ai/showcase)
 
 ## Skills and automation
 
 ### How do I customize skills without keeping the repo dirty
 
-Use managed overrides instead of editing the repo copy. Put your changes in `~/.openclaw/skills/<name>/SKILL.md` (or add a folder via `skills.load.extraDirs` in `~/.openclaw/openclaw.json`). Precedence is `<workspace>/skills` > `~/.openclaw/skills` > bundled, so managed overrides win without touching git. Only upstream-worthy edits should live in the repo and go out as PRs.
+Use managed overrides instead of editing the repo copy. Put your changes in `~/.openclaw/skills/<name>/SKILL.md` (or add a folder via `skills.load.extraDirs` in `~/.sudoclaw/sudoclaw.json`). Precedence is `<workspace>/skills` > `~/.openclaw/skills` > bundled, so managed overrides win without touching git. Only upstream-worthy edits should live in the repo and go out as PRs.
 
 ### Can I load skills from a custom folder
 
-Yes. Add extra directories via `skills.load.extraDirs` in `~/.openclaw/openclaw.json` (lowest precedence). Default precedence remains: `<workspace>/skills` → `~/.openclaw/skills` → bundled → `skills.load.extraDirs`. `clawhub` installs into `./skills` by default, which OpenClaw treats as `<workspace>/skills`.
+Yes. Add extra directories via `skills.load.extraDirs` in `~/.sudoclaw/sudoclaw.json` (lowest precedence). Default precedence remains: `<workspace>/skills` → `~/.openclaw/skills` → bundled → `skills.load.extraDirs`. `clawhub` installs into `./skills` by default, which OpenClaw treats as `<workspace>/skills`.
 
 ### How can I use different models for different tasks
 
@@ -1144,7 +1144,7 @@ Keep the Gateway on Linux, but make the required CLI binaries resolve to SSH wra
    ---
    name: apple-notes
    description: Manage Apple Notes via the memo CLI on macOS.
-   metadata: { "openclaw": { "os": ["darwin", "linux"], "requires": { "bins": ["memo"] } } }
+   metadata: { "sudoclaw": { "os": ["darwin", "linux"], "requires": { "bins": ["memo"] } } }
    ---
    ```
 
@@ -1310,7 +1310,7 @@ Everything lives under `$OPENCLAW_STATE_DIR` (default: `~/.openclaw`):
 | `$OPENCLAW_STATE_DIR/agents/<agentId>/sessions/`                | Conversation history & state (per agent)                           |
 | `$OPENCLAW_STATE_DIR/agents/<agentId>/sessions/sessions.json`   | Session metadata (per agent)                                       |
 
-Legacy single-agent path: `~/.openclaw/agent/*` (migrated by `openclaw doctor`).
+Legacy single-agent path: `~/.openclaw/agent/*` (migrated by `sudoclaw doctor`).
 
 Your **workspace** (AGENTS.md, memory files, skills, etc.) is separate and configured via `agents.defaults.workspace` (default: `~/.openclaw/workspace`).
 
@@ -1386,7 +1386,7 @@ Session state is owned by the **gateway host**. If you're in remote mode, the se
 
 ### What format is the config Where is it
 
-OpenClaw reads an optional **JSON5** config from `$OPENCLAW_CONFIG_PATH` (default: `~/.openclaw/openclaw.json`):
+OpenClaw reads an optional **JSON5** config from `$OPENCLAW_CONFIG_PATH` (default: `~/.sudoclaw/sudoclaw.json`):
 
 ```
 $OPENCLAW_CONFIG_PATH
@@ -1396,7 +1396,7 @@ If the file is missing, it uses safe-ish defaults (including a default workspace
 
 ### I set gatewaybind lan or tailnet and now nothing listens the UI says unauthorized
 
-Non-loopback binds **require auth**. Configure `gateway.auth.mode` + `gateway.auth.token` (or use `OPENCLAW_GATEWAY_TOKEN`).
+Non-loopback binds **require auth**. Configure `gateway.auth.mode` + `gateway.auth.token` (or use `SUDOCLAW_GATEWAY_TOKEN`).
 
 ```json5
 {
@@ -1420,7 +1420,7 @@ Notes:
 
 OpenClaw enforces token auth by default, including loopback. If no token is configured, gateway startup auto-generates one and saves it to `gateway.auth.token`, so **local WS clients must authenticate**. This blocks other local processes from calling the Gateway.
 
-If you **really** want open loopback, set `gateway.auth.mode: "none"` explicitly in your config. Doctor can generate a token for you any time: `openclaw doctor --generate-gateway-token`.
+If you **really** want open loopback, set `gateway.auth.mode: "none"` explicitly in your config. Doctor can generate a token for you any time: `sudoclaw doctor --generate-gateway-token`.
 
 ### Do I have to restart after changing config
 
@@ -1432,7 +1432,7 @@ The Gateway watches the config and supports hot-reload:
 ### How do I enable web search and web fetch
 
 `web_fetch` works without an API key. `web_search` requires a Brave Search API
-key. **Recommended:** run `openclaw configure --section web` to store it in
+key. **Recommended:** run `sudoclaw configure --section web` to store it in
 `tools.web.search.apiKey`. Environment alternative: set `BRAVE_API_KEY` for the
 Gateway process.
 
@@ -1635,8 +1635,8 @@ else is removed.
 
 Recover:
 
-- Restore from backup (git or a copied `~/.openclaw/openclaw.json`).
-- If you have no backup, re-run `openclaw doctor` and reconfigure channels/models.
+- Restore from backup (git or a copied `~/.sudoclaw/sudoclaw.json`).
+- If you have no backup, re-run `sudoclaw doctor` and reconfigure channels/models.
 - If this was unexpected, file a bug and include your last known config or any backup.
 - A local coding agent can often reconstruct a working config from logs or history.
 
@@ -1843,7 +1843,7 @@ openclaw onboard --install-daemon
 Notes:
 
 - The onboarding wizard also offers **Reset** if it sees an existing config. See [Wizard](/start/wizard).
-- If you used profiles (`--profile` / `OPENCLAW_PROFILE`), reset each state dir (defaults are `~/.openclaw-<profile>`).
+- If you used profiles (`--profile` / `SUDOCLAW_PROFILE`), reset each state dir (defaults are `~/.openclaw-<profile>`).
 - Dev reset: `openclaw gateway --dev --reset` (dev-only; wipes dev config + credentials + sessions + workspace).
 
 ### Im getting context too large errors how do I reset or compact
@@ -1925,7 +1925,7 @@ If you want only **you** to be able to trigger group replies:
 Option 1 (fastest): tail logs and send a test message in the group:
 
 ```bash
-openclaw logs --follow --json
+sudoclaw logs --follow --json
 ```
 
 Look for `chatId` (or `from`) ending in `@g.us`, like:
@@ -1964,7 +1964,7 @@ Tips:
 
 - Keep one **active** workspace per agent (`agents.defaults.workspace`).
 - Prune old sessions (delete JSONL or store entries) if disk grows.
-- Use `openclaw doctor` to spot stray workspaces and profile mismatches.
+- Use `sudoclaw doctor` to spot stray workspaces and profile mismatches.
 
 ### Can I run multiple bots or chats at the same time Slack and how should I set that up
 
@@ -2039,10 +2039,10 @@ Safe options:
 - `/model` in chat (quick, per-session)
 - `openclaw models set ...` (updates just model config)
 - `openclaw configure --section model` (interactive)
-- edit `agents.defaults.model` in `~/.openclaw/openclaw.json`
+- edit `agents.defaults.model` in `~/.sudoclaw/sudoclaw.json`
 
 Avoid `config.apply` with a partial object unless you intend to replace the whole config.
-If you did overwrite config, restore from backup or re-run `openclaw doctor` to repair.
+If you did overwrite config, restore from backup or re-run `sudoclaw doctor` to repair.
 
 Docs: [Models](/concepts/models), [Configure](/cli/configure), [Config](/cli/config), [Doctor](/gateway/doctor).
 
@@ -2280,7 +2280,7 @@ It means the system attempted to use the auth profile ID `anthropic:default`, bu
 
 - **Confirm where auth profiles live** (new vs legacy paths)
   - Current: `~/.openclaw/agents/<agentId>/agent/auth-profiles.json`
-  - Legacy: `~/.openclaw/agent/*` (migrated by `openclaw doctor`)
+  - Legacy: `~/.openclaw/agent/*` (migrated by `sudoclaw doctor`)
 - **Confirm your env var is loaded by the Gateway**
   - If you set `ANTHROPIC_API_KEY` in your shell but run the Gateway via systemd/launchd, it may not inherit it. Put it in `~/.openclaw/.env` or enable `env.shellEnv`.
 - **Make sure you're editing the correct agent**
@@ -2386,7 +2386,7 @@ The wizard explicitly supports Anthropic setup-token and OpenAI Codex OAuth and 
 Precedence:
 
 ```
---port > OPENCLAW_GATEWAY_PORT > gateway.port > default 18789
+--port > SUDOCLAW_GATEWAY_PORT > gateway.port > default 18789
 ```
 
 ### Why does openclaw gateway status say Runtime running but RPC probe failed
@@ -2401,7 +2401,7 @@ Use `openclaw gateway status` and trust these lines:
 
 ### Why does openclaw gateway status show Config cli and Config service different
 
-You're editing one config file while the service is running another (often a `--profile` / `OPENCLAW_STATE_DIR` mismatch).
+You're editing one config file while the service is running another (often a `--profile` / `SUDOCLAW_STATE_DIR` mismatch).
 
 Fix:
 
@@ -2445,14 +2445,14 @@ Your gateway is running with auth enabled (`gateway.auth.*`), but the UI is not 
 
 Facts (from code):
 
-- The Control UI stores the token in browser localStorage key `openclaw.control.settings.v1`.
+- The Control UI stores the token in browser localStorage key `sudoclaw.control.settings.v1`.
 
 Fix:
 
-- Fastest: `openclaw dashboard` (prints + copies the dashboard URL, tries to open; shows SSH hint if headless).
-- If you don't have a token yet: `openclaw doctor --generate-gateway-token`.
+- Fastest: `sudoclaw dashboard` (prints + copies the dashboard URL, tries to open; shows SSH hint if headless).
+- If you don't have a token yet: `sudoclaw doctor --generate-gateway-token`.
 - If remote, tunnel first: `ssh -N -L 18789:127.0.0.1:18789 user@host` then open `http://127.0.0.1:18789/`.
-- Set `gateway.auth.token` (or `OPENCLAW_GATEWAY_TOKEN`) on the gateway host.
+- Set `gateway.auth.token` (or `SUDOCLAW_GATEWAY_TOKEN`) on the gateway host.
 - In the Control UI settings, paste the same token.
 - Still stuck? Run `openclaw status --all` and follow [Troubleshooting](/gateway/troubleshooting). See [Dashboard](/web/dashboard) for auth details.
 
@@ -2473,8 +2473,8 @@ Usually no - one Gateway can run multiple messaging channels and agents. Use mul
 
 Yes, but you must isolate:
 
-- `OPENCLAW_CONFIG_PATH` (per-instance config)
-- `OPENCLAW_STATE_DIR` (per-instance state)
+- `SUDOCLAW_CONFIG_PATH` (per-instance config)
+- `SUDOCLAW_STATE_DIR` (per-instance state)
 - `agents.defaults.workspace` (workspace isolation)
 - `gateway.port` (unique ports)
 
@@ -2508,7 +2508,7 @@ Quick fixes:
 If you're using the CLI or TUI, the URL should look like:
 
 ```
-openclaw tui --url ws://<host>:18789 --token <token>
+sudoclaw tui --url ws://<host>:18789 --token <token>
 ```
 
 Protocol details: [Gateway protocol](/gateway/protocol).
@@ -2528,7 +2528,7 @@ You can set a stable path via `logging.file`. File log level is controlled by `l
 Fastest log tail:
 
 ```bash
-openclaw logs --follow
+sudoclaw logs --follow
 ```
 
 Service/supervisor logs (when the gateway runs via launchd/systemd):
@@ -2595,7 +2595,7 @@ Start with a quick health sweep:
 openclaw status
 openclaw models status
 openclaw channels status
-openclaw logs --follow
+sudoclaw logs --follow
 ```
 
 Common causes:
@@ -2615,13 +2615,13 @@ This usually means the UI lost the WebSocket connection. Check:
 
 1. Is the Gateway running? `openclaw gateway status`
 2. Is the Gateway healthy? `openclaw status`
-3. Does the UI have the right token? `openclaw dashboard`
+3. Does the UI have the right token? `sudoclaw dashboard`
 4. If remote, is the tunnel/Tailscale link up?
 
 Then tail logs:
 
 ```bash
-openclaw logs --follow
+sudoclaw logs --follow
 ```
 
 Docs: [Dashboard](/web/dashboard), [Remote access](/gateway/remote), [Troubleshooting](/gateway/troubleshooting).
@@ -2647,7 +2647,7 @@ First confirm the Gateway is reachable and the agent can run:
 ```bash
 openclaw status
 openclaw models status
-openclaw logs --follow
+sudoclaw logs --follow
 ```
 
 In the TUI, use `/status` to see the current state. If you expect replies in a chat
@@ -2718,7 +2718,7 @@ Treat inbound DMs as untrusted input. Defaults are designed to reduce risk:
   - Pending requests are capped at **3 per channel**; check `openclaw pairing list --channel <channel> [--account <id>]` if a code didn't arrive.
 - Opening DMs publicly requires explicit opt-in (`dmPolicy: "open"` and allowlist `"*"`).
 
-Run `openclaw doctor` to surface risky DM policies.
+Run `sudoclaw doctor` to surface risky DM policies.
 
 ### Is prompt injection only a concern for public bots
 

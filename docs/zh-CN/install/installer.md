@@ -18,20 +18,20 @@ x-i18n:
 
 OpenClaw 提供两个安装器脚本（托管在 `openclaw.ai`）：
 
-- `https://openclaw.ai/install.sh` — "推荐"安装器（默认全局 npm 安装；也可从 GitHub 检出安装）
-- `https://openclaw.ai/install-cli.sh` — 无需 root 权限的 CLI 安装器（安装到带有独立 Node 的前缀目录）
-- `https://openclaw.ai/install.ps1` — Windows PowerShell 安装器（默认 npm；可选 git 安装）
+- `https://sudoclaw.ai/install.sh` — "推荐"安装器（默认全局 npm 安装；也可从 GitHub 检出安装）
+- `https://sudoclaw.ai/install-cli.sh` — 无需 root 权限的 CLI 安装器（安装到带有独立 Node 的前缀目录）
+- `https://sudoclaw.ai/install.ps1` — Windows PowerShell 安装器（默认 npm；可选 git 安装）
 
 查看当前参数/行为，运行：
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash -s -- --help
+curl -fsSL https://sudoclaw.ai/install.sh | bash -s -- --help
 ```
 
 Windows (PowerShell) 帮助：
 
 ```powershell
-& ([scriptblock]::Create((iwr -useb https://openclaw.ai/install.ps1))) -?
+& ([scriptblock]::Create((iwr -useb https://sudoclaw.ai/install.ps1))) -?
 ```
 
 如果安装器完成但在新终端中找不到 `openclaw`，通常是 Node/npm PATH 问题。参见：[安装](/install#nodejs--npm-path-sanity)。
@@ -46,14 +46,14 @@ Windows (PowerShell) 帮助：
   - `npm`（默认）：`npm install -g openclaw@latest`
   - `git`：克隆/构建源码检出并安装包装脚本
 - 在 Linux 上：必要时将 npm 前缀切换到 `~/.npm-global`，以避免全局 npm 权限错误。
-- 如果是升级现有安装：运行 `openclaw doctor --non-interactive`（尽力执行）。
-- 对于 git 安装：安装/更新后运行 `openclaw doctor --non-interactive`（尽力执行）。
+- 如果是升级现有安装：运行 `sudoclaw doctor --non-interactive`（尽力执行）。
+- 对于 git 安装：安装/更新后运行 `sudoclaw doctor --non-interactive`（尽力执行）。
 - 通过默认设置 `SHARP_IGNORE_GLOBAL_LIBVIPS=1` 来缓解 `sharp` 原生安装问题（避免使用系统 libvips 编译）。
 
 如果你*希望* `sharp` 链接到全局安装的 libvips（或你正在调试），请设置：
 
 ```bash
-SHARP_IGNORE_GLOBAL_LIBVIPS=0 curl -fsSL https://openclaw.ai/install.sh | bash
+SHARP_IGNORE_GLOBAL_LIBVIPS=0 curl -fsSL https://sudoclaw.ai/install.sh | bash
 ```
 
 ### 可发现性 / "git 安装"提示
@@ -86,7 +86,7 @@ SHARP_IGNORE_GLOBAL_LIBVIPS=0 curl -fsSL https://openclaw.ai/install.sh | bash
 帮助：
 
 ```bash
-curl -fsSL https://openclaw.ai/install-cli.sh | bash -s -- --help
+curl -fsSL https://sudoclaw.ai/install-cli.sh | bash -s -- --help
 ```
 
 ## install.ps1（Windows PowerShell）
@@ -97,20 +97,20 @@ curl -fsSL https://openclaw.ai/install-cli.sh | bash -s -- --help
 - 选择安装方式：
   - `npm`（默认）：`npm install -g openclaw@latest`
   - `git`：克隆/构建源码检出并安装包装脚本
-- 在升级和 git 安装时运行 `openclaw doctor --non-interactive`（尽力执行）。
+- 在升级和 git 安装时运行 `sudoclaw doctor --non-interactive`（尽力执行）。
 
 示例：
 
 ```powershell
-iwr -useb https://openclaw.ai/install.ps1 | iex
+iwr -useb https://sudoclaw.ai/install.ps1 | iex
 ```
 
 ```powershell
-iwr -useb https://openclaw.ai/install.ps1 | iex -InstallMethod git
+iwr -useb https://sudoclaw.ai/install.ps1 | iex -InstallMethod git
 ```
 
 ```powershell
-iwr -useb https://openclaw.ai/install.ps1 | iex -InstallMethod git -GitDir "C:\\openclaw"
+iwr -useb https://sudoclaw.ai/install.ps1 | iex -InstallMethod git -GitDir "C:\\openclaw"
 ```
 
 环境变量：
@@ -125,4 +125,4 @@ Git 要求：
 常见 Windows 问题：
 
 - **npm error spawn git / ENOENT**：安装 Git for Windows 并重新打开 PowerShell，然后重新运行安装器。
-- **"openclaw" 不是可识别的命令**：你的 npm 全局 bin 文件夹不在 PATH 中。大多数系统使用 `%AppData%\\npm`。你也可以运行 `npm config get prefix` 并将 `\\bin` 添加到 PATH，然后重新打开 PowerShell。
+- **"sudoclaw" 不是可识别的命令**：你的 npm 全局 bin 文件夹不在 PATH 中。大多数系统使用 `%AppData%\\npm`。你也可以运行 `npm config get prefix` 并将 `\\bin` 添加到 PATH，然后重新打开 PowerShell。

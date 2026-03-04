@@ -27,7 +27,7 @@ You will need to create a new application with a bot, add the bot to your server
 
 <Steps>
   <Step title="Create a Discord application and bot">
-    Go to the [Discord Developer Portal](https://discord.com/developers/applications) and click **New Application**. Name it something like "OpenClaw".
+    Go to the [Discord Developer Portal](https://discord.com/developers/applications) and click **New Application**. Name it something like "sudoclaw".
 
     Click **Bot** on the sidebar. Set the **Username** to whatever you call your OpenClaw agent.
 
@@ -405,7 +405,7 @@ Example:
     - guild must match `channels.discord.guilds` (`id` preferred, slug accepted)
     - optional sender allowlists: `users` (stable IDs recommended) and `roles` (role IDs only); if either is configured, senders are allowed when they match `users` OR `roles`
     - direct name/tag matching is disabled by default; enable `channels.discord.dangerouslyAllowNameMatching: true` only as break-glass compatibility mode
-    - names/tags are supported for `users`, but IDs are safer; `openclaw security audit` warns when name/tag entries are used
+    - names/tags are supported for `users`, but IDs are safer; `sudoclaw security audit` warns when name/tag entries are used
     - if a guild has `channels` configured, non-listed channels are denied
     - if a guild has no `channels` block, all channels in that allowlisted guild are allowed
 
@@ -987,9 +987,9 @@ message(action="send", channel="discord", target="channel:123", path="/path/to/a
     Useful checks:
 
 ```bash
-openclaw doctor
+sudoclaw doctor
 openclaw channels status --probe
-openclaw logs --follow
+sudoclaw logs --follow
 ```
 
   </Accordion>

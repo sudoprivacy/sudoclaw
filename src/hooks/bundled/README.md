@@ -10,7 +10,7 @@ Automatically saves session context to memory when you issue `/new` or `/reset`.
 
 **Events**: `command:new`, `command:reset`
 **What it does**: Creates a dated memory file with LLM-generated slug based on conversation content.
-**Output**: `<workspace>/memory/YYYY-MM-DD-slug.md` (defaults to `~/.openclaw/workspace`)
+**Output**: `<workspace>/memory/YYYY-MM-DD-slug.md` (defaults to `~/.sudoclaw/workspace`)
 
 **Enable**:
 
@@ -38,7 +38,7 @@ Logs all command events to a centralized audit file.
 
 **Events**: `command` (all commands)
 **What it does**: Appends JSONL entries to command log file.
-**Output**: `~/.openclaw/logs/commands.log`
+**Output**: `~/.sudoclaw/logs/commands.log`
 
 **Enable**:
 
@@ -81,9 +81,9 @@ session-memory/
 ---
 name: my-hook
 description: "Short description"
-homepage: https://docs.openclaw.ai/automation/hooks#my-hook
+homepage: https://docs.sudoclaw.ai/automation/hooks#my-hook
 metadata:
-  { "openclaw": { "emoji": "🔗", "events": ["command:new"], "requires": { "bins": ["node"] } } }
+  { "sudoclaw": { "emoji": "🔗", "events": ["command:new"], "requires": { "bins": ["node"] } } }
 ---
 # Hook Title
 
@@ -107,7 +107,7 @@ Documentation goes here...
 To create your own hooks, place them in:
 
 - **Workspace hooks**: `<workspace>/hooks/` (highest precedence)
-- **Managed hooks**: `~/.openclaw/hooks/` (shared across workspaces)
+- **Managed hooks**: `~/.sudoclaw/hooks/` (shared across workspaces)
 
 Custom hooks follow the same structure as bundled hooks.
 
@@ -140,7 +140,7 @@ openclaw hooks disable command-logger
 
 ## Configuration
 
-Hooks can be configured in `~/.openclaw/openclaw.json`:
+Hooks can be configured in `~/.sudoclaw/sudoclaw.json`:
 
 ```json
 {
@@ -220,4 +220,4 @@ Test your hooks by:
 
 ## Documentation
 
-Full documentation: https://docs.openclaw.ai/automation/hooks
+Full documentation: https://docs.sudoclaw.ai/automation/hooks

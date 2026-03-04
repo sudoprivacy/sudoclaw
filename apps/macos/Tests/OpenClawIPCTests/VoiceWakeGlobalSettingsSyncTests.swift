@@ -11,7 +11,7 @@ import Testing
             AppStateStore.shared.applyGlobalVoiceWakeTriggers(["before"])
         }
 
-        let payload = OpenClawProtocol.AnyCodable(["triggers": ["openclaw", "computer"]])
+        let payload = OpenClawProtocol.AnyCodable(["triggers": ["sudoclaw", "computer"]])
         let evt = EventFrame(
             type: "event",
             event: "voicewake.changed",
@@ -22,7 +22,7 @@ import Testing
         await VoiceWakeGlobalSettingsSync.shared.handle(push: .event(evt))
 
         let updated = await MainActor.run { AppStateStore.shared.swabbleTriggerWords }
-        #expect(updated == ["openclaw", "computer"])
+        #expect(updated == ["sudoclaw", "computer"])
 
         await MainActor.run {
             AppStateStore.shared.applyGlobalVoiceWakeTriggers(previous)

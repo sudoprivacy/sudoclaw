@@ -80,9 +80,9 @@ const originForPort = (port: number) => `http://127.0.0.1:${port}`;
 
 function restoreGatewayToken(prevToken: string | undefined) {
   if (prevToken === undefined) {
-    delete process.env.OPENCLAW_GATEWAY_TOKEN;
+    delete process.env.SUDOCLAW_GATEWAY_TOKEN;
   } else {
-    process.env.OPENCLAW_GATEWAY_TOKEN = prevToken;
+    process.env.SUDOCLAW_GATEWAY_TOKEN = prevToken;
   }
 }
 
@@ -182,7 +182,7 @@ function resolveGatewayTokenOrEnv(): string {
   const token =
     typeof (testState.gatewayAuth as { token?: unknown } | undefined)?.token === "string"
       ? ((testState.gatewayAuth as { token?: string }).token ?? undefined)
-      : process.env.OPENCLAW_GATEWAY_TOKEN;
+      : process.env.SUDOCLAW_GATEWAY_TOKEN;
   expect(typeof token).toBe("string");
   return String(token ?? "");
 }
@@ -387,7 +387,7 @@ describe("gateway server auth/connect", () => {
         {
           env: {
             OPENCLAW_VERSION: " ",
-            OPENCLAW_SERVICE_VERSION: "2.4.6-service",
+            SUDOCLAW_SERVICE_VERSION: "2.4.6-service",
             npm_package_version: "1.0.0-package",
           },
           expectedVersion: "2.4.6-service",
@@ -395,7 +395,7 @@ describe("gateway server auth/connect", () => {
         {
           env: {
             OPENCLAW_VERSION: "9.9.9-cli",
-            OPENCLAW_SERVICE_VERSION: "2.4.6-service",
+            SUDOCLAW_SERVICE_VERSION: "2.4.6-service",
             npm_package_version: "1.0.0-package",
           },
           expectedVersion: "9.9.9-cli",
@@ -403,7 +403,7 @@ describe("gateway server auth/connect", () => {
         {
           env: {
             OPENCLAW_VERSION: " ",
-            OPENCLAW_SERVICE_VERSION: "\t",
+            SUDOCLAW_SERVICE_VERSION: "\t",
             npm_package_version: "1.0.0-package",
           },
           expectedVersion: "1.0.0-package",
@@ -757,8 +757,8 @@ describe("gateway server auth/connect", () => {
     let prevToken: string | undefined;
 
     beforeAll(async () => {
-      prevToken = process.env.OPENCLAW_GATEWAY_TOKEN;
-      process.env.OPENCLAW_GATEWAY_TOKEN = "secret";
+      prevToken = process.env.SUDOCLAW_GATEWAY_TOKEN;
+      process.env.SUDOCLAW_GATEWAY_TOKEN = "secret";
       port = await getFreePort();
       server = await startGatewayServer(port);
     });
@@ -766,9 +766,9 @@ describe("gateway server auth/connect", () => {
     afterAll(async () => {
       await server.close();
       if (prevToken === undefined) {
-        delete process.env.OPENCLAW_GATEWAY_TOKEN;
+        delete process.env.SUDOCLAW_GATEWAY_TOKEN;
       } else {
-        process.env.OPENCLAW_GATEWAY_TOKEN = prevToken;
+        process.env.SUDOCLAW_GATEWAY_TOKEN = prevToken;
       }
     });
 
@@ -817,8 +817,8 @@ describe("gateway server auth/connect", () => {
     let prevToken: string | undefined;
 
     beforeAll(async () => {
-      prevToken = process.env.OPENCLAW_GATEWAY_TOKEN;
-      delete process.env.OPENCLAW_GATEWAY_TOKEN;
+      prevToken = process.env.SUDOCLAW_GATEWAY_TOKEN;
+      delete process.env.SUDOCLAW_GATEWAY_TOKEN;
       testState.gatewayAuth = { mode: "none" };
       port = await getFreePort();
       server = await startGatewayServer(port);
@@ -827,9 +827,9 @@ describe("gateway server auth/connect", () => {
     afterAll(async () => {
       await server.close();
       if (prevToken === undefined) {
-        delete process.env.OPENCLAW_GATEWAY_TOKEN;
+        delete process.env.SUDOCLAW_GATEWAY_TOKEN;
       } else {
-        process.env.OPENCLAW_GATEWAY_TOKEN = prevToken;
+        process.env.SUDOCLAW_GATEWAY_TOKEN = prevToken;
       }
     });
 
@@ -1025,8 +1025,8 @@ describe("gateway server auth/connect", () => {
       },
       // oxlint-disable-next-line typescript/no-explicit-any
     } as any);
-    const prevToken = process.env.OPENCLAW_GATEWAY_TOKEN;
-    process.env.OPENCLAW_GATEWAY_TOKEN = "secret";
+    const prevToken = process.env.SUDOCLAW_GATEWAY_TOKEN;
+    process.env.SUDOCLAW_GATEWAY_TOKEN = "secret";
     try {
       await withGatewayServer(async ({ port }) => {
         const ws = new WebSocket(`ws://127.0.0.1:${port}`, {
@@ -1085,8 +1085,8 @@ describe("gateway server auth/connect", () => {
   test("allows control ui with stale device identity when device auth is disabled", async () => {
     testState.gatewayControlUi = { dangerouslyDisableDeviceAuth: true };
     testState.gatewayAuth = { mode: "token", token: "secret" };
-    const prevToken = process.env.OPENCLAW_GATEWAY_TOKEN;
-    process.env.OPENCLAW_GATEWAY_TOKEN = "secret";
+    const prevToken = process.env.SUDOCLAW_GATEWAY_TOKEN;
+    process.env.SUDOCLAW_GATEWAY_TOKEN = "secret";
     try {
       await withGatewayServer(async ({ port }) => {
         const ws = await openWs(port, { origin: originForPort(port) });
@@ -1785,9 +1785,9 @@ describe("gateway server auth/connect", () => {
     ws2.close();
     await server.close();
     if (prevToken === undefined) {
-      delete process.env.OPENCLAW_GATEWAY_TOKEN;
+      delete process.env.SUDOCLAW_GATEWAY_TOKEN;
     } else {
-      process.env.OPENCLAW_GATEWAY_TOKEN = prevToken;
+      process.env.SUDOCLAW_GATEWAY_TOKEN = prevToken;
     }
   });
 

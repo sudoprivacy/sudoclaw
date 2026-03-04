@@ -10,7 +10,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 BUILD_ROOT="$ROOT_DIR/apps/macos/.build"
-PRODUCT="OpenClaw"
+PRODUCT="sudoclaw"
 BUILD_CONFIG="${BUILD_CONFIG:-release}"
 
 # Default to universal binary for distribution builds (supports both Apple Silicon and Intel Macs)

@@ -37,7 +37,7 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 sudo apt --fix-broken install -y  # if there are dependency errors
 ```
 
-Then update your OpenClaw config (`~/.openclaw/openclaw.json`):
+Then update your OpenClaw config (`~/.sudoclaw/sudoclaw.json`):
 
 ```json
 {
@@ -129,7 +129,7 @@ browser extension to be attached to a live tab.
 Fix options:
 
 1. **Use the managed browser:** `openclaw browser start --browser-profile openclaw`
-   (or set `browser.defaultProfile: "openclaw"`).
+   (or set `browser.defaultProfile: "sudoclaw"`).
 2. **Use the extension relay:** install the extension, open a tab, and click the
    OpenClaw extension icon to attach it.
 

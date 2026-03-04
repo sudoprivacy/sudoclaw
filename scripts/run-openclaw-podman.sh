@@ -67,13 +67,13 @@ fi
 if [[ -z "${EFFECTIVE_HOME:-}" ]]; then
   EFFECTIVE_HOME="${OPENCLAW_HOME:-/tmp}"
 fi
-CONFIG_DIR="${OPENCLAW_CONFIG_DIR:-$EFFECTIVE_HOME/.openclaw}"
+CONFIG_DIR="${OPENCLAW_CONFIG_DIR:-$EFFECTIVE_HOME/.sudoclaw}"
 ENV_FILE="${OPENCLAW_PODMAN_ENV:-$CONFIG_DIR/.env}"
 WORKSPACE_DIR="${OPENCLAW_WORKSPACE_DIR:-$CONFIG_DIR/workspace}"
 CONTAINER_NAME="${OPENCLAW_PODMAN_CONTAINER:-openclaw}"
 OPENCLAW_IMAGE="${OPENCLAW_PODMAN_IMAGE:-openclaw:local}"
 PODMAN_PULL="${OPENCLAW_PODMAN_PULL:-never}"
-HOST_GATEWAY_PORT="${OPENCLAW_PODMAN_GATEWAY_HOST_PORT:-${OPENCLAW_GATEWAY_PORT:-18789}}"
+HOST_GATEWAY_PORT="${OPENCLAW_PODMAN_GATEWAY_HOST_PORT:-${SUDOCLAW_GATEWAY_PORT:-18789}}"
 HOST_BRIDGE_PORT="${OPENCLAW_PODMAN_BRIDGE_HOST_PORT:-${OPENCLAW_BRIDGE_PORT:-18790}}"
 # Keep Podman default local-only unless explicitly overridden.
 # Non-loopback binds require gateway.controlUi.allowedOrigins (security hardening).
@@ -136,15 +136,15 @@ PY
     od -An -N32 -tx1 /dev/urandom | tr -d " \n"
     return 0
   fi
-  echo "Missing dependency: need openssl or python3 (or od) to generate OPENCLAW_GATEWAY_TOKEN." >&2
+  echo "Missing dependency: need openssl or python3 (or od) to generate SUDOCLAW_GATEWAY_TOKEN." >&2
   exit 1
 }
 
-if [[ -z "${OPENCLAW_GATEWAY_TOKEN:-}" ]]; then
-  export OPENCLAW_GATEWAY_TOKEN="$(generate_token_hex_32)"
+if [[ -z "${SUDOCLAW_GATEWAY_TOKEN:-}" ]]; then
+  export SUDOCLAW_GATEWAY_TOKEN="$(generate_token_hex_32)"
   mkdir -p "$(dirname "$ENV_FILE")"
-  upsert_env_var "$ENV_FILE" "OPENCLAW_GATEWAY_TOKEN" "$OPENCLAW_GATEWAY_TOKEN"
-  echo "Generated OPENCLAW_GATEWAY_TOKEN and wrote it to $ENV_FILE." >&2
+  upsert_env_var "$ENV_FILE" "SUDOCLAW_GATEWAY_TOKEN" "$OPENCLAW_GATEWAY_TOKEN"
+  echo "Generated SUDOCLAW_GATEWAY_TOKEN and wrote it to $ENV_FILE." >&2
 fi
 
 # The gateway refuses to start unless gateway.mode=local is set in config.
@@ -186,9 +186,9 @@ if [[ "$RUN_SETUP" == true ]]; then
     --init \
     "${USERNS_ARGS[@]}" "${RUN_USER_ARGS[@]}" \
     -e HOME=/home/node -e TERM=xterm-256color -e BROWSER=echo \
-    -e OPENCLAW_GATEWAY_TOKEN="$OPENCLAW_GATEWAY_TOKEN" \
-    -v "$CONFIG_DIR:/home/node/.openclaw:rw" \
-    -v "$WORKSPACE_DIR:/home/node/.openclaw/workspace:rw" \
+    -e SUDOCLAW_GATEWAY_TOKEN="$OPENCLAW_GATEWAY_TOKEN" \
+    -v "$CONFIG_DIR:/home/node/.sudoclaw:rw" \
+    -v "$WORKSPACE_DIR:/home/node/.sudoclaw/workspace:rw" \
     "${ENV_FILE_ARGS[@]}" \
     "$OPENCLAW_IMAGE" \
     node dist/index.js onboard "$@"
@@ -199,10 +199,10 @@ podman run --pull="$PODMAN_PULL" -d --replace \
   --init \
   "${USERNS_ARGS[@]}" "${RUN_USER_ARGS[@]}" \
   -e HOME=/home/node -e TERM=xterm-256color \
-  -e OPENCLAW_GATEWAY_TOKEN="$OPENCLAW_GATEWAY_TOKEN" \
+  -e SUDOCLAW_GATEWAY_TOKEN="$OPENCLAW_GATEWAY_TOKEN" \
   "${ENV_FILE_ARGS[@]}" \
-  -v "$CONFIG_DIR:/home/node/.openclaw:rw" \
-  -v "$WORKSPACE_DIR:/home/node/.openclaw/workspace:rw" \
+  -v "$CONFIG_DIR:/home/node/.sudoclaw:rw" \
+  -v "$WORKSPACE_DIR:/home/node/.sudoclaw/workspace:rw" \
   -p "${HOST_GATEWAY_PORT}:18789" \
   -p "${HOST_BRIDGE_PORT}:18790" \
   "$OPENCLAW_IMAGE" \

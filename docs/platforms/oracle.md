@@ -99,7 +99,7 @@ tailscale status
 ## 5) Install OpenClaw
 
 ```bash
-curl -fsSL https://openclaw.ai/install.sh | bash
+curl -fsSL https://sudoclaw.ai/install.sh | bash
 source ~/.bashrc
 ```
 
@@ -117,7 +117,7 @@ openclaw config set gateway.bind loopback
 
 # Require auth for the Gateway + Control UI
 openclaw config set gateway.auth.mode token
-openclaw doctor --generate-gateway-token
+sudoclaw doctor --generate-gateway-token
 
 # Expose over Tailscale Serve (HTTPS + tailnet access)
 openclaw config set gateway.tailscale.mode serve
@@ -178,7 +178,7 @@ No SSH tunnel needed. Tailscale provides:
 
 With the VCN locked down (only UDP 41641 open) and the Gateway bound to loopback, you get strong defense-in-depth: public traffic is blocked at the network edge, and admin access happens over your tailnet.
 
-This setup often removes the _need_ for extra host-based firewall rules purely to stop Internet-wide SSH brute force — but you should still keep the OS updated, run `openclaw security audit`, and verify you aren’t accidentally listening on public interfaces.
+This setup often removes the _need_ for extra host-based firewall rules purely to stop Internet-wide SSH brute force — but you should still keep the OS updated, run `sudoclaw security audit`, and verify you aren’t accidentally listening on public interfaces.
 
 ### What's Already Protected
 
@@ -194,7 +194,7 @@ This setup often removes the _need_ for extra host-based firewall rules purely t
 ### Still Recommended
 
 - **Credential permissions:** `chmod 700 ~/.openclaw`
-- **Security audit:** `openclaw security audit`
+- **Security audit:** `sudoclaw security audit`
 - **System updates:** `sudo apt update && sudo apt upgrade` regularly
 - **Monitor Tailscale:** Review devices in [Tailscale admin console](https://login.tailscale.com/admin)
 
@@ -250,7 +250,7 @@ sudo tailscale up --ssh --hostname=openclaw --reset
 
 ```bash
 openclaw gateway status
-openclaw doctor --non-interactive
+sudoclaw doctor --non-interactive
 journalctl --user -u openclaw-gateway -n 50
 ```
 

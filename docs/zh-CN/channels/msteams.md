@@ -150,7 +150,7 @@ OpenClaw 将自动提供本地安装路径。
 2. 创建一个 **Azure Bot**（App ID + 密钥 + 租户 ID）。
 3. 构建一个引用机器人并包含以下 RSC 权限的 **Teams 应用包**。
 4. 将 Teams 应用上传/安装到团队中（或用于私信的个人范围）。
-5. 在 `~/.openclaw/openclaw.json`（或环境变量）中配置 `msteams` 并启动 Gateway 网关。
+5. 在 `~/.sudoclaw/sudoclaw.json`（或环境变量）中配置 `msteams` 并启动 Gateway 网关。
 6. Gateway 网关默认在 `/api/messages` 上监听 Bot Framework webhook 流量。
 
 ## Azure Bot 设置（前提条件）
@@ -323,7 +323,7 @@ tailscale funnel 3978
   "manifestVersion": "1.23",
   "version": "1.0.0",
   "id": "00000000-0000-0000-0000-000000000000",
-  "name": { "short": "OpenClaw" },
+  "name": { "short": "sudoclaw" },
   "developer": {
     "name": "Your Org",
     "websiteUrl": "https://example.com",

@@ -111,7 +111,7 @@ Example `package.json`:
 {
   "name": "@acme/my-hooks",
   "version": "0.1.0",
-  "openclaw": {
+  "sudoclaw": {
     "hooks": ["./hooks/my-hook", "./hooks/other-hook"]
   }
 }
@@ -136,9 +136,9 @@ The `HOOK.md` file contains metadata in YAML frontmatter plus Markdown documenta
 ---
 name: my-hook
 description: "Short description of what this hook does"
-homepage: https://docs.openclaw.ai/automation/hooks#my-hook
+homepage: https://docs.sudoclaw.ai/automation/hooks#my-hook
 metadata:
-  { "openclaw": { "emoji": "🔗", "events": ["command:new"], "requires": { "bins": ["node"] } } }
+  { "sudoclaw": { "emoji": "🔗", "events": ["command:new"], "requires": { "bins": ["node"] } } }
 ---
 
 # My Hook
@@ -353,7 +353,7 @@ cd ~/.openclaw/hooks/my-hook
 ---
 name: my-hook
 description: "Does something useful"
-metadata: { "openclaw": { "emoji": "🎯", "events": ["command:new"] } }
+metadata: { "sudoclaw": { "emoji": "🎯", "events": ["command:new"] } }
 ---
 
 # My Custom Hook
@@ -720,13 +720,13 @@ const handler: HookHandler = async (event) => {
 Specify exact events in metadata when possible:
 
 ```yaml
-metadata: { "openclaw": { "events": ["command:new"] } } # Specific
+metadata: { "sudoclaw": { "events": ["command:new"] } } # Specific
 ```
 
 Rather than:
 
 ```yaml
-metadata: { "openclaw": { "events": ["command"] } } # General - more overhead
+metadata: { "sudoclaw": { "events": ["command"] } } # General - more overhead
 ```
 
 ## Debugging
@@ -957,7 +957,7 @@ node -e "import('./path/to/handler.ts').then(console.log)"
    ---
    name: my-hook
    description: "My custom hook"
-   metadata: { "openclaw": { "emoji": "🎯", "events": ["command:new"] } }
+   metadata: { "sudoclaw": { "emoji": "🎯", "events": ["command:new"] } }
    ---
 
    # My Hook

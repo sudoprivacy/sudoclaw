@@ -189,8 +189,8 @@ Pre-req checklist:
 9) For A2UI checks, keep the app on **Screen** tab; the node now auto-refreshes canvas capability once on first A2UI reachability failure (TTL-safe retry).
 
 ```bash
-openclaw devices list
-openclaw devices approve --latest
+sudoclaw devices list
+sudoclaw devices approve --latest
 ```
 
 Run:
@@ -216,7 +216,7 @@ What it does:
 Common failure quick-fixes:
 
 - `pairing required` before tests start:
-  - approve pending device pairing (`openclaw devices approve --latest`) and rerun.
+  - approve pending device pairing (`sudoclaw devices approve --latest`) and rerun.
 - `A2UI host not reachable` / `A2UI_HOST_NOT_CONFIGURED`:
   - ensure gateway canvas host is running and reachable, keep the app on the **Screen** tab. The app will auto-refresh canvas capability once; if it still fails, reconnect app and rerun.
 - `NODE_BACKGROUND_UNAVAILABLE: canvas unavailable`:
