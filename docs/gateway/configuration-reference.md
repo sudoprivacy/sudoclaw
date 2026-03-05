@@ -2585,7 +2585,7 @@ Validation:
       },
       vault: {
         source: "exec",
-        command: "/usr/local/bin/openclaw-vault-resolver",
+        command: "/usr/local/bin/sudoclaw-vault-resolver",
         passEnv: ["PATH", "VAULT_ADDR"],
       },
     },

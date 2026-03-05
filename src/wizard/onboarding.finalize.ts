@@ -423,7 +423,7 @@ export async function finalizeOnboardingWizard(
         `Dashboard link (with token): ${authedUrl}`,
         controlUiOpened
           ? "Opened in your browser. Keep that tab to control SudoClaw."
-          : "Copy/paste this URL in a browser on this machine to control OpenClaw.",
+          : "Copy/paste this URL in a browser on this machine to control SudoClaw.",
         controlUiOpenHint,
       ]
         .filter(Boolean)

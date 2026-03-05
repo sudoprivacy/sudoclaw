@@ -84,7 +84,7 @@ async function runRepair(cfg: OpenClawConfig) {
 
 const gatewayProgramArguments = [
   "/usr/bin/node",
-  "/usr/local/bin/openclaw",
+  "/usr/local/bin/sudoclaw",
   "gateway",
   "--port",
   "18789",
