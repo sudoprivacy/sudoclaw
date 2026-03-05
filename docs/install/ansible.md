@@ -176,7 +176,7 @@ pnpm start
 sudo systemctl status docker
 
 # Check sandbox image
-sudo docker images | grep openclaw-sandbox
+sudo docker images | grep sudoclaw-sandbox
 
 # Build sandbox image if missing
 cd /opt/openclaw/openclaw

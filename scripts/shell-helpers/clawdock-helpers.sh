@@ -202,7 +202,7 @@ clawdock-exec() {
 }
 
 clawdock-cli() {
-  _clawdock_compose run --rm openclaw-cli "$@"
+  _clawdock_compose run --rm sudoclaw-cli "$@"
 }
 
 # Maintenance
@@ -280,7 +280,7 @@ clawdock-dashboard() {
 
   echo "🦞 Getting dashboard URL..."
   local output exit_status url
-  output=$(_clawdock_compose run --rm openclaw-cli dashboard --no-open 2>&1)
+  output=$(_clawdock_compose run --rm sudoclaw-cli dashboard --no-open 2>&1)
   exit_status=$?
   url=$(printf "%s\n" "$output" | _clawdock_filter_warnings | grep -o 'http[s]\?://[^[:space:]]*' | head -n 1)
   if [[ $exit_status -ne 0 ]]; then

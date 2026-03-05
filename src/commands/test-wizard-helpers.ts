@@ -37,7 +37,7 @@ export function createWizardPrompter(
 }
 
 export async function setupAuthTestEnv(
-  prefix = "openclaw-auth-",
+  prefix = "sudoclaw-auth-",
   options?: { agentSubdir?: string },
 ): Promise<{
   stateDir: string;

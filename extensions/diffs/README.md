@@ -1,6 +1,6 @@
 # @openclaw/diffs
 
-Read-only diff viewer plugin for **OpenClaw** agents.
+Read-only diff viewer plugin for **SudoClaw** agents.
 
 It gives agents one tool, `diffs`, that can:
 
@@ -114,10 +114,10 @@ Use the `diffs` tool in `image` mode for this before/after input. After it retur
 Path: README.md
 
 Before:
-OpenClaw supports plugins.
+SudoClaw supports plugins.
 
 After:
-OpenClaw supports plugins and hosted diff views.
+SudoClaw supports plugins and hosted diff views.
 ```
 
 Do both:

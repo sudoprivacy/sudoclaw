@@ -317,7 +317,7 @@ sudoclaw browser create-profile \
 如果你的 Gateway 网关在 Docker 中运行，避免使用 `npx playwright`（npm 覆盖冲突）。改用捆绑的 CLI：
 
 ```bash
-docker compose run --rm openclaw-cli \
+docker compose run --rm sudoclaw-cli \
   node /app/node_modules/playwright-core/cli.js install chromium
 ```
 

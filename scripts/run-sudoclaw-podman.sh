@@ -3,18 +3,18 @@
 #
 # One-time setup (from repo root): ./setup-podman.sh
 # Then:
-#   ./scripts/run-openclaw-podman.sh launch           # Start gateway
-#   ./scripts/run-openclaw-podman.sh launch setup      # Onboarding wizard
+#   ./scripts/run-sudoclaw-podman.sh launch           # Start gateway
+#   ./scripts/run-sudoclaw-podman.sh launch setup      # Onboarding wizard
 #
-# As the openclaw user (no repo needed):
-#   sudo -u openclaw /home/openclaw/run-openclaw-podman.sh
-#   sudo -u openclaw /home/openclaw/run-openclaw-podman.sh setup
+# As the sudoclaw user (no repo needed):
+#   sudo -u sudoclaw /home/sudoclaw/run-sudoclaw-podman.sh
+#   sudo -u sudoclaw /home/sudoclaw/run-sudoclaw-podman.sh setup
 #
 # Legacy: "setup-host" delegates to ../setup-podman.sh
 
 set -euo pipefail
 
-SUDOCLAW_USER="${SUDOCLAW_PODMAN_USER:-openclaw}"
+SUDOCLAW_USER="${SUDOCLAW_PODMAN_USER:-sudoclaw}"
 
 resolve_user_home() {
   local user="$1"
@@ -33,7 +33,7 @@ resolve_user_home() {
 
 SUDOCLAW_HOME="$(resolve_user_home "$SUDOCLAW_USER")"
 SUDOCLAW_UID="$(id -u "$SUDOCLAW_USER" 2>/dev/null || true)"
-LAUNCH_SCRIPT="$SUDOCLAW_HOME/run-openclaw-podman.sh"
+LAUNCH_SCRIPT="$SUDOCLAW_HOME/run-sudoclaw-podman.sh"
 
 # Legacy: setup-host → run setup-podman.sh
 if [[ "${1:-}" == "setup-host" ]]; then
@@ -47,18 +47,18 @@ if [[ "${1:-}" == "setup-host" ]]; then
   exit 1
 fi
 
-# --- Step 2: launch (from repo: re-exec as openclaw in safe cwd; from openclaw home: run container) ---
+# --- Step 2: launch (from repo: re-exec as sudoclaw in safe cwd; from sudoclaw home: run container) ---
 if [[ "${1:-}" == "launch" ]]; then
   shift
   if [[ -n "${SUDOCLAW_UID:-}" && "$(id -u)" -ne "$SUDOCLAW_UID" ]]; then
-    # Exec as openclaw with cwd=/tmp so a nologin user never inherits an invalid cwd.
+    # Exec as sudoclaw with cwd=/tmp so a nologin user never inherits an invalid cwd.
     exec sudo -u "$SUDOCLAW_USER" env HOME="$SUDOCLAW_HOME" PATH="$PATH" TERM="${TERM:-}" \
       bash -c 'cd /tmp && exec '"$LAUNCH_SCRIPT"' "$@"' _ "$@"
   fi
-  # Already openclaw; fall through to container run (with remaining args, e.g. "setup")
+  # Already sudoclaw; fall through to container run (with remaining args, e.g. "setup")
 fi
 
-# --- Container run (script in openclaw home, run as openclaw) ---
+# --- Container run (script in sudoclaw home, run as sudoclaw) ---
 EFFECTIVE_HOME="${HOME:-}"
 if [[ -n "${SUDOCLAW_UID:-}" && "$(id -u)" -eq "$SUDOCLAW_UID" ]]; then
   EFFECTIVE_HOME="$SUDOCLAW_HOME"
@@ -70,7 +70,7 @@ fi
 CONFIG_DIR="${SUDOCLAW_CONFIG_DIR:-$EFFECTIVE_HOME/.sudoclaw}"
 ENV_FILE="${SUDOCLAW_PODMAN_ENV:-$CONFIG_DIR/.env}"
 WORKSPACE_DIR="${SUDOCLAW_WORKSPACE_DIR:-$CONFIG_DIR/workspace}"
-CONTAINER_NAME="${SUDOCLAW_PODMAN_CONTAINER:-openclaw}"
+CONTAINER_NAME="${SUDOCLAW_PODMAN_CONTAINER:-sudoclaw}"
 SUDOCLAW_IMAGE="${SUDOCLAW_PODMAN_IMAGE:-sudoclaw:local}"
 PODMAN_PULL="${SUDOCLAW_PODMAN_PULL:-never}"
 HOST_GATEWAY_PORT="${SUDOCLAW_PODMAN_GATEWAY_HOST_PORT:-${SUDOCLAW_GATEWAY_PORT:-18789}}"
@@ -79,7 +79,7 @@ HOST_BRIDGE_PORT="${SUDOCLAW_PODMAN_BRIDGE_HOST_PORT:-${SUDOCLAW_BRIDGE_PORT:-18
 # Non-loopback binds require gateway.controlUi.allowedOrigins (security hardening).
 GATEWAY_BIND="${SUDOCLAW_GATEWAY_BIND:-loopback}"
 
-# Safe cwd for podman (openclaw is nologin; avoid inherited cwd from sudo)
+# Safe cwd for podman (sudoclaw is nologin; avoid inherited cwd from sudo)
 cd "$EFFECTIVE_HOME" 2>/dev/null || cd /tmp 2>/dev/null || true
 
 RUN_SETUP=false

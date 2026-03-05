@@ -26,7 +26,7 @@ export function createPiToolsSandboxContext(params: PiToolsSandboxContextParams)
     containerWorkdir: params.containerWorkdir ?? "/workspace",
     fsBridge: params.fsBridge,
     docker: {
-      image: "openclaw-sandbox:bookworm-slim",
+      image: "sudoclaw-sandbox:bookworm-slim",
       containerPrefix: "openclaw-sbx-",
       workdir: "/workspace",
       readOnlyRoot: true,

@@ -1,4 +1,4 @@
-# OpenClaw Codebase Patterns
+# SudoClaw Codebase Patterns
 
 **Always reuse existing code - no redundancy!**
 

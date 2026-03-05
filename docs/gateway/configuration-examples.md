@@ -291,7 +291,7 @@ Save to `~/.sudoclaw/sudoclaw.json` and you can DM the bot from that number.
         perSession: true,
         workspaceRoot: "~/.sudoclaw/sandboxes",
         docker: {
-          image: "openclaw-sandbox:bookworm-slim",
+          image: "sudoclaw-sandbox:bookworm-slim",
           workdir: "/workspace",
           readOnlyRoot: true,
           tmpfs: ["/tmp", "/var/tmp", "/run"],

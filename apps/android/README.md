@@ -1,4 +1,4 @@
-## OpenClaw Android App
+## SudoClaw Android App
 
 Status: **extremely alpha**. The app is actively being rebuilt from the ground up.
 
@@ -201,7 +201,7 @@ pnpm android:test:integration
 
 Optional overrides:
 
-- `SUDOCLAW_ANDROID_GATEWAY_URL=ws://...` (default: from your local OpenClaw config)
+- `SUDOCLAW_ANDROID_GATEWAY_URL=ws://...` (default: from your local SudoClaw config)
 - `SUDOCLAW_ANDROID_GATEWAY_TOKEN=...`
 - `SUDOCLAW_ANDROID_GATEWAY_PASSWORD=...`
 - `SUDOCLAW_ANDROID_NODE_ID=...` or `SUDOCLAW_ANDROID_NODE_NAME=...`

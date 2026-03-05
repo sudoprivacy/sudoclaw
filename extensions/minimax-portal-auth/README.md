@@ -1,4 +1,4 @@
-# MiniMax OAuth (OpenClaw plugin)
+# MiniMax OAuth (SudoClaw plugin)
 
 OAuth provider plugin for **MiniMax** (OAuth).
 

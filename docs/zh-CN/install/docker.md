@@ -63,7 +63,7 @@ Docker 是**可选的**。仅当你想要容器化的 Gateway 网关或验证 Do
 
 - 在浏览器中打开 `http://127.0.0.1:18789/`。
 - 将令牌粘贴到控制 UI（设置 → token）。
-- 需要再次获取带令牌的 URL？运行 `docker compose run --rm openclaw-cli dashboard --no-open`。
+- 需要再次获取带令牌的 URL？运行 `docker compose run --rm sudoclaw-cli dashboard --no-open`。
 
 它在主机上写入配置/工作区：
 
@@ -76,7 +76,7 @@ Docker 是**可选的**。仅当你想要容器化的 Gateway 网关或验证 Do
 
 ```bash
 docker build -t sudoclaw:local -f Dockerfile .
-docker compose run --rm openclaw-cli onboard
+docker compose run --rm sudoclaw-cli onboard
 docker compose up -d sudoclaw-gateway
 ```
 
@@ -91,16 +91,16 @@ docker compose -f docker-compose.yml -f docker-compose.extra.yml <command>
 如果你看到"unauthorized"或"disconnected (1008): pairing required"，获取新的仪表板链接并批准浏览器设备：
 
 ```bash
-docker compose run --rm openclaw-cli dashboard --no-open
-docker compose run --rm openclaw-cli devices list
-docker compose run --rm openclaw-cli devices approve <requestId>
+docker compose run --rm sudoclaw-cli dashboard --no-open
+docker compose run --rm sudoclaw-cli devices list
+docker compose run --rm sudoclaw-cli devices approve <requestId>
 ```
 
 更多详情：[仪表板](/web/dashboard)，[设备](/cli/devices)。
 
 ### 额外挂载（可选）
 
-如果你想将额外的主机目录挂载到容器中，在运行 `docker-setup.sh` 之前设置 `SUDOCLAW_EXTRA_MOUNTS`。这接受逗号分隔的 Docker 绑定挂载列表，并通过生成 `docker-compose.extra.yml` 将它们应用到 `sudoclaw-gateway` 和 `openclaw-cli`。
+如果你想将额外的主机目录挂载到容器中，在运行 `docker-setup.sh` 之前设置 `SUDOCLAW_EXTRA_MOUNTS`。这接受逗号分隔的 Docker 绑定挂载列表，并通过生成 `docker-compose.extra.yml` 将它们应用到 `sudoclaw-gateway` 和 `sudoclaw-cli`。
 
 示例：
 
@@ -182,7 +182,7 @@ export SUDOCLAW_DOCKER_APT_PACKAGES="git curl jq"
 3. **不使用 `npx` 安装 Playwright 浏览器**（避免 npm 覆盖冲突）：
 
 ```bash
-docker compose run --rm openclaw-cli \
+docker compose run --rm sudoclaw-cli \
   node /app/node_modules/playwright-core/cli.js install chromium
 ```
 
@@ -244,19 +244,19 @@ CMD ["node","dist/index.js"]
 WhatsApp（QR）：
 
 ```bash
-docker compose run --rm openclaw-cli channels login
+docker compose run --rm sudoclaw-cli channels login
 ```
 
 Telegram（bot token）：
 
 ```bash
-docker compose run --rm openclaw-cli channels add --channel telegram --token "<token>"
+docker compose run --rm sudoclaw-cli channels add --channel telegram --token "<token>"
 ```
 
 Discord（bot token）：
 
 ```bash
-docker compose run --rm openclaw-cli channels add --channel discord --token "<token>"
+docker compose run --rm sudoclaw-cli channels add --channel discord --token "<token>"
 ```
 
 文档：[WhatsApp](/channels/whatsapp)，[Telegram](/channels/telegram)，[Discord](/channels/discord)
@@ -318,7 +318,7 @@ pnpm test:docker:qr
 
 ### 默认行为
 
-- 镜像：`openclaw-sandbox:bookworm-slim`
+- 镜像：`sudoclaw-sandbox:bookworm-slim`
 - 每个智能体一个容器
 - 智能体工作区访问：`workspaceAccess: "none"`（默认）使用 `~/.sudoclaw/sandboxes`
   - `"ro"` 保持沙箱工作区在 `/workspace` 并将智能体工作区只读挂载在 `/agent`（禁用 `write`/`edit`/`apply_patch`）
@@ -347,7 +347,7 @@ pnpm test:docker:qr
         workspaceAccess: "none", // none | ro | rw
         workspaceRoot: "~/.sudoclaw/sandboxes",
         docker: {
-          image: "openclaw-sandbox:bookworm-slim",
+          image: "sudoclaw-sandbox:bookworm-slim",
           workdir: "/workspace",
           readOnlyRoot: true,
           tmpfs: ["/tmp", "/var/tmp", "/run"],
@@ -365,7 +365,7 @@ pnpm test:docker:qr
             nproc: 256,
           },
           seccompProfile: "/path/to/seccomp.json",
-          apparmorProfile: "openclaw-sandbox",
+          apparmorProfile: "sudoclaw-sandbox",
           dns: ["1.1.1.1", "8.8.8.8"],
           extraHosts: ["internal.service:10.0.0.5"],
         },
@@ -408,7 +408,7 @@ pnpm test:docker:qr
 scripts/sandbox-setup.sh
 ```
 
-这使用 `Dockerfile.sandbox` 构建 `openclaw-sandbox:bookworm-slim`。
+这使用 `Dockerfile.sandbox` 构建 `sudoclaw-sandbox:bookworm-slim`。
 
 ### 沙箱通用镜像（可选）
 
@@ -418,13 +418,13 @@ scripts/sandbox-setup.sh
 scripts/sandbox-common-setup.sh
 ```
 
-这构建 `openclaw-sandbox-common:bookworm-slim`。要使用它：
+这构建 `sudoclaw-sandbox-common:bookworm-slim`。要使用它：
 
 ```json5
 {
   agents: {
     defaults: {
-      sandbox: { docker: { image: "openclaw-sandbox-common:bookworm-slim" } },
+      sandbox: { docker: { image: "sudoclaw-sandbox-common:bookworm-slim" } },
     },
   },
 }
@@ -438,7 +438,7 @@ scripts/sandbox-common-setup.sh
 scripts/sandbox-browser-setup.sh
 ```
 
-这使用 `Dockerfile.sandbox-browser` 构建 `openclaw-sandbox-browser:bookworm-slim`。容器运行启用 CDP 的 Chromium 和可选的 noVNC 观察器（通过 Xvfb 有头）。
+这使用 `Dockerfile.sandbox-browser` 构建 `sudoclaw-sandbox-browser:bookworm-slim`。容器运行启用 CDP 的 Chromium 和可选的 noVNC 观察器（通过 Xvfb 有头）。
 
 注意：
 

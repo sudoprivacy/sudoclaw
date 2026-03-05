@@ -90,7 +90,7 @@ function createSandboxConfig(dns: string[], binds?: string[]): SandboxConfig {
     workspaceAccess: "rw",
     workspaceRoot: "~/.sudoclaw/sandboxes",
     docker: {
-      image: "openclaw-sandbox:test",
+      image: "sudoclaw-sandbox:test",
       containerPrefix: "oc-test-",
       workdir: "/workspace",
       readOnlyRoot: true,
@@ -107,7 +107,7 @@ function createSandboxConfig(dns: string[], binds?: string[]): SandboxConfig {
       enabled: false,
       image: "openclaw-browser:test",
       containerPrefix: "oc-browser-",
-      network: "openclaw-sandbox-browser",
+      network: "sudoclaw-sandbox-browser",
       cdpPort: 9222,
       vncPort: 5900,
       noVncPort: 6080,

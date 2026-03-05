@@ -1,6 +1,6 @@
 # @openclaw/voice-call
 
-Official Voice Call plugin for **OpenClaw**.
+Official Voice Call plugin for **SudoClaw**.
 
 Providers:
 
@@ -14,7 +14,7 @@ Plugin system: `https://docs.sudoclaw.ai/plugin`
 
 ## Install (local dev)
 
-### Option A: install via OpenClaw (recommended)
+### Option A: install via SudoClaw (recommended)
 
 ```bash
 sudoclaw plugins install @openclaw/voice-call
@@ -143,7 +143,7 @@ Notes:
 ## CLI
 
 ```bash
-sudoclaw voicecall call --to "+15555550123" --message "Hello from OpenClaw"
+sudoclaw voicecall call --to "+15555550123" --message "Hello from SudoClaw"
 sudoclaw voicecall continue --call-id <id> --message "Any questions?"
 sudoclaw voicecall speak --call-id <id> --message "One moment"
 sudoclaw voicecall end --call-id <id>

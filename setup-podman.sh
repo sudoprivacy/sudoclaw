@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# One-time host setup for rootless OpenClaw in Podman: creates the openclaw
+# One-time host setup for rootless SudoClaw in Podman: creates the sudoclaw
 # user, builds the image, loads it into that user's Podman store, and installs
 # the launch script. Run from repo root with sudo capability.
 #
@@ -9,16 +9,16 @@
 #   Or set SUDOCLAW_PODMAN_QUADLET=1 (or 0) to choose without a flag.
 #
 # After this, start the gateway manually:
-#   ./scripts/run-openclaw-podman.sh launch
-#   ./scripts/run-openclaw-podman.sh launch setup   # onboarding wizard
-# Or as the openclaw user: sudo -u openclaw /home/openclaw/run-openclaw-podman.sh
-# If you used --quadlet, you can also: sudo systemctl --machine openclaw@ --user start openclaw.service
+#   ./scripts/run-sudoclaw-podman.sh launch
+#   ./scripts/run-sudoclaw-podman.sh launch setup   # onboarding wizard
+# Or as the sudoclaw user: sudo -u sudoclaw /home/sudoclaw/run-sudoclaw-podman.sh
+# If you used --quadlet, you can also: sudo systemctl --machine sudoclaw@ --user start sudoclaw.service
 set -euo pipefail
 
-SUDOCLAW_USER="${SUDOCLAW_PODMAN_USER:-openclaw}"
+SUDOCLAW_USER="${SUDOCLAW_PODMAN_USER:-sudoclaw}"
 REPO_PATH="${SUDOCLAW_REPO_PATH:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)}"
-RUN_SCRIPT_SRC="$REPO_PATH/scripts/run-openclaw-podman.sh"
-QUADLET_TEMPLATE="$REPO_PATH/scripts/podman/openclaw.container.in"
+RUN_SCRIPT_SRC="$REPO_PATH/scripts/run-sudoclaw-podman.sh"
+QUADLET_TEMPLATE="$REPO_PATH/scripts/podman/sudoclaw.container.in"
 
 require_cmd() {
   if ! command -v "$1" >/dev/null 2>&1; then
@@ -50,7 +50,7 @@ run_as_user() {
   fi
 }
 
-run_as_openclaw() {
+run_as_sudoclaw() {
   # Avoid root writes into $SUDOCLAW_HOME (symlink/hardlink/TOCTOU footguns).
   # Anything under the target user's home should be created/modified as that user.
   run_as_user "$SUDOCLAW_USER" env HOME="$SUDOCLAW_HOME" "$@"
@@ -143,7 +143,7 @@ resolve_nologin_shell() {
   printf '%s' "/usr/sbin/nologin"
 }
 
-# Create openclaw user (non-login, with home) if missing
+# Create sudoclaw user (non-login, with home) if missing
 if ! user_exists "$SUDOCLAW_USER"; then
   NOLOGIN_SHELL="$(resolve_nologin_shell)"
   echo "Creating user $SUDOCLAW_USER ($NOLOGIN_SHELL, with home)..."
@@ -181,30 +181,30 @@ if ! grep -q "^${SUDOCLAW_USER}:" /etc/subuid 2>/dev/null; then
 fi
 
 echo "Creating $SUDOCLAW_CONFIG and workspace..."
-run_as_openclaw mkdir -p "$SUDOCLAW_CONFIG/workspace"
-run_as_openclaw chmod 700 "$SUDOCLAW_CONFIG" "$SUDOCLAW_CONFIG/workspace" 2>/dev/null || true
+run_as_sudoclaw mkdir -p "$SUDOCLAW_CONFIG/workspace"
+run_as_sudoclaw chmod 700 "$SUDOCLAW_CONFIG" "$SUDOCLAW_CONFIG/workspace" 2>/dev/null || true
 
 ENV_FILE="$SUDOCLAW_CONFIG/.env"
-if run_as_openclaw test -f "$ENV_FILE"; then
-  if ! run_as_openclaw grep -q '^SUDOCLAW_GATEWAY_TOKEN=' "$ENV_FILE" 2>/dev/null; then
+if run_as_sudoclaw test -f "$ENV_FILE"; then
+  if ! run_as_sudoclaw grep -q '^SUDOCLAW_GATEWAY_TOKEN=' "$ENV_FILE" 2>/dev/null; then
     TOKEN="$(generate_token_hex_32)"
-    printf 'SUDOCLAW_GATEWAY_TOKEN=%s\n' "$TOKEN" | run_as_openclaw tee -a "$ENV_FILE" >/dev/null
+    printf 'SUDOCLAW_GATEWAY_TOKEN=%s\n' "$TOKEN" | run_as_sudoclaw tee -a "$ENV_FILE" >/dev/null
     echo "Added SUDOCLAW_GATEWAY_TOKEN to $ENV_FILE."
   fi
-  run_as_openclaw chmod 600 "$ENV_FILE" 2>/dev/null || true
+  run_as_sudoclaw chmod 600 "$ENV_FILE" 2>/dev/null || true
 else
   TOKEN="$(generate_token_hex_32)"
-  printf 'SUDOCLAW_GATEWAY_TOKEN=%s\n' "$TOKEN" | run_as_openclaw tee "$ENV_FILE" >/dev/null
-  run_as_openclaw chmod 600 "$ENV_FILE" 2>/dev/null || true
+  printf 'SUDOCLAW_GATEWAY_TOKEN=%s\n' "$TOKEN" | run_as_sudoclaw tee "$ENV_FILE" >/dev/null
+  run_as_sudoclaw chmod 600 "$ENV_FILE" 2>/dev/null || true
   echo "Created $ENV_FILE with new token."
 fi
 
 # The gateway refuses to start unless gateway.mode=local is set in config.
 # Make first-run non-interactive; users can run the wizard later to configure channels/providers.
 SUDOCLAW_JSON="$SUDOCLAW_CONFIG/sudoclaw.json"
-if ! run_as_openclaw test -f "$SUDOCLAW_JSON"; then
-  printf '%s\n' '{ gateway: { mode: "local" } }' | run_as_openclaw tee "$SUDOCLAW_JSON" >/dev/null
-  run_as_openclaw chmod 600 "$SUDOCLAW_JSON" 2>/dev/null || true
+if ! run_as_sudoclaw test -f "$SUDOCLAW_JSON"; then
+  printf '%s\n' '{ gateway: { mode: "local" } }' | run_as_sudoclaw tee "$SUDOCLAW_JSON" >/dev/null
+  run_as_sudoclaw chmod 600 "$SUDOCLAW_JSON" 2>/dev/null || true
   echo "Created $SUDOCLAW_JSON (minimal gateway.mode=local)."
 fi
 
@@ -212,7 +212,7 @@ echo "Building image from $REPO_PATH..."
 podman build -t sudoclaw:local -f "$REPO_PATH/Dockerfile" "$REPO_PATH"
 
 echo "Loading image into $SUDOCLAW_USER's Podman store..."
-TMP_IMAGE="$(mktemp -p /tmp openclaw-image.XXXXXX.tar)"
+TMP_IMAGE="$(mktemp -p /tmp sudoclaw-image.XXXXXX.tar)"
 trap 'rm -f "$TMP_IMAGE"' EXIT
 podman save sudoclaw:local -o "$TMP_IMAGE"
 chmod 644 "$TMP_IMAGE"
@@ -221,22 +221,22 @@ rm -f "$TMP_IMAGE"
 trap - EXIT
 
 echo "Copying launch script to $LAUNCH_SCRIPT_DST..."
-run_root cat "$RUN_SCRIPT_SRC" | run_as_openclaw tee "$LAUNCH_SCRIPT_DST" >/dev/null
-run_as_openclaw chmod 755 "$LAUNCH_SCRIPT_DST"
+run_root cat "$RUN_SCRIPT_SRC" | run_as_sudoclaw tee "$LAUNCH_SCRIPT_DST" >/dev/null
+run_as_sudoclaw chmod 755 "$LAUNCH_SCRIPT_DST"
 
-# Optionally install systemd quadlet for openclaw user (rootless Podman + systemd)
+# Optionally install systemd quadlet for sudoclaw user (rootless Podman + systemd)
 QUADLET_DIR="$SUDOCLAW_HOME/.config/containers/systemd"
 if [[ "$INSTALL_QUADLET" == true && -f "$QUADLET_TEMPLATE" ]]; then
   echo "Installing systemd quadlet for $SUDOCLAW_USER..."
-  run_as_openclaw mkdir -p "$QUADLET_DIR"
+  run_as_sudoclaw mkdir -p "$QUADLET_DIR"
   SUDOCLAW_HOME_SED="$(escape_sed_replacement_pipe_delim "$SUDOCLAW_HOME")"
-  sed "s|{{SUDOCLAW_HOME}}|$SUDOCLAW_HOME_SED|g" "$QUADLET_TEMPLATE" | run_as_openclaw tee "$QUADLET_DIR/openclaw.container" >/dev/null
-  run_as_openclaw chmod 700 "$SUDOCLAW_HOME/.config" "$SUDOCLAW_HOME/.config/containers" "$QUADLET_DIR" 2>/dev/null || true
-  run_as_openclaw chmod 600 "$QUADLET_DIR/openclaw.container" 2>/dev/null || true
+  sed "s|{{SUDOCLAW_HOME}}|$SUDOCLAW_HOME_SED|g" "$QUADLET_TEMPLATE" | run_as_sudoclaw tee "$QUADLET_DIR/sudoclaw.container" >/dev/null
+  run_as_sudoclaw chmod 700 "$SUDOCLAW_HOME/.config" "$SUDOCLAW_HOME/.config/containers" "$QUADLET_DIR" 2>/dev/null || true
+  run_as_sudoclaw chmod 600 "$QUADLET_DIR/sudoclaw.container" 2>/dev/null || true
   if command -v systemctl &>/dev/null; then
     run_root systemctl --machine "${SUDOCLAW_USER}@" --user daemon-reload 2>/dev/null || true
-    run_root systemctl --machine "${SUDOCLAW_USER}@" --user enable openclaw.service 2>/dev/null || true
-    run_root systemctl --machine "${SUDOCLAW_USER}@" --user start openclaw.service 2>/dev/null || true
+    run_root systemctl --machine "${SUDOCLAW_USER}@" --user enable sudoclaw.service 2>/dev/null || true
+    run_root systemctl --machine "${SUDOCLAW_USER}@" --user start sudoclaw.service 2>/dev/null || true
   fi
 fi
 
@@ -249,8 +249,8 @@ echo "  sudo -u $SUDOCLAW_USER $LAUNCH_SCRIPT_DST"
 echo "  sudo -u $SUDOCLAW_USER $LAUNCH_SCRIPT_DST setup"
 if [[ "$INSTALL_QUADLET" == true ]]; then
   echo "Or use systemd (quadlet):"
-  echo "  sudo systemctl --machine ${SUDOCLAW_USER}@ --user start openclaw.service"
-  echo "  sudo systemctl --machine ${SUDOCLAW_USER}@ --user status openclaw.service"
+  echo "  sudo systemctl --machine ${SUDOCLAW_USER}@ --user start sudoclaw.service"
+  echo "  sudo systemctl --machine ${SUDOCLAW_USER}@ --user status sudoclaw.service"
 else
   echo "To install systemd quadlet later: $0 --quadlet"
 fi

@@ -1,6 +1,6 @@
 # @openclaw/twitch
 
-Twitch channel plugin for OpenClaw.
+Twitch channel plugin for SudoClaw.
 
 ## Install (local checkout)
 

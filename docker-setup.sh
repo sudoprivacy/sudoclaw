@@ -77,7 +77,7 @@ ensure_control_ui_allowed_origins() {
   local current_allowed_origins
   allowed_origin_json="$(printf '["http://127.0.0.1:%s"]' "$SUDOCLAW_GATEWAY_PORT")"
   current_allowed_origins="$(
-    docker compose "${COMPOSE_ARGS[@]}" run --rm openclaw-cli \
+    docker compose "${COMPOSE_ARGS[@]}" run --rm sudoclaw-cli \
       config get gateway.controlUi.allowedOrigins 2>/dev/null || true
   )"
   current_allowed_origins="${current_allowed_origins//$'\r'/}"
@@ -87,15 +87,15 @@ ensure_control_ui_allowed_origins() {
     return 0
   fi
 
-  docker compose "${COMPOSE_ARGS[@]}" run --rm openclaw-cli \
+  docker compose "${COMPOSE_ARGS[@]}" run --rm sudoclaw-cli \
     config set gateway.controlUi.allowedOrigins "$allowed_origin_json" --strict-json >/dev/null
   echo "Set gateway.controlUi.allowedOrigins to $allowed_origin_json for non-loopback bind."
 }
 
 sync_gateway_mode_and_bind() {
-  docker compose "${COMPOSE_ARGS[@]}" run --rm openclaw-cli \
+  docker compose "${COMPOSE_ARGS[@]}" run --rm sudoclaw-cli \
     config set gateway.mode local >/dev/null
-  docker compose "${COMPOSE_ARGS[@]}" run --rm openclaw-cli \
+  docker compose "${COMPOSE_ARGS[@]}" run --rm sudoclaw-cli \
     config set gateway.bind "$SUDOCLAW_GATEWAY_BIND" >/dev/null
   echo "Pinned gateway.mode=local and gateway.bind=$SUDOCLAW_GATEWAY_BIND for Docker setup."
 }
@@ -230,7 +230,7 @@ YAML
   done
 
   cat >>"$EXTRA_COMPOSE_FILE" <<'YAML'
-  openclaw-cli:
+  sudoclaw-cli:
     volumes:
 YAML
 
@@ -360,7 +360,7 @@ echo "==> Fixing data-directory permissions"
 # ownership of all user project files on Linux hosts.
 # After fixing the config dir, only the SudoClaw metadata subdirectory
 # (.sudoclaw/) inside the workspace gets chowned, not the user's project files.
-docker compose "${COMPOSE_ARGS[@]}" run --rm --user root --entrypoint sh openclaw-cli -c \
+docker compose "${COMPOSE_ARGS[@]}" run --rm --user root --entrypoint sh sudoclaw-cli -c \
   'find /home/node/.sudoclaw -xdev -exec chown node:node {} +; \
    [ -d /home/node/.sudoclaw/workspace/.sudoclaw ] && chown -R node:node /home/node/.sudoclaw/workspace/.sudoclaw || true'
 
@@ -373,7 +373,7 @@ echo "Gateway token: $SUDOCLAW_GATEWAY_TOKEN"
 echo "Tailscale exposure: Off (use host-level tailnet/Tailscale setup separately)."
 echo "Install Gateway daemon: No (managed by Docker Compose)"
 echo ""
-docker compose "${COMPOSE_ARGS[@]}" run --rm openclaw-cli onboard --mode local --no-install-daemon
+docker compose "${COMPOSE_ARGS[@]}" run --rm sudoclaw-cli onboard --mode local --no-install-daemon
 
 echo ""
 echo "==> Docker gateway defaults"
@@ -386,11 +386,11 @@ ensure_control_ui_allowed_origins
 echo ""
 echo "==> Provider setup (optional)"
 echo "WhatsApp (QR):"
-echo "  ${COMPOSE_HINT} run --rm openclaw-cli channels login"
+echo "  ${COMPOSE_HINT} run --rm sudoclaw-cli channels login"
 echo "Telegram (bot token):"
-echo "  ${COMPOSE_HINT} run --rm openclaw-cli channels add --channel telegram --token <token>"
+echo "  ${COMPOSE_HINT} run --rm sudoclaw-cli channels add --channel telegram --token <token>"
 echo "Discord (bot token):"
-echo "  ${COMPOSE_HINT} run --rm openclaw-cli channels add --channel discord --token <token>"
+echo "  ${COMPOSE_HINT} run --rm sudoclaw-cli channels add --channel discord --token <token>"
 echo "Docs: https://docs.sudoclaw.ai/channels"
 
 echo ""

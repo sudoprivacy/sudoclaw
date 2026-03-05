@@ -1,6 +1,6 @@
 # @openclaw/nostr
 
-Nostr DM channel plugin for OpenClaw using NIP-04 encrypted direct messages.
+Nostr DM channel plugin for SudoClaw using NIP-04 encrypted direct messages.
 
 ## Overview
 

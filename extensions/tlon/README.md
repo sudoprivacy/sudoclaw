@@ -1,5 +1,5 @@
-# Tlon (OpenClaw plugin)
+# Tlon (SudoClaw plugin)
 
-Tlon/Urbit channel plugin for OpenClaw. Supports DMs, group mentions, and thread replies.
+Tlon/Urbit channel plugin for SudoClaw. Supports DMs, group mentions, and thread replies.
 
 Docs: https://docs.sudoclaw.ai/channels/tlon

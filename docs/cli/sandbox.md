@@ -72,8 +72,8 @@ sudoclaw sandbox recreate --all --force        # Skip confirmation
 
 ```bash
 # Pull new image
-docker pull openclaw-sandbox:latest
-docker tag openclaw-sandbox:latest openclaw-sandbox:bookworm-slim
+docker pull sudoclaw-sandbox:latest
+docker tag sudoclaw-sandbox:latest sudoclaw-sandbox:bookworm-slim
 
 # Update config to use new image
 # Edit config: agents.defaults.sandbox.docker.image (or agents.list[].sandbox.docker.image)
@@ -131,7 +131,7 @@ Sandbox settings live in `~/.sudoclaw/sudoclaw.json` under `agents.defaults.sand
         "mode": "all", // off, non-main, all
         "scope": "agent", // session, agent, shared
         "docker": {
-          "image": "openclaw-sandbox:bookworm-slim",
+          "image": "sudoclaw-sandbox:bookworm-slim",
           "containerPrefix": "openclaw-sbx-",
           // ... more Docker options
         },

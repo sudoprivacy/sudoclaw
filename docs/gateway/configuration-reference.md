@@ -1066,7 +1066,7 @@ Optional **Docker sandboxing** for the embedded agent. See [Sandboxing](/gateway
         workspaceAccess: "none", // none | ro | rw
         workspaceRoot: "~/.sudoclaw/sandboxes",
         docker: {
-          image: "openclaw-sandbox:bookworm-slim",
+          image: "sudoclaw-sandbox:bookworm-slim",
           containerPrefix: "openclaw-sbx-",
           workdir: "/workspace",
           readOnlyRoot: true,
@@ -1085,15 +1085,15 @@ Optional **Docker sandboxing** for the embedded agent. See [Sandboxing](/gateway
             nproc: 256,
           },
           seccompProfile: "/path/to/seccomp.json",
-          apparmorProfile: "openclaw-sandbox",
+          apparmorProfile: "sudoclaw-sandbox",
           dns: ["1.1.1.1", "8.8.8.8"],
           extraHosts: ["internal.service:10.0.0.5"],
           binds: ["/home/user/source:/source:rw"],
         },
         browser: {
           enabled: false,
-          image: "openclaw-sandbox-browser:bookworm-slim",
-          network: "openclaw-sandbox-browser",
+          image: "sudoclaw-sandbox-browser:bookworm-slim",
+          network: "sudoclaw-sandbox-browser",
           cdpPort: 9222,
           cdpSourceRange: "172.21.0.1/32",
           vncPort: 5900,
@@ -1162,7 +1162,7 @@ Optional **Docker sandboxing** for the embedded agent. See [Sandboxing](/gateway
 noVNC observer access uses VNC auth by default and SudoClaw emits a short-lived token URL that serves a local bootstrap page; noVNC password is passed via URL fragment (instead of URL query).
 
 - `allowHostControl: false` (default) blocks sandboxed sessions from targeting the host browser.
-- `network` defaults to `openclaw-sandbox-browser` (dedicated bridge network). Set to `bridge` only when you explicitly want global bridge connectivity.
+- `network` defaults to `sudoclaw-sandbox-browser` (dedicated bridge network). Set to `bridge` only when you explicitly want global bridge connectivity.
 - `cdpSourceRange` optionally restricts CDP ingress at the container edge to a CIDR range (for example `172.21.0.1/32`).
 - `sandbox.browser.binds` mounts additional host directories into the sandbox browser container only. When set (including `[]`), it replaces `docker.binds` for the browser container.
 

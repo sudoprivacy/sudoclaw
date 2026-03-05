@@ -51,7 +51,7 @@ function buildConfig(enableNoVnc: boolean): SandboxConfig {
     workspaceAccess: "none",
     workspaceRoot: "/tmp/sudoclaw-sandboxes",
     docker: {
-      image: "openclaw-sandbox:bookworm-slim",
+      image: "sudoclaw-sandbox:bookworm-slim",
       containerPrefix: "openclaw-sbx-",
       workdir: "/workspace",
       readOnlyRoot: true,
@@ -62,9 +62,9 @@ function buildConfig(enableNoVnc: boolean): SandboxConfig {
     },
     browser: {
       enabled: true,
-      image: "openclaw-sandbox-browser:bookworm-slim",
+      image: "sudoclaw-sandbox-browser:bookworm-slim",
       containerPrefix: "openclaw-sbx-browser-",
-      network: "openclaw-sandbox-browser",
+      network: "sudoclaw-sandbox-browser",
       cdpPort: 9222,
       vncPort: 5900,
       noVncPort: 6080,

@@ -2,7 +2,7 @@
 
 Stop typing `docker-compose` commands. Just type `clawdock-start`.
 
-Inspired by Simon Willison's [Running OpenClaw in Docker](https://til.simonwillison.net/llms/openclaw-docker).
+Inspired by Simon Willison's [Running SudoClaw in Docker](https://til.simonwillison.net/llms/openclaw-docker).
 
 - [Quickstart](#quickstart)
 - [Available Commands](#available-commands)
@@ -38,7 +38,7 @@ echo 'source ~/.clawdock/clawdock-helpers.sh' >> ~/.zshrc && source ~/.zshrc
 clawdock-help
 ```
 
-On first command, ClawDock auto-detects your OpenClaw directory:
+On first command, ClawDock auto-detects your SudoClaw directory:
 
 - Checks common paths (`~/openclaw`, `~/workspace/openclaw`, etc.)
 - If found, asks you to confirm
@@ -87,7 +87,7 @@ clawdock-approve <request-id>
 | Command                   | Description                                    |
 | ------------------------- | ---------------------------------------------- |
 | `clawdock-shell`          | Interactive shell inside the gateway container |
-| `clawdock-cli <command>`  | Run OpenClaw CLI commands                      |
+| `clawdock-cli <command>`  | Run SudoClaw CLI commands                      |
 | `clawdock-exec <command>` | Execute arbitrary commands in the container    |
 
 ### Web UI & Devices
@@ -117,8 +117,8 @@ clawdock-approve <request-id>
 | -------------------- | ----------------------------------------- |
 | `clawdock-health`    | Run gateway health check                  |
 | `clawdock-token`     | Display the gateway authentication token  |
-| `clawdock-cd`        | Jump to the OpenClaw project directory    |
-| `clawdock-config`    | Open the OpenClaw config directory        |
+| `clawdock-cd`        | Jump to the SudoClaw project directory    |
+| `clawdock-config`    | Open the SudoClaw config directory        |
 | `clawdock-workspace` | Open the workspace directory              |
 | `clawdock-help`      | Show all available commands with examples |
 
@@ -193,7 +193,7 @@ clawdock-fix-token
 This will:
 
 1. Read the token from your `.env` file
-2. Configure it in the OpenClaw config
+2. Configure it in the SudoClaw config
 3. Restart the gateway
 4. Verify the configuration
 
@@ -209,7 +209,7 @@ docker ps
 
 - Docker and Docker Compose installed
 - Bash or Zsh shell
-- OpenClaw project (from `docker-setup.sh`)
+- SudoClaw project (from `docker-setup.sh`)
 
 ## Development
 

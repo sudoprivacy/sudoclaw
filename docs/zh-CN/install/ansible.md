@@ -183,7 +183,7 @@ pnpm start
 sudo systemctl status docker
 
 # 检查沙箱镜像
-sudo docker images | grep openclaw-sandbox
+sudo docker images | grep sudoclaw-sandbox
 
 # 如果缺失则构建沙箱镜像
 cd /opt/openclaw/openclaw

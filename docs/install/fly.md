@@ -36,7 +36,7 @@ cd openclaw
 fly apps create my-openclaw
 
 # Create a persistent volume (1GB is usually enough)
-fly volumes create openclaw_data --size 1 --region iad
+fly volumes create sudoclaw_data --size 1 --region iad
 ```
 
 **Tip:** Choose a region close to you. Common options: `lhr` (London), `iad` (Virginia), `sjc` (San Jose).
@@ -76,7 +76,7 @@ primary_region = "iad"
   memory = "2048mb"
 
 [mounts]
-  source = "openclaw_data"
+  source = "sudoclaw_data"
   destination = "/data"
 ```
 

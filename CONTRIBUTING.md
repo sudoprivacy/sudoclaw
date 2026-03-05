@@ -1,4 +1,4 @@
-# Contributing to OpenClaw
+# Contributing to SudoClaw
 
 Welcome to the lobster tank! 🦞
 
@@ -69,7 +69,7 @@ Welcome to the lobster tank! 🦞
 
 ## Before You PR
 
-- Test locally with your OpenClaw instance
+- Test locally with your SudoClaw instance
 - Run tests: `pnpm build && pnpm check && pnpm test`
 - Ensure CI checks pass
 - Keep PRs focused (one thing per PR; do not mix unrelated concerns)
@@ -109,7 +109,7 @@ We are currently prioritizing:
 
 - **Stability**: Fixing edge cases in channel connections (WhatsApp/Telegram).
 - **UX**: Improving the onboarding wizard and error messages.
-- **Skills**: For skill contributions, head to [ClawHub](https://clawhub.ai/) — the community hub for OpenClaw skills.
+- **Skills**: For skill contributions, head to [ClawHub](https://clawhub.ai/) — the community hub for SudoClaw skills.
 - **Performance**: Optimizing token usage and compaction logic.
 
 Check the [GitHub Issues](https://github.com/sudoprivacy/sudoclaw/issues) for "good first issue" labels!
@@ -117,13 +117,13 @@ Check the [GitHub Issues](https://github.com/sudoprivacy/sudoclaw/issues) for "g
 ## Maintainers
 
 We're selectively expanding the maintainer team.
-If you're an experienced contributor who wants to help shape OpenClaw's direction — whether through code, docs, or community — we'd like to hear from you.
+If you're an experienced contributor who wants to help shape SudoClaw's direction — whether through code, docs, or community — we'd like to hear from you.
 
 Being a maintainer is a responsibility, not an honorary title. We expect active, consistent involvement — triaging issues, reviewing PRs, and helping move the project forward.
 
 Still interested? Email contributing@openclaw.ai with:
 
-- Links to your PRs on OpenClaw (if you don't have any, start there first)
+- Links to your PRs on SudoClaw (if you don't have any, start there first)
 - Links to open source projects you maintain or actively contribute to
 - Your GitHub, Discord, and X/Twitter handles
 - A brief intro: background, experience, and areas of interest

@@ -347,7 +347,7 @@ If your Gateway runs in Docker, avoid `npx playwright` (npm override conflicts).
 Use the bundled CLI instead:
 
 ```bash
-docker compose run --rm openclaw-cli \
+docker compose run --rm sudoclaw-cli \
   node /app/node_modules/playwright-core/cli.js install chromium
 ```
 
