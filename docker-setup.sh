@@ -4,9 +4,9 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 COMPOSE_FILE="$ROOT_DIR/docker-compose.yml"
 EXTRA_COMPOSE_FILE="$ROOT_DIR/docker-compose.extra.yml"
-IMAGE_NAME="${OPENCLAW_IMAGE:-openclaw:local}"
-EXTRA_MOUNTS="${OPENCLAW_EXTRA_MOUNTS:-}"
-HOME_VOLUME_NAME="${OPENCLAW_HOME_VOLUME:-}"
+IMAGE_NAME="${SUDOCLAW_IMAGE:-sudoclaw:local}"
+EXTRA_MOUNTS="${SUDOCLAW_EXTRA_MOUNTS:-}"
+HOME_VOLUME_NAME="${SUDOCLAW_HOME_VOLUME:-}"
 
 fail() {
   echo "ERROR: $*" >&2
@@ -21,7 +21,7 @@ require_cmd() {
 }
 
 read_config_gateway_token() {
-  local config_path="$OPENCLAW_CONFIG_DIR/openclaw.json"
+  local config_path="$SUDOCLAW_CONFIG_DIR/sudoclaw.json"
   if [[ ! -f "$config_path" ]]; then
     return 0
   fi
@@ -69,13 +69,13 @@ NODE
 }
 
 ensure_control_ui_allowed_origins() {
-  if [[ "${OPENCLAW_GATEWAY_BIND}" == "loopback" ]]; then
+  if [[ "${SUDOCLAW_GATEWAY_BIND}" == "loopback" ]]; then
     return 0
   fi
 
   local allowed_origin_json
   local current_allowed_origins
-  allowed_origin_json="$(printf '["http://127.0.0.1:%s"]' "$OPENCLAW_GATEWAY_PORT")"
+  allowed_origin_json="$(printf '["http://127.0.0.1:%s"]' "$SUDOCLAW_GATEWAY_PORT")"
   current_allowed_origins="$(
     docker compose "${COMPOSE_ARGS[@]}" run --rm openclaw-cli \
       config get gateway.controlUi.allowedOrigins 2>/dev/null || true
@@ -96,8 +96,8 @@ sync_gateway_mode_and_bind() {
   docker compose "${COMPOSE_ARGS[@]}" run --rm openclaw-cli \
     config set gateway.mode local >/dev/null
   docker compose "${COMPOSE_ARGS[@]}" run --rm openclaw-cli \
-    config set gateway.bind "$OPENCLAW_GATEWAY_BIND" >/dev/null
-  echo "Pinned gateway.mode=local and gateway.bind=$OPENCLAW_GATEWAY_BIND for Docker setup."
+    config set gateway.bind "$SUDOCLAW_GATEWAY_BIND" >/dev/null
+  echo "Pinned gateway.mode=local and gateway.bind=$SUDOCLAW_GATEWAY_BIND for Docker setup."
 }
 
 contains_disallowed_chars() {
@@ -122,14 +122,14 @@ validate_mount_path_value() {
 validate_named_volume() {
   local value="$1"
   if [[ ! "$value" =~ ^[A-Za-z0-9][A-Za-z0-9_.-]*$ ]]; then
-    fail "OPENCLAW_HOME_VOLUME must match [A-Za-z0-9][A-Za-z0-9_.-]* when using a named volume."
+    fail "SUDOCLAW_HOME_VOLUME must match [A-Za-z0-9][A-Za-z0-9_.-]* when using a named volume."
   fi
 }
 
 validate_mount_spec() {
   local mount="$1"
   if contains_disallowed_chars "$mount"; then
-    fail "OPENCLAW_EXTRA_MOUNTS entries cannot contain control characters."
+    fail "SUDOCLAW_EXTRA_MOUNTS entries cannot contain control characters."
   fi
   # Keep mount specs strict to avoid YAML structure injection.
   # Expected format: source:target[:options]
@@ -144,45 +144,45 @@ if ! docker compose version >/dev/null 2>&1; then
   exit 1
 fi
 
-OPENCLAW_CONFIG_DIR="${OPENCLAW_CONFIG_DIR:-$HOME/.sudoclaw}"
-OPENCLAW_WORKSPACE_DIR="${OPENCLAW_WORKSPACE_DIR:-$HOME/.sudoclaw/workspace}"
+SUDOCLAW_CONFIG_DIR="${SUDOCLAW_CONFIG_DIR:-$HOME/.sudoclaw}"
+SUDOCLAW_WORKSPACE_DIR="${SUDOCLAW_WORKSPACE_DIR:-$HOME/.sudoclaw/workspace}"
 
-validate_mount_path_value "OPENCLAW_CONFIG_DIR" "$OPENCLAW_CONFIG_DIR"
-validate_mount_path_value "OPENCLAW_WORKSPACE_DIR" "$OPENCLAW_WORKSPACE_DIR"
+validate_mount_path_value "SUDOCLAW_CONFIG_DIR" "$SUDOCLAW_CONFIG_DIR"
+validate_mount_path_value "SUDOCLAW_WORKSPACE_DIR" "$SUDOCLAW_WORKSPACE_DIR"
 if [[ -n "$HOME_VOLUME_NAME" ]]; then
   if [[ "$HOME_VOLUME_NAME" == *"/"* ]]; then
-    validate_mount_path_value "OPENCLAW_HOME_VOLUME" "$HOME_VOLUME_NAME"
+    validate_mount_path_value "SUDOCLAW_HOME_VOLUME" "$HOME_VOLUME_NAME"
   else
     validate_named_volume "$HOME_VOLUME_NAME"
   fi
 fi
 if contains_disallowed_chars "$EXTRA_MOUNTS"; then
-  fail "OPENCLAW_EXTRA_MOUNTS cannot contain control characters."
+  fail "SUDOCLAW_EXTRA_MOUNTS cannot contain control characters."
 fi
 
-mkdir -p "$OPENCLAW_CONFIG_DIR"
-mkdir -p "$OPENCLAW_WORKSPACE_DIR"
+mkdir -p "$SUDOCLAW_CONFIG_DIR"
+mkdir -p "$SUDOCLAW_WORKSPACE_DIR"
 # Seed directory tree eagerly so bind mounts work even on Docker Desktop/Windows
 # where the container (even as root) cannot create new host subdirectories.
-mkdir -p "$OPENCLAW_CONFIG_DIR/identity"
-mkdir -p "$OPENCLAW_CONFIG_DIR/agents/main/agent"
-mkdir -p "$OPENCLAW_CONFIG_DIR/agents/main/sessions"
+mkdir -p "$SUDOCLAW_CONFIG_DIR/identity"
+mkdir -p "$SUDOCLAW_CONFIG_DIR/agents/main/agent"
+mkdir -p "$SUDOCLAW_CONFIG_DIR/agents/main/sessions"
 
-export OPENCLAW_CONFIG_DIR
-export OPENCLAW_WORKSPACE_DIR
+export SUDOCLAW_CONFIG_DIR
+export SUDOCLAW_WORKSPACE_DIR
 export SUDOCLAW_GATEWAY_PORT="${SUDOCLAW_GATEWAY_PORT:-18789}"
-export OPENCLAW_BRIDGE_PORT="${OPENCLAW_BRIDGE_PORT:-18790}"
-export OPENCLAW_GATEWAY_BIND="${OPENCLAW_GATEWAY_BIND:-lan}"
-export OPENCLAW_IMAGE="$IMAGE_NAME"
-export OPENCLAW_DOCKER_APT_PACKAGES="${OPENCLAW_DOCKER_APT_PACKAGES:-}"
-export OPENCLAW_EXTRA_MOUNTS="$EXTRA_MOUNTS"
-export OPENCLAW_HOME_VOLUME="$HOME_VOLUME_NAME"
+export SUDOCLAW_BRIDGE_PORT="${SUDOCLAW_BRIDGE_PORT:-18790}"
+export SUDOCLAW_GATEWAY_BIND="${SUDOCLAW_GATEWAY_BIND:-lan}"
+export SUDOCLAW_IMAGE="$IMAGE_NAME"
+export SUDOCLAW_DOCKER_APT_PACKAGES="${SUDOCLAW_DOCKER_APT_PACKAGES:-}"
+export SUDOCLAW_EXTRA_MOUNTS="$EXTRA_MOUNTS"
+export SUDOCLAW_HOME_VOLUME="$HOME_VOLUME_NAME"
 
 if [[ -z "${SUDOCLAW_GATEWAY_TOKEN:-}" ]]; then
   EXISTING_CONFIG_TOKEN="$(read_config_gateway_token || true)"
   if [[ -n "$EXISTING_CONFIG_TOKEN" ]]; then
     SUDOCLAW_GATEWAY_TOKEN="$EXISTING_CONFIG_TOKEN"
-    echo "Reusing gateway token from $OPENCLAW_CONFIG_DIR/openclaw.json"
+    echo "Reusing gateway token from $SUDOCLAW_CONFIG_DIR/sudoclaw.json"
   elif command -v openssl >/dev/null 2>&1; then
     SUDOCLAW_GATEWAY_TOKEN="$(openssl rand -hex 32)"
   else
@@ -208,14 +208,14 @@ write_extra_compose() {
 
   cat >"$EXTRA_COMPOSE_FILE" <<'YAML'
 services:
-  openclaw-gateway:
+  sudoclaw-gateway:
     volumes:
 YAML
 
   if [[ -n "$home_volume" ]]; then
     gateway_home_mount="${home_volume}:/home/node"
-    gateway_config_mount="${OPENCLAW_CONFIG_DIR}:/home/node/.sudoclaw"
-    gateway_workspace_mount="${OPENCLAW_WORKSPACE_DIR}:/home/node/.sudoclaw/workspace"
+    gateway_config_mount="${SUDOCLAW_CONFIG_DIR}:/home/node/.sudoclaw"
+    gateway_workspace_mount="${SUDOCLAW_WORKSPACE_DIR}:/home/node/.sudoclaw/workspace"
     validate_mount_spec "$gateway_home_mount"
     validate_mount_spec "$gateway_config_mount"
     validate_mount_spec "$gateway_workspace_mount"
@@ -322,21 +322,21 @@ upsert_env() {
 }
 
 upsert_env "$ENV_FILE" \
-  OPENCLAW_CONFIG_DIR \
-  OPENCLAW_WORKSPACE_DIR \
+  SUDOCLAW_CONFIG_DIR \
+  SUDOCLAW_WORKSPACE_DIR \
   SUDOCLAW_GATEWAY_PORT \
-  OPENCLAW_BRIDGE_PORT \
-  OPENCLAW_GATEWAY_BIND \
+  SUDOCLAW_BRIDGE_PORT \
+  SUDOCLAW_GATEWAY_BIND \
   SUDOCLAW_GATEWAY_TOKEN \
-  OPENCLAW_IMAGE \
-  OPENCLAW_EXTRA_MOUNTS \
-  OPENCLAW_HOME_VOLUME \
-  OPENCLAW_DOCKER_APT_PACKAGES
+  SUDOCLAW_IMAGE \
+  SUDOCLAW_EXTRA_MOUNTS \
+  SUDOCLAW_HOME_VOLUME \
+  SUDOCLAW_DOCKER_APT_PACKAGES
 
-if [[ "$IMAGE_NAME" == "openclaw:local" ]]; then
+if [[ "$IMAGE_NAME" == "sudoclaw:local" ]]; then
   echo "==> Building Docker image: $IMAGE_NAME"
   docker build \
-    --build-arg "OPENCLAW_DOCKER_APT_PACKAGES=${OPENCLAW_DOCKER_APT_PACKAGES}" \
+    --build-arg "SUDOCLAW_DOCKER_APT_PACKAGES=${SUDOCLAW_DOCKER_APT_PACKAGES}" \
     -t "$IMAGE_NAME" \
     -f "$ROOT_DIR/Dockerfile" \
     "$ROOT_DIR"
@@ -367,9 +367,9 @@ docker compose "${COMPOSE_ARGS[@]}" run --rm --user root --entrypoint sh opencla
 echo ""
 echo "==> Onboarding (interactive)"
 echo "Docker setup pins Gateway mode to local."
-echo "Gateway runtime bind comes from OPENCLAW_GATEWAY_BIND (default: lan)."
-echo "Current runtime bind: $OPENCLAW_GATEWAY_BIND"
-echo "Gateway token: $OPENCLAW_GATEWAY_TOKEN"
+echo "Gateway runtime bind comes from SUDOCLAW_GATEWAY_BIND (default: lan)."
+echo "Current runtime bind: $SUDOCLAW_GATEWAY_BIND"
+echo "Gateway token: $SUDOCLAW_GATEWAY_TOKEN"
 echo "Tailscale exposure: Off (use host-level tailnet/Tailscale setup separately)."
 echo "Install Gateway daemon: No (managed by Docker Compose)"
 echo ""
@@ -395,15 +395,15 @@ echo "Docs: https://docs.sudoclaw.ai/channels"
 
 echo ""
 echo "==> Starting gateway"
-docker compose "${COMPOSE_ARGS[@]}" up -d openclaw-gateway
+docker compose "${COMPOSE_ARGS[@]}" up -d sudoclaw-gateway
 
 echo ""
 echo "Gateway running with host port mapping."
 echo "Access from tailnet devices via the host's tailnet IP."
-echo "Config: $OPENCLAW_CONFIG_DIR"
-echo "Workspace: $OPENCLAW_WORKSPACE_DIR"
-echo "Token: $OPENCLAW_GATEWAY_TOKEN"
+echo "Config: $SUDOCLAW_CONFIG_DIR"
+echo "Workspace: $SUDOCLAW_WORKSPACE_DIR"
+echo "Token: $SUDOCLAW_GATEWAY_TOKEN"
 echo ""
 echo "Commands:"
-echo "  ${COMPOSE_HINT} logs -f openclaw-gateway"
-echo "  ${COMPOSE_HINT} exec openclaw-gateway node dist/index.js health --token \"$OPENCLAW_GATEWAY_TOKEN\""
+echo "  ${COMPOSE_HINT} logs -f sudoclaw-gateway"
+echo "  ${COMPOSE_HINT} exec sudoclaw-gateway node dist/index.js health --token \"$SUDOCLAW_GATEWAY_TOKEN\""

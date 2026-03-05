@@ -74,9 +74,9 @@ export async function setupInternalHooks(
       `Enabled ${selected.length} hook${selected.length > 1 ? "s" : ""}: ${selected.join(", ")}`,
       "",
       "You can manage hooks later with:",
-      `  ${formatCliCommand("openclaw hooks list")}`,
-      `  ${formatCliCommand("openclaw hooks enable <name>")}`,
-      `  ${formatCliCommand("openclaw hooks disable <name>")}`,
+      `  ${formatCliCommand("sudoclaw hooks list")}`,
+      `  ${formatCliCommand("sudoclaw hooks enable <name>")}`,
+      `  ${formatCliCommand("sudoclaw hooks disable <name>")}`,
     ].join("\n"),
     "Hooks Configured",
   );

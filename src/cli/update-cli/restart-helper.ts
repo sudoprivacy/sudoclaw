@@ -40,7 +40,7 @@ function resolveLaunchdLabel(env: NodeJS.ProcessEnv): string {
 }
 
 function resolveWindowsTaskName(env: NodeJS.ProcessEnv): string {
-  const override = env.OPENCLAW_WINDOWS_TASK_NAME?.trim();
+  const override = env.SUDOCLAW_WINDOWS_TASK_NAME?.trim();
   if (override) {
     return override;
   }

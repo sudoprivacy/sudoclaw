@@ -17,7 +17,7 @@ async function withPresenceModule<T>(
 }
 
 describe("system-presence version fallback", () => {
-  it("uses SUDOCLAW_SERVICE_VERSION when OPENCLAW_VERSION is not set", async () => {
+  it("uses SUDOCLAW_SERVICE_VERSION when SUDOCLAW_VERSION is not set", async () => {
     await withPresenceModule(
       {
         SUDOCLAW_SERVICE_VERSION: "2.4.6-service",
@@ -30,10 +30,10 @@ describe("system-presence version fallback", () => {
     );
   });
 
-  it("prefers OPENCLAW_VERSION over SUDOCLAW_SERVICE_VERSION", async () => {
+  it("prefers SUDOCLAW_VERSION over SUDOCLAW_SERVICE_VERSION", async () => {
     await withPresenceModule(
       {
-        OPENCLAW_VERSION: "9.9.9-cli",
+        SUDOCLAW_VERSION: "9.9.9-cli",
         SUDOCLAW_SERVICE_VERSION: "2.4.6-service",
         npm_package_version: "1.0.0-package",
       },
@@ -44,10 +44,10 @@ describe("system-presence version fallback", () => {
     );
   });
 
-  it("uses npm_package_version when OPENCLAW_VERSION and SUDOCLAW_SERVICE_VERSION are blank", async () => {
+  it("uses npm_package_version when SUDOCLAW_VERSION and SUDOCLAW_SERVICE_VERSION are blank", async () => {
     await withPresenceModule(
       {
-        OPENCLAW_VERSION: " ",
+        SUDOCLAW_VERSION: " ",
         SUDOCLAW_SERVICE_VERSION: "\t",
         npm_package_version: "1.0.0-package",
       },

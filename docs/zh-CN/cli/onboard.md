@@ -1,7 +1,7 @@
 ---
 read_when:
   - 你想要 Gateway 网关、工作区、认证、渠道和 Skills 的引导式设置
-summary: "`openclaw onboard` 的 CLI 参考（交互式新手引导向导）"
+summary: "`sudoclaw onboard` 的 CLI 参考（交互式新手引导向导）"
 title: onboard
 x-i18n:
   generated_at: "2026-02-03T07:45:00Z"
@@ -12,7 +12,7 @@ x-i18n:
   workflow: 15
 ---
 
-# `openclaw onboard`
+# `sudoclaw onboard`
 
 交互式新手引导向导（本地或远程 Gateway 网关设置）。
 
@@ -23,10 +23,10 @@ x-i18n:
 ## 示例
 
 ```bash
-openclaw onboard
-openclaw onboard --flow quickstart
-openclaw onboard --flow manual
-openclaw onboard --mode remote --remote-url ws://gateway-host:18789
+sudoclaw onboard
+sudoclaw onboard --flow quickstart
+sudoclaw onboard --flow manual
+sudoclaw onboard --mode remote --remote-url ws://gateway-host:18789
 ```
 
 流程说明：

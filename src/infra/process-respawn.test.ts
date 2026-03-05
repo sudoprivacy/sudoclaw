@@ -47,15 +47,15 @@ function clearSupervisorHints() {
 }
 
 describe("restartGatewayProcessWithFreshPid", () => {
-  it("returns disabled when OPENCLAW_NO_RESPAWN is set", () => {
-    process.env.OPENCLAW_NO_RESPAWN = "1";
+  it("returns disabled when SUDOCLAW_NO_RESPAWN is set", () => {
+    process.env.SUDOCLAW_NO_RESPAWN = "1";
     const result = restartGatewayProcessWithFreshPid();
     expect(result.mode).toBe("disabled");
     expect(spawnMock).not.toHaveBeenCalled();
   });
 
   it("returns supervised when launchd/systemd hints are present", () => {
-    process.env.LAUNCH_JOB_LABEL = "ai.openclaw.gateway";
+    process.env.LAUNCH_JOB_LABEL = "ai.sudoclaw.gateway";
     const result = restartGatewayProcessWithFreshPid();
     expect(result.mode).toBe("supervised");
     expect(spawnMock).not.toHaveBeenCalled();
@@ -63,8 +63,8 @@ describe("restartGatewayProcessWithFreshPid", () => {
 
   it("runs launchd kickstart helper on macOS when launchd label is set", () => {
     setPlatform("darwin");
-    process.env.LAUNCH_JOB_LABEL = "ai.openclaw.gateway";
-    process.env.SUDOCLAW_LAUNCHD_LABEL = "ai.openclaw.gateway";
+    process.env.LAUNCH_JOB_LABEL = "ai.sudoclaw.gateway";
+    process.env.SUDOCLAW_LAUNCHD_LABEL = "ai.sudoclaw.gateway";
     triggerOpenClawRestartMock.mockReturnValue({ ok: true, method: "launchctl" });
 
     const result = restartGatewayProcessWithFreshPid();
@@ -76,8 +76,8 @@ describe("restartGatewayProcessWithFreshPid", () => {
 
   it("returns failed when launchd kickstart helper fails", () => {
     setPlatform("darwin");
-    process.env.LAUNCH_JOB_LABEL = "ai.openclaw.gateway";
-    process.env.SUDOCLAW_LAUNCHD_LABEL = "ai.openclaw.gateway";
+    process.env.LAUNCH_JOB_LABEL = "ai.sudoclaw.gateway";
+    process.env.SUDOCLAW_LAUNCHD_LABEL = "ai.sudoclaw.gateway";
     triggerOpenClawRestartMock.mockReturnValue({
       ok: false,
       method: "launchctl",
@@ -93,7 +93,7 @@ describe("restartGatewayProcessWithFreshPid", () => {
   it("does not schedule kickstart on non-darwin platforms", () => {
     setPlatform("linux");
     process.env.INVOCATION_ID = "abc123";
-    process.env.SUDOCLAW_LAUNCHD_LABEL = "ai.openclaw.gateway";
+    process.env.SUDOCLAW_LAUNCHD_LABEL = "ai.sudoclaw.gateway";
 
     const result = restartGatewayProcessWithFreshPid();
 
@@ -103,7 +103,7 @@ describe("restartGatewayProcessWithFreshPid", () => {
   });
 
   it("spawns detached child with current exec argv", () => {
-    delete process.env.OPENCLAW_NO_RESPAWN;
+    delete process.env.SUDOCLAW_NO_RESPAWN;
     clearSupervisorHints();
     process.execArgv = ["--import", "tsx"];
     process.argv = ["/usr/local/bin/node", "/repo/dist/index.js", "gateway", "run"];
@@ -125,7 +125,7 @@ describe("restartGatewayProcessWithFreshPid", () => {
   it("returns supervised when SUDOCLAW_LAUNCHD_LABEL is set (stock launchd plist)", () => {
     clearSupervisorHints();
     setPlatform("darwin");
-    process.env.SUDOCLAW_LAUNCHD_LABEL = "ai.openclaw.gateway";
+    process.env.SUDOCLAW_LAUNCHD_LABEL = "ai.sudoclaw.gateway";
     triggerOpenClawRestartMock.mockReturnValue({ ok: true, method: "launchctl" });
     const result = restartGatewayProcessWithFreshPid();
     expect(result.mode).toBe("supervised");
@@ -135,7 +135,7 @@ describe("restartGatewayProcessWithFreshPid", () => {
 
   it("returns supervised when SUDOCLAW_SYSTEMD_UNIT is set", () => {
     clearSupervisorHints();
-    process.env.SUDOCLAW_SYSTEMD_UNIT = "openclaw-gateway.service";
+    process.env.SUDOCLAW_SYSTEMD_UNIT = "sudoclaw-gateway.service";
     const result = restartGatewayProcessWithFreshPid();
     expect(result.mode).toBe("supervised");
     expect(spawnMock).not.toHaveBeenCalled();
@@ -150,7 +150,7 @@ describe("restartGatewayProcessWithFreshPid", () => {
   });
 
   it("returns failed when spawn throws", () => {
-    delete process.env.OPENCLAW_NO_RESPAWN;
+    delete process.env.SUDOCLAW_NO_RESPAWN;
     clearSupervisorHints();
 
     spawnMock.mockImplementation(() => {

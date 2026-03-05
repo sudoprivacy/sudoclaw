@@ -28,14 +28,14 @@ extension OnboardingView {
         view.localGatewayProbe = LocalGatewayProbe(
             port: GatewayEnvironment.gatewayPort(),
             pid: 123,
-            command: "openclaw-gateway",
+            command: "sudoclaw-gateway",
             expected: true)
         view.showAdvancedConnection = true
         view.preferredGatewayID = gateway.stableID
         view.cliInstalled = true
-        view.cliInstallLocation = "/usr/local/bin/openclaw"
+        view.cliInstallLocation = "/usr/local/bin/sudoclaw"
         view.cliStatus = "Installed"
-        view.workspacePath = "/tmp/openclaw"
+        view.workspacePath = "/tmp/sudoclaw"
         view.workspaceStatus = "Saved workspace"
         view.state.connectionMode = .local
         _ = view.welcomePage()

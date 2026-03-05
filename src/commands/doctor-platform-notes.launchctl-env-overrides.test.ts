@@ -26,7 +26,7 @@ describe("noteMacLaunchctlGatewayEnvOverrides", () => {
     expect(message).toContain("launchctl environment overrides detected");
     expect(message).toContain("SUDOCLAW_GATEWAY_TOKEN");
     expect(message).toContain("launchctl unsetenv SUDOCLAW_GATEWAY_TOKEN");
-    expect(message).not.toContain("OPENCLAW_GATEWAY_PASSWORD");
+    expect(message).not.toContain("SUDOCLAW_GATEWAY_PASSWORD");
   });
 
   it("does nothing when config has no gateway credentials", async () => {

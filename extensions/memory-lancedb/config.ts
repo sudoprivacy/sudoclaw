@@ -159,7 +159,7 @@ export const memoryConfigSchema = {
     },
     dbPath: {
       label: "Database Path",
-      placeholder: "~/.openclaw/memory/lancedb",
+      placeholder: "~/.sudoclaw/memory/lancedb",
       advanced: true,
     },
     autoCapture: {

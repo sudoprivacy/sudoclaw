@@ -16,9 +16,9 @@ describe("cli json stdout contract", () => {
           ...process.env,
           HOME: tempHome,
           USERPROFILE: tempHome,
-          OPENCLAW_TEST_FAST: "1",
+          SUDOCLAW_TEST_FAST: "1",
         };
-        delete env.OPENCLAW_HOME;
+        delete env.SUDOCLAW_HOME;
         delete env.SUDOCLAW_STATE_DIR;
         delete env.SUDOCLAW_CONFIG_PATH;
         delete env.VITEST;

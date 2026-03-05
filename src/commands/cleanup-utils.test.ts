@@ -85,19 +85,19 @@ describe("cleanup path removals", () => {
     const joinedLogs = runtime.log.mock.calls
       .map(([line]) => line.replaceAll("\\", "/"))
       .join("\n");
-    expect(joinedLogs).toContain("/tmp/openclaw-cleanup/state");
-    expect(joinedLogs).toContain("/tmp/openclaw-cleanup/oauth");
+    expect(joinedLogs).toContain("/tmp/sudoclaw-cleanup/state");
+    expect(joinedLogs).toContain("/tmp/sudoclaw-cleanup/oauth");
     expect(joinedLogs).not.toContain("sudoclaw.json");
   });
 
   it("removes every workspace directory", async () => {
     const runtime = createRuntimeMock();
-    const workspaces = ["/tmp/openclaw-workspace-1", "/tmp/openclaw-workspace-2"];
+    const workspaces = ["/tmp/sudoclaw-workspace-1", "/tmp/sudoclaw-workspace-2"];
 
     await removeWorkspaceDirs(workspaces, runtime, { dryRun: true });
 
     const logs = runtime.log.mock.calls.map(([line]) => line);
-    expect(logs).toContain("[dry-run] remove /tmp/openclaw-workspace-1");
-    expect(logs).toContain("[dry-run] remove /tmp/openclaw-workspace-2");
+    expect(logs).toContain("[dry-run] remove /tmp/sudoclaw-workspace-1");
+    expect(logs).toContain("[dry-run] remove /tmp/sudoclaw-workspace-2");
   });
 });

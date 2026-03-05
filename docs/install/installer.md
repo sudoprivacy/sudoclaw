@@ -9,13 +9,13 @@ title: "Installer Internals"
 
 # Installer internals
 
-OpenClaw ships three installer scripts, served from `openclaw.ai`.
+SudoClaw ships three installer scripts, served from `openclaw.ai`.
 
 | Script                             | Platform             | What it does                                                                                 |
 | ---------------------------------- | -------------------- | -------------------------------------------------------------------------------------------- |
-| [`install.sh`](#installsh)         | macOS / Linux / WSL  | Installs Node if needed, installs OpenClaw via npm (default) or git, and can run onboarding. |
-| [`install-cli.sh`](#install-clish) | macOS / Linux / WSL  | Installs Node + OpenClaw into a local prefix (`~/.openclaw`). No root required.              |
-| [`install.ps1`](#installps1)       | Windows (PowerShell) | Installs Node if needed, installs OpenClaw via npm (default) or git, and can run onboarding. |
+| [`install.sh`](#installsh)         | macOS / Linux / WSL  | Installs Node if needed, installs SudoClaw via npm (default) or git, and can run onboarding. |
+| [`install-cli.sh`](#install-clish) | macOS / Linux / WSL  | Installs Node + SudoClaw into a local prefix (`~/.sudoclaw`). No root required.              |
+| [`install.ps1`](#installps1)       | Windows (PowerShell) | Installs Node if needed, installs SudoClaw via npm (default) or git, and can run onboarding. |
 
 ## Quick commands
 
@@ -76,7 +76,7 @@ Recommended for most interactive installs on macOS/Linux/WSL.
   <Step title="Ensure Git">
     Installs Git if missing.
   </Step>
-  <Step title="Install OpenClaw">
+  <Step title="Install SudoClaw">
     - `npm` method (default): global npm install
     - `git` method: clone/update repo, install deps with pnpm, build, then install wrapper at `~/.local/bin/openclaw`
   </Step>
@@ -89,7 +89,7 @@ Recommended for most interactive installs on macOS/Linux/WSL.
 
 ### Source checkout detection
 
-If run inside an OpenClaw checkout (`package.json` + `pnpm-workspace.yaml`), the script offers:
+If run inside an SudoClaw checkout (`package.json` + `pnpm-workspace.yaml`), the script offers:
 
 - use checkout (`git`), or
 - use global install (`npm`)
@@ -148,16 +148,16 @@ The script exits with code `2` for invalid method selection or invalid `--instal
 
 | Variable                                    | Description                                   |
 | ------------------------------------------- | --------------------------------------------- |
-| `OPENCLAW_INSTALL_METHOD=git\|npm`          | Install method                                |
-| `OPENCLAW_VERSION=latest\|next\|<semver>`   | npm version or dist-tag                       |
-| `OPENCLAW_BETA=0\|1`                        | Use beta if available                         |
-| `OPENCLAW_GIT_DIR=<path>`                   | Checkout directory                            |
-| `OPENCLAW_GIT_UPDATE=0\|1`                  | Toggle git updates                            |
-| `OPENCLAW_NO_PROMPT=1`                      | Disable prompts                               |
-| `OPENCLAW_NO_ONBOARD=1`                     | Skip onboarding                               |
-| `OPENCLAW_DRY_RUN=1`                        | Dry run mode                                  |
-| `OPENCLAW_VERBOSE=1`                        | Debug mode                                    |
-| `OPENCLAW_NPM_LOGLEVEL=error\|warn\|notice` | npm log level                                 |
+| `SUDOCLAW_INSTALL_METHOD=git\|npm`          | Install method                                |
+| `SUDOCLAW_VERSION=latest\|next\|<semver>`   | npm version or dist-tag                       |
+| `SUDOCLAW_BETA=0\|1`                        | Use beta if available                         |
+| `SUDOCLAW_GIT_DIR=<path>`                   | Checkout directory                            |
+| `SUDOCLAW_GIT_UPDATE=0\|1`                  | Toggle git updates                            |
+| `SUDOCLAW_NO_PROMPT=1`                      | Disable prompts                               |
+| `SUDOCLAW_NO_ONBOARD=1`                     | Skip onboarding                               |
+| `SUDOCLAW_DRY_RUN=1`                        | Dry run mode                                  |
+| `SUDOCLAW_VERBOSE=1`                        | Debug mode                                    |
+| `SUDOCLAW_NPM_LOGLEVEL=error\|warn\|notice` | npm log level                                 |
 | `SHARP_IGNORE_GLOBAL_LIBVIPS=0\|1`          | Control sharp/libvips behavior (default: `1`) |
 
   </Accordion>
@@ -168,7 +168,7 @@ The script exits with code `2` for invalid method selection or invalid `--instal
 ## install-cli.sh
 
 <Info>
-Designed for environments where you want everything under a local prefix (default `~/.openclaw`) and no system Node dependency.
+Designed for environments where you want everything under a local prefix (default `~/.sudoclaw`) and no system Node dependency.
 </Info>
 
 ### Flow (install-cli.sh)
@@ -180,7 +180,7 @@ Designed for environments where you want everything under a local prefix (defaul
   <Step title="Ensure Git">
     If Git is missing, attempts install via apt/dnf/yum on Linux or Homebrew on macOS.
   </Step>
-  <Step title="Install OpenClaw under prefix">
+  <Step title="Install SudoClaw under prefix">
     Installs with npm using `--prefix <prefix>`, then writes wrapper to `<prefix>/bin/openclaw`.
   </Step>
 </Steps>
@@ -195,7 +195,7 @@ Designed for environments where you want everything under a local prefix (defaul
   </Tab>
   <Tab title="Custom prefix + version">
     ```bash
-    curl -fsSL --proto '=https' --tlsv1.2 https://sudoclaw.ai/install-cli.sh | bash -s -- --prefix /opt/openclaw --version latest
+    curl -fsSL --proto '=https' --tlsv1.2 https://sudoclaw.ai/install-cli.sh | bash -s -- --prefix /opt/sudoclaw --version latest
     ```
   </Tab>
   <Tab title="Automation JSON output">
@@ -215,11 +215,11 @@ Designed for environments where you want everything under a local prefix (defaul
 
 | Flag                   | Description                                                                     |
 | ---------------------- | ------------------------------------------------------------------------------- |
-| `--prefix <path>`      | Install prefix (default: `~/.openclaw`)                                         |
-| `--version <ver>`      | OpenClaw version or dist-tag (default: `latest`)                                |
+| `--prefix <path>`      | Install prefix (default: `~/.sudoclaw`)                                         |
+| `--version <ver>`      | SudoClaw version or dist-tag (default: `latest`)                                |
 | `--node-version <ver>` | Node version (default: `22.22.0`)                                               |
 | `--json`               | Emit NDJSON events                                                              |
-| `--onboard`            | Run `openclaw onboard` after install                                            |
+| `--onboard`            | Run `sudoclaw onboard` after install                                            |
 | `--no-onboard`         | Skip onboarding (default)                                                       |
 | `--set-npm-prefix`     | On Linux, force npm prefix to `~/.npm-global` if current prefix is not writable |
 | `--help`               | Show usage (`-h`)                                                               |
@@ -230,12 +230,12 @@ Designed for environments where you want everything under a local prefix (defaul
 
 | Variable                                    | Description                                                                       |
 | ------------------------------------------- | --------------------------------------------------------------------------------- |
-| `OPENCLAW_PREFIX=<path>`                    | Install prefix                                                                    |
-| `OPENCLAW_VERSION=<ver>`                    | OpenClaw version or dist-tag                                                      |
-| `OPENCLAW_NODE_VERSION=<ver>`               | Node version                                                                      |
-| `OPENCLAW_NO_ONBOARD=1`                     | Skip onboarding                                                                   |
-| `OPENCLAW_NPM_LOGLEVEL=error\|warn\|notice` | npm log level                                                                     |
-| `OPENCLAW_GIT_DIR=<path>`                   | Legacy cleanup lookup path (used when removing old `Peekaboo` submodule checkout) |
+| `SUDOCLAW_PREFIX=<path>`                    | Install prefix                                                                    |
+| `SUDOCLAW_VERSION=<ver>`                    | SudoClaw version or dist-tag                                                      |
+| `SUDOCLAW_NODE_VERSION=<ver>`               | Node version                                                                      |
+| `SUDOCLAW_NO_ONBOARD=1`                     | Skip onboarding                                                                   |
+| `SUDOCLAW_NPM_LOGLEVEL=error\|warn\|notice` | npm log level                                                                     |
+| `SUDOCLAW_GIT_DIR=<path>`                   | Legacy cleanup lookup path (used when removing old `Peekaboo` submodule checkout) |
 | `SHARP_IGNORE_GLOBAL_LIBVIPS=0\|1`          | Control sharp/libvips behavior (default: `1`)                                     |
 
   </Accordion>
@@ -254,7 +254,7 @@ Designed for environments where you want everything under a local prefix (defaul
   <Step title="Ensure Node.js 22+">
     If missing, attempts install via winget, then Chocolatey, then Scoop.
   </Step>
-  <Step title="Install OpenClaw">
+  <Step title="Install SudoClaw">
     - `npm` method (default): global npm install using selected `-Tag`
     - `git` method: clone/update repo, install/build with pnpm, and install wrapper at `%USERPROFILE%\.local\bin\openclaw.cmd`
   </Step>
@@ -314,11 +314,11 @@ Designed for environments where you want everything under a local prefix (defaul
 
 | Variable                           | Description        |
 | ---------------------------------- | ------------------ |
-| `OPENCLAW_INSTALL_METHOD=git\|npm` | Install method     |
-| `OPENCLAW_GIT_DIR=<path>`          | Checkout directory |
-| `OPENCLAW_NO_ONBOARD=1`            | Skip onboarding    |
-| `OPENCLAW_GIT_UPDATE=0`            | Disable git pull   |
-| `OPENCLAW_DRY_RUN=1`               | Dry run mode       |
+| `SUDOCLAW_INSTALL_METHOD=git\|npm` | Install method     |
+| `SUDOCLAW_GIT_DIR=<path>`          | Checkout directory |
+| `SUDOCLAW_NO_ONBOARD=1`            | Skip onboarding    |
+| `SUDOCLAW_GIT_UPDATE=0`            | Disable git pull   |
+| `SUDOCLAW_DRY_RUN=1`               | Dry run mode       |
 
   </Accordion>
 </AccordionGroup>
@@ -341,7 +341,7 @@ Use non-interactive flags/env vars for predictable runs.
   </Tab>
   <Tab title="install.sh (non-interactive git)">
     ```bash
-    OPENCLAW_INSTALL_METHOD=git OPENCLAW_NO_PROMPT=1 \
+    SUDOCLAW_INSTALL_METHOD=git SUDOCLAW_NO_PROMPT=1 \
       curl -fsSL --proto '=https' --tlsv1.2 https://sudoclaw.ai/install.sh | bash
     ```
   </Tab>

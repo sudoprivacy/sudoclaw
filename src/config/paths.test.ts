@@ -12,9 +12,9 @@ import {
 } from "./paths.js";
 
 describe("oauth paths", () => {
-  it("prefers OPENCLAW_OAUTH_DIR over SUDOCLAW_STATE_DIR", () => {
+  it("prefers SUDOCLAW_OAUTH_DIR over SUDOCLAW_STATE_DIR", () => {
     const env = {
-      OPENCLAW_OAUTH_DIR: "/custom/oauth",
+      SUDOCLAW_OAUTH_DIR: "/custom/oauth",
       SUDOCLAW_STATE_DIR: "/custom/state",
     } as NodeJS.ProcessEnv;
 
@@ -47,9 +47,9 @@ describe("state + config path candidates", () => {
   }
 
   function expectOpenClawHomeDefaults(env: NodeJS.ProcessEnv): void {
-    const configuredHome = env.OPENCLAW_HOME;
+    const configuredHome = env.SUDOCLAW_HOME;
     if (!configuredHome) {
-      throw new Error("OPENCLAW_HOME must be set for this assertion helper");
+      throw new Error("SUDOCLAW_HOME must be set for this assertion helper");
     }
     const resolvedHome = path.resolve(configuredHome);
     expect(resolveStateDir(env)).toBe(path.join(resolvedHome, ".sudoclaw"));
@@ -66,16 +66,16 @@ describe("state + config path candidates", () => {
     expect(resolveStateDir(env, () => "/home/test")).toBe(path.resolve("/new/state"));
   });
 
-  it("uses OPENCLAW_HOME for default state/config locations", () => {
+  it("uses SUDOCLAW_HOME for default state/config locations", () => {
     const env = {
-      OPENCLAW_HOME: "/srv/openclaw-home",
+      SUDOCLAW_HOME: "/srv/sudoclaw-home",
     } as NodeJS.ProcessEnv;
     expectOpenClawHomeDefaults(env);
   });
 
-  it("prefers OPENCLAW_HOME over HOME for default state/config locations", () => {
+  it("prefers SUDOCLAW_HOME over HOME for default state/config locations", () => {
     const env = {
-      OPENCLAW_HOME: "/srv/openclaw-home",
+      SUDOCLAW_HOME: "/srv/sudoclaw-home",
       HOME: "/home/other",
     } as NodeJS.ProcessEnv;
     expectOpenClawHomeDefaults(env);

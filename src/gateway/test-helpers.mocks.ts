@@ -198,7 +198,7 @@ export const resetTestPluginRegistry = () => {
 };
 
 const testConfigRoot = {
-  value: path.join(os.tmpdir(), `openclaw-gateway-test-${process.pid}-${crypto.randomUUID()}`),
+  value: path.join(os.tmpdir(), `sudoclaw-gateway-test-${process.pid}-${crypto.randomUUID()}`),
 };
 
 export const setTestConfigRoot = (root: string) => {
@@ -414,7 +414,7 @@ vi.mock("../config/config.js", async () => {
           : {};
       const defaults = {
         model: { primary: "anthropic/claude-opus-4-6" },
-        workspace: path.join(os.tmpdir(), "openclaw-gateway-test"),
+        workspace: path.join(os.tmpdir(), "sudoclaw-gateway-test"),
         ...fileDefaults,
         ...testState.agentConfig,
       };
@@ -608,7 +608,7 @@ vi.mock("../plugins/loader.js", async () => {
   };
 });
 
-process.env.OPENCLAW_SKIP_CHANNELS = "1";
-process.env.OPENCLAW_SKIP_CRON = "1";
-process.env.OPENCLAW_SKIP_CHANNELS = "1";
-process.env.OPENCLAW_SKIP_CRON = "1";
+process.env.SUDOCLAW_SKIP_CHANNELS = "1";
+process.env.SUDOCLAW_SKIP_CRON = "1";
+process.env.SUDOCLAW_SKIP_CHANNELS = "1";
+process.env.SUDOCLAW_SKIP_CRON = "1";

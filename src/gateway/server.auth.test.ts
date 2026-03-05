@@ -347,8 +347,8 @@ describe("gateway server auth/connect", () => {
 
     test("closes silent handshakes after timeout", async () => {
       vi.useRealTimers();
-      const prevHandshakeTimeout = process.env.OPENCLAW_TEST_HANDSHAKE_TIMEOUT_MS;
-      process.env.OPENCLAW_TEST_HANDSHAKE_TIMEOUT_MS = "20";
+      const prevHandshakeTimeout = process.env.SUDOCLAW_TEST_HANDSHAKE_TIMEOUT_MS;
+      process.env.SUDOCLAW_TEST_HANDSHAKE_TIMEOUT_MS = "20";
       try {
         const ws = await openWs(port);
         const handshakeTimeoutMs = getHandshakeTimeoutMs();
@@ -356,9 +356,9 @@ describe("gateway server auth/connect", () => {
         expect(closed).toBe(true);
       } finally {
         if (prevHandshakeTimeout === undefined) {
-          delete process.env.OPENCLAW_TEST_HANDSHAKE_TIMEOUT_MS;
+          delete process.env.SUDOCLAW_TEST_HANDSHAKE_TIMEOUT_MS;
         } else {
-          process.env.OPENCLAW_TEST_HANDSHAKE_TIMEOUT_MS = prevHandshakeTimeout;
+          process.env.SUDOCLAW_TEST_HANDSHAKE_TIMEOUT_MS = prevHandshakeTimeout;
         }
       }
     });
@@ -386,7 +386,7 @@ describe("gateway server auth/connect", () => {
       for (const testCase of [
         {
           env: {
-            OPENCLAW_VERSION: " ",
+            SUDOCLAW_VERSION: " ",
             SUDOCLAW_SERVICE_VERSION: "2.4.6-service",
             npm_package_version: "1.0.0-package",
           },
@@ -394,7 +394,7 @@ describe("gateway server auth/connect", () => {
         },
         {
           env: {
-            OPENCLAW_VERSION: "9.9.9-cli",
+            SUDOCLAW_VERSION: "9.9.9-cli",
             SUDOCLAW_SERVICE_VERSION: "2.4.6-service",
             npm_package_version: "1.0.0-package",
           },
@@ -402,7 +402,7 @@ describe("gateway server auth/connect", () => {
         },
         {
           env: {
-            OPENCLAW_VERSION: " ",
+            SUDOCLAW_VERSION: " ",
             SUDOCLAW_SERVICE_VERSION: "\t",
             npm_package_version: "1.0.0-package",
           },

@@ -30,7 +30,7 @@ function buildRegistry(params: { acpxRoot: string; helperRoot: string }): Plugin
         origin: "workspace",
         rootDir: params.acpxRoot,
         source: params.acpxRoot,
-        manifestPath: path.join(params.acpxRoot, "openclaw.plugin.json"),
+        manifestPath: path.join(params.acpxRoot, "sudoclaw.plugin.json"),
       },
       {
         id: "helper",
@@ -41,7 +41,7 @@ function buildRegistry(params: { acpxRoot: string; helperRoot: string }): Plugin
         origin: "workspace",
         rootDir: params.helperRoot,
         source: params.helperRoot,
-        manifestPath: path.join(params.helperRoot, "openclaw.plugin.json"),
+        manifestPath: path.join(params.helperRoot, "sudoclaw.plugin.json"),
       },
     ],
   };
@@ -122,7 +122,7 @@ describe("resolvePluginSkillDirs", () => {
           origin: "workspace",
           rootDir: pluginRoot,
           source: pluginRoot,
-          manifestPath: path.join(pluginRoot, "openclaw.plugin.json"),
+          manifestPath: path.join(pluginRoot, "sudoclaw.plugin.json"),
         },
       ],
     } satisfies PluginManifestRegistry);
@@ -160,7 +160,7 @@ describe("resolvePluginSkillDirs", () => {
           origin: "workspace",
           rootDir: pluginRoot,
           source: pluginRoot,
-          manifestPath: path.join(pluginRoot, "openclaw.plugin.json"),
+          manifestPath: path.join(pluginRoot, "sudoclaw.plugin.json"),
         },
       ],
     } satisfies PluginManifestRegistry);

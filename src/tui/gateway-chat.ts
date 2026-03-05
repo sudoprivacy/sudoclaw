@@ -269,7 +269,7 @@ export function resolveGatewayConnection(opts: GatewayConnectionOptions) {
   const password =
     explicitAuth.password ||
     (!urlOverride
-      ? process.env.OPENCLAW_GATEWAY_PASSWORD?.trim() ||
+      ? process.env.SUDOCLAW_GATEWAY_PASSWORD?.trim() ||
         (typeof remote?.password === "string" && remote.password.trim().length > 0
           ? remote.password.trim()
           : undefined)

@@ -21,7 +21,7 @@ struct GatewayDiscoveryHelpersTests {
             tailnetDns: tailnetDns,
             sshPort: sshPort,
             gatewayPort: gatewayPort,
-            cliPath: "/tmp/openclaw",
+            cliPath: "/tmp/sudoclaw",
             stableID: UUID().uuidString,
             debugID: UUID().uuidString,
             isLocal: false)

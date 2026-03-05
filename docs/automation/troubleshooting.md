@@ -14,27 +14,27 @@ Use this page for scheduler and delivery issues (`cron` + `heartbeat`).
 ## Command ladder
 
 ```bash
-openclaw status
-openclaw gateway status
+sudoclaw status
+sudoclaw gateway status
 sudoclaw logs --follow
 sudoclaw doctor
-openclaw channels status --probe
+sudoclaw channels status --probe
 ```
 
 Then run automation checks:
 
 ```bash
-openclaw cron status
-openclaw cron list
-openclaw system heartbeat last
+sudoclaw cron status
+sudoclaw cron list
+sudoclaw system heartbeat last
 ```
 
 ## Cron not firing
 
 ```bash
-openclaw cron status
-openclaw cron list
-openclaw cron runs --id <jobId> --limit 20
+sudoclaw cron status
+sudoclaw cron list
+sudoclaw cron runs --id <jobId> --limit 20
 sudoclaw logs --follow
 ```
 
@@ -53,9 +53,9 @@ Common signatures:
 ## Cron fired but no delivery
 
 ```bash
-openclaw cron runs --id <jobId> --limit 20
-openclaw cron list
-openclaw channels status --probe
+sudoclaw cron runs --id <jobId> --limit 20
+sudoclaw cron list
+sudoclaw channels status --probe
 sudoclaw logs --follow
 ```
 
@@ -74,10 +74,10 @@ Common signatures:
 ## Heartbeat suppressed or skipped
 
 ```bash
-openclaw system heartbeat last
+sudoclaw system heartbeat last
 sudoclaw logs --follow
-openclaw config get agents.defaults.heartbeat
-openclaw channels status --probe
+sudoclaw config get agents.defaults.heartbeat
+sudoclaw channels status --probe
 ```
 
 Good output looks like:
@@ -95,10 +95,10 @@ Common signatures:
 ## Timezone and activeHours gotchas
 
 ```bash
-openclaw config get agents.defaults.heartbeat.activeHours
-openclaw config get agents.defaults.heartbeat.activeHours.timezone
-openclaw config get agents.defaults.userTimezone || echo "agents.defaults.userTimezone not set"
-openclaw cron list
+sudoclaw config get agents.defaults.heartbeat.activeHours
+sudoclaw config get agents.defaults.heartbeat.activeHours.timezone
+sudoclaw config get agents.defaults.userTimezone || echo "agents.defaults.userTimezone not set"
+sudoclaw cron list
 sudoclaw logs --follow
 ```
 

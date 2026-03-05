@@ -170,7 +170,7 @@ function resolveAuth(cfg: OpenClawConfig, env: NodeJS.ProcessEnv): ResolveAuthRe
     env.CLAWDBOT_GATEWAY_TOKEN?.trim() ||
     cfg.gateway?.auth?.token?.trim();
   const password =
-    env.OPENCLAW_GATEWAY_PASSWORD?.trim() ||
+    env.SUDOCLAW_GATEWAY_PASSWORD?.trim() ||
     env.CLAWDBOT_GATEWAY_PASSWORD?.trim() ||
     cfg.gateway?.auth?.password?.trim();
 

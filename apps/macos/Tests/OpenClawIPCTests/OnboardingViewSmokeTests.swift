@@ -49,7 +49,7 @@ struct OnboardingViewSmokeTests {
                 tailnetDns: "txt-host.ts.net",
                 sshPort: 22,
                 gatewayPort: 18789,
-                cliPath: "/tmp/openclaw",
+                cliPath: "/tmp/sudoclaw",
                 stableID: UUID().uuidString,
                 debugID: UUID().uuidString,
                 isLocal: false)

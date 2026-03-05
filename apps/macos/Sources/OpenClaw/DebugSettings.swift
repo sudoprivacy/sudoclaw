@@ -979,7 +979,7 @@ extension DebugSettings {
         view.modelsCount = 3
         view.modelsLoading = false
         view.modelsError = "Failed to load models"
-        view.gatewayRootInput = "/tmp/openclaw"
+        view.gatewayRootInput = "/tmp/sudoclaw"
         view.sessionStorePath = "/tmp/sessions.json"
         view.sessionStoreSaveError = "Save failed"
         view.debugSendInFlight = true

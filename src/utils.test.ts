@@ -152,23 +152,23 @@ describe("resolveConfigDir", () => {
 });
 
 describe("resolveHomeDir", () => {
-  it("prefers OPENCLAW_HOME over HOME", () => {
-    vi.stubEnv("OPENCLAW_HOME", "/srv/openclaw-home");
+  it("prefers SUDOCLAW_HOME over HOME", () => {
+    vi.stubEnv("SUDOCLAW_HOME", "/srv/sudoclaw-home");
     vi.stubEnv("HOME", "/home/other");
 
-    expect(resolveHomeDir()).toBe(path.resolve("/srv/openclaw-home"));
+    expect(resolveHomeDir()).toBe(path.resolve("/srv/sudoclaw-home"));
 
     vi.unstubAllEnvs();
   });
 });
 
 describe("shortenHomePath", () => {
-  it("uses $OPENCLAW_HOME prefix when OPENCLAW_HOME is set", () => {
-    vi.stubEnv("OPENCLAW_HOME", "/srv/openclaw-home");
+  it("uses $SUDOCLAW_HOME prefix when SUDOCLAW_HOME is set", () => {
+    vi.stubEnv("SUDOCLAW_HOME", "/srv/sudoclaw-home");
     vi.stubEnv("HOME", "/home/other");
 
-    expect(shortenHomePath(`${path.resolve("/srv/openclaw-home")}/.sudoclaw/sudoclaw.json`)).toBe(
-      "$OPENCLAW_HOME/.sudoclaw/sudoclaw.json",
+    expect(shortenHomePath(`${path.resolve("/srv/sudoclaw-home")}/.sudoclaw/sudoclaw.json`)).toBe(
+      "$SUDOCLAW_HOME/.sudoclaw/sudoclaw.json",
     );
 
     vi.unstubAllEnvs();
@@ -176,13 +176,13 @@ describe("shortenHomePath", () => {
 });
 
 describe("shortenHomeInString", () => {
-  it("uses $OPENCLAW_HOME replacement when OPENCLAW_HOME is set", () => {
-    vi.stubEnv("OPENCLAW_HOME", "/srv/openclaw-home");
+  it("uses $SUDOCLAW_HOME replacement when SUDOCLAW_HOME is set", () => {
+    vi.stubEnv("SUDOCLAW_HOME", "/srv/sudoclaw-home");
     vi.stubEnv("HOME", "/home/other");
 
     expect(
-      shortenHomeInString(`config: ${path.resolve("/srv/openclaw-home")}/.sudoclaw/sudoclaw.json`),
-    ).toBe("config: $OPENCLAW_HOME/.sudoclaw/sudoclaw.json");
+      shortenHomeInString(`config: ${path.resolve("/srv/sudoclaw-home")}/.sudoclaw/sudoclaw.json`),
+    ).toBe("config: $SUDOCLAW_HOME/.sudoclaw/sudoclaw.json");
 
     vi.unstubAllEnvs();
   });
@@ -227,11 +227,11 @@ describe("resolveUserPath", () => {
     expect(resolveUserPath("tmp/dir")).toBe(path.resolve("tmp/dir"));
   });
 
-  it("prefers OPENCLAW_HOME for tilde expansion", () => {
-    vi.stubEnv("OPENCLAW_HOME", "/srv/openclaw-home");
+  it("prefers SUDOCLAW_HOME for tilde expansion", () => {
+    vi.stubEnv("SUDOCLAW_HOME", "/srv/sudoclaw-home");
     vi.stubEnv("HOME", "/home/other");
 
-    expect(resolveUserPath("~/openclaw")).toBe(path.resolve("/srv/openclaw-home", "sudoclaw"));
+    expect(resolveUserPath("~/openclaw")).toBe(path.resolve("/srv/sudoclaw-home", "sudoclaw"));
 
     vi.unstubAllEnvs();
   });

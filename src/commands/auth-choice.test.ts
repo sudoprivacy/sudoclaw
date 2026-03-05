@@ -58,7 +58,7 @@ type StoredAuthProfile = {
 describe("applyAuthChoice", () => {
   const lifecycle = createAuthTestLifecycle([
     "SUDOCLAW_STATE_DIR",
-    "OPENCLAW_AGENT_DIR",
+    "SUDOCLAW_AGENT_DIR",
     "PI_CODING_AGENT_DIR",
     "ANTHROPIC_API_KEY",
     "OPENROUTER_API_KEY",
@@ -774,7 +774,7 @@ describe("applyAuthChoice", () => {
           providers: {
             filemain: {
               source: "file",
-              path: "/tmp/openclaw-missing-secrets.json",
+              path: "/tmp/sudoclaw-missing-secrets.json",
               mode: "json",
             },
           },

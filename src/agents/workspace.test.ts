@@ -19,13 +19,13 @@ import {
 } from "./workspace.js";
 
 describe("resolveDefaultAgentWorkspaceDir", () => {
-  it("uses OPENCLAW_HOME for default workspace resolution", () => {
+  it("uses SUDOCLAW_HOME for default workspace resolution", () => {
     const dir = resolveDefaultAgentWorkspaceDir({
-      OPENCLAW_HOME: "/srv/openclaw-home",
+      SUDOCLAW_HOME: "/srv/sudoclaw-home",
       HOME: "/home/other",
     } as NodeJS.ProcessEnv);
 
-    expect(dir).toBe(path.join(path.resolve("/srv/openclaw-home"), ".sudoclaw", "workspace"));
+    expect(dir).toBe(path.join(path.resolve("/srv/sudoclaw-home"), ".sudoclaw", "workspace"));
   });
 });
 

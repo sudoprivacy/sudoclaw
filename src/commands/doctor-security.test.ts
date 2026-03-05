@@ -22,9 +22,9 @@ describe("noteSecurityWarnings gateway exposure", () => {
     note.mockClear();
     pluginRegistry.list = [];
     prevToken = process.env.SUDOCLAW_GATEWAY_TOKEN;
-    prevPassword = process.env.OPENCLAW_GATEWAY_PASSWORD;
+    prevPassword = process.env.SUDOCLAW_GATEWAY_PASSWORD;
     delete process.env.SUDOCLAW_GATEWAY_TOKEN;
-    delete process.env.OPENCLAW_GATEWAY_PASSWORD;
+    delete process.env.SUDOCLAW_GATEWAY_PASSWORD;
   });
 
   afterEach(() => {
@@ -34,9 +34,9 @@ describe("noteSecurityWarnings gateway exposure", () => {
       process.env.SUDOCLAW_GATEWAY_TOKEN = prevToken;
     }
     if (prevPassword === undefined) {
-      delete process.env.OPENCLAW_GATEWAY_PASSWORD;
+      delete process.env.SUDOCLAW_GATEWAY_PASSWORD;
     } else {
-      process.env.OPENCLAW_GATEWAY_PASSWORD = prevPassword;
+      process.env.SUDOCLAW_GATEWAY_PASSWORD = prevPassword;
     }
   });
 
@@ -117,6 +117,6 @@ describe("noteSecurityWarnings gateway exposure", () => {
     const message = lastMessage();
     expect(message).toContain("disables approval forwarding only");
     expect(message).toContain("exec-approvals.json");
-    expect(message).toContain("openclaw approvals get --gateway");
+    expect(message).toContain("sudoclaw approvals get --gateway");
   });
 });

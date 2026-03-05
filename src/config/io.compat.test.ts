@@ -50,10 +50,10 @@ describe("config io paths", () => {
     });
   });
 
-  it("uses OPENCLAW_HOME for default config path", async () => {
+  it("uses SUDOCLAW_HOME for default config path", async () => {
     await withTempHome(async (home) => {
       const io = createConfigIO({
-        env: { OPENCLAW_HOME: path.join(home, "svc-home") } as NodeJS.ProcessEnv,
+        env: { SUDOCLAW_HOME: path.join(home, "svc-home") } as NodeJS.ProcessEnv,
         homedir: () => path.join(home, "ignored-home"),
       });
       expect(io.configPath).toBe(path.join(home, "svc-home", ".sudoclaw", "sudoclaw.json"));

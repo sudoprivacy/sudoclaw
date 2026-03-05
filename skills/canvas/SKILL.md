@@ -123,7 +123,7 @@ tailscale status --json | jq -r '.Self.DNSName' | sed 's/\.$//'
 ### 3. Find connected nodes
 
 ```bash
-openclaw nodes list
+sudoclaw nodes list
 ```
 
 Look for Mac/iOS/Android nodes with canvas capability.
@@ -168,7 +168,7 @@ Always specify `node:<node-id>` parameter.
 
 ### "node not connected" error
 
-Node is offline. Use `openclaw nodes list` to find online nodes.
+Node is offline. Use `sudoclaw nodes list` to find online nodes.
 
 ### Content not updating
 

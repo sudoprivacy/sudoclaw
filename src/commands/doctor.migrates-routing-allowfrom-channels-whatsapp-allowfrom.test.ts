@@ -88,9 +88,9 @@ describe("doctor command", () => {
   );
 
   it("offers to update first for git checkouts", async () => {
-    delete process.env.OPENCLAW_UPDATE_IN_PROGRESS;
+    delete process.env.SUDOCLAW_UPDATE_IN_PROGRESS;
 
-    const root = "/tmp/openclaw";
+    const root = "/tmp/sudoclaw";
     resolveOpenClawPackageRoot.mockResolvedValueOnce(root);
     runCommandWithTimeout.mockResolvedValueOnce({
       stdout: `${root}\n`,

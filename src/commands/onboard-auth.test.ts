@@ -119,9 +119,9 @@ function expectAliasPreserved(
 describe("writeOAuthCredentials", () => {
   const lifecycle = createAuthTestLifecycle([
     "SUDOCLAW_STATE_DIR",
-    "OPENCLAW_AGENT_DIR",
+    "SUDOCLAW_AGENT_DIR",
     "PI_CODING_AGENT_DIR",
-    "OPENCLAW_OAUTH_DIR",
+    "SUDOCLAW_OAUTH_DIR",
   ]);
 
   let tempStateDir: string;
@@ -131,7 +131,7 @@ describe("writeOAuthCredentials", () => {
     await lifecycle.cleanup();
   });
 
-  it("writes auth-profiles.json under OPENCLAW_AGENT_DIR when set", async () => {
+  it("writes auth-profiles.json under SUDOCLAW_AGENT_DIR when set", async () => {
     const env = await setupAuthTestEnv("openclaw-oauth-");
     lifecycle.setStateDir(env.stateDir);
 
@@ -168,7 +168,7 @@ describe("writeOAuthCredentials", () => {
     await fs.mkdir(kidAgentDir, { recursive: true });
     await fs.mkdir(workerAgentDir, { recursive: true });
 
-    process.env.OPENCLAW_AGENT_DIR = kidAgentDir;
+    process.env.SUDOCLAW_AGENT_DIR = kidAgentDir;
     process.env.PI_CODING_AGENT_DIR = kidAgentDir;
 
     const creds = {
@@ -203,7 +203,7 @@ describe("writeOAuthCredentials", () => {
     await fs.mkdir(mainAgentDir, { recursive: true });
     await fs.mkdir(kidAgentDir, { recursive: true });
 
-    process.env.OPENCLAW_AGENT_DIR = kidAgentDir;
+    process.env.SUDOCLAW_AGENT_DIR = kidAgentDir;
     process.env.PI_CODING_AGENT_DIR = kidAgentDir;
 
     const creds = {
@@ -271,7 +271,7 @@ describe("writeOAuthCredentials", () => {
 describe("setMinimaxApiKey", () => {
   const lifecycle = createAuthTestLifecycle([
     "SUDOCLAW_STATE_DIR",
-    "OPENCLAW_AGENT_DIR",
+    "SUDOCLAW_AGENT_DIR",
     "PI_CODING_AGENT_DIR",
   ]);
 
@@ -279,7 +279,7 @@ describe("setMinimaxApiKey", () => {
     await lifecycle.cleanup();
   });
 
-  it("writes to OPENCLAW_AGENT_DIR when set", async () => {
+  it("writes to SUDOCLAW_AGENT_DIR when set", async () => {
     const env = await setupAuthTestEnv("openclaw-minimax-", { agentSubdir: "custom-agent" });
     lifecycle.setStateDir(env.stateDir);
 

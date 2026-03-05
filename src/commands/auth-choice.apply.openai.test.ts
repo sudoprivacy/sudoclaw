@@ -11,7 +11,7 @@ import {
 describe("applyAuthChoiceOpenAI", () => {
   const lifecycle = createAuthTestLifecycle([
     "SUDOCLAW_STATE_DIR",
-    "OPENCLAW_AGENT_DIR",
+    "SUDOCLAW_AGENT_DIR",
     "PI_CODING_AGENT_DIR",
     "OPENAI_API_KEY",
   ]);

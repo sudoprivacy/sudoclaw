@@ -54,8 +54,8 @@ function loadProfileEnv(): void {
 export function installTestEnv(): { cleanup: () => void; tempHome: string } {
   const live =
     process.env.LIVE === "1" ||
-    process.env.OPENCLAW_LIVE_TEST === "1" ||
-    process.env.OPENCLAW_LIVE_GATEWAY === "1";
+    process.env.SUDOCLAW_LIVE_TEST === "1" ||
+    process.env.SUDOCLAW_LIVE_GATEWAY === "1";
 
   // Live tests must use the real user environment (keys, profiles, config).
   // The default test env isolates HOME to avoid touching real state.
@@ -65,7 +65,7 @@ export function installTestEnv(): { cleanup: () => void; tempHome: string } {
   }
 
   const restore: RestoreEntry[] = [
-    { key: "OPENCLAW_TEST_FAST", value: process.env.OPENCLAW_TEST_FAST },
+    { key: "SUDOCLAW_TEST_FAST", value: process.env.SUDOCLAW_TEST_FAST },
     { key: "HOME", value: process.env.HOME },
     { key: "USERPROFILE", value: process.env.USERPROFILE },
     { key: "XDG_CONFIG_HOME", value: process.env.XDG_CONFIG_HOME },
@@ -75,11 +75,11 @@ export function installTestEnv(): { cleanup: () => void; tempHome: string } {
     { key: "SUDOCLAW_STATE_DIR", value: process.env.SUDOCLAW_STATE_DIR },
     { key: "SUDOCLAW_CONFIG_PATH", value: process.env.SUDOCLAW_CONFIG_PATH },
     { key: "SUDOCLAW_GATEWAY_PORT", value: process.env.SUDOCLAW_GATEWAY_PORT },
-    { key: "OPENCLAW_BRIDGE_ENABLED", value: process.env.OPENCLAW_BRIDGE_ENABLED },
-    { key: "OPENCLAW_BRIDGE_HOST", value: process.env.OPENCLAW_BRIDGE_HOST },
-    { key: "OPENCLAW_BRIDGE_PORT", value: process.env.OPENCLAW_BRIDGE_PORT },
-    { key: "OPENCLAW_CANVAS_HOST_PORT", value: process.env.OPENCLAW_CANVAS_HOST_PORT },
-    { key: "OPENCLAW_TEST_HOME", value: process.env.OPENCLAW_TEST_HOME },
+    { key: "SUDOCLAW_BRIDGE_ENABLED", value: process.env.SUDOCLAW_BRIDGE_ENABLED },
+    { key: "SUDOCLAW_BRIDGE_HOST", value: process.env.SUDOCLAW_BRIDGE_HOST },
+    { key: "SUDOCLAW_BRIDGE_PORT", value: process.env.SUDOCLAW_BRIDGE_PORT },
+    { key: "SUDOCLAW_CANVAS_HOST_PORT", value: process.env.SUDOCLAW_CANVAS_HOST_PORT },
+    { key: "SUDOCLAW_TEST_HOME", value: process.env.SUDOCLAW_TEST_HOME },
     { key: "TELEGRAM_BOT_TOKEN", value: process.env.TELEGRAM_BOT_TOKEN },
     { key: "DISCORD_BOT_TOKEN", value: process.env.DISCORD_BOT_TOKEN },
     { key: "SLACK_BOT_TOKEN", value: process.env.SLACK_BOT_TOKEN },
@@ -95,8 +95,8 @@ export function installTestEnv(): { cleanup: () => void; tempHome: string } {
 
   process.env.HOME = tempHome;
   process.env.USERPROFILE = tempHome;
-  process.env.OPENCLAW_TEST_HOME = tempHome;
-  process.env.OPENCLAW_TEST_FAST = "1";
+  process.env.SUDOCLAW_TEST_HOME = tempHome;
+  process.env.SUDOCLAW_TEST_FAST = "1";
 
   // Ensure test runs never touch the developer's real config/state, even if they have overrides set.
   delete process.env.SUDOCLAW_CONFIG_PATH;
@@ -104,10 +104,10 @@ export function installTestEnv(): { cleanup: () => void; tempHome: string } {
   delete process.env.SUDOCLAW_STATE_DIR;
   // Prefer test-controlled ports over developer overrides (avoid port collisions across tests/workers).
   delete process.env.SUDOCLAW_GATEWAY_PORT;
-  delete process.env.OPENCLAW_BRIDGE_ENABLED;
-  delete process.env.OPENCLAW_BRIDGE_HOST;
-  delete process.env.OPENCLAW_BRIDGE_PORT;
-  delete process.env.OPENCLAW_CANVAS_HOST_PORT;
+  delete process.env.SUDOCLAW_BRIDGE_ENABLED;
+  delete process.env.SUDOCLAW_BRIDGE_HOST;
+  delete process.env.SUDOCLAW_BRIDGE_PORT;
+  delete process.env.SUDOCLAW_CANVAS_HOST_PORT;
   // Avoid leaking real GitHub/Copilot tokens into non-live test runs.
   delete process.env.TELEGRAM_BOT_TOKEN;
   delete process.env.DISCORD_BOT_TOKEN;

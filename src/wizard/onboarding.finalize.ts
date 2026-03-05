@@ -309,7 +309,7 @@ export async function finalizeOnboardingWizard(
       [
         "Gateway token: shared auth for the Gateway + Control UI.",
         "Stored in: ~/.sudoclaw/sudoclaw.json (gateway.auth.token) or SUDOCLAW_GATEWAY_TOKEN.",
-        `View token: ${formatCliCommand("openclaw config get gateway.auth.token")}`,
+        `View token: ${formatCliCommand("sudoclaw config get gateway.auth.token")}`,
         `Generate token: ${formatCliCommand("sudoclaw doctor --generate-gateway-token")}`,
         "Web UI stores a copy in this browser's localStorage (sudoclaw.control.settings.v1).",
         `Open the dashboard anytime: ${formatCliCommand("sudoclaw dashboard --no-open")}`,

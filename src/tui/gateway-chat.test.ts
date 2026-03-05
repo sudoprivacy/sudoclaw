@@ -13,7 +13,7 @@ describe("resolveGatewayConnection", () => {
   let envSnapshot: ReturnType<typeof captureEnv>;
 
   beforeEach(() => {
-    envSnapshot = captureEnv(["SUDOCLAW_GATEWAY_TOKEN", "OPENCLAW_GATEWAY_PASSWORD"]);
+    envSnapshot = captureEnv(["SUDOCLAW_GATEWAY_TOKEN", "SUDOCLAW_GATEWAY_PASSWORD"]);
     loadConfig.mockClear();
     resolveGatewayPort.mockClear();
     pickPrimaryTailnetIPv4.mockClear();
@@ -22,7 +22,7 @@ describe("resolveGatewayConnection", () => {
     pickPrimaryTailnetIPv4.mockReturnValue(undefined);
     pickPrimaryLanIPv4.mockReturnValue(undefined);
     delete process.env.SUDOCLAW_GATEWAY_TOKEN;
-    delete process.env.OPENCLAW_GATEWAY_PASSWORD;
+    delete process.env.SUDOCLAW_GATEWAY_PASSWORD;
   });
 
   afterEach(() => {
@@ -99,7 +99,7 @@ describe("resolveGatewayConnection", () => {
     expect(result.token).toBe("config-token");
   });
 
-  it("prefers OPENCLAW_GATEWAY_PASSWORD over remote password fallback", () => {
+  it("prefers SUDOCLAW_GATEWAY_PASSWORD over remote password fallback", () => {
     loadConfig.mockReturnValue({
       gateway: {
         mode: "remote",
@@ -107,7 +107,7 @@ describe("resolveGatewayConnection", () => {
       },
     });
 
-    withEnv({ OPENCLAW_GATEWAY_PASSWORD: "env-pass" }, () => {
+    withEnv({ SUDOCLAW_GATEWAY_PASSWORD: "env-pass" }, () => {
       const result = resolveGatewayConnection({});
       expect(result.password).toBe("env-pass");
     });

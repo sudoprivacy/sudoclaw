@@ -8,7 +8,7 @@ title: "Bonjour Discovery"
 
 # Bonjour / mDNS discovery
 
-OpenClaw uses Bonjour (mDNS / DNS‑SD) as a **LAN‑only convenience** to discover
+SudoClaw uses Bonjour (mDNS / DNS‑SD) as a **LAN‑only convenience** to discover
 an active Gateway (WebSocket endpoint). It is best‑effort and does **not** replace SSH or
 Tailnet-based connectivity.
 
@@ -22,11 +22,11 @@ High‑level steps:
 
 1. Run a DNS server on the gateway host (reachable over Tailnet).
 2. Publish DNS‑SD records for `_openclaw-gw._tcp` under a dedicated zone
-   (example: `openclaw.internal.`).
+   (example: `sudoclaw.internal.`).
 3. Configure Tailscale **split DNS** so your chosen domain resolves via that
    DNS server for clients (including iOS).
 
-OpenClaw supports any discovery domain; `openclaw.internal.` is just an example.
+SudoClaw supports any discovery domain; `sudoclaw.internal.` is just an example.
 iOS/Android nodes browse both `local.` and your configured wide‑area domain.
 
 ### Gateway config (recommended)
@@ -41,19 +41,19 @@ iOS/Android nodes browse both `local.` and your configured wide‑area domain.
 ### One‑time DNS server setup (gateway host)
 
 ```bash
-openclaw dns setup --apply
+sudoclaw dns setup --apply
 ```
 
 This installs CoreDNS and configures it to:
 
 - listen on port 53 only on the gateway’s Tailscale interfaces
-- serve your chosen domain (example: `openclaw.internal.`) from `~/.openclaw/dns/<domain>.db`
+- serve your chosen domain (example: `sudoclaw.internal.`) from `~/.sudoclaw/dns/<domain>.db`
 
 Validate from a tailnet‑connected machine:
 
 ```bash
-dns-sd -B _openclaw-gw._tcp openclaw.internal.
-dig @<TAILNET_IPV4> -p 53 _openclaw-gw._tcp.openclaw.internal PTR +short
+dns-sd -B _openclaw-gw._tcp sudoclaw.internal.
+dig @<TAILNET_IPV4> -p 53 _openclaw-gw._tcp.sudoclaw.internal PTR +short
 ```
 
 ### Tailscale DNS settings
@@ -165,11 +165,11 @@ sequences (e.g. spaces become `\032`).
 
 ## Disabling / configuration
 
-- `OPENCLAW_DISABLE_BONJOUR=1` disables advertising (legacy: `OPENCLAW_DISABLE_BONJOUR`).
+- `SUDOCLAW_DISABLE_BONJOUR=1` disables advertising (legacy: `SUDOCLAW_DISABLE_BONJOUR`).
 - `gateway.bind` in `~/.sudoclaw/sudoclaw.json` controls the Gateway bind mode.
-- `OPENCLAW_SSH_PORT` overrides the SSH port advertised in TXT (legacy: `OPENCLAW_SSH_PORT`).
-- `OPENCLAW_TAILNET_DNS` publishes a MagicDNS hint in TXT (legacy: `OPENCLAW_TAILNET_DNS`).
-- `OPENCLAW_CLI_PATH` overrides the advertised CLI path (legacy: `OPENCLAW_CLI_PATH`).
+- `SUDOCLAW_SSH_PORT` overrides the SSH port advertised in TXT (legacy: `SUDOCLAW_SSH_PORT`).
+- `SUDOCLAW_TAILNET_DNS` publishes a MagicDNS hint in TXT (legacy: `SUDOCLAW_TAILNET_DNS`).
+- `SUDOCLAW_CLI_PATH` overrides the advertised CLI path (legacy: `SUDOCLAW_CLI_PATH`).
 
 ## Related docs
 

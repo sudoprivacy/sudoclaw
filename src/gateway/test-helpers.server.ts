@@ -48,14 +48,14 @@ const GATEWAY_TEST_ENV_KEYS = [
   "USERPROFILE",
   "SUDOCLAW_STATE_DIR",
   "SUDOCLAW_CONFIG_PATH",
-  "OPENCLAW_SKIP_BROWSER_CONTROL_SERVER",
-  "OPENCLAW_SKIP_GMAIL_WATCHER",
-  "OPENCLAW_SKIP_CANVAS_HOST",
-  "OPENCLAW_BUNDLED_PLUGINS_DIR",
-  "OPENCLAW_SKIP_CHANNELS",
-  "OPENCLAW_SKIP_PROVIDERS",
-  "OPENCLAW_SKIP_CRON",
-  "OPENCLAW_TEST_MINIMAL_GATEWAY",
+  "SUDOCLAW_SKIP_BROWSER_CONTROL_SERVER",
+  "SUDOCLAW_SKIP_GMAIL_WATCHER",
+  "SUDOCLAW_SKIP_CANVAS_HOST",
+  "SUDOCLAW_BUNDLED_PLUGINS_DIR",
+  "SUDOCLAW_SKIP_CHANNELS",
+  "SUDOCLAW_SKIP_PROVIDERS",
+  "SUDOCLAW_SKIP_CRON",
+  "SUDOCLAW_TEST_MINIMAL_GATEWAY",
 ] as const;
 
 let gatewayEnvSnapshot: ReturnType<typeof captureEnv> | undefined;
@@ -92,7 +92,7 @@ export async function writeSessionStore(params: {
 
 async function setupGatewayTestHome() {
   gatewayEnvSnapshot = captureEnv([...GATEWAY_TEST_ENV_KEYS]);
-  tempHome = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-gateway-home-"));
+  tempHome = await fs.mkdtemp(path.join(os.tmpdir(), "sudoclaw-gateway-home-"));
   process.env.HOME = tempHome;
   process.env.USERPROFILE = tempHome;
   process.env.SUDOCLAW_STATE_DIR = path.join(tempHome, ".sudoclaw");
@@ -100,14 +100,14 @@ async function setupGatewayTestHome() {
 }
 
 function applyGatewaySkipEnv() {
-  process.env.OPENCLAW_SKIP_BROWSER_CONTROL_SERVER = "1";
-  process.env.OPENCLAW_SKIP_GMAIL_WATCHER = "1";
-  process.env.OPENCLAW_SKIP_CANVAS_HOST = "1";
-  process.env.OPENCLAW_SKIP_CHANNELS = "1";
-  process.env.OPENCLAW_SKIP_PROVIDERS = "1";
-  process.env.OPENCLAW_SKIP_CRON = "1";
-  process.env.OPENCLAW_TEST_MINIMAL_GATEWAY = "1";
-  process.env.OPENCLAW_BUNDLED_PLUGINS_DIR = tempHome
+  process.env.SUDOCLAW_SKIP_BROWSER_CONTROL_SERVER = "1";
+  process.env.SUDOCLAW_SKIP_GMAIL_WATCHER = "1";
+  process.env.SUDOCLAW_SKIP_CANVAS_HOST = "1";
+  process.env.SUDOCLAW_SKIP_CHANNELS = "1";
+  process.env.SUDOCLAW_SKIP_PROVIDERS = "1";
+  process.env.SUDOCLAW_SKIP_CRON = "1";
+  process.env.SUDOCLAW_TEST_MINIMAL_GATEWAY = "1";
+  process.env.SUDOCLAW_BUNDLED_PLUGINS_DIR = tempHome
     ? path.join(tempHome, "openclaw-test-no-bundled-extensions")
     : "openclaw-test-no-bundled-extensions";
 }
@@ -518,7 +518,7 @@ export async function connectReq(
       ? undefined
       : typeof (testState.gatewayAuth as { password?: unknown } | undefined)?.password === "string"
         ? ((testState.gatewayAuth as { password?: string }).password ?? undefined)
-        : process.env.OPENCLAW_GATEWAY_PASSWORD;
+        : process.env.SUDOCLAW_GATEWAY_PASSWORD;
   const token = opts?.token ?? defaultToken;
   const deviceToken = opts?.deviceToken?.trim() || undefined;
   const password = opts?.password ?? defaultPassword;

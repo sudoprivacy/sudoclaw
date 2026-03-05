@@ -96,7 +96,7 @@ function makeOwnerGroupConfig() {
 
 function makeInboundCfg(messagePrefix = "") {
   return {
-    agents: { defaults: { workspace: "/tmp/openclaw" } },
+    agents: { defaults: { workspace: "/tmp/sudoclaw" } },
     channels: { whatsapp: { messagePrefix } },
   } as never;
 }

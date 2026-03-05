@@ -96,7 +96,7 @@ describeLaunchdIntegration("launchd integration", () => {
     env = {
       HOME: homeDir,
       SUDOCLAW_LAUNCHD_LABEL: `ai.openclaw.launchd-int-${testId}`,
-      OPENCLAW_LOG_PREFIX: `gateway-launchd-int-${testId}`,
+      SUDOCLAW_LOG_PREFIX: `gateway-launchd-int-${testId}`,
     };
   });
 

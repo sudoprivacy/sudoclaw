@@ -41,8 +41,8 @@ sudoclaw doctor --deep
 
 ```bash
 launchctl getenv SUDOCLAW_GATEWAY_TOKEN
-launchctl getenv OPENCLAW_GATEWAY_PASSWORD
+launchctl getenv SUDOCLAW_GATEWAY_PASSWORD
 
 launchctl unsetenv SUDOCLAW_GATEWAY_TOKEN
-launchctl unsetenv OPENCLAW_GATEWAY_PASSWORD
+launchctl unsetenv SUDOCLAW_GATEWAY_PASSWORD
 ```

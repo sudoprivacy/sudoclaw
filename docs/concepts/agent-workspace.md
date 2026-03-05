@@ -11,7 +11,7 @@ title: "Agent Workspace"
 The workspace is the agent's home. It is the only working directory used for
 file tools and for workspace context. Keep it private and treat it as memory.
 
-This is separate from `~/.openclaw/`, which stores config, credentials, and
+This is separate from `~/.sudoclaw/`, which stores config, credentials, and
 sessions.
 
 **Important:** the workspace is the **default cwd**, not a hard sandbox. Tools
@@ -19,24 +19,24 @@ resolve relative paths against the workspace, but absolute paths can still reach
 elsewhere on the host unless sandboxing is enabled. If you need isolation, use
 [`agents.defaults.sandbox`](/gateway/sandboxing) (and/or per‑agent sandbox config).
 When sandboxing is enabled and `workspaceAccess` is not `"rw"`, tools operate
-inside a sandbox workspace under `~/.openclaw/sandboxes`, not your host workspace.
+inside a sandbox workspace under `~/.sudoclaw/sandboxes`, not your host workspace.
 
 ## Default location
 
-- Default: `~/.openclaw/workspace`
+- Default: `~/.sudoclaw/workspace`
 - If `SUDOCLAW_PROFILE` is set and not `"default"`, the default becomes
-  `~/.openclaw/workspace-<profile>`.
+  `~/.sudoclaw/workspace-<profile>`.
 - Override in `~/.sudoclaw/sudoclaw.json`:
 
 ```json5
 {
   agent: {
-    workspace: "~/.openclaw/workspace",
+    workspace: "~/.sudoclaw/workspace",
   },
 }
 ```
 
-`openclaw onboard`, `openclaw configure`, or `openclaw setup` will create the
+`sudoclaw onboard`, `sudoclaw configure`, or `sudoclaw setup` will create the
 workspace and seed the bootstrap files if they are missing.
 
 If you already manage the workspace files yourself, you can disable bootstrap
@@ -61,7 +61,7 @@ If you intentionally keep multiple workspaces, make sure
 
 ## Workspace file map (what each file means)
 
-These are the standard files OpenClaw expects inside the workspace:
+These are the standard files SudoClaw expects inside the workspace:
 
 - `AGENTS.md`
   - Operating instructions for the agent and how it should use memory.
@@ -114,21 +114,21 @@ See [Memory](/concepts/memory) for the workflow and automatic memory flush.
 - `canvas/` (optional)
   - Canvas UI files for node displays (for example `canvas/index.html`).
 
-If any bootstrap file is missing, OpenClaw injects a "missing file" marker into
+If any bootstrap file is missing, SudoClaw injects a "missing file" marker into
 the session and continues. Large bootstrap files are truncated when injected;
 adjust limits with `agents.defaults.bootstrapMaxChars` (default: 20000) and
 `agents.defaults.bootstrapTotalMaxChars` (default: 150000).
-`openclaw setup` can recreate missing defaults without overwriting existing
+`sudoclaw setup` can recreate missing defaults without overwriting existing
 files.
 
 ## What is NOT in the workspace
 
-These live under `~/.openclaw/` and should NOT be committed to the workspace repo:
+These live under `~/.sudoclaw/` and should NOT be committed to the workspace repo:
 
 - `~/.sudoclaw/sudoclaw.json` (config)
-- `~/.openclaw/credentials/` (OAuth tokens, API keys)
-- `~/.openclaw/agents/<agentId>/sessions/` (session transcripts + metadata)
-- `~/.openclaw/skills/` (managed skills)
+- `~/.sudoclaw/credentials/` (OAuth tokens, API keys)
+- `~/.sudoclaw/agents/<agentId>/sessions/` (session transcripts + metadata)
+- `~/.sudoclaw/skills/` (managed skills)
 
 If you need to migrate sessions or config, copy them separately and keep them
 out of version control.
@@ -147,7 +147,7 @@ If git is installed, brand-new workspaces are initialized automatically. If this
 workspace is not already a repo, run:
 
 ```bash
-cd ~/.openclaw/workspace
+cd ~/.sudoclaw/workspace
 git init
 git add AGENTS.md SOUL.md TOOLS.md IDENTITY.md USER.md HEARTBEAT.md memory/
 git commit -m "Add agent workspace"
@@ -202,11 +202,11 @@ git push
 Even in a private repo, avoid storing secrets in the workspace:
 
 - API keys, OAuth tokens, passwords, or private credentials.
-- Anything under `~/.openclaw/`.
+- Anything under `~/.sudoclaw/`.
 - Raw dumps of chats or sensitive attachments.
 
 If you must store sensitive references, use placeholders and keep the real
-secret elsewhere (password manager, environment variables, or `~/.openclaw/`).
+secret elsewhere (password manager, environment variables, or `~/.sudoclaw/`).
 
 Suggested `.gitignore` starter:
 
@@ -220,10 +220,10 @@ Suggested `.gitignore` starter:
 
 ## Moving the workspace to a new machine
 
-1. Clone the repo to the desired path (default `~/.openclaw/workspace`).
+1. Clone the repo to the desired path (default `~/.sudoclaw/workspace`).
 2. Set `agents.defaults.workspace` to that path in `~/.sudoclaw/sudoclaw.json`.
-3. Run `openclaw setup --workspace <path>` to seed any missing files.
-4. If you need sessions, copy `~/.openclaw/agents/<agentId>/sessions/` from the
+3. Run `sudoclaw setup --workspace <path>` to seed any missing files.
+4. If you need sessions, copy `~/.sudoclaw/agents/<agentId>/sessions/` from the
    old machine separately.
 
 ## Advanced notes

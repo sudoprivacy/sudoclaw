@@ -267,8 +267,8 @@ fun ConnectTabScreen(viewModel: MainViewModel) {
           }
 
           Text("Run these on the gateway host:", style = mobileCallout, color = mobileTextSecondary)
-          CommandBlock("openclaw qr --setup-code-only")
-          CommandBlock("openclaw qr --json")
+          CommandBlock("sudoclaw qr --setup-code-only")
+          CommandBlock("sudoclaw qr --json")
 
           if (inputMode == ConnectInputMode.SetupCode) {
             Text("Setup Code", style = mobileCaption1.copy(fontWeight = FontWeight.SemiBold), color = mobileTextSecondary)

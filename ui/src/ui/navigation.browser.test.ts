@@ -42,7 +42,7 @@ describe("control UI routing", () => {
   });
 
   it("honors explicit base path overrides", async () => {
-    window.__OPENCLAW_CONTROL_UI_BASE_PATH__ = "/sudoclaw";
+    window.__SUDOCLAW_CONTROL_UI_BASE_PATH__ = "/sudoclaw";
     const app = mountApp("/sudoclaw/sessions");
     await app.updateComplete;
 

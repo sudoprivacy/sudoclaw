@@ -62,7 +62,7 @@ No configuration needed. The hook automatically:
 To disable this hook:
 
 ```bash
-openclaw hooks disable command-logger
+sudoclaw hooks disable command-logger
 ```
 
 Or via config:
@@ -86,7 +86,7 @@ The hook does not automatically rotate logs. To manage log size, you can:
 1. **Manual rotation**:
 
    ```bash
-   mv ~/.openclaw/logs/commands.log ~/.sudoclaw/logs/commands.log.old
+   mv ~/.sudoclaw/logs/commands.log ~/.sudoclaw/logs/commands.log.old
    ```
 
 2. **Use logrotate** (Linux):

@@ -161,7 +161,7 @@ import Testing
         defaults.set(AppState.ConnectionMode.remote.rawValue, forKey: connectionModeKey)
         defaults.set("openclaw@example.com:2222", forKey: remoteTargetKey)
         defaults.set("/tmp/id_ed25519", forKey: remoteIdentityKey)
-        defaults.set("/srv/openclaw", forKey: remoteProjectRootKey)
+        defaults.set("/srv/sudoclaw", forKey: remoteProjectRootKey)
 
         let cmd = CommandResolver.openclawCommand(
             subcommand: "status",
@@ -178,7 +178,7 @@ import Testing
         #expect(cmd.contains("-i"))
         #expect(cmd.contains("/tmp/id_ed25519"))
         if let script = cmd.last {
-            #expect(script.contains("PRJ='/srv/openclaw'"))
+            #expect(script.contains("PRJ='/srv/sudoclaw'"))
             #expect(script.contains("cd \"$PRJ\""))
             #expect(script.contains("sudoclaw"))
             #expect(script.contains("status"))

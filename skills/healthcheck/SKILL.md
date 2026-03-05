@@ -91,7 +91,7 @@ If browser control is enabled, recommend that 2FA be enabled on all important ac
 
 ### 3) Check OpenClaw version/update status (read-only)
 
-As part of the default read-only checks, run `openclaw update status`.
+As part of the default read-only checks, run `sudoclaw update status`.
 
 Report the current channel and whether an update is available.
 
@@ -172,7 +172,7 @@ After OpenClaw install or first hardening pass, run at least one baseline audit 
 
 - `sudoclaw security audit`
 - `sudoclaw security audit --deep`
-- `openclaw update status`
+- `sudoclaw update status`
 
 Ongoing monitoring is recommended. Use the OpenClaw cron tool/CLI to schedule periodic audits (Gateway scheduler). Do not create scheduled tasks without explicit approval. Store outputs in a user-approved location and avoid secrets in logs.
 When scheduling headless cron runs, include a note in the output that instructs the user to call `healthcheck` so issues can be fixed.
@@ -181,24 +181,24 @@ When scheduling headless cron runs, include a note in the output that instructs 
 
 After any audit or hardening pass, explicitly offer scheduling and require a direct response. Use a short prompt like (numbered):
 
-1. “Do you want me to schedule periodic audits (e.g., daily/weekly) via `openclaw cron add`?”
+1. “Do you want me to schedule periodic audits (e.g., daily/weekly) via `sudoclaw cron add`?”
 
 If the user says yes, ask for:
 
 - cadence (daily/weekly), preferred time window, and output location
-- whether to also schedule `openclaw update status`
+- whether to also schedule `sudoclaw update status`
 
 Use a stable cron job name so updates are deterministic. Prefer exact names:
 
 - `healthcheck:security-audit`
 - `healthcheck:update-status`
 
-Before creating, `openclaw cron list` and match on exact `name`. If found, `openclaw cron edit <id> ...`.
-If not found, `openclaw cron add --name <name> ...`.
+Before creating, `sudoclaw cron list` and match on exact `name`. If found, `sudoclaw cron edit <id> ...`.
+If not found, `sudoclaw cron add --name <name> ...`.
 
 Also offer a periodic version check so the user can decide when to update (numbered):
 
-1. `openclaw update status` (preferred for source checkouts and channels)
+1. `sudoclaw update status` (preferred for source checkouts and channels)
 2. `npm view openclaw version` (published npm version)
 
 ## OpenClaw command accuracy
@@ -206,10 +206,10 @@ Also offer a periodic version check so the user can decide when to update (numbe
 Use only supported commands and flags:
 
 - `sudoclaw security audit [--deep] [--fix] [--json]`
-- `openclaw status` / `openclaw status --deep`
-- `openclaw health --json`
-- `openclaw update status`
-- `openclaw cron add|list|runs|run`
+- `sudoclaw status` / `sudoclaw status --deep`
+- `sudoclaw health --json`
+- `sudoclaw update status`
+- `sudoclaw cron add|list|runs|run`
 
 Do not invent CLI flags or imply OpenClaw enforces host firewall/SSH policies.
 

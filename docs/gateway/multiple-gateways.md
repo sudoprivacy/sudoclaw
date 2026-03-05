@@ -1,5 +1,5 @@
 ---
-summary: "Run multiple OpenClaw Gateways on one host (isolation, ports, and profiles)"
+summary: "Run multiple SudoClaw Gateways on one host (isolation, ports, and profiles)"
 read_when:
   - Running more than one Gateway on the same machine
   - You need isolated config/state/ports per Gateway
@@ -26,19 +26,19 @@ Profiles auto-scope `SUDOCLAW_STATE_DIR` + `SUDOCLAW_CONFIG_PATH` and suffix ser
 
 ```bash
 # main
-openclaw --profile main setup
-openclaw --profile main gateway --port 18789
+sudoclaw --profile main setup
+sudoclaw --profile main gateway --port 18789
 
 # rescue
-openclaw --profile rescue setup
-openclaw --profile rescue gateway --port 19001
+sudoclaw --profile rescue setup
+sudoclaw --profile rescue gateway --port 19001
 ```
 
 Per-profile services:
 
 ```bash
-openclaw --profile main gateway install
-openclaw --profile rescue gateway install
+sudoclaw --profile main gateway install
+sudoclaw --profile rescue gateway install
 ```
 
 ## Rescue-bot guide
@@ -59,11 +59,11 @@ Port spacing: leave at least 20 ports between base ports so the derived browser/
 ```bash
 # Main bot (existing or fresh, without --profile param)
 # Runs on port 18789 + Chrome CDC/Canvas/... Ports
-openclaw onboard
-openclaw gateway install
+sudoclaw onboard
+sudoclaw gateway install
 
 # Rescue bot (isolated profile + ports)
-openclaw --profile rescue onboard
+sudoclaw --profile rescue onboard
 # Notes:
 # - workspace name will be postfixed with -rescue per default
 # - Port should be at least 18789 + 20 Ports,
@@ -71,7 +71,7 @@ openclaw --profile rescue onboard
 # - rest of the onboarding is the same as normal
 
 # To install the service (if not happened automatically during onboarding)
-openclaw --profile rescue gateway install
+sudoclaw --profile rescue gateway install
 ```
 
 ## Port mapping (derived)
@@ -94,19 +94,19 @@ If you override any of these in config or env, you must keep them unique per ins
 ## Manual env example
 
 ```bash
-SUDOCLAW_CONFIG_PATH=~/.openclaw/main.json \
-SUDOCLAW_STATE_DIR=~/.openclaw-main \
-openclaw gateway --port 18789
+SUDOCLAW_CONFIG_PATH=~/.sudoclaw/main.json \
+SUDOCLAW_STATE_DIR=~/.sudoclaw-main \
+sudoclaw gateway --port 18789
 
-SUDOCLAW_CONFIG_PATH=~/.openclaw/rescue.json \
-SUDOCLAW_STATE_DIR=~/.openclaw-rescue \
-openclaw gateway --port 19001
+SUDOCLAW_CONFIG_PATH=~/.sudoclaw/rescue.json \
+SUDOCLAW_STATE_DIR=~/.sudoclaw-rescue \
+sudoclaw gateway --port 19001
 ```
 
 ## Quick checks
 
 ```bash
-openclaw --profile main status
-openclaw --profile rescue status
-openclaw --profile rescue browser status
+sudoclaw --profile main status
+sudoclaw --profile rescue status
+sudoclaw --profile rescue browser status
 ```

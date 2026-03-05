@@ -8,7 +8,7 @@ title: "Doctor"
 
 # Doctor
 
-`sudoclaw doctor` is the repair + migration tool for OpenClaw. It fixes stale
+`sudoclaw doctor` is the repair + migration tool for SudoClaw. It fixes stale
 config/state, checks health, and provides actionable repair steps.
 
 ## Quick start
@@ -140,12 +140,12 @@ remove the override and restore per-model API routing + costs.
 Doctor can migrate older on-disk layouts into the current structure:
 
 - Sessions store + transcripts:
-  - from `~/.openclaw/sessions/` to `~/.openclaw/agents/<agentId>/sessions/`
+  - from `~/.sudoclaw/sessions/` to `~/.sudoclaw/agents/<agentId>/sessions/`
 - Agent dir:
-  - from `~/.openclaw/agent/` to `~/.openclaw/agents/<agentId>/agent/`
+  - from `~/.sudoclaw/agent/` to `~/.sudoclaw/agents/<agentId>/agent/`
 - WhatsApp auth state (Baileys):
-  - from legacy `~/.openclaw/credentials/*.json` (except `oauth.json`)
-  - to `~/.openclaw/credentials/whatsapp/<accountId>/...` (default account id: `default`)
+  - from legacy `~/.sudoclaw/credentials/*.json` (except `oauth.json`)
+  - to `~/.sudoclaw/credentials/whatsapp/<accountId>/...` (default account id: `default`)
 
 These migrations are best-effort and idempotent; doctor will emit warnings when
 it leaves any legacy folders behind as backups. The Gateway/CLI also auto-migrates
@@ -177,7 +177,7 @@ Doctor checks:
   transcript files.
 - **Main session “1-line JSONL”**: flags when the main transcript has only one
   line (history is not accumulating).
-- **Multiple state dirs**: warns when multiple `~/.openclaw` folders exist across
+- **Multiple state dirs**: warns when multiple `~/.sudoclaw` folders exist across
   home directories or when `SUDOCLAW_STATE_DIR` points elsewhere (history can
   split between installs).
 - **Remote mode reminder**: if `gateway.mode=remote`, doctor reminds you to run
@@ -211,9 +211,9 @@ switch to legacy names if the current image is missing.
 ### 8) Gateway service migrations and cleanup hints
 
 Doctor detects legacy gateway services (launchd/systemd/schtasks) and
-offers to remove them and install the OpenClaw service using the current gateway
+offers to remove them and install the SudoClaw service using the current gateway
 port. It can also scan for extra gateway-like services and print cleanup hints.
-Profile-named OpenClaw gateway services are considered first-class and are not
+Profile-named SudoClaw gateway services are considered first-class and are not
 flagged as "extra."
 
 ### 9) Security warnings
@@ -260,7 +260,7 @@ Notes:
 - `sudoclaw doctor --yes` accepts the default repair prompts.
 - `sudoclaw doctor --repair` applies recommended fixes without prompts.
 - `sudoclaw doctor --repair --force` overwrites custom supervisor configs.
-- You can always force a full rewrite via `openclaw gateway install --force`.
+- You can always force a full rewrite via `sudoclaw gateway install --force`.
 
 ### 16) Gateway runtime + port diagnostics
 

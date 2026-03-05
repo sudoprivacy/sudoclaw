@@ -53,7 +53,7 @@ describe("createLocalShellRunner", () => {
     expect(spawnCommand).not.toHaveBeenCalled();
   });
 
-  it("sets OPENCLAW_SHELL when running local shell commands", async () => {
+  it("sets SUDOCLAW_SHELL when running local shell commands", async () => {
     const messages: string[] = [];
     const chatLog = {
       addSystem: (line: string) => {
@@ -101,7 +101,7 @@ describe("createLocalShellRunner", () => {
     expect(createSelectorSpy).toHaveBeenCalledTimes(1);
     expect(spawnCommand).toHaveBeenCalledTimes(1);
     const spawnOptions = spawnCommand.mock.calls[0]?.[1] as { env?: Record<string, string> };
-    expect(spawnOptions.env?.OPENCLAW_SHELL).toBe("tui-local");
+    expect(spawnOptions.env?.SUDOCLAW_SHELL).toBe("tui-local");
     expect(spawnOptions.env?.PATH).toBe("/tmp/bin");
     expect(messages).toContain("local shell: enabled for this session");
   });

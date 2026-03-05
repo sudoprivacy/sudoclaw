@@ -121,7 +121,7 @@ export function getPwMocks(): Record<string, MockFn> {
   return pwMocks as unknown as Record<string, MockFn>;
 }
 
-const chromeUserDataDir = vi.hoisted(() => ({ dir: "/tmp/openclaw" }));
+const chromeUserDataDir = vi.hoisted(() => ({ dir: "/tmp/sudoclaw" }));
 installChromeUserDataDirHooks(chromeUserDataDir);
 
 function makeProc(pid = 123) {
@@ -263,9 +263,9 @@ export async function resetBrowserControlServerTestContext(): Promise<void> {
   // Avoid flaky auth coupling: some suites temporarily set gateway env auth
   // which would make the browser control server require auth.
   state.prevGatewayToken = process.env.SUDOCLAW_GATEWAY_TOKEN;
-  state.prevGatewayPassword = process.env.OPENCLAW_GATEWAY_PASSWORD;
+  state.prevGatewayPassword = process.env.SUDOCLAW_GATEWAY_PASSWORD;
   delete process.env.SUDOCLAW_GATEWAY_TOKEN;
-  delete process.env.OPENCLAW_GATEWAY_PASSWORD;
+  delete process.env.SUDOCLAW_GATEWAY_PASSWORD;
 }
 
 export function restoreGatewayAuthEnv(
@@ -278,9 +278,9 @@ export function restoreGatewayAuthEnv(
     process.env.SUDOCLAW_GATEWAY_TOKEN = prevGatewayToken;
   }
   if (prevGatewayPassword === undefined) {
-    delete process.env.OPENCLAW_GATEWAY_PASSWORD;
+    delete process.env.SUDOCLAW_GATEWAY_PASSWORD;
   } else {
-    process.env.OPENCLAW_GATEWAY_PASSWORD = prevGatewayPassword;
+    process.env.SUDOCLAW_GATEWAY_PASSWORD = prevGatewayPassword;
   }
 }
 

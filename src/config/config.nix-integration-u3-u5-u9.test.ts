@@ -18,7 +18,7 @@ function envWith(overrides: Record<string, string | undefined>): NodeJS.ProcessE
 
 function loadConfigForHome(home: string) {
   return createConfigIO({
-    env: envWith({ OPENCLAW_HOME: home }),
+    env: envWith({ SUDOCLAW_HOME: home }),
     homedir: () => home,
   }).loadConfig();
 }
@@ -35,20 +35,20 @@ async function withLoadedConfigForHome(
 
 describe("Nix integration (U3, U5, U9)", () => {
   describe("U3: isNixMode env var detection", () => {
-    it("isNixMode is false when OPENCLAW_NIX_MODE is not set", () => {
-      expect(resolveIsNixMode(envWith({ OPENCLAW_NIX_MODE: undefined }))).toBe(false);
+    it("isNixMode is false when SUDOCLAW_NIX_MODE is not set", () => {
+      expect(resolveIsNixMode(envWith({ SUDOCLAW_NIX_MODE: undefined }))).toBe(false);
     });
 
-    it("isNixMode is false when OPENCLAW_NIX_MODE is empty", () => {
-      expect(resolveIsNixMode(envWith({ OPENCLAW_NIX_MODE: "" }))).toBe(false);
+    it("isNixMode is false when SUDOCLAW_NIX_MODE is empty", () => {
+      expect(resolveIsNixMode(envWith({ SUDOCLAW_NIX_MODE: "" }))).toBe(false);
     });
 
-    it("isNixMode is false when OPENCLAW_NIX_MODE is not '1'", () => {
-      expect(resolveIsNixMode(envWith({ OPENCLAW_NIX_MODE: "true" }))).toBe(false);
+    it("isNixMode is false when SUDOCLAW_NIX_MODE is not '1'", () => {
+      expect(resolveIsNixMode(envWith({ SUDOCLAW_NIX_MODE: "true" }))).toBe(false);
     });
 
-    it("isNixMode is true when OPENCLAW_NIX_MODE=1", () => {
-      expect(resolveIsNixMode(envWith({ OPENCLAW_NIX_MODE: "1" }))).toBe(true);
+    it("isNixMode is true when SUDOCLAW_NIX_MODE=1", () => {
+      expect(resolveIsNixMode(envWith({ SUDOCLAW_NIX_MODE: "1" }))).toBe(true);
     });
   });
 
@@ -63,19 +63,19 @@ describe("Nix integration (U3, U5, U9)", () => {
       );
     });
 
-    it("STATE_DIR respects OPENCLAW_HOME when state override is unset", () => {
+    it("STATE_DIR respects SUDOCLAW_HOME when state override is unset", () => {
       const customHome = path.join(path.sep, "custom", "home");
       expect(
-        resolveStateDir(envWith({ OPENCLAW_HOME: customHome, SUDOCLAW_STATE_DIR: undefined })),
+        resolveStateDir(envWith({ SUDOCLAW_HOME: customHome, SUDOCLAW_STATE_DIR: undefined })),
       ).toBe(path.join(path.resolve(customHome), ".sudoclaw"));
     });
 
-    it("CONFIG_PATH defaults to OPENCLAW_HOME/.sudoclaw/sudoclaw.json", () => {
+    it("CONFIG_PATH defaults to SUDOCLAW_HOME/.sudoclaw/sudoclaw.json", () => {
       const customHome = path.join(path.sep, "custom", "home");
       expect(
         resolveConfigPathCandidate(
           envWith({
-            OPENCLAW_HOME: customHome,
+            SUDOCLAW_HOME: customHome,
             SUDOCLAW_CONFIG_PATH: undefined,
             SUDOCLAW_STATE_DIR: undefined,
           }),
@@ -94,16 +94,16 @@ describe("Nix integration (U3, U5, U9)", () => {
     it("CONFIG_PATH respects SUDOCLAW_CONFIG_PATH override", () => {
       expect(
         resolveConfigPathCandidate(
-          envWith({ SUDOCLAW_CONFIG_PATH: "/nix/store/abc/openclaw.json" }),
+          envWith({ SUDOCLAW_CONFIG_PATH: "/nix/store/abc/sudoclaw.json" }),
         ),
-      ).toBe(path.resolve("/nix/store/abc/openclaw.json"));
+      ).toBe(path.resolve("/nix/store/abc/sudoclaw.json"));
     });
 
     it("CONFIG_PATH expands ~ in SUDOCLAW_CONFIG_PATH override", async () => {
       await withTempHome(async (home) => {
         expect(
           resolveConfigPathCandidate(
-            envWith({ OPENCLAW_HOME: home, SUDOCLAW_CONFIG_PATH: "~/.sudoclaw/custom.json" }),
+            envWith({ SUDOCLAW_HOME: home, SUDOCLAW_CONFIG_PATH: "~/.sudoclaw/custom.json" }),
             () => home,
           ),
         ).toBe(path.join(home, ".sudoclaw", "custom.json"));
@@ -130,7 +130,7 @@ describe("Nix integration (U3, U5, U9)", () => {
           "utf-8",
         );
         await fs.writeFile(
-          path.join(pluginDir, "openclaw.plugin.json"),
+          path.join(pluginDir, "sudoclaw.plugin.json"),
           JSON.stringify(
             {
               id: "demo-plugin",

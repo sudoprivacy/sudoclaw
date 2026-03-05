@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: openclaw
+    name: sudoclaw
     runtime: docker
     plan: starter
     healthCheckPath: /health
@@ -11,11 +11,11 @@ services:
         sync: false
       - key: SUDOCLAW_STATE_DIR
         value: /data/.sudoclaw
-      - key: OPENCLAW_WORKSPACE_DIR
+      - key: SUDOCLAW_WORKSPACE_DIR
         value: /data/workspace
       - key: SUDOCLAW_GATEWAY_TOKEN
         generateValue: true
     disk:
-      name: openclaw-data
+      name: sudoclaw-data
       mountPath: /data
       sizeGB: 1

@@ -98,7 +98,7 @@ struct OpenClawConfigFileTests {
             "SUDOCLAW_STATE_DIR": dir,
         ]) {
             #expect(OpenClawConfigFile.stateDirURL().path == dir)
-            #expect(OpenClawConfigFile.url().path == "\(dir)/openclaw.json")
+            #expect(OpenClawConfigFile.url().path == "\(dir)/sudoclaw.json")
         }
     }
 

@@ -10,7 +10,7 @@ import Testing
             "ProgramArguments": ["sudoclaw", "gateway-daemon", "--port", "18789", "--bind", "loopback"],
             "EnvironmentVariables": [
                 "SUDOCLAW_GATEWAY_TOKEN": " secret ",
-                "OPENCLAW_GATEWAY_PASSWORD": "pw",
+                "SUDOCLAW_GATEWAY_PASSWORD": "pw",
             ],
         ]
         let data = try PropertyListSerialization.data(fromPropertyList: plist, format: .xml, options: 0)

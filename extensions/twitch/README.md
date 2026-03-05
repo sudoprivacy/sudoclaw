@@ -5,13 +5,13 @@ Twitch channel plugin for OpenClaw.
 ## Install (local checkout)
 
 ```bash
-openclaw plugins install ./extensions/twitch
+sudoclaw plugins install ./extensions/twitch
 ```
 
 ## Install (npm)
 
 ```bash
-openclaw plugins install @openclaw/twitch
+sudoclaw plugins install @sudoclaw/twitch
 ```
 
 Onboarding: select Twitch and confirm the install prompt to fetch the plugin automatically.

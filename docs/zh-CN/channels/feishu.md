@@ -17,13 +17,13 @@ title: 飞书
 安装 Feishu 插件：
 
 ```bash
-openclaw plugins install @openclaw/feishu
+sudoclaw plugins install @openclaw/feishu
 ```
 
 本地 checkout（在 git 仓库内运行）：
 
 ```bash
-openclaw plugins install ./extensions/feishu
+sudoclaw plugins install ./extensions/feishu
 ```
 
 ---
@@ -34,10 +34,10 @@ openclaw plugins install ./extensions/feishu
 
 ### 方式一：通过安装向导添加（推荐）
 
-如果您刚安装完 OpenClaw，可以直接运行向导，根据提示添加飞书：
+如果您刚安装完 SudoClaw，可以直接运行向导，根据提示添加飞书：
 
 ```bash
-openclaw onboard
+sudoclaw onboard
 ```
 
 向导会引导您完成：
@@ -48,7 +48,7 @@ openclaw onboard
 
 ✅ **完成配置后**，您可以使用以下命令检查网关状态：
 
-- `openclaw gateway status` - 查看网关运行状态
+- `sudoclaw gateway status` - 查看网关运行状态
 - `sudoclaw logs --follow` - 查看实时日志
 
 ### 方式二：通过命令行添加
@@ -56,15 +56,15 @@ openclaw onboard
 如果您已经完成了初始安装，可以用以下命令添加飞书渠道：
 
 ```bash
-openclaw channels add
+sudoclaw channels add
 ```
 
 然后根据交互式提示选择 Feishu，输入 App ID 和 App Secret 即可。
 
 ✅ **完成配置后**，您可以使用以下命令管理网关：
 
-- `openclaw gateway status` - 查看网关运行状态
-- `openclaw gateway restart` - 重启网关以应用新配置
+- `sudoclaw gateway status` - 查看网关运行状态
+- `sudoclaw gateway restart` - 重启网关以应用新配置
 - `sudoclaw logs --follow` - 查看实时日志
 
 ---
@@ -147,8 +147,8 @@ Lark（国际版）请使用 https://open.larksuite.com/app，并在配置中设
 
 ⚠️ **重要提醒**：在配置事件订阅前，请务必确保已完成以下步骤：
 
-1. 运行 `openclaw channels add` 添加了 Feishu 渠道
-2. 网关处于启动状态（可通过 `openclaw gateway status` 检查状态）
+1. 运行 `sudoclaw channels add` 添加了 Feishu 渠道
+2. 网关处于启动状态（可通过 `sudoclaw gateway status` 检查状态）
 
 在 **事件订阅** 页面：
 
@@ -167,14 +167,14 @@ Lark（国际版）请使用 https://open.larksuite.com/app，并在配置中设
 
 ---
 
-## 第二步：配置 OpenClaw
+## 第二步：配置 SudoClaw
 
 ### 通过向导配置（推荐）
 
 运行以下命令，根据提示粘贴 App ID 和 App Secret：
 
 ```bash
-openclaw channels add
+sudoclaw channels add
 ```
 
 选择 **Feishu**，然后输入您在第一步获取的凭证即可。
@@ -235,7 +235,7 @@ export FEISHU_APP_SECRET="xxx"
 ### 1. 启动网关
 
 ```bash
-openclaw gateway
+sudoclaw gateway
 ```
 
 ### 2. 发送测试消息
@@ -247,7 +247,7 @@ openclaw gateway
 默认情况下，机器人会回复一个 **配对码**。您需要批准此代码：
 
 ```bash
-openclaw pairing approve feishu <配对码>
+sudoclaw pairing approve feishu <配对码>
 ```
 
 批准后即可正常对话。
@@ -270,8 +270,8 @@ openclaw pairing approve feishu <配对码>
 - **默认**：`dmPolicy: "pairing"`，陌生用户会收到配对码
 - **批准配对**：
   ```bash
-  openclaw pairing list feishu      # 查看待审批列表
-  openclaw pairing approve feishu <CODE>  # 批准
+  sudoclaw pairing list feishu      # 查看待审批列表
+  sudoclaw pairing approve feishu <CODE>  # 批准
   ```
 - **白名单模式**：通过 `channels.feishu.allowFrom` 配置允许的用户 Open ID
 
@@ -363,7 +363,7 @@ openclaw pairing approve feishu <配对码>
 查看配对请求列表，其中包含用户的 Open ID：
 
 ```bash
-openclaw pairing list feishu
+sudoclaw pairing list feishu
 ```
 
 ---
@@ -384,10 +384,10 @@ openclaw pairing list feishu
 
 | 命令                       | 说明              |
 | -------------------------- | ----------------- |
-| `openclaw gateway status`  | 查看网关运行状态  |
-| `openclaw gateway install` | 安装/启动网关服务 |
-| `openclaw gateway stop`    | 停止网关服务      |
-| `openclaw gateway restart` | 重启网关服务      |
+| `sudoclaw gateway status`  | 查看网关运行状态  |
+| `sudoclaw gateway install` | 安装/启动网关服务 |
+| `sudoclaw gateway stop`    | 停止网关服务      |
+| `sudoclaw gateway restart` | 重启网关服务      |
 | `sudoclaw logs --follow`   | 实时查看日志输出  |
 
 ---
@@ -407,7 +407,7 @@ openclaw pairing list feishu
 2. 检查事件订阅是否配置正确（`im.message.receive_v1`）
 3. 检查是否选择了 **长连接** 模式
 4. 检查应用权限是否完整
-5. 检查网关是否正在运行：`openclaw gateway status`
+5. 检查网关是否正在运行：`sudoclaw gateway status`
 6. 查看实时日志：`sudoclaw logs --follow`
 
 ### App Secret 泄露怎么办
@@ -521,12 +521,12 @@ openclaw pairing list feishu
       {
         id: "clawd-fan",
         workspace: "/home/user/clawd-fan",
-        agentDir: "/home/user/.openclaw/agents/clawd-fan/agent",
+        agentDir: "/home/user/.sudoclaw/agents/clawd-fan/agent",
       },
       {
         id: "clawd-xi",
         workspace: "/home/user/clawd-xi",
-        agentDir: "/home/user/.openclaw/agents/clawd-xi/agent",
+        agentDir: "/home/user/.sudoclaw/agents/clawd-xi/agent",
       },
     ],
   },

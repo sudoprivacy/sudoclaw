@@ -230,7 +230,7 @@ describe("sendMediaFeishu msg_type routing", () => {
       contentType: "application/pdf",
     });
 
-    const roots = ["/allowed/workspace", "/tmp/openclaw"];
+    const roots = ["/allowed/workspace", "/tmp/sudoclaw"];
     await sendMediaFeishu({
       cfg: {} as any,
       to: "user:ou_target",

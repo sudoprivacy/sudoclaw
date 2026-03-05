@@ -8,7 +8,7 @@ title: Feishu
 
 # Feishu bot
 
-Feishu (Lark) is a team chat platform used by companies for messaging and collaboration. This plugin connects OpenClaw to a Feishu/Lark bot using the platform’s WebSocket event subscription so messages can be received without exposing a public webhook URL.
+Feishu (Lark) is a team chat platform used by companies for messaging and collaboration. This plugin connects SudoClaw to a Feishu/Lark bot using the platform’s WebSocket event subscription so messages can be received without exposing a public webhook URL.
 
 ---
 
@@ -17,13 +17,13 @@ Feishu (Lark) is a team chat platform used by companies for messaging and collab
 Install the Feishu plugin:
 
 ```bash
-openclaw plugins install @openclaw/feishu
+sudoclaw plugins install @openclaw/feishu
 ```
 
 Local checkout (when running from a git repo):
 
 ```bash
-openclaw plugins install ./extensions/feishu
+sudoclaw plugins install ./extensions/feishu
 ```
 
 ---
@@ -34,21 +34,21 @@ There are two ways to add the Feishu channel:
 
 ### Method 1: onboarding wizard (recommended)
 
-If you just installed OpenClaw, run the wizard:
+If you just installed SudoClaw, run the wizard:
 
 ```bash
-openclaw onboard
+sudoclaw onboard
 ```
 
 The wizard guides you through:
 
 1. Creating a Feishu app and collecting credentials
-2. Configuring app credentials in OpenClaw
+2. Configuring app credentials in SudoClaw
 3. Starting the gateway
 
 ✅ **After configuration**, check gateway status:
 
-- `openclaw gateway status`
+- `sudoclaw gateway status`
 - `sudoclaw logs --follow`
 
 ### Method 2: CLI setup
@@ -56,15 +56,15 @@ The wizard guides you through:
 If you already completed initial install, add the channel via CLI:
 
 ```bash
-openclaw channels add
+sudoclaw channels add
 ```
 
 Choose **Feishu**, then enter the App ID and App Secret.
 
 ✅ **After configuration**, manage the gateway:
 
-- `openclaw gateway status`
-- `openclaw gateway restart`
+- `sudoclaw gateway status`
+- `sudoclaw gateway restart`
 - `sudoclaw logs --follow`
 
 ---
@@ -143,8 +143,8 @@ In **App Capability** > **Bot**:
 
 ⚠️ **Important:** before setting event subscription, make sure:
 
-1. You already ran `openclaw channels add` for Feishu
-2. The gateway is running (`openclaw gateway status`)
+1. You already ran `sudoclaw channels add` for Feishu
+2. The gateway is running (`sudoclaw gateway status`)
 
 In **Event Subscription**:
 
@@ -163,12 +163,12 @@ In **Event Subscription**:
 
 ---
 
-## Step 2: Configure OpenClaw
+## Step 2: Configure SudoClaw
 
 ### Configure with the wizard (recommended)
 
 ```bash
-openclaw channels add
+sudoclaw channels add
 ```
 
 Choose **Feishu** and paste your App ID + App Secret.
@@ -259,7 +259,7 @@ Set them at top level or per account:
 ### 1. Start the gateway
 
 ```bash
-openclaw gateway
+sudoclaw gateway
 ```
 
 ### 2. Send a test message
@@ -271,7 +271,7 @@ In Feishu, find your bot and send a message.
 By default, the bot replies with a pairing code. Approve it:
 
 ```bash
-openclaw pairing approve feishu <CODE>
+sudoclaw pairing approve feishu <CODE>
 ```
 
 After approval, you can chat normally.
@@ -295,8 +295,8 @@ After approval, you can chat normally.
 - **Approve pairing**:
 
   ```bash
-  openclaw pairing list feishu
-  openclaw pairing approve feishu <CODE>
+  sudoclaw pairing list feishu
+  sudoclaw pairing approve feishu <CODE>
   ```
 
 - **Allowlist mode**: set `channels.feishu.allowFrom` with allowed Open IDs
@@ -411,7 +411,7 @@ User IDs look like `ou_xxx`.
 Check pairing requests for user Open IDs:
 
 ```bash
-openclaw pairing list feishu
+sudoclaw pairing list feishu
 ```
 
 ---
@@ -430,10 +430,10 @@ openclaw pairing list feishu
 
 | Command                    | Description                   |
 | -------------------------- | ----------------------------- |
-| `openclaw gateway status`  | Show gateway status           |
-| `openclaw gateway install` | Install/start gateway service |
-| `openclaw gateway stop`    | Stop gateway service          |
-| `openclaw gateway restart` | Restart gateway service       |
+| `sudoclaw gateway status`  | Show gateway status           |
+| `sudoclaw gateway install` | Install/start gateway service |
+| `sudoclaw gateway stop`    | Stop gateway service          |
+| `sudoclaw gateway restart` | Restart gateway service       |
 | `sudoclaw logs --follow`   | Tail gateway logs             |
 
 ---
@@ -453,7 +453,7 @@ openclaw pairing list feishu
 2. Ensure event subscription includes `im.message.receive_v1`
 3. Ensure **long connection** is enabled
 4. Ensure app permissions are complete
-5. Ensure the gateway is running: `openclaw gateway status`
+5. Ensure the gateway is running: `sudoclaw gateway status`
 6. Check logs: `sudoclaw logs --follow`
 
 ### App Secret leak
@@ -533,12 +533,12 @@ Use `bindings` to route Feishu DMs or groups to different agents.
       {
         id: "clawd-fan",
         workspace: "/home/user/clawd-fan",
-        agentDir: "/home/user/.openclaw/agents/clawd-fan/agent",
+        agentDir: "/home/user/.sudoclaw/agents/clawd-fan/agent",
       },
       {
         id: "clawd-xi",
         workspace: "/home/user/clawd-xi",
-        agentDir: "/home/user/.openclaw/agents/clawd-xi/agent",
+        agentDir: "/home/user/.sudoclaw/agents/clawd-xi/agent",
       },
     ],
   },

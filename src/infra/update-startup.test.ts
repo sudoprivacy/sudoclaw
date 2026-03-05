@@ -412,7 +412,7 @@ describe("update-startup", () => {
       expect.objectContaining({
         timeoutMs: 45 * 60 * 1000,
         env: expect.objectContaining({
-          OPENCLAW_AUTO_UPDATE: "1",
+          SUDOCLAW_AUTO_UPDATE: "1",
         }),
       }),
     );

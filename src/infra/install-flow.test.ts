@@ -85,7 +85,7 @@ describe("withExtractedArchiveRoot", () => {
 
   it("returns extract failure when extraction throws", async () => {
     vi.spyOn(installSource, "withTempDir").mockImplementation(
-      async (_prefix, fn) => await fn("/tmp/openclaw-install-flow"),
+      async (_prefix, fn) => await fn("/tmp/sudoclaw-install-flow"),
     );
     vi.spyOn(archive, "extractArchive").mockRejectedValue(new Error("boom"));
 
@@ -104,7 +104,7 @@ describe("withExtractedArchiveRoot", () => {
 
   it("returns root-resolution failure when archive layout is invalid", async () => {
     vi.spyOn(installSource, "withTempDir").mockImplementation(
-      async (_prefix, fn) => await fn("/tmp/openclaw-install-flow"),
+      async (_prefix, fn) => await fn("/tmp/sudoclaw-install-flow"),
     );
     vi.spyOn(archive, "extractArchive").mockResolvedValue(undefined);
     vi.spyOn(archive, "resolvePackedRootDir").mockRejectedValue(new Error("invalid layout"));

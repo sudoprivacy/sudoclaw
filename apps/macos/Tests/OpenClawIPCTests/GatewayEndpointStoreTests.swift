@@ -58,7 +58,7 @@ import Testing
     @Test func resolveGatewayPasswordFallsBackToLaunchd() {
         let snapshot = LaunchAgentPlistSnapshot(
             programArguments: [],
-            environment: ["OPENCLAW_GATEWAY_PASSWORD": "launchd-pass"],
+            environment: ["SUDOCLAW_GATEWAY_PASSWORD": "launchd-pass"],
             stdoutPath: nil,
             stderrPath: nil,
             port: nil,

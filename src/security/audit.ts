@@ -1086,7 +1086,7 @@ export async function runSecurityAudit(opts: SecurityAuditOptions): Promise<Secu
       severity: "warn",
       title: "Gateway probe failed (deep)",
       detail: deep.gateway.error ?? "gateway unreachable",
-      remediation: `Run "${formatCliCommand("openclaw status --all")}" to debug connectivity/auth, then re-run "${formatCliCommand("sudoclaw security audit --deep")}".`,
+      remediation: `Run "${formatCliCommand("sudoclaw status --all")}" to debug connectivity/auth, then re-run "${formatCliCommand("sudoclaw security audit --deep")}".`,
     });
   }
 

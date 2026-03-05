@@ -9,7 +9,7 @@ type HomeEnvSnapshot = {
   HOMEDRIVE: string | undefined;
   HOMEPATH: string | undefined;
   SUDOCLAW_STATE_DIR: string | undefined;
-  OPENCLAW_AGENT_DIR: string | undefined;
+  SUDOCLAW_AGENT_DIR: string | undefined;
   PI_CODING_AGENT_DIR: string | undefined;
 };
 
@@ -20,7 +20,7 @@ function snapshotHomeEnv(): HomeEnvSnapshot {
     HOMEDRIVE: process.env.HOMEDRIVE,
     HOMEPATH: process.env.HOMEPATH,
     SUDOCLAW_STATE_DIR: process.env.SUDOCLAW_STATE_DIR,
-    OPENCLAW_AGENT_DIR: process.env.OPENCLAW_AGENT_DIR,
+    SUDOCLAW_AGENT_DIR: process.env.SUDOCLAW_AGENT_DIR,
     PI_CODING_AGENT_DIR: process.env.PI_CODING_AGENT_DIR,
   };
 }
@@ -57,7 +57,7 @@ export function createTempHomeHarness(options: { prefix: string; beforeEachCase?
     process.env.HOME = home;
     process.env.USERPROFILE = home;
     process.env.SUDOCLAW_STATE_DIR = path.join(home, ".sudoclaw");
-    process.env.OPENCLAW_AGENT_DIR = path.join(home, ".sudoclaw", "agent");
+    process.env.SUDOCLAW_AGENT_DIR = path.join(home, ".sudoclaw", "agent");
     process.env.PI_CODING_AGENT_DIR = path.join(home, ".sudoclaw", "agent");
 
     if (process.platform === "win32") {

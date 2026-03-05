@@ -89,21 +89,21 @@ describe("onboard (non-interactive): gateway and remote auth", () => {
       "HOME",
       "SUDOCLAW_STATE_DIR",
       "SUDOCLAW_CONFIG_PATH",
-      "OPENCLAW_SKIP_CHANNELS",
-      "OPENCLAW_SKIP_GMAIL_WATCHER",
-      "OPENCLAW_SKIP_CRON",
-      "OPENCLAW_SKIP_CANVAS_HOST",
-      "OPENCLAW_SKIP_BROWSER_CONTROL_SERVER",
+      "SUDOCLAW_SKIP_CHANNELS",
+      "SUDOCLAW_SKIP_GMAIL_WATCHER",
+      "SUDOCLAW_SKIP_CRON",
+      "SUDOCLAW_SKIP_CANVAS_HOST",
+      "SUDOCLAW_SKIP_BROWSER_CONTROL_SERVER",
       "SUDOCLAW_GATEWAY_TOKEN",
-      "OPENCLAW_GATEWAY_PASSWORD",
+      "SUDOCLAW_GATEWAY_PASSWORD",
     ]);
-    process.env.OPENCLAW_SKIP_CHANNELS = "1";
-    process.env.OPENCLAW_SKIP_GMAIL_WATCHER = "1";
-    process.env.OPENCLAW_SKIP_CRON = "1";
-    process.env.OPENCLAW_SKIP_CANVAS_HOST = "1";
-    process.env.OPENCLAW_SKIP_BROWSER_CONTROL_SERVER = "1";
+    process.env.SUDOCLAW_SKIP_CHANNELS = "1";
+    process.env.SUDOCLAW_SKIP_GMAIL_WATCHER = "1";
+    process.env.SUDOCLAW_SKIP_CRON = "1";
+    process.env.SUDOCLAW_SKIP_CANVAS_HOST = "1";
+    process.env.SUDOCLAW_SKIP_BROWSER_CONTROL_SERVER = "1";
     delete process.env.SUDOCLAW_GATEWAY_TOKEN;
-    delete process.env.OPENCLAW_GATEWAY_PASSWORD;
+    delete process.env.SUDOCLAW_GATEWAY_PASSWORD;
 
     tempHome = await makeTempWorkspace("openclaw-onboard-");
     process.env.HOME = tempHome;

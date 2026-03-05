@@ -123,7 +123,7 @@ function snapshotTempHomeEnv(): TempHomeEnvSnapshot {
     userProfile: process.env.USERPROFILE,
     homeDrive: process.env.HOMEDRIVE,
     homePath: process.env.HOMEPATH,
-    openclawHome: process.env.OPENCLAW_HOME,
+    openclawHome: process.env.SUDOCLAW_HOME,
     stateDir: process.env.SUDOCLAW_STATE_DIR,
   };
 }
@@ -141,14 +141,14 @@ function restoreTempHomeEnv(snapshot: TempHomeEnvSnapshot): void {
   restoreKey("USERPROFILE", snapshot.userProfile);
   restoreKey("HOMEDRIVE", snapshot.homeDrive);
   restoreKey("HOMEPATH", snapshot.homePath);
-  restoreKey("OPENCLAW_HOME", snapshot.openclawHome);
+  restoreKey("SUDOCLAW_HOME", snapshot.openclawHome);
   restoreKey("SUDOCLAW_STATE_DIR", snapshot.stateDir);
 }
 
 function setTempHomeEnv(home: string): void {
   process.env.HOME = home;
   process.env.USERPROFILE = home;
-  delete process.env.OPENCLAW_HOME;
+  delete process.env.SUDOCLAW_HOME;
   process.env.SUDOCLAW_STATE_DIR = join(home, ".sudoclaw");
 
   if (process.platform !== "win32") {

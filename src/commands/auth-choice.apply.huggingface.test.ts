@@ -32,7 +32,7 @@ function createHuggingfacePrompter(params: {
 describe("applyAuthChoiceHuggingface", () => {
   const lifecycle = createAuthTestLifecycle([
     "SUDOCLAW_STATE_DIR",
-    "OPENCLAW_AGENT_DIR",
+    "SUDOCLAW_AGENT_DIR",
     "PI_CODING_AGENT_DIR",
     "HF_TOKEN",
     "HUGGINGFACE_HUB_TOKEN",

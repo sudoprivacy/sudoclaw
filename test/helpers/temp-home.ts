@@ -19,7 +19,7 @@ function snapshotEnv(): EnvSnapshot {
     userProfile: process.env.USERPROFILE,
     homeDrive: process.env.HOMEDRIVE,
     homePath: process.env.HOMEPATH,
-    openclawHome: process.env.OPENCLAW_HOME,
+    openclawHome: process.env.SUDOCLAW_HOME,
     stateDir: process.env.SUDOCLAW_STATE_DIR,
   };
 }
@@ -36,7 +36,7 @@ function restoreEnv(snapshot: EnvSnapshot) {
   restoreKey("USERPROFILE", snapshot.userProfile);
   restoreKey("HOMEDRIVE", snapshot.homeDrive);
   restoreKey("HOMEPATH", snapshot.homePath);
-  restoreKey("OPENCLAW_HOME", snapshot.openclawHome);
+  restoreKey("SUDOCLAW_HOME", snapshot.openclawHome);
   restoreKey("SUDOCLAW_STATE_DIR", snapshot.stateDir);
 }
 
@@ -61,8 +61,8 @@ function restoreExtraEnv(snapshot: Record<string, string | undefined>) {
 function setTempHome(base: string) {
   process.env.HOME = base;
   process.env.USERPROFILE = base;
-  // Ensure tests using HOME isolation aren't affected by leaked OPENCLAW_HOME.
-  delete process.env.OPENCLAW_HOME;
+  // Ensure tests using HOME isolation aren't affected by leaked SUDOCLAW_HOME.
+  delete process.env.SUDOCLAW_HOME;
   process.env.SUDOCLAW_STATE_DIR = path.join(base, ".sudoclaw");
 
   if (process.platform !== "win32") {

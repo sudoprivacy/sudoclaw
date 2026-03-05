@@ -42,7 +42,7 @@ describe("loadSettings default gateway URL derivation", () => {
       host: "gateway.example:8443",
       pathname: "/ignored/path",
     } as Location);
-    vi.stubGlobal("window", { __OPENCLAW_CONTROL_UI_BASE_PATH__: " /sudoclaw/ " } as Window &
+    vi.stubGlobal("window", { __SUDOCLAW_CONTROL_UI_BASE_PATH__: " /sudoclaw/ " } as Window &
       typeof globalThis);
 
     const { loadSettings } = await import("./storage.ts");

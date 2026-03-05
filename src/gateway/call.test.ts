@@ -410,7 +410,7 @@ describe("callGateway url override auth requirements", () => {
   let envSnapshot: ReturnType<typeof captureEnv>;
 
   beforeEach(() => {
-    envSnapshot = captureEnv(["SUDOCLAW_GATEWAY_TOKEN", "OPENCLAW_GATEWAY_PASSWORD"]);
+    envSnapshot = captureEnv(["SUDOCLAW_GATEWAY_TOKEN", "SUDOCLAW_GATEWAY_PASSWORD"]);
     resetGatewayCallMocks();
     setGatewayNetworkDefaults(18789);
   });
@@ -421,7 +421,7 @@ describe("callGateway url override auth requirements", () => {
 
   it("throws when url override is set without explicit credentials", async () => {
     process.env.SUDOCLAW_GATEWAY_TOKEN = "env-token";
-    process.env.OPENCLAW_GATEWAY_PASSWORD = "env-password";
+    process.env.SUDOCLAW_GATEWAY_PASSWORD = "env-password";
     loadConfig.mockReturnValue({
       gateway: {
         mode: "local",
@@ -441,7 +441,7 @@ describe("callGateway password resolution", () => {
     {
       label: "password",
       authKey: "password",
-      envKey: "OPENCLAW_GATEWAY_PASSWORD",
+      envKey: "SUDOCLAW_GATEWAY_PASSWORD",
       envValue: "from-env",
       configValue: "from-config",
       explicitValue: "explicit-password",
@@ -457,9 +457,9 @@ describe("callGateway password resolution", () => {
   ] as const;
 
   beforeEach(() => {
-    envSnapshot = captureEnv(["OPENCLAW_GATEWAY_PASSWORD", "SUDOCLAW_GATEWAY_TOKEN"]);
+    envSnapshot = captureEnv(["SUDOCLAW_GATEWAY_PASSWORD", "SUDOCLAW_GATEWAY_TOKEN"]);
     resetGatewayCallMocks();
-    delete process.env.OPENCLAW_GATEWAY_PASSWORD;
+    delete process.env.SUDOCLAW_GATEWAY_PASSWORD;
     delete process.env.SUDOCLAW_GATEWAY_TOKEN;
     setGatewayNetworkDefaults(18789);
   });
@@ -507,7 +507,7 @@ describe("callGateway password resolution", () => {
     },
   ])("$label", async ({ envPassword, config, expectedPassword }) => {
     if (envPassword !== undefined) {
-      process.env.OPENCLAW_GATEWAY_PASSWORD = envPassword;
+      process.env.SUDOCLAW_GATEWAY_PASSWORD = envPassword;
     }
     loadConfig.mockReturnValue(config);
 

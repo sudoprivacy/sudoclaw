@@ -20,7 +20,7 @@ async function withStateDir<T>(stateDir: string, fn: () => Promise<T>) {
     {
       SUDOCLAW_STATE_DIR: stateDir,
       CLAWDBOT_STATE_DIR: undefined,
-      OPENCLAW_BUNDLED_PLUGINS_DIR: "/nonexistent/bundled/plugins",
+      SUDOCLAW_BUNDLED_PLUGINS_DIR: "/nonexistent/bundled/plugins",
     },
     fn,
   );

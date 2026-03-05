@@ -277,9 +277,9 @@ describe("buildServiceEnvironment", () => {
     expect(env.SUDOCLAW_SERVICE_MARKER).toBe("sudoclaw");
     expect(env.SUDOCLAW_SERVICE_KIND).toBe("gateway");
     expect(typeof env.SUDOCLAW_SERVICE_VERSION).toBe("string");
-    expect(env.SUDOCLAW_SYSTEMD_UNIT).toBe("openclaw-gateway.service");
+    expect(env.SUDOCLAW_SYSTEMD_UNIT).toBe("sudoclaw-gateway.service");
     if (process.platform === "darwin") {
-      expect(env.SUDOCLAW_LAUNCHD_LABEL).toBe("ai.openclaw.gateway");
+      expect(env.SUDOCLAW_LAUNCHD_LABEL).toBe("ai.sudoclaw.gateway");
     }
   });
 
@@ -304,9 +304,9 @@ describe("buildServiceEnvironment", () => {
       env: { HOME: "/home/user", SUDOCLAW_PROFILE: "work" },
       port: 18789,
     });
-    expect(env.SUDOCLAW_SYSTEMD_UNIT).toBe("openclaw-gateway-work.service");
+    expect(env.SUDOCLAW_SYSTEMD_UNIT).toBe("sudoclaw-gateway-work.service");
     if (process.platform === "darwin") {
-      expect(env.SUDOCLAW_LAUNCHD_LABEL).toBe("ai.openclaw.work");
+      expect(env.SUDOCLAW_LAUNCHD_LABEL).toBe("ai.sudoclaw.work");
     }
   });
 

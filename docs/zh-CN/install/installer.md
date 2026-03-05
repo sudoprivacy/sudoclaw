@@ -16,7 +16,7 @@ x-i18n:
 
 # 安装器内部机制
 
-OpenClaw 提供两个安装器脚本（托管在 `openclaw.ai`）：
+SudoClaw 提供两个安装器脚本（托管在 `openclaw.ai`）：
 
 - `https://sudoclaw.ai/install.sh` — "推荐"安装器（默认全局 npm 安装；也可从 GitHub 检出安装）
 - `https://sudoclaw.ai/install-cli.sh` — 无需 root 权限的 CLI 安装器（安装到带有独立 Node 的前缀目录）
@@ -58,12 +58,12 @@ SHARP_IGNORE_GLOBAL_LIBVIPS=0 curl -fsSL https://sudoclaw.ai/install.sh | bash
 
 ### 可发现性 / "git 安装"提示
 
-如果你在**已有的 OpenClaw 源码检出目录中**运行安装器（通过 `package.json` + `pnpm-workspace.yaml` 检测），它会提示：
+如果你在**已有的 SudoClaw 源码检出目录中**运行安装器（通过 `package.json` + `pnpm-workspace.yaml` 检测），它会提示：
 
 - 更新并使用此检出（`git`）
 - 或迁移到全局 npm 安装（`npm`）
 
-在非交互式上下文中（无 TTY / `--no-prompt`），你必须传入 `--install-method git|npm`（或设置 `OPENCLAW_INSTALL_METHOD`），否则脚本将以退出码 `2` 退出。
+在非交互式上下文中（无 TTY / `--no-prompt`），你必须传入 `--install-method git|npm`（或设置 `SUDOCLAW_INSTALL_METHOD`），否则脚本将以退出码 `2` 退出。
 
 ### 为什么需要 Git
 
@@ -81,7 +81,7 @@ SHARP_IGNORE_GLOBAL_LIBVIPS=0 curl -fsSL https://sudoclaw.ai/install.sh | bash
 
 ## install-cli.sh（无需 root 权限的 CLI 安装器）
 
-此脚本将 `openclaw` 安装到前缀目录（默认：`~/.openclaw`），同时在该前缀下安装专用的 Node 运行时，因此可以在不想改动系统 Node/npm 的机器上使用。
+此脚本将 `openclaw` 安装到前缀目录（默认：`~/.sudoclaw`），同时在该前缀下安装专用的 Node 运行时，因此可以在不想改动系统 Node/npm 的机器上使用。
 
 帮助：
 
@@ -115,8 +115,8 @@ iwr -useb https://sudoclaw.ai/install.ps1 | iex -InstallMethod git -GitDir "C:\\
 
 环境变量：
 
-- `OPENCLAW_INSTALL_METHOD=git|npm`
-- `OPENCLAW_GIT_DIR=...`
+- `SUDOCLAW_INSTALL_METHOD=git|npm`
+- `SUDOCLAW_GIT_DIR=...`
 
 Git 要求：
 

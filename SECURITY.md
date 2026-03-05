@@ -6,10 +6,10 @@ If you believe you've found a security issue in OpenClaw, please report it priva
 
 Report vulnerabilities directly to the repository where the issue lives:
 
-- **Core CLI and gateway** — [openclaw/openclaw](https://github.com/openclaw/openclaw)
-- **macOS desktop app** — [openclaw/openclaw](https://github.com/openclaw/openclaw) (apps/macos)
-- **iOS app** — [openclaw/openclaw](https://github.com/openclaw/openclaw) (apps/ios)
-- **Android app** — [openclaw/openclaw](https://github.com/openclaw/openclaw) (apps/android)
+- **Core CLI and gateway** — [sudoprivacy/sudoclaw](https://github.com/sudoprivacy/sudoclaw)
+- **macOS desktop app** — [sudoprivacy/sudoclaw](https://github.com/sudoprivacy/sudoclaw) (apps/macos)
+- **iOS app** — [sudoprivacy/sudoclaw](https://github.com/sudoprivacy/sudoclaw) (apps/ios)
+- **Android app** — [sudoprivacy/sudoclaw](https://github.com/sudoprivacy/sudoclaw) (apps/android)
 - **ClawHub** — [openclaw/clawhub](https://github.com/openclaw/clawhub)
 - **Trust and threat model** — [openclaw/trust](https://github.com/openclaw/trust)
 
@@ -179,10 +179,10 @@ Plugins/extensions are loaded **in-process** with the Gateway and are treated as
 
 ## Temp Folder Boundary (Media/Sandbox)
 
-OpenClaw uses a dedicated temp root for local media handoff and sandbox-adjacent temp artifacts:
+SudoClaw uses a dedicated temp root for local media handoff and sandbox-adjacent temp artifacts:
 
-- Preferred temp root: `/tmp/openclaw` (when available and safe on the host).
-- Fallback temp root: `os.tmpdir()/openclaw` (or `openclaw-<uid>` on multi-user hosts).
+- Preferred temp root: `/tmp/sudoclaw` (when available and safe on the host).
+- Fallback temp root: `os.tmpdir()/sudoclaw` (or `sudoclaw-<uid>` on multi-user hosts).
 
 Security boundary notes:
 
@@ -220,7 +220,7 @@ OpenClaw's web interface (Gateway Control UI + HTTP endpoints) is intended for *
 
 - Recommended: keep the Gateway **loopback-only** (`127.0.0.1` / `::1`).
   - Config: `gateway.bind="loopback"` (default).
-  - CLI: `openclaw gateway run --bind loopback`.
+  - CLI: `sudoclaw gateway run --bind loopback`.
 - `gateway.controlUi.dangerouslyDisableDeviceAuth` is intended for localhost-only break-glass use.
   - OpenClaw keeps deployment flexibility by design and does not hard-forbid non-local setups.
   - Non-local and other risky configurations are surfaced by `sudoclaw security audit` as dangerous findings.
@@ -260,8 +260,8 @@ Example secure Docker run:
 
 ```bash
 docker run --read-only --cap-drop=ALL \
-  -v openclaw-data:/app/data \
-  openclaw/openclaw:latest
+  -v sudoclaw-data:/app/data \
+  sudoprivacy/sudoclaw:latest
 ```
 
 ## Security Scanning

@@ -2,8 +2,8 @@
 
 <p align="center">
     <picture>
-        <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/openclaw/openclaw/main/docs/assets/openclaw-logo-text-dark.png">
-        <img src="https://raw.githubusercontent.com/openclaw/openclaw/main/docs/assets/openclaw-logo-text.png" alt="sudoclaw" width="500">
+        <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/sudoprivacy/sudoclaw/main/docs/assets/openclaw-logo-text-dark.png">
+        <img src="https://raw.githubusercontent.com/sudoprivacy/sudoclaw/main/docs/assets/openclaw-logo-text.png" alt="sudoclaw" width="500">
     </picture>
 </p>
 
@@ -12,8 +12,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/openclaw/openclaw/actions/workflows/ci.yml?branch=main"><img src="https://img.shields.io/github/actions/workflow/status/openclaw/openclaw/ci.yml?branch=main&style=for-the-badge" alt="CI status"></a>
-  <a href="https://github.com/openclaw/openclaw/releases"><img src="https://img.shields.io/github/v/release/openclaw/openclaw?include_prereleases&style=for-the-badge" alt="GitHub release"></a>
+  <a href="https://github.com/sudoprivacy/sudoclaw/actions/workflows/ci.yml?branch=main"><img src="https://img.shields.io/github/actions/workflow/status/sudoprivacy/sudoclaw/ci.yml?branch=main&style=for-the-badge" alt="CI status"></a>
+  <a href="https://github.com/sudoprivacy/sudoclaw/releases"><img src="https://img.shields.io/github/v/release/sudoprivacy/sudoclaw?include_prereleases&style=for-the-badge" alt="GitHub release"></a>
   <a href="https://discord.gg/clawd"><img src="https://img.shields.io/discord/1456350064065904867?label=Discord&logo=discord&logoColor=white&color=5865F2&style=for-the-badge" alt="Discord"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="MIT License"></a>
 </p>
@@ -25,7 +25,7 @@ If you want a personal, single-user assistant that feels local, fast, and always
 
 [Website](https://sudoclaw.ai) · [Docs](https://docs.sudoclaw.ai) · [Vision](VISION.md) · [DeepWiki](https://deepwiki.com/openclaw/openclaw) · [Getting Started](https://docs.sudoclaw.ai/start/getting-started) · [Updating](https://docs.sudoclaw.ai/install/updating) · [Showcase](https://docs.sudoclaw.ai/start/showcase) · [FAQ](https://docs.sudoclaw.ai/help/faq) · [Wizard](https://docs.sudoclaw.ai/start/wizard) · [Nix](https://github.com/openclaw/nix-openclaw) · [Docker](https://docs.sudoclaw.ai/install/docker) · [Discord](https://discord.gg/clawd)
 
-Preferred setup: run the onboarding wizard (`openclaw onboard`) in your terminal.
+Preferred setup: run the onboarding wizard (`sudoclaw onboard`) in your terminal.
 The wizard guides you step by step through setting up the gateway, workspace, channels, and skills. The CLI wizard is the recommended path and works on **macOS, Linux, and Windows (via WSL2; strongly recommended)**.
 Works with npm, pnpm, or bun.
 New install? Start here: [Getting started](https://docs.sudoclaw.ai/start/getting-started)
@@ -52,10 +52,10 @@ Model note: while any model is supported, I strongly recommend **Anthropic Pro/M
 Runtime: **Node ≥22**.
 
 ```bash
-npm install -g openclaw@latest
-# or: pnpm add -g openclaw@latest
+npm install -g sudoclaw@latest
+# or: pnpm add -g sudoclaw@latest
 
-openclaw onboard --install-daemon
+sudoclaw onboard --install-daemon
 ```
 
 The wizard installs the Gateway daemon (launchd/systemd user service) so it stays running.
@@ -86,7 +86,7 @@ Upgrading? [Updating guide](https://docs.sudoclaw.ai/install/updating) (and run 
 - **beta**: prerelease tags (`vYYYY.M.D-beta.N`), npm dist-tag `beta` (macOS app may be missing).
 - **dev**: moving head of `main`, npm dist-tag `dev` (when published).
 
-Switch channels (git + npm): `openclaw update --channel stable|beta|dev`.
+Switch channels (git + npm): `sudoclaw update --channel stable|beta|dev`.
 Details: [Development channels](https://docs.sudoclaw.ai/install/development-channels).
 
 ## From source (development)
@@ -107,7 +107,7 @@ pnpm sudoclaw onboard --install-daemon
 pnpm gateway:watch
 ```
 
-Note: `pnpm sudoclaw ...` runs TypeScript directly (via `tsx`). `pnpm build` produces `dist/` for running via Node / the packaged `openclaw` binary.
+Note: `pnpm sudoclaw ...` runs TypeScript directly (via `tsx`). `pnpm build` produces `dist/` for running via Node / the packaged `sudoclaw` binary.
 
 ## Security defaults (DM access)
 
@@ -299,7 +299,7 @@ Note: signed builds required for macOS permissions to stick across rebuilds (see
 
 - Pairs as a node via the Bridge.
 - Voice trigger forwarding + Canvas surface.
-- Controlled via `openclaw nodes …`.
+- Controlled via `sudoclaw nodes …`.
 
 Runbook: [iOS connect](https://docs.sudoclaw.ai/platforms/ios).
 
@@ -339,7 +339,7 @@ Details: [Security guide](https://docs.sudoclaw.ai/gateway/security) · [Docker 
 
 ### [WhatsApp](https://docs.sudoclaw.ai/channels/whatsapp)
 
-- Link the device: `pnpm openclaw channels login` (stores creds in `~/.sudoclaw/credentials`).
+- Link the device: `pnpm sudoclaw channels login` (stores creds in `~/.sudoclaw/credentials`).
 - Allowlist who can talk to the assistant via `channels.whatsapp.allowFrom`.
 - If `channels.whatsapp.groups` is set, it becomes a group allowlist; include `"*"` to allow all.
 

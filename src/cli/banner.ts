@@ -99,7 +99,7 @@ export function formatCliBannerArt(options: BannerOptions = {}): string {
       return (
         theme.muted("              ") +
         theme.accent("🦞") +
-        theme.info(" OPENCLAW ") +
+        theme.info(" SUDOCLAW ") +
         theme.accent("🦞")
       );
     }

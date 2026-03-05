@@ -131,10 +131,10 @@ describe("version resolution", () => {
     });
   });
 
-  it("prefers OPENCLAW_VERSION over service and package versions", () => {
+  it("prefers SUDOCLAW_VERSION over service and package versions", () => {
     expect(
       resolveRuntimeServiceVersion({
-        OPENCLAW_VERSION: "9.9.9",
+        SUDOCLAW_VERSION: "9.9.9",
         SUDOCLAW_SERVICE_VERSION: "2.2.2",
         npm_package_version: "1.1.1",
       }),
@@ -144,7 +144,7 @@ describe("version resolution", () => {
   it("uses service and package fallbacks and ignores blank env values", () => {
     expect(
       resolveRuntimeServiceVersion({
-        OPENCLAW_VERSION: "   ",
+        SUDOCLAW_VERSION: "   ",
         SUDOCLAW_SERVICE_VERSION: "  2.0.0  ",
         npm_package_version: "1.0.0",
       }),
@@ -152,7 +152,7 @@ describe("version resolution", () => {
 
     expect(
       resolveRuntimeServiceVersion({
-        OPENCLAW_VERSION: " ",
+        SUDOCLAW_VERSION: " ",
         SUDOCLAW_SERVICE_VERSION: "\t",
         npm_package_version: " 1.0.0-package ",
       }),
@@ -161,7 +161,7 @@ describe("version resolution", () => {
     expect(
       resolveRuntimeServiceVersion(
         {
-          OPENCLAW_VERSION: "",
+          SUDOCLAW_VERSION: "",
           SUDOCLAW_SERVICE_VERSION: " ",
           npm_package_version: "",
         },

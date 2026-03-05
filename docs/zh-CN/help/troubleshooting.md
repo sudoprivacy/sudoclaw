@@ -20,9 +20,9 @@ x-i18n:
 按顺序运行这些命令：
 
 ```bash
-openclaw status
-openclaw status --all
-openclaw gateway probe
+sudoclaw status
+sudoclaw status --all
+sudoclaw gateway probe
 sudoclaw logs --follow
 sudoclaw doctor
 ```
@@ -30,7 +30,7 @@ sudoclaw doctor
 如果 Gateway 网关可达，进行深度探测：
 
 ```bash
-openclaw status --deep
+sudoclaw status --deep
 ```
 
 ## 常见的“它坏了”情况
@@ -55,7 +55,7 @@ curl -fsSL https://sudoclaw.ai/install.sh | bash -s -- --verbose
 curl -fsSL https://sudoclaw.ai/install.sh | bash -s -- --beta --verbose
 ```
 
-你也可以设置 `OPENCLAW_VERBOSE=1` 代替标志。
+你也可以设置 `SUDOCLAW_VERBOSE=1` 代替标志。
 
 ### Gateway 网关“unauthorized”、无法连接或持续重连
 
@@ -89,7 +89,7 @@ curl -fsSL https://sudoclaw.ai/install.sh | bash -s -- --beta --verbose
 
 这通常意味着 `agents.defaults.models` 配置为允许列表。当它非空时，只能选择那些提供商/模型键。
 
-- 检查允许列表：`openclaw config get agents.defaults.models`
+- 检查允许列表：`sudoclaw config get agents.defaults.models`
 - 添加你想要的模型（或清除允许列表）然后重试 `/model`
 - 使用 `/models` 浏览允许的提供商/模型
 
@@ -98,7 +98,7 @@ curl -fsSL https://sudoclaw.ai/install.sh | bash -s -- --beta --verbose
 粘贴一份安全报告：
 
 ```bash
-openclaw status --all
+sudoclaw status --all
 ```
 
 如果可以的话，包含来自 `sudoclaw logs --follow` 的相关日志尾部。

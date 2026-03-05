@@ -91,7 +91,7 @@ The hook automatically:
 To disable this hook:
 
 ```bash
-openclaw hooks disable session-memory
+sudoclaw hooks disable session-memory
 ```
 
 Or remove it from your config:

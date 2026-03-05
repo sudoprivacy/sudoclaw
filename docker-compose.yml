@@ -1,6 +1,6 @@
 services:
-  openclaw-gateway:
-    image: ${OPENCLAW_IMAGE:-openclaw:local}
+  sudoclaw-gateway:
+    image: ${SUDOCLAW_IMAGE:-sudoclaw:local}
     environment:
       HOME: /home/node
       TERM: xterm-256color
@@ -9,11 +9,11 @@ services:
       CLAUDE_WEB_SESSION_KEY: ${CLAUDE_WEB_SESSION_KEY:-}
       CLAUDE_WEB_COOKIE: ${CLAUDE_WEB_COOKIE:-}
     volumes:
-      - ${OPENCLAW_CONFIG_DIR}:/home/node/.sudoclaw
-      - ${OPENCLAW_WORKSPACE_DIR}:/home/node/.sudoclaw/workspace
+      - ${SUDOCLAW_CONFIG_DIR}:/home/node/.sudoclaw
+      - ${SUDOCLAW_WORKSPACE_DIR}:/home/node/.sudoclaw/workspace
     ports:
       - "${SUDOCLAW_GATEWAY_PORT:-18789}:18789"
-      - "${OPENCLAW_BRIDGE_PORT:-18790}:18790"
+      - "${SUDOCLAW_BRIDGE_PORT:-18790}:18790"
     init: true
     restart: unless-stopped
     command:
@@ -22,14 +22,14 @@ services:
         "dist/index.js",
         "gateway",
         "--bind",
-        "${OPENCLAW_GATEWAY_BIND:-lan}",
+        "${SUDOCLAW_GATEWAY_BIND:-lan}",
         "--port",
         "18789",
       ]
 
-  openclaw-cli:
-    image: ${OPENCLAW_IMAGE:-openclaw:local}
-    network_mode: "service:openclaw-gateway"
+  sudoclaw-cli:
+    image: ${SUDOCLAW_IMAGE:-sudoclaw:local}
+    network_mode: "service:sudoclaw-gateway"
     cap_drop:
       - NET_RAW
       - NET_ADMIN
@@ -44,11 +44,11 @@ services:
       CLAUDE_WEB_SESSION_KEY: ${CLAUDE_WEB_SESSION_KEY:-}
       CLAUDE_WEB_COOKIE: ${CLAUDE_WEB_COOKIE:-}
     volumes:
-      - ${OPENCLAW_CONFIG_DIR}:/home/node/.sudoclaw
-      - ${OPENCLAW_WORKSPACE_DIR}:/home/node/.sudoclaw/workspace
+      - ${SUDOCLAW_CONFIG_DIR}:/home/node/.sudoclaw
+      - ${SUDOCLAW_WORKSPACE_DIR}:/home/node/.sudoclaw/workspace
     stdin_open: true
     tty: true
     init: true
     entrypoint: ["node", "dist/index.js"]
     depends_on:
-      - openclaw-gateway
+      - sudoclaw-gateway

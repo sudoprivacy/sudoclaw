@@ -32,10 +32,10 @@ import { hasExpectedToolNonce, shouldRetryToolReadProbe } from "./live-tool-prob
 import { startGatewayServer } from "./server.js";
 import { extractPayloadText } from "./test-helpers.agent-results.js";
 
-const LIVE = isTruthyEnvValue(process.env.LIVE) || isTruthyEnvValue(process.env.OPENCLAW_LIVE_TEST);
-const GATEWAY_LIVE = isTruthyEnvValue(process.env.OPENCLAW_LIVE_GATEWAY);
-const ZAI_FALLBACK = isTruthyEnvValue(process.env.OPENCLAW_LIVE_GATEWAY_ZAI_FALLBACK);
-const PROVIDERS = parseFilter(process.env.OPENCLAW_LIVE_GATEWAY_PROVIDERS);
+const LIVE = isTruthyEnvValue(process.env.LIVE) || isTruthyEnvValue(process.env.SUDOCLAW_LIVE_TEST);
+const GATEWAY_LIVE = isTruthyEnvValue(process.env.SUDOCLAW_LIVE_GATEWAY);
+const ZAI_FALLBACK = isTruthyEnvValue(process.env.SUDOCLAW_LIVE_GATEWAY_ZAI_FALLBACK);
+const PROVIDERS = parseFilter(process.env.SUDOCLAW_LIVE_GATEWAY_PROVIDERS);
 const THINKING_LEVEL = "high";
 const THINKING_TAG_RE = /<\s*\/?\s*(?:think(?:ing)?|thought|antthinking)\s*>/i;
 const FINAL_TAG_RE = /<\s*\/?\s*final\s*>/i;
@@ -70,12 +70,12 @@ function toInt(value: string | undefined, fallback: number): number {
 }
 
 function resolveGatewayLiveMaxModels(): number {
-  const gatewayMax = toInt(process.env.OPENCLAW_LIVE_GATEWAY_MAX_MODELS, -1);
+  const gatewayMax = toInt(process.env.SUDOCLAW_LIVE_GATEWAY_MAX_MODELS, -1);
   if (gatewayMax >= 0) {
     return gatewayMax;
   }
   // Reuse shared live-model cap when gateway-specific cap is not provided.
-  return Math.max(0, toInt(process.env.OPENCLAW_LIVE_MAX_MODELS, 0));
+  return Math.max(0, toInt(process.env.SUDOCLAW_LIVE_MAX_MODELS, 0));
 }
 
 function resolveGatewayLiveSuiteTimeoutMs(maxModels: number): number {
@@ -594,21 +594,21 @@ async function runGatewayModelSuite(params: GatewayModelSuiteParams) {
   const previous = {
     configPath: process.env.SUDOCLAW_CONFIG_PATH,
     token: process.env.SUDOCLAW_GATEWAY_TOKEN,
-    skipChannels: process.env.OPENCLAW_SKIP_CHANNELS,
-    skipGmail: process.env.OPENCLAW_SKIP_GMAIL_WATCHER,
-    skipCron: process.env.OPENCLAW_SKIP_CRON,
-    skipCanvas: process.env.OPENCLAW_SKIP_CANVAS_HOST,
-    agentDir: process.env.OPENCLAW_AGENT_DIR,
+    skipChannels: process.env.SUDOCLAW_SKIP_CHANNELS,
+    skipGmail: process.env.SUDOCLAW_SKIP_GMAIL_WATCHER,
+    skipCron: process.env.SUDOCLAW_SKIP_CRON,
+    skipCanvas: process.env.SUDOCLAW_SKIP_CANVAS_HOST,
+    agentDir: process.env.SUDOCLAW_AGENT_DIR,
     piAgentDir: process.env.PI_CODING_AGENT_DIR,
     stateDir: process.env.SUDOCLAW_STATE_DIR,
   };
   let tempAgentDir: string | undefined;
   let tempStateDir: string | undefined;
 
-  process.env.OPENCLAW_SKIP_CHANNELS = "1";
-  process.env.OPENCLAW_SKIP_GMAIL_WATCHER = "1";
-  process.env.OPENCLAW_SKIP_CRON = "1";
-  process.env.OPENCLAW_SKIP_CANVAS_HOST = "1";
+  process.env.SUDOCLAW_SKIP_CHANNELS = "1";
+  process.env.SUDOCLAW_SKIP_GMAIL_WATCHER = "1";
+  process.env.SUDOCLAW_SKIP_CRON = "1";
+  process.env.SUDOCLAW_SKIP_CANVAS_HOST = "1";
 
   const token = `test-${randomUUID()}`;
   process.env.SUDOCLAW_GATEWAY_TOKEN = token;
@@ -635,7 +635,7 @@ async function runGatewayModelSuite(params: GatewayModelSuiteParams) {
   if (tempSessionAgentDir !== tempAgentDir) {
     saveAuthProfileStore(sanitizedStore, tempSessionAgentDir);
   }
-  process.env.OPENCLAW_AGENT_DIR = tempAgentDir;
+  process.env.SUDOCLAW_AGENT_DIR = tempAgentDir;
   process.env.PI_CODING_AGENT_DIR = tempAgentDir;
 
   const workspaceDir = resolveAgentWorkspaceDir(params.cfg, agentId);
@@ -1141,11 +1141,11 @@ async function runGatewayModelSuite(params: GatewayModelSuiteParams) {
 
     process.env.SUDOCLAW_CONFIG_PATH = previous.configPath;
     process.env.SUDOCLAW_GATEWAY_TOKEN = previous.token;
-    process.env.OPENCLAW_SKIP_CHANNELS = previous.skipChannels;
-    process.env.OPENCLAW_SKIP_GMAIL_WATCHER = previous.skipGmail;
-    process.env.OPENCLAW_SKIP_CRON = previous.skipCron;
-    process.env.OPENCLAW_SKIP_CANVAS_HOST = previous.skipCanvas;
-    process.env.OPENCLAW_AGENT_DIR = previous.agentDir;
+    process.env.SUDOCLAW_SKIP_CHANNELS = previous.skipChannels;
+    process.env.SUDOCLAW_SKIP_GMAIL_WATCHER = previous.skipGmail;
+    process.env.SUDOCLAW_SKIP_CRON = previous.skipCron;
+    process.env.SUDOCLAW_SKIP_CANVAS_HOST = previous.skipCanvas;
+    process.env.SUDOCLAW_AGENT_DIR = previous.agentDir;
     process.env.PI_CODING_AGENT_DIR = previous.piAgentDir;
     process.env.SUDOCLAW_STATE_DIR = previous.stateDir;
   }
@@ -1166,7 +1166,7 @@ describeLive("gateway live (dev agent, profile keys)", () => {
       const modelRegistry = discoverModels(authStorage, agentDir);
       const all = modelRegistry.getAll();
 
-      const rawModels = process.env.OPENCLAW_LIVE_GATEWAY_MODELS?.trim();
+      const rawModels = process.env.SUDOCLAW_LIVE_GATEWAY_MODELS?.trim();
       const useModern = !rawModels || rawModels === "modern" || rawModels === "all";
       const useExplicit = Boolean(rawModels) && !useModern;
       const filter = useExplicit ? parseFilter(rawModels) : null;
@@ -1209,7 +1209,7 @@ describeLive("gateway live (dev agent, profile keys)", () => {
       logProgress(`[all-models] selection=${useExplicit ? "explicit" : "modern"}`);
       if (selectedCandidates.length < candidates.length) {
         logProgress(
-          `[all-models] capped to ${selectedCandidates.length}/${candidates.length} via OPENCLAW_LIVE_GATEWAY_MAX_MODELS=${maxModels}`,
+          `[all-models] capped to ${selectedCandidates.length}/${candidates.length} via SUDOCLAW_LIVE_GATEWAY_MAX_MODELS=${maxModels}`,
         );
       }
       const imageCandidates = selectedCandidates.filter((m) => m.input?.includes("image"));
@@ -1260,16 +1260,16 @@ describeLive("gateway live (dev agent, profile keys)", () => {
     const previous = {
       configPath: process.env.SUDOCLAW_CONFIG_PATH,
       token: process.env.SUDOCLAW_GATEWAY_TOKEN,
-      skipChannels: process.env.OPENCLAW_SKIP_CHANNELS,
-      skipGmail: process.env.OPENCLAW_SKIP_GMAIL_WATCHER,
-      skipCron: process.env.OPENCLAW_SKIP_CRON,
-      skipCanvas: process.env.OPENCLAW_SKIP_CANVAS_HOST,
+      skipChannels: process.env.SUDOCLAW_SKIP_CHANNELS,
+      skipGmail: process.env.SUDOCLAW_SKIP_GMAIL_WATCHER,
+      skipCron: process.env.SUDOCLAW_SKIP_CRON,
+      skipCanvas: process.env.SUDOCLAW_SKIP_CANVAS_HOST,
     };
 
-    process.env.OPENCLAW_SKIP_CHANNELS = "1";
-    process.env.OPENCLAW_SKIP_GMAIL_WATCHER = "1";
-    process.env.OPENCLAW_SKIP_CRON = "1";
-    process.env.OPENCLAW_SKIP_CANVAS_HOST = "1";
+    process.env.SUDOCLAW_SKIP_CHANNELS = "1";
+    process.env.SUDOCLAW_SKIP_GMAIL_WATCHER = "1";
+    process.env.SUDOCLAW_SKIP_CRON = "1";
+    process.env.SUDOCLAW_SKIP_CANVAS_HOST = "1";
 
     const token = `test-${randomUUID()}`;
     process.env.SUDOCLAW_GATEWAY_TOKEN = token;
@@ -1391,10 +1391,10 @@ describeLive("gateway live (dev agent, profile keys)", () => {
 
       process.env.SUDOCLAW_CONFIG_PATH = previous.configPath;
       process.env.SUDOCLAW_GATEWAY_TOKEN = previous.token;
-      process.env.OPENCLAW_SKIP_CHANNELS = previous.skipChannels;
-      process.env.OPENCLAW_SKIP_GMAIL_WATCHER = previous.skipGmail;
-      process.env.OPENCLAW_SKIP_CRON = previous.skipCron;
-      process.env.OPENCLAW_SKIP_CANVAS_HOST = previous.skipCanvas;
+      process.env.SUDOCLAW_SKIP_CHANNELS = previous.skipChannels;
+      process.env.SUDOCLAW_SKIP_GMAIL_WATCHER = previous.skipGmail;
+      process.env.SUDOCLAW_SKIP_CRON = previous.skipCron;
+      process.env.SUDOCLAW_SKIP_CANVAS_HOST = previous.skipCanvas;
     }
   }, 180_000);
 });

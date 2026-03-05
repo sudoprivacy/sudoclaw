@@ -15,7 +15,7 @@ Automatically saves session context to memory when you issue `/new` or `/reset`.
 **Enable**:
 
 ```bash
-openclaw hooks enable session-memory
+sudoclaw hooks enable session-memory
 ```
 
 ### 📎 bootstrap-extra-files
@@ -29,7 +29,7 @@ Injects extra bootstrap files (for example monorepo `AGENTS.md`/`TOOLS.md`) duri
 **Enable**:
 
 ```bash
-openclaw hooks enable bootstrap-extra-files
+sudoclaw hooks enable bootstrap-extra-files
 ```
 
 ### 📝 command-logger
@@ -43,7 +43,7 @@ Logs all command events to a centralized audit file.
 **Enable**:
 
 ```bash
-openclaw hooks enable command-logger
+sudoclaw hooks enable command-logger
 ```
 
 ### 🚀 boot-md
@@ -57,7 +57,7 @@ Runs `BOOT.md` whenever the gateway starts (after channels start).
 **Enable**:
 
 ```bash
-openclaw hooks enable boot-md
+sudoclaw hooks enable boot-md
 ```
 
 ## Hook Structure
@@ -116,26 +116,26 @@ Custom hooks follow the same structure as bundled hooks.
 List all hooks:
 
 ```bash
-openclaw hooks list
+sudoclaw hooks list
 ```
 
 Show hook details:
 
 ```bash
-openclaw hooks info session-memory
+sudoclaw hooks info session-memory
 ```
 
 Check hook status:
 
 ```bash
-openclaw hooks check
+sudoclaw hooks check
 ```
 
 Enable/disable:
 
 ```bash
-openclaw hooks enable session-memory
-openclaw hooks disable command-logger
+sudoclaw hooks enable session-memory
+sudoclaw hooks disable command-logger
 ```
 
 ## Configuration
@@ -213,8 +213,8 @@ export default myHandler;
 Test your hooks by:
 
 1. Place hook in workspace hooks directory
-2. Restart gateway: `pkill -9 -f 'openclaw.*gateway' && pnpm openclaw gateway`
-3. Enable the hook: `openclaw hooks enable my-hook`
+2. Restart gateway: `pkill -9 -f 'sudoclaw.*gateway' && pnpm sudoclaw gateway`
+3. Enable the hook: `sudoclaw hooks enable my-hook`
 4. Trigger the event (e.g., send `/new` command)
 5. Check gateway logs for hook execution
 

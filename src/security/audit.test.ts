@@ -191,9 +191,9 @@ describe("security audit", () => {
   it("flags non-loopback bind without auth as critical", async () => {
     // Clear env tokens so resolveGatewayAuth defaults to mode=none
     const prevToken = process.env.SUDOCLAW_GATEWAY_TOKEN;
-    const prevPassword = process.env.OPENCLAW_GATEWAY_PASSWORD;
+    const prevPassword = process.env.SUDOCLAW_GATEWAY_PASSWORD;
     delete process.env.SUDOCLAW_GATEWAY_TOKEN;
-    delete process.env.OPENCLAW_GATEWAY_PASSWORD;
+    delete process.env.SUDOCLAW_GATEWAY_PASSWORD;
 
     try {
       const cfg: OpenClawConfig = {
@@ -214,9 +214,9 @@ describe("security audit", () => {
         process.env.SUDOCLAW_GATEWAY_TOKEN = prevToken;
       }
       if (prevPassword === undefined) {
-        delete process.env.OPENCLAW_GATEWAY_PASSWORD;
+        delete process.env.SUDOCLAW_GATEWAY_PASSWORD;
       } else {
-        process.env.OPENCLAW_GATEWAY_PASSWORD = prevPassword;
+        process.env.SUDOCLAW_GATEWAY_PASSWORD = prevPassword;
       }
     }
   });
@@ -442,7 +442,7 @@ describe("security audit", () => {
     const riskyGlobalTrustedDirs =
       process.platform === "win32"
         ? [String.raw`C:\Users\ci-user\bin`, String.raw`C:\Users\ci-user\.local\bin`]
-        : ["/usr/local/bin", "/tmp/openclaw-safe-bins"];
+        : ["/usr/local/bin", "/tmp/sudoclaw-safe-bins"];
     const cfg: OpenClawConfig = {
       tools: {
         exec: {
@@ -754,7 +754,7 @@ describe("security audit", () => {
     const stateDir = path.join(tmp, "state");
     await fs.mkdir(stateDir, { recursive: true, mode: 0o700 });
 
-    const targetConfigPath = path.join(tmp, "managed-openclaw.json");
+    const targetConfigPath = path.join(tmp, "managed-sudoclaw.json");
     await fs.writeFile(targetConfigPath, "{}\n", "utf-8");
     await fs.chmod(targetConfigPath, 0o444);
 
@@ -2889,7 +2889,7 @@ description: test skill
         probeEnv.SUDOCLAW_GATEWAY_TOKEN = env.token;
       }
       if (env?.password !== undefined) {
-        probeEnv.OPENCLAW_GATEWAY_PASSWORD = env.password;
+        probeEnv.SUDOCLAW_GATEWAY_PASSWORD = env.password;
       }
       return probeEnv;
     };

@@ -20,7 +20,7 @@ x-i18n:
 1. 启动 Gateway 网关。
 
 ```bash
-openclaw gateway
+sudoclaw gateway
 ```
 
 2. 打开 TUI。
@@ -155,12 +155,12 @@ sudoclaw tui --url ws://<host>:<port> --token <gateway-token>
 
 - 在 TUI 中运行 `/status` 以确认 Gateway 网关已连接且处于空闲/忙碌状态。
 - 检查 Gateway 网关日志：`sudoclaw logs --follow`。
-- 确认智能体可以运行：`openclaw status` 和 `openclaw models status`。
+- 确认智能体可以运行：`sudoclaw status` 和 `sudoclaw models status`。
 - 如果你期望消息出现在聊天渠道中，请启用投递（`/deliver on` 或 `--deliver`）。
 - `--history-limit <n>`：要加载的历史条目数（默认 200）
 
 ## 故障排除
 
 - `disconnected`：确保 Gateway 网关正在运行且你的 `--url/--token/--password` 正确。
-- 选择器中没有智能体：检查 `openclaw agents list` 和你的路由配置。
+- 选择器中没有智能体：检查 `sudoclaw agents list` 和你的路由配置。
 - 会话选择器为空：你可能处于全局范围或还没有会话。

@@ -237,7 +237,7 @@ export async function gatherDaemonStatus(
           daemonCfg.gateway?.auth?.token,
         password:
           opts.rpc.password ||
-          mergedDaemonEnv.OPENCLAW_GATEWAY_PASSWORD ||
+          mergedDaemonEnv.SUDOCLAW_GATEWAY_PASSWORD ||
           daemonCfg.gateway?.auth?.password,
         tlsFingerprint:
           shouldUseLocalTlsRuntime && tlsRuntime?.enabled

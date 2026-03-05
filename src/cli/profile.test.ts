@@ -81,9 +81,9 @@ describe("applyCliProfileEnv", () => {
     expect(env.SUDOCLAW_CONFIG_PATH).toBe(path.join("/custom", "sudoclaw.json"));
   });
 
-  it("uses OPENCLAW_HOME when deriving profile state dir", () => {
+  it("uses SUDOCLAW_HOME when deriving profile state dir", () => {
     const env: Record<string, string | undefined> = {
-      OPENCLAW_HOME: "/srv/openclaw-home",
+      SUDOCLAW_HOME: "/srv/sudoclaw-home",
       HOME: "/home/other",
     };
     applyCliProfileEnv({
@@ -92,7 +92,7 @@ describe("applyCliProfileEnv", () => {
       homedir: () => "/home/fallback",
     });
 
-    const resolvedHome = path.resolve("/srv/openclaw-home");
+    const resolvedHome = path.resolve("/srv/sudoclaw-home");
     expect(env.SUDOCLAW_STATE_DIR).toBe(path.join(resolvedHome, ".openclaw-work"));
     expect(env.SUDOCLAW_CONFIG_PATH).toBe(
       path.join(resolvedHome, ".openclaw-work", "sudoclaw.json"),
@@ -128,15 +128,15 @@ describe("formatCliCommand", () => {
     },
     {
       name: "--profile is already present",
-      cmd: "openclaw --profile work doctor --fix",
+      cmd: "sudoclaw --profile work doctor --fix",
       env: { SUDOCLAW_PROFILE: "work" },
-      expected: "openclaw --profile work doctor --fix",
+      expected: "sudoclaw --profile work doctor --fix",
     },
     {
       name: "--dev is already present",
-      cmd: "openclaw --dev doctor",
+      cmd: "sudoclaw --dev doctor",
       env: { SUDOCLAW_PROFILE: "dev" },
-      expected: "openclaw --dev doctor",
+      expected: "sudoclaw --dev doctor",
     },
   ])("returns command unchanged when $name", ({ cmd, env, expected }) => {
     expect(formatCliCommand(cmd, env)).toBe(expected);
@@ -144,25 +144,25 @@ describe("formatCliCommand", () => {
 
   it("inserts --profile flag when profile is set", () => {
     expect(formatCliCommand("sudoclaw doctor --fix", { SUDOCLAW_PROFILE: "work" })).toBe(
-      "openclaw --profile work doctor --fix",
+      "sudoclaw --profile work doctor --fix",
     );
   });
 
   it("trims whitespace from profile", () => {
     expect(formatCliCommand("sudoclaw doctor --fix", { SUDOCLAW_PROFILE: "  jbopenclaw  " })).toBe(
-      "openclaw --profile jbsudoclaw doctor --fix",
+      "sudoclaw --profile jbsudoclaw doctor --fix",
     );
   });
 
   it("handles command with no args after openclaw", () => {
     expect(formatCliCommand("sudoclaw", { SUDOCLAW_PROFILE: "test" })).toBe(
-      "openclaw --profile test",
+      "sudoclaw --profile test",
     );
   });
 
   it("handles pnpm wrapper", () => {
     expect(formatCliCommand("pnpm sudoclaw doctor", { SUDOCLAW_PROFILE: "work" })).toBe(
-      "pnpm openclaw --profile work doctor",
+      "pnpm sudoclaw --profile work doctor",
     );
   });
 });

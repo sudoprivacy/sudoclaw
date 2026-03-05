@@ -28,8 +28,8 @@ Notes:
 - Interactive prompts (like keychain/OAuth fixes) only run when stdin is a TTY and `--non-interactive` is **not** set. Headless runs (cron, Telegram, no terminal) will skip prompts.
 - `--fix` (alias for `--repair`) writes a backup to `~/.sudoclaw/sudoclaw.json.bak` and drops unknown config keys, listing each removal.
 - State integrity checks now detect orphan transcript files in the sessions directory and can archive them as `.deleted.<timestamp>` to reclaim space safely.
-- Doctor includes a memory-search readiness check and can recommend `openclaw configure --section model` when embedding credentials are missing.
-- If sandbox mode is enabled but Docker is unavailable, doctor reports a high-signal warning with remediation (`install Docker` or `openclaw config set agents.defaults.sandbox.mode off`).
+- Doctor includes a memory-search readiness check and can recommend `sudoclaw configure --section model` when embedding credentials are missing.
+- If sandbox mode is enabled but Docker is unavailable, doctor reports a high-signal warning with remediation (`install Docker` or `sudoclaw config set agents.defaults.sandbox.mode off`).
 
 ## macOS: `launchctl` env overrides
 
@@ -37,8 +37,8 @@ If you previously ran `launchctl setenv SUDOCLAW_GATEWAY_TOKEN ...` (or `...PASS
 
 ```bash
 launchctl getenv SUDOCLAW_GATEWAY_TOKEN
-launchctl getenv OPENCLAW_GATEWAY_PASSWORD
+launchctl getenv SUDOCLAW_GATEWAY_PASSWORD
 
 launchctl unsetenv SUDOCLAW_GATEWAY_TOKEN
-launchctl unsetenv OPENCLAW_GATEWAY_PASSWORD
+launchctl unsetenv SUDOCLAW_GATEWAY_PASSWORD
 ```

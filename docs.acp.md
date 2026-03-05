@@ -5,7 +5,7 @@ how it maps ACP sessions to Gateway sessions, and how IDEs should invoke it.
 
 ## Overview
 
-`openclaw acp` exposes an ACP agent over stdio and forwards prompts to a running
+`sudoclaw acp` exposes an ACP agent over stdio and forwards prompts to a running
 OpenClaw Gateway over WebSocket. It keeps ACP session ids mapped to Gateway
 session keys so IDEs can reconnect to the same agent transcript or reset it on
 request.
@@ -26,19 +26,19 @@ Quick steps:
 
 1. Run a Gateway (local or remote).
 2. Configure the Gateway target (`gateway.remote.url` + auth) or pass flags.
-3. Point the IDE to run `openclaw acp` over stdio.
+3. Point the IDE to run `sudoclaw acp` over stdio.
 
 Example config:
 
 ```bash
-openclaw config set gateway.remote.url wss://gateway-host:18789
-openclaw config set gateway.remote.token <token>
+sudoclaw config set gateway.remote.url wss://gateway-host:18789
+sudoclaw config set gateway.remote.token <token>
 ```
 
 Example run:
 
 ```bash
-openclaw acp --url wss://gateway-host:18789 --token <token>
+sudoclaw acp --url wss://gateway-host:18789 --token <token>
 ```
 
 ## Selecting agents
@@ -48,9 +48,9 @@ ACP does not pick agents directly. It routes by the Gateway session key.
 Use agent-scoped session keys to target a specific agent:
 
 ```bash
-openclaw acp --session agent:main:main
-openclaw acp --session agent:design:main
-openclaw acp --session agent:qa:bug-123
+sudoclaw acp --session agent:main:main
+sudoclaw acp --session agent:design:main
+sudoclaw acp --session agent:qa:bug-123
 ```
 
 Each ACP session maps to a single Gateway session key. One agent can have many
@@ -101,7 +101,7 @@ In Zed, open the Agent panel and select “OpenClaw ACP” to start a thread.
 
 ## Execution Model
 
-- ACP client spawns `openclaw acp` and speaks ACP messages over stdio.
+- ACP client spawns `sudoclaw acp` and speaks ACP messages over stdio.
 - The bridge connects to the Gateway using existing auth config (or CLI flags).
 - ACP `prompt` translates to Gateway `chat.send`.
 - Gateway streaming events are translated back into ACP streaming events.
@@ -118,9 +118,9 @@ You can override or reuse sessions in two ways:
 1. CLI defaults
 
 ```bash
-openclaw acp --session agent:main:main
-openclaw acp --session-label "support inbox"
-openclaw acp --reset-session
+sudoclaw acp --session agent:main:main
+sudoclaw acp --session-label "support inbox"
+sudoclaw acp --reset-session
 ```
 
 2. ACP metadata per session
@@ -167,7 +167,7 @@ updates. Terminal Gateway states map to ACP `done` with stop reasons:
 
 ## Auth + Gateway Discovery
 
-`openclaw acp` resolves the Gateway URL and auth from CLI flags or config:
+`sudoclaw acp` resolves the Gateway URL and auth from CLI flags or config:
 
 - `--url` / `--token` / `--password` take precedence.
 - Otherwise use configured `gateway.remote.*` settings.

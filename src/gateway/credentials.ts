@@ -50,7 +50,7 @@ function readGatewayPasswordEnv(
   env: NodeJS.ProcessEnv,
   includeLegacyEnv: boolean,
 ): string | undefined {
-  const primary = trimToUndefined(env.OPENCLAW_GATEWAY_PASSWORD);
+  const primary = trimToUndefined(env.SUDOCLAW_GATEWAY_PASSWORD);
   if (primary) {
     return primary;
   }

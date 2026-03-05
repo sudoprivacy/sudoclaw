@@ -236,7 +236,7 @@ struct TailscaleIntegrationSection: View {
             .textFieldStyle(.roundedBorder)
             .frame(maxWidth: 240)
             .onSubmit { Task { await self.applySettings() } }
-        Text("Stored in ~/.sudoclaw/sudoclaw.json. Prefer OPENCLAW_GATEWAY_PASSWORD for production.")
+        Text("Stored in ~/.sudoclaw/sudoclaw.json. Prefer SUDOCLAW_GATEWAY_PASSWORD for production.")
             .font(.caption)
             .foregroundStyle(.secondary)
         Button("Update password") { Task { await self.applySettings() } }

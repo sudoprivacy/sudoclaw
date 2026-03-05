@@ -43,7 +43,7 @@ describe("secrets runtime snapshot", () => {
         GITHUB_TOKEN: "ghp-env-token",
         REVIEW_SKILL_API_KEY: "sk-skill-ref",
       },
-      agentDirs: ["/tmp/openclaw-agent-main"],
+      agentDirs: ["/tmp/sudoclaw-agent-main"],
       loadAuthStore: () => ({
         version: 1,
         profiles: {
@@ -94,7 +94,7 @@ describe("secrets runtime snapshot", () => {
     const snapshot = await prepareSecretsRuntimeSnapshot({
       config,
       env: { MY_TOKEN: "resolved-token-value" },
-      agentDirs: ["/tmp/openclaw-agent-main"],
+      agentDirs: ["/tmp/sudoclaw-agent-main"],
       loadAuthStore: ((_agentDir?: string) =>
         ({
           version: 1,
@@ -124,7 +124,7 @@ describe("secrets runtime snapshot", () => {
     const snapshot = await prepareSecretsRuntimeSnapshot({
       config,
       env: { MY_KEY: "resolved-key-value" },
-      agentDirs: ["/tmp/openclaw-agent-main"],
+      agentDirs: ["/tmp/sudoclaw-agent-main"],
       loadAuthStore: ((_agentDir?: string) =>
         ({
           version: 1,
@@ -157,7 +157,7 @@ describe("secrets runtime snapshot", () => {
         PRIMARY_KEY: "primary-key-value",
         SHADOW_KEY: "shadow-key-value",
       },
-      agentDirs: ["/tmp/openclaw-agent-main"],
+      agentDirs: ["/tmp/sudoclaw-agent-main"],
       loadAuthStore: () =>
         ({
           version: 1,
@@ -231,7 +231,7 @@ describe("secrets runtime snapshot", () => {
 
       const snapshot = await prepareSecretsRuntimeSnapshot({
         config,
-        agentDirs: ["/tmp/openclaw-agent-main"],
+        agentDirs: ["/tmp/sudoclaw-agent-main"],
         loadAuthStore: () => ({ version: 1, profiles: {} }),
       });
 
@@ -273,7 +273,7 @@ describe("secrets runtime snapshot", () => {
               },
             },
           },
-          agentDirs: ["/tmp/openclaw-agent-main"],
+          agentDirs: ["/tmp/sudoclaw-agent-main"],
           loadAuthStore: () => ({ version: 1, profiles: {} }),
         }),
       ).rejects.toThrow("payload is not a JSON object");
@@ -296,7 +296,7 @@ describe("secrets runtime snapshot", () => {
         },
       },
       env: { OPENAI_API_KEY: "sk-runtime" },
-      agentDirs: ["/tmp/openclaw-agent-main"],
+      agentDirs: ["/tmp/sudoclaw-agent-main"],
       loadAuthStore: () => ({
         version: 1,
         profiles: {
@@ -312,7 +312,7 @@ describe("secrets runtime snapshot", () => {
     activateSecretsRuntimeSnapshot(prepared);
 
     expect(loadConfig().models?.providers?.openai?.apiKey).toBe("sk-runtime");
-    const store = ensureAuthProfileStore("/tmp/openclaw-agent-main");
+    const store = ensureAuthProfileStore("/tmp/sudoclaw-agent-main");
     expect(store.profiles["openai:default"]).toMatchObject({
       type: "api_key",
       key: "sk-runtime",

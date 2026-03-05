@@ -55,7 +55,7 @@ async function withWrapperEnvContext(configPath: string, run: () => Promise<void
   await withEnvOverrides(
     {
       SUDOCLAW_CONFIG_PATH: configPath,
-      OPENCLAW_DISABLE_CONFIG_CACHE: "1",
+      SUDOCLAW_DISABLE_CONFIG_CACHE: "1",
       MY_API_KEY: "original-key-123",
     },
     run,

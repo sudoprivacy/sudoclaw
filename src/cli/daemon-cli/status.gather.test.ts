@@ -21,8 +21,8 @@ const serviceReadRuntime = vi.fn(async (_env?: NodeJS.ProcessEnv) => ({ status: 
 const serviceReadCommand = vi.fn(async (_env?: NodeJS.ProcessEnv) => ({
   programArguments: ["/bin/node", "cli", "gateway", "--port", "19001"],
   environment: {
-    SUDOCLAW_STATE_DIR: "/tmp/openclaw-daemon",
-    SUDOCLAW_CONFIG_PATH: "/tmp/openclaw-daemon/openclaw.json",
+    SUDOCLAW_STATE_DIR: "/tmp/sudoclaw-daemon",
+    SUDOCLAW_CONFIG_PATH: "/tmp/sudoclaw-daemon/sudoclaw.json",
   },
 }));
 const resolveGatewayBindHost = vi.fn(
@@ -31,10 +31,10 @@ const resolveGatewayBindHost = vi.fn(
 const pickPrimaryTailnetIPv4 = vi.fn(() => "100.64.0.9");
 const resolveGatewayPort = vi.fn((_cfg?: unknown, _env?: unknown) => 18789);
 const resolveStateDir = vi.fn(
-  (env: NodeJS.ProcessEnv) => env.SUDOCLAW_STATE_DIR ?? "/tmp/openclaw-cli",
+  (env: NodeJS.ProcessEnv) => env.SUDOCLAW_STATE_DIR ?? "/tmp/sudoclaw-cli",
 );
 const resolveConfigPath = vi.fn((env: NodeJS.ProcessEnv, stateDir: string) => {
-  return env.SUDOCLAW_CONFIG_PATH ?? `${stateDir}/openclaw.json`;
+  return env.SUDOCLAW_CONFIG_PATH ?? `${stateDir}/sudoclaw.json`;
 });
 
 vi.mock("../../config/config.js", () => ({
@@ -123,12 +123,12 @@ describe("gatherDaemonStatus", () => {
       "SUDOCLAW_STATE_DIR",
       "SUDOCLAW_CONFIG_PATH",
       "SUDOCLAW_GATEWAY_TOKEN",
-      "OPENCLAW_GATEWAY_PASSWORD",
+      "SUDOCLAW_GATEWAY_PASSWORD",
     ]);
-    process.env.SUDOCLAW_STATE_DIR = "/tmp/openclaw-cli";
-    process.env.SUDOCLAW_CONFIG_PATH = "/tmp/openclaw-cli/openclaw.json";
+    process.env.SUDOCLAW_STATE_DIR = "/tmp/sudoclaw-cli";
+    process.env.SUDOCLAW_CONFIG_PATH = "/tmp/sudoclaw-cli/sudoclaw.json";
     delete process.env.SUDOCLAW_GATEWAY_TOKEN;
-    delete process.env.OPENCLAW_GATEWAY_PASSWORD;
+    delete process.env.SUDOCLAW_GATEWAY_PASSWORD;
     callGatewayStatusProbe.mockClear();
     loadGatewayTlsRuntime.mockClear();
   });

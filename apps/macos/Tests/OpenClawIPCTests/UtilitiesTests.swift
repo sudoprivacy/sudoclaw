@@ -58,7 +58,7 @@ import Testing
 
     @Test func logLocatorPicksNewestLogFile() throws {
         let fm = FileManager()
-        let dir = URL(fileURLWithPath: "/tmp/openclaw", isDirectory: true)
+        let dir = URL(fileURLWithPath: "/tmp/sudoclaw", isDirectory: true)
         try? fm.createDirectory(at: dir, withIntermediateDirectories: true)
 
         let older = dir.appendingPathComponent("openclaw-old-\(UUID().uuidString).log")

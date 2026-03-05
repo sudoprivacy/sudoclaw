@@ -31,7 +31,7 @@ describe("resolveProviderAuths key normalization", () => {
       "USERPROFILE",
       "HOMEDRIVE",
       "HOMEPATH",
-      "OPENCLAW_HOME",
+      "SUDOCLAW_HOME",
       "SUDOCLAW_STATE_DIR",
       ...Object.keys(env),
     ]);
@@ -42,7 +42,7 @@ describe("resolveProviderAuths key normalization", () => {
 
     process.env.HOME = base;
     process.env.USERPROFILE = base;
-    delete process.env.OPENCLAW_HOME;
+    delete process.env.SUDOCLAW_HOME;
     process.env.SUDOCLAW_STATE_DIR = path.join(base, ".sudoclaw");
     for (const [key, value] of Object.entries(env)) {
       if (value === undefined) {

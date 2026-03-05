@@ -1,8 +1,8 @@
 ---
 read_when:
-  - 安装 OpenClaw
+  - 安装 SudoClaw
   - 你想从 GitHub 安装
-summary: 安装 OpenClaw（推荐安装器、全局安装或从源代码安装）
+summary: 安装 SudoClaw（推荐安装器、全局安装或从源代码安装）
 title: 安装
 x-i18n:
   generated_at: "2026-02-03T10:07:43Z"
@@ -32,7 +32,7 @@ iwr -useb https://sudoclaw.ai/install.ps1 | iex
 下一步（如果你跳过了新手引导）：
 
 ```bash
-openclaw onboard --install-daemon
+sudoclaw onboard --install-daemon
 ```
 
 ## 系统要求
@@ -94,21 +94,21 @@ pnpm 需要显式批准带有构建脚本的包。在首次安装显示"Ignored 
 然后：
 
 ```bash
-openclaw onboard --install-daemon
+sudoclaw onboard --install-daemon
 ```
 
 ### 3）从源代码（贡献者/开发）
 
 ```bash
-git clone https://github.com/openclaw/openclaw.git
+git clone https://github.com/sudoprivacy/sudoclaw.git
 cd openclaw
 pnpm install
 pnpm ui:build # 首次运行时自动安装 UI 依赖
 pnpm build
-openclaw onboard --install-daemon
+sudoclaw onboard --install-daemon
 ```
 
-提示：如果你还没有全局安装，请通过 `pnpm openclaw ...` 运行仓库命令。
+提示：如果你还没有全局安装，请通过 `pnpm sudoclaw ...` 运行仓库命令。
 
 ### 4）其他安装选项
 
@@ -119,9 +119,9 @@ openclaw onboard --install-daemon
 
 ## 安装后
 
-- 运行新手引导：`openclaw onboard --install-daemon`
+- 运行新手引导：`sudoclaw onboard --install-daemon`
 - 快速检查：`sudoclaw doctor`
-- 检查 Gateway 网关健康状态：`openclaw status` + `openclaw health`
+- 检查 Gateway 网关健康状态：`sudoclaw status` + `sudoclaw health`
 - 打开仪表板：`sudoclaw dashboard`
 
 ## 安装方式：npm vs git（安装器）
@@ -154,12 +154,12 @@ curl -fsSL https://sudoclaw.ai/install.sh | bash -s -- --install-method git
 
 等效的环境变量（对自动化有用）：
 
-- `OPENCLAW_INSTALL_METHOD=git|npm`
-- `OPENCLAW_GIT_DIR=...`
-- `OPENCLAW_GIT_UPDATE=0|1`
-- `OPENCLAW_NO_PROMPT=1`
-- `OPENCLAW_DRY_RUN=1`
-- `OPENCLAW_NO_ONBOARD=1`
+- `SUDOCLAW_INSTALL_METHOD=git|npm`
+- `SUDOCLAW_GIT_DIR=...`
+- `SUDOCLAW_GIT_UPDATE=0|1`
+- `SUDOCLAW_NO_PROMPT=1`
+- `SUDOCLAW_DRY_RUN=1`
+- `SUDOCLAW_NO_ONBOARD=1`
 - `SHARP_IGNORE_GLOBAL_LIBVIPS=0|1`（默认：`1`；避免 `sharp` 针对系统 libvips 构建）
 
 ## 故障排除：找不到 `openclaw`（PATH）

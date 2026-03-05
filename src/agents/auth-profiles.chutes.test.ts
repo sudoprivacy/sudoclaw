@@ -27,7 +27,7 @@ describe("auth-profiles (chutes)", () => {
     await withEnvAsync(
       {
         SUDOCLAW_STATE_DIR: tempDir,
-        OPENCLAW_AGENT_DIR: agentDir,
+        SUDOCLAW_AGENT_DIR: agentDir,
         PI_CODING_AGENT_DIR: agentDir,
         CHUTES_CLIENT_ID: undefined,
       },

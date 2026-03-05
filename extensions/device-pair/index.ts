@@ -191,7 +191,7 @@ function resolveAuth(cfg: OpenClawPluginApi["config"]): ResolveAuthResult {
     ]) ?? undefined;
   const password =
     pickFirstDefined([
-      process.env.OPENCLAW_GATEWAY_PASSWORD,
+      process.env.SUDOCLAW_GATEWAY_PASSWORD,
       process.env.CLAWDBOT_GATEWAY_PASSWORD,
       cfg.gateway?.auth?.password,
     ]) ?? undefined;

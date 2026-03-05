@@ -12,7 +12,7 @@ vi.mock("./install-source-utils.js", async (importOriginal) => {
   return {
     ...actual,
     withTempDir: vi.fn(async (_prefix: string, fn: (tmpDir: string) => Promise<unknown>) => {
-      return await fn("/tmp/openclaw-npm-pack-install-test");
+      return await fn("/tmp/sudoclaw-npm-pack-install-test");
     }),
     packNpmSpecToArchive: vi.fn(),
   };
@@ -20,7 +20,7 @@ vi.mock("./install-source-utils.js", async (importOriginal) => {
 
 describe("installFromNpmSpecArchive", () => {
   const baseSpec = "@openclaw/test@1.0.0";
-  const baseArchivePath = "/tmp/openclaw-test.tgz";
+  const baseArchivePath = "/tmp/sudoclaw-test.tgz";
 
   const mockPackedSuccess = (overrides?: {
     resolvedSpec?: string;
@@ -104,7 +104,7 @@ describe("installFromNpmSpecArchive", () => {
     expect(okResult.integrityDrift).toBeUndefined();
     expect(okResult.npmResolution.resolvedSpec).toBe("@openclaw/test@1.0.0");
     expect(okResult.npmResolution.resolvedAt).toBeTruthy();
-    expect(installFromArchive).toHaveBeenCalledWith({ archivePath: "/tmp/openclaw-test.tgz" });
+    expect(installFromArchive).toHaveBeenCalledWith({ archivePath: "/tmp/sudoclaw-test.tgz" });
   });
 
   it("proceeds when integrity drift callback accepts drift", async () => {
@@ -186,7 +186,7 @@ describe("installFromNpmSpecArchiveWithInstaller", () => {
   it("passes archive path and installer params to installFromArchive", async () => {
     vi.mocked(packNpmSpecToArchive).mockResolvedValue({
       ok: true,
-      archivePath: "/tmp/openclaw-plugin.tgz",
+      archivePath: "/tmp/sudoclaw-plugin.tgz",
       metadata: {
         resolvedSpec: "@openclaw/voice-call@1.0.0",
         integrity: "sha512-same",
@@ -210,7 +210,7 @@ describe("installFromNpmSpecArchiveWithInstaller", () => {
       return;
     }
     expect(installFromArchive).toHaveBeenCalledWith({
-      archivePath: "/tmp/openclaw-plugin.tgz",
+      archivePath: "/tmp/sudoclaw-plugin.tgz",
       pluginId: "voice-call",
     });
     expect(result.installResult).toEqual({ ok: true, pluginId: "voice-call" });

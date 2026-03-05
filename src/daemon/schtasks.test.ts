@@ -120,7 +120,7 @@ describe("readScheduledTaskCommand", () => {
           "rem OpenClaw Gateway",
           "cd /d C:\\Projects\\openclaw",
           "set NODE_ENV=production",
-          "set OPENCLAW_PORT=18789",
+          "set SUDOCLAW_PORT=18789",
           "node gateway.js --verbose",
         ],
       },
@@ -131,7 +131,7 @@ describe("readScheduledTaskCommand", () => {
           workingDirectory: "C:\\Projects\\openclaw",
           environment: {
             NODE_ENV: "production",
-            OPENCLAW_PORT: "18789",
+            SUDOCLAW_PORT: "18789",
           },
         });
       },

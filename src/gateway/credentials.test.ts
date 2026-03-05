@@ -16,7 +16,7 @@ const DEFAULT_GATEWAY_AUTH = { token: "config-token", password: "config-password
 const DEFAULT_REMOTE_AUTH = { token: "remote-token", password: "remote-password" };
 const DEFAULT_GATEWAY_ENV = {
   SUDOCLAW_GATEWAY_TOKEN: "env-token",
-  OPENCLAW_GATEWAY_PASSWORD: "env-password",
+  SUDOCLAW_GATEWAY_PASSWORD: "env-password",
 } as NodeJS.ProcessEnv;
 
 function resolveGatewayCredentialsFor(
@@ -218,7 +218,7 @@ describe("resolveGatewayCredentialsFromValues", () => {
       configPassword: "config-password",
       env: {
         SUDOCLAW_GATEWAY_TOKEN: "env-token",
-        OPENCLAW_GATEWAY_PASSWORD: "env-password",
+        SUDOCLAW_GATEWAY_PASSWORD: "env-password",
       } as NodeJS.ProcessEnv,
       includeLegacyEnv: false,
       tokenPrecedence: "config-first",
@@ -236,7 +236,7 @@ describe("resolveGatewayCredentialsFromValues", () => {
       configPassword: "config-password",
       env: {
         SUDOCLAW_GATEWAY_TOKEN: "env-token",
-        OPENCLAW_GATEWAY_PASSWORD: "env-password",
+        SUDOCLAW_GATEWAY_PASSWORD: "env-password",
       } as NodeJS.ProcessEnv,
     });
     expect(resolved).toEqual({

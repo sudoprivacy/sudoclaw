@@ -24,17 +24,17 @@ Status: ready for DMs + spaces via Google Chat API webhooks (HTTP only).
    - Go to the **Keys** tab.
    - Click **Add Key** > **Create new key**.
    - Select **JSON** and press **Create**.
-4. Store the downloaded JSON file on your gateway host (e.g., `~/.openclaw/googlechat-service-account.json`).
+4. Store the downloaded JSON file on your gateway host (e.g., `~/.sudoclaw/googlechat-service-account.json`).
 5. Create a Google Chat app in the [Google Cloud Console Chat Configuration](https://console.cloud.google.com/apis/api/chat.googleapis.com/hangouts-chat):
    - Fill in the **Application info**:
-     - **App name**: (e.g. `OpenClaw`)
+     - **App name**: (e.g. `SudoClaw`)
      - **Avatar URL**: (e.g. `https://sudoclaw.ai/logo.png`)
      - **Description**: (e.g. `Personal AI Assistant`)
    - Enable **Interactive features**.
    - Under **Functionality**, check **Join spaces and group conversations**.
    - Under **Connection settings**, select **HTTP endpoint URL**.
    - Under **Triggers**, select **Use a common HTTP endpoint URL for all triggers** and set it to your gateway's public URL followed by `/googlechat`.
-     - _Tip: Run `openclaw status` to find your gateway's public URL._
+     - _Tip: Run `sudoclaw status` to find your gateway's public URL._
    - Under **Visibility**, check **Make this Chat app available to specific people and groups in &lt;Your Domain&gt;**.
    - Enter your email address (e.g. `user@example.com`) in the text box.
    - Click **Save** at the bottom.
@@ -43,7 +43,7 @@ Status: ready for DMs + spaces via Google Chat API webhooks (HTTP only).
    - Look for the **App status** section (usually near the top or bottom after saving).
    - Change the status to **Live - available to users**.
    - Click **Save** again.
-7. Configure OpenClaw with the service account path + webhook audience:
+7. Configure SudoClaw with the service account path + webhook audience:
    - Env: `GOOGLE_CHAT_SERVICE_ACCOUNT_FILE=/path/to/service-account.json`
    - Or config: `channels.googlechat.serviceAccountFile: "/path/to/service-account.json"`.
 8. Set the webhook audience type + value (matches your Chat app config).
@@ -127,7 +127,7 @@ your-domain.com {
 }
 ```
 
-With this config, any request to `your-domain.com/` will be ignored or returned as 404, while `your-domain.com/googlechat` is safely routed to OpenClaw.
+With this config, any request to `your-domain.com/` will be ignored or returned as 404, while `your-domain.com/googlechat` is safely routed to SudoClaw.
 
 ### Option C: Cloudflare Tunnel
 
@@ -139,14 +139,14 @@ Configure your tunnel's ingress rules to only route the webhook path:
 ## How it works
 
 1. Google Chat sends webhook POSTs to the gateway. Each request includes an `Authorization: Bearer <token>` header.
-2. OpenClaw verifies the token against the configured `audienceType` + `audience`:
+2. SudoClaw verifies the token against the configured `audienceType` + `audience`:
    - `audienceType: "app-url"` → audience is your HTTPS webhook URL.
    - `audienceType: "project-number"` → audience is the Cloud project number.
 3. Messages are routed by space:
    - DMs use session key `agent:<agentId>:googlechat:dm:<spaceId>`.
    - Spaces use session key `agent:<agentId>:googlechat:group:<spaceId>`.
 4. DM access is pairing by default. Unknown senders receive a pairing code; approve with:
-   - `openclaw pairing approve googlechat <code>`
+   - `sudoclaw pairing approve googlechat <code>`
 5. Group spaces require @-mention by default. Use `botUser` if mention detection needs the app’s user name.
 
 ## Targets
@@ -219,7 +219,7 @@ This means the webhook handler isn't registered. Common causes:
 1. **Channel not configured**: The `channels.googlechat` section is missing from your config. Verify with:
 
    ```bash
-   openclaw config get channels.googlechat
+   sudoclaw config get channels.googlechat
    ```
 
    If it returns "Config path not found", add the configuration (see [Config highlights](#config-highlights)).
@@ -227,7 +227,7 @@ This means the webhook handler isn't registered. Common causes:
 2. **Plugin not enabled**: Check plugin status:
 
    ```bash
-   openclaw plugins list | grep googlechat
+   sudoclaw plugins list | grep googlechat
    ```
 
    If it shows "disabled", add `plugins.entries.googlechat.enabled: true` to your config.
@@ -235,19 +235,19 @@ This means the webhook handler isn't registered. Common causes:
 3. **Gateway not restarted**: After adding config, restart the gateway:
 
    ```bash
-   openclaw gateway restart
+   sudoclaw gateway restart
    ```
 
 Verify the channel is running:
 
 ```bash
-openclaw channels status
+sudoclaw channels status
 # Should show: Google Chat default: enabled, configured, ...
 ```
 
 ### Other issues
 
-- Check `openclaw channels status --probe` for auth errors or missing audience config.
+- Check `sudoclaw channels status --probe` for auth errors or missing audience config.
 - If no messages arrive, confirm the Chat app's webhook URL + event subscriptions.
 - If mention gating blocks replies, set `botUser` to the app's user resource name and verify `requireMention`.
 - Use `sudoclaw logs --follow` while sending a test message to see if requests reach the gateway.

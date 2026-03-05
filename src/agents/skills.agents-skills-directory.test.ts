@@ -33,7 +33,7 @@ describe("buildWorkspaceSkillsPrompt — .agents/skills/ directories", () => {
   let fakeHome: string;
 
   beforeEach(async () => {
-    fakeHome = await createTempDir("openclaw-home-");
+    fakeHome = await createTempDir("sudoclaw-home-");
     vi.spyOn(os, "homedir").mockReturnValue(fakeHome);
   });
 

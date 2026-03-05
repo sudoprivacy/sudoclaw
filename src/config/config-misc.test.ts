@@ -329,13 +329,13 @@ describe("config strict validation", () => {
       await fs.writeFile(
         path.join(configDir, "sudoclaw.json"),
         JSON.stringify({
-          gateway: { bind: "${OPENCLAW_BIND}" },
+          gateway: { bind: "${SUDOCLAW_BIND}" },
         }),
         "utf-8",
       );
 
-      const prev = process.env.OPENCLAW_BIND;
-      process.env.OPENCLAW_BIND = "0.0.0.0";
+      const prev = process.env.SUDOCLAW_BIND;
+      process.env.SUDOCLAW_BIND = "0.0.0.0";
       try {
         const snap = await readConfigFileSnapshot();
         expect(snap.valid).toBe(false);
@@ -343,9 +343,9 @@ describe("config strict validation", () => {
         expect(snap.issues.some((issue) => issue.path === "gateway.bind")).toBe(true);
       } finally {
         if (prev === undefined) {
-          delete process.env.OPENCLAW_BIND;
+          delete process.env.SUDOCLAW_BIND;
         } else {
-          process.env.OPENCLAW_BIND = prev;
+          process.env.SUDOCLAW_BIND = prev;
         }
       }
     });

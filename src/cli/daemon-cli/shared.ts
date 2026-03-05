@@ -85,7 +85,7 @@ const SAFE_DAEMON_ENV_KEYS = [
   "SUDOCLAW_STATE_DIR",
   "SUDOCLAW_CONFIG_PATH",
   "SUDOCLAW_GATEWAY_PORT",
-  "OPENCLAW_NIX_MODE",
+  "SUDOCLAW_NIX_MODE",
 ];
 
 export function filterDaemonEnv(env: Record<string, string> | undefined): Record<string, string> {
@@ -134,7 +134,7 @@ export function renderRuntimeHints(
     }
   })();
   if (runtime.missingUnit) {
-    hints.push(`Service not installed. Run: ${formatCliCommand("openclaw gateway install", env)}`);
+    hints.push(`Service not installed. Run: ${formatCliCommand("sudoclaw gateway install", env)}`);
     if (fileLog) {
       hints.push(`File logs: ${fileLog}`);
     }
@@ -161,8 +161,8 @@ export function renderRuntimeHints(
 
 export function renderGatewayServiceStartHints(env: NodeJS.ProcessEnv = process.env): string[] {
   const base = [
-    formatCliCommand("openclaw gateway install", env),
-    formatCliCommand("openclaw gateway", env),
+    formatCliCommand("sudoclaw gateway install", env),
+    formatCliCommand("sudoclaw gateway", env),
   ];
   const profile = env.SUDOCLAW_PROFILE;
   switch (process.platform) {

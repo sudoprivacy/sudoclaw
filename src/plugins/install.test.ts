@@ -514,7 +514,7 @@ describe("installPluginFromDir", () => {
     expect(manifest.devDependencies?.vitest).toBe("^3.0.0");
   });
 
-  it("uses openclaw.plugin.json id as install key when it differs from package name", async () => {
+  it("uses sudoclaw.plugin.json id as install key when it differs from package name", async () => {
     const { pluginDir, extensionsDir } = setupPluginInstallDirs();
     fs.mkdirSync(path.join(pluginDir, "dist"), { recursive: true });
     fs.writeFileSync(
@@ -528,7 +528,7 @@ describe("installPluginFromDir", () => {
     );
     fs.writeFileSync(path.join(pluginDir, "dist", "index.js"), "export {};", "utf-8");
     fs.writeFileSync(
-      path.join(pluginDir, "openclaw.plugin.json"),
+      path.join(pluginDir, "sudoclaw.plugin.json"),
       JSON.stringify({
         id: "memory-cognee",
         configSchema: { type: "object", properties: {} },
@@ -572,7 +572,7 @@ describe("installPluginFromDir", () => {
     );
     fs.writeFileSync(path.join(pluginDir, "dist", "index.js"), "export {};", "utf-8");
     fs.writeFileSync(
-      path.join(pluginDir, "openclaw.plugin.json"),
+      path.join(pluginDir, "sudoclaw.plugin.json"),
       JSON.stringify({
         id: "@team/memory-cognee",
         configSchema: { type: "object", properties: {} },

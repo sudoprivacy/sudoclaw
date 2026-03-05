@@ -60,7 +60,7 @@ if ! command -v adb >/dev/null 2>&1; then
 fi
 
 if [[ -z "$OUTPUT_PERF_DATA" ]]; then
-  OUTPUT_PERF_DATA="/tmp/openclaw-startup-$(date +%Y%m%d-%H%M%S).perf.data"
+  OUTPUT_PERF_DATA="/tmp/sudoclaw-startup-$(date +%Y%m%d-%H%M%S).perf.data"
 fi
 
 device_count="$(adb devices | awk 'NR>1 && $2=="device" {c+=1} END {print c+0}')"

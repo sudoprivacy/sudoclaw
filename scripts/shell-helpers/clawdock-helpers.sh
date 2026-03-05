@@ -4,7 +4,7 @@
 # https://til.simonwillison.net/llms/openclaw-docker
 #
 # Installation:
-#   mkdir -p ~/.clawdock && curl -sL https://raw.githubusercontent.com/openclaw/openclaw/main/scripts/shell-helpers/clawdock-helpers.sh -o ~/.clawdock/clawdock-helpers.sh
+#   mkdir -p ~/.clawdock && curl -sL https://raw.githubusercontent.com/sudoprivacy/sudoclaw/main/scripts/shell-helpers/clawdock-helpers.sh -o ~/.clawdock/clawdock-helpers.sh
 #   echo 'source ~/.clawdock/clawdock-helpers.sh' >> ~/.zshrc
 #
 # Usage:
@@ -113,7 +113,7 @@ _clawdock_ensure_dir() {
     echo ""
     echo "Clone it first:"
     echo ""
-    echo "  git clone https://github.com/openclaw/openclaw.git ~/openclaw"
+    echo "  git clone https://github.com/sudoprivacy/sudoclaw.git ~/openclaw"
     echo "  cd ~/openclaw && ./docker-setup.sh"
     echo ""
     echo "Or set CLAWDOCK_DIR if it's elsewhere:"
@@ -158,7 +158,7 @@ _clawdock_read_env_token() {
 
 # Basic Operations
 clawdock-start() {
-  _clawdock_compose up -d openclaw-gateway
+  _clawdock_compose up -d sudoclaw-gateway
 }
 
 clawdock-stop() {
@@ -166,11 +166,11 @@ clawdock-stop() {
 }
 
 clawdock-restart() {
-  _clawdock_compose restart openclaw-gateway
+  _clawdock_compose restart sudoclaw-gateway
 }
 
 clawdock-logs() {
-  _clawdock_compose logs -f openclaw-gateway
+  _clawdock_compose logs -f sudoclaw-gateway
 }
 
 clawdock-status() {
@@ -184,21 +184,21 @@ clawdock-cd() {
 }
 
 clawdock-config() {
-  cd ~/.openclaw
+  cd ~/.sudoclaw
 }
 
 clawdock-workspace() {
-  cd ~/.openclaw/workspace
+  cd ~/.sudoclaw/workspace
 }
 
 # Container Access
 clawdock-shell() {
-  _clawdock_compose exec openclaw-gateway \
+  _clawdock_compose exec sudoclaw-gateway \
     bash -c 'echo "alias openclaw=\"./openclaw.mjs\"" > /tmp/.bashrc_openclaw && bash --rcfile /tmp/.bashrc_openclaw'
 }
 
 clawdock-exec() {
-  _clawdock_compose exec openclaw-gateway "$@"
+  _clawdock_compose exec sudoclaw-gateway "$@"
 }
 
 clawdock-cli() {
@@ -207,7 +207,7 @@ clawdock-cli() {
 
 # Maintenance
 clawdock-rebuild() {
-  _clawdock_compose build openclaw-gateway
+  _clawdock_compose build sudoclaw-gateway
 }
 
 clawdock-clean() {
@@ -224,7 +224,7 @@ clawdock-health() {
     echo "   Check: ${CLAWDOCK_DIR}/.env"
     return 1
   fi
-  _clawdock_compose exec -e "SUDOCLAW_GATEWAY_TOKEN=$token" openclaw-gateway \
+  _clawdock_compose exec -e "SUDOCLAW_GATEWAY_TOKEN=$token" sudoclaw-gateway \
     node dist/index.js health
 }
 
@@ -248,12 +248,12 @@ clawdock-fix-token() {
 
   echo "📝 Setting token: ${token:0:20}..."
 
-  _clawdock_compose exec -e "TOKEN=$token" openclaw-gateway \
+  _clawdock_compose exec -e "TOKEN=$token" sudoclaw-gateway \
     bash -c './openclaw.mjs config set gateway.remote.token "$TOKEN" && ./openclaw.mjs config set gateway.auth.token "$TOKEN"' 2>&1 | _clawdock_filter_warnings
 
   echo "🔍 Verifying token was saved..."
   local saved_token
-  saved_token=$(_clawdock_compose exec openclaw-gateway \
+  saved_token=$(_clawdock_compose exec sudoclaw-gateway \
     bash -c "./openclaw.mjs config get gateway.remote.token 2>/dev/null" 2>&1 | _clawdock_filter_warnings | tr -d '\r\n' | head -c 64)
 
   if [[ "$saved_token" == "$token" ]]; then
@@ -265,7 +265,7 @@ clawdock-fix-token() {
   fi
 
   echo "🔄 Restarting gateway..."
-  _clawdock_compose restart openclaw-gateway 2>&1 | _clawdock_filter_warnings
+  _clawdock_compose restart sudoclaw-gateway 2>&1 | _clawdock_filter_warnings
 
   echo "⏳ Waiting for gateway to start..."
   sleep 5
@@ -309,7 +309,7 @@ clawdock-devices() {
 
   echo "🔍 Checking device pairings..."
   local output exit_status
-  output=$(_clawdock_compose exec openclaw-gateway node dist/index.js devices list 2>&1)
+  output=$(_clawdock_compose exec sudoclaw-gateway node dist/index.js devices list 2>&1)
   exit_status=$?
   printf "%s\n" "$output" | _clawdock_filter_warnings
   if [ $exit_status -ne 0 ]; then
@@ -318,7 +318,7 @@ clawdock-devices() {
     echo -e "   1. Verify token is set: $(_cmd clawdock-token)"
     echo "   2. Try manual config inside container:"
     echo -e "      $(_cmd clawdock-shell)"
-    echo -e "      $(_cmd 'openclaw config get gateway.remote.token')"
+    echo -e "      $(_cmd 'sudoclaw config get gateway.remote.token')"
     return 1
   fi
 
@@ -345,7 +345,7 @@ clawdock-approve() {
   fi
 
   echo "✅ Approving device: $1"
-  _clawdock_compose exec openclaw-gateway \
+  _clawdock_compose exec sudoclaw-gateway \
     node dist/index.js devices approve "$1" 2>&1 | _clawdock_filter_warnings
 
   echo ""
@@ -389,7 +389,7 @@ clawdock-help() {
   echo -e "  $(_cmd clawdock-health)      ${_CLR_DIM}Run health check${_CLR_RESET}"
   echo -e "  $(_cmd clawdock-token)       ${_CLR_DIM}Show gateway auth token${_CLR_RESET}"
   echo -e "  $(_cmd clawdock-cd)          ${_CLR_DIM}Jump to openclaw project directory${_CLR_RESET}"
-  echo -e "  $(_cmd clawdock-config)      ${_CLR_DIM}Open config directory (~/.openclaw)${_CLR_RESET}"
+  echo -e "  $(_cmd clawdock-config)      ${_CLR_DIM}Open config directory (~/.sudoclaw)${_CLR_RESET}"
   echo -e "  $(_cmd clawdock-workspace)   ${_CLR_DIM}Open workspace directory${_CLR_RESET}"
   echo ""
 
@@ -404,8 +404,8 @@ clawdock-help() {
 
   echo -e "${_CLR_BOLD}${_CLR_GREEN}💬 WhatsApp Setup${_CLR_RESET}"
   echo -e "  $(_cmd clawdock-shell)"
-  echo -e "    ${_CLR_BLUE}>${_CLR_RESET} $(_cmd 'openclaw channels login --channel whatsapp')"
-  echo -e "    ${_CLR_BLUE}>${_CLR_RESET} $(_cmd 'openclaw status')"
+  echo -e "    ${_CLR_BLUE}>${_CLR_RESET} $(_cmd 'sudoclaw channels login --channel whatsapp')"
+  echo -e "    ${_CLR_BLUE}>${_CLR_RESET} $(_cmd 'sudoclaw status')"
   echo ""
 
   echo -e "${_CLR_BOLD}${_CLR_CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${_CLR_RESET}"

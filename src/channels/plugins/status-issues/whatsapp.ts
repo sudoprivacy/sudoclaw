@@ -47,7 +47,7 @@ export function collectWhatsAppStatusIssues(
           accountId,
           kind: "auth",
           message: "Not linked (no WhatsApp Web session).",
-          fix: `Run: ${formatCliCommand("openclaw channels login")} (scan QR on the gateway host).`,
+          fix: `Run: ${formatCliCommand("sudoclaw channels login")} (scan QR on the gateway host).`,
         });
         return;
       }
