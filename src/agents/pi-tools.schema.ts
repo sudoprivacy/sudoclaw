@@ -64,7 +64,7 @@ function mergePropertySchemas(existing: unknown, incoming: unknown): unknown {
 
 export function normalizeToolParameters(
   tool: AnyAgentTool,
-  options?: { modelProvider?: string },
+  options?: { modelProvider?: string; modelId?: string },
 ): AnyAgentTool {
   const schema =
     tool.parameters && typeof tool.parameters === "object"
@@ -82,10 +82,13 @@ export function normalizeToolParameters(
   //
   // Normalize once here so callers can always pass `tools` through unchanged.
 
+  const providerLower = options?.modelProvider?.toLowerCase() ?? "";
+  const modelIdLower = options?.modelId?.toLowerCase() ?? "";
   const isGeminiProvider =
-    options?.modelProvider?.toLowerCase().includes("google") ||
-    options?.modelProvider?.toLowerCase().includes("gemini");
-  const isAnthropicProvider = options?.modelProvider?.toLowerCase().includes("anthropic");
+    providerLower.includes("google") ||
+    providerLower.includes("gemini") ||
+    modelIdLower.includes("gemini");
+  const isAnthropicProvider = providerLower.includes("anthropic");
 
   // If schema already has type + properties (no top-level anyOf to merge),
   // clean it for Gemini compatibility (but only if using Gemini, not Anthropic)

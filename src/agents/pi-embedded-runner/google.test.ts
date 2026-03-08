@@ -42,6 +42,25 @@ describe("sanitizeToolsForGoogle", () => {
     expectFormatRemoved(sanitized, "additionalProperties");
   });
 
+  it("strips unsupported keywords when modelId contains gemini", () => {
+    const tool = createTool({
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        foo: {
+          type: "string",
+          format: "uuid",
+        },
+      },
+    });
+    const [sanitized] = sanitizeToolsForGoogle({
+      tools: [tool],
+      provider: "sudorouter",
+      modelId: "gemini-3-pro-preview",
+    });
+    expectFormatRemoved(sanitized, "additionalProperties");
+  });
+
   it("returns original tools for non-google providers", () => {
     const tool = createTool({
       type: "object",
