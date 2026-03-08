@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
-import type { OpenClawConfig } from "../config/config.js";
+import type { SudoClawConfig } from "../config/config.js";
 import { resolveGatewayPort, resolveIsNixMode } from "../config/paths.js";
 import {
   findExtraGatewayServices,
@@ -55,12 +55,13 @@ function normalizeExecutablePath(value: string): string {
   return path.resolve(value);
 }
 
-function resolveGatewayAuthToken(cfg: OpenClawConfig, env: NodeJS.ProcessEnv): string | undefined {
+function resolveGatewayAuthToken(cfg: SudoClawConfig, env: NodeJS.ProcessEnv): string | undefined {
   const configToken = cfg.gateway?.auth?.token?.trim();
   if (configToken) {
     return configToken;
   }
-  const envToken = env.OPENCLAW_GATEWAY_TOKEN ?? env.CLAWDBOT_GATEWAY_TOKEN;
+  const envToken =
+    env.SUDOCLAW_GATEWAY_TOKEN ?? env.OPENCLAW_GATEWAY_TOKEN ?? env.CLAWDBOT_GATEWAY_TOKEN;
   const trimmedEnvToken = envToken?.trim();
   return trimmedEnvToken || undefined;
 }
@@ -193,7 +194,7 @@ async function cleanupLegacyLinuxUserServices(
 }
 
 export async function maybeRepairGatewayServiceConfig(
-  cfg: OpenClawConfig,
+  cfg: SudoClawConfig,
   mode: "local" | "remote",
   runtime: RuntimeEnv,
   prompter: DoctorPrompter,
@@ -362,7 +363,7 @@ export async function maybeScanExtraGatewayServices(
         note(failed.map((line) => `- ${line}`).join("\n"), "Legacy gateway cleanup skipped");
       }
       if (removed.length > 0) {
-        runtime.log("Legacy gateway services removed. Installing OpenClaw gateway next.");
+        runtime.log("Legacy gateway services removed. Installing SudoClaw gateway next.");
       }
     }
   }

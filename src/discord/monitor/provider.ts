@@ -19,7 +19,7 @@ import {
   resolveNativeCommandsEnabled,
   resolveNativeSkillsEnabled,
 } from "../../config/commands.js";
-import type { OpenClawConfig, ReplyToMode } from "../../config/config.js";
+import type { SudoClawConfig, ReplyToMode } from "../../config/config.js";
 import { loadConfig } from "../../config/config.js";
 import { isDangerousNameMatchingEnabled } from "../../config/dangerous-name-matching.js";
 import {
@@ -82,7 +82,7 @@ import { formatThreadBindingDurationLabel } from "./thread-bindings.messages.js"
 export type MonitorDiscordOpts = {
   token?: string;
   accountId?: string;
-  config?: OpenClawConfig;
+  config?: SudoClawConfig;
   runtime?: RuntimeEnv;
   abortSignal?: AbortSignal;
   mediaMaxMb?: number;

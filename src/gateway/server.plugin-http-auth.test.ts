@@ -191,7 +191,7 @@ describe("gateway plugin HTTP auth boundary", () => {
 
     await withTempConfig({
       cfg: { gateway: { trustedProxies: [] } },
-      prefix: "openclaw-plugin-http-security-headers-test-",
+      prefix: "sudoclaw-plugin-http-security-headers-test-",
       run: async () => {
         const withoutHsts = createGatewayHttpServer({
           canvasHost: null,
@@ -253,7 +253,7 @@ describe("gateway plugin HTTP auth boundary", () => {
 
     await withTempConfig({
       cfg: { gateway: { trustedProxies: [] } },
-      prefix: "openclaw-plugin-http-auth-test-",
+      prefix: "sudoclaw-plugin-http-auth-test-",
       run: async () => {
         const handlePluginRequest = vi.fn(async (req: IncomingMessage, res: ServerResponse) => {
           const pathname = new URL(req.url ?? "/", "http://localhost").pathname;
@@ -348,7 +348,7 @@ describe("gateway plugin HTTP auth boundary", () => {
 
     await withTempConfig({
       cfg: { gateway: { trustedProxies: [] } },
-      prefix: "openclaw-plugin-http-auth-wildcard-handler-test-",
+      prefix: "sudoclaw-plugin-http-auth-wildcard-handler-test-",
       run: async () => {
         const handlePluginRequest = vi.fn(async (req: IncomingMessage, res: ServerResponse) => {
           const pathname = new URL(req.url ?? "/", "http://localhost").pathname;
@@ -424,7 +424,7 @@ describe("gateway plugin HTTP auth boundary", () => {
 
     await withTempConfig({
       cfg: { gateway: { trustedProxies: [] } },
-      prefix: "openclaw-plugin-http-auth-wildcard-default-test-",
+      prefix: "sudoclaw-plugin-http-auth-wildcard-default-test-",
       run: async () => {
         const handlePluginRequest = vi.fn(async (req: IncomingMessage, res: ServerResponse) => {
           const pathname = new URL(req.url ?? "/", "http://localhost").pathname;
@@ -506,7 +506,7 @@ describe("gateway plugin HTTP auth boundary", () => {
 
     await withTempConfig({
       cfg: { gateway: { trustedProxies: [] } },
-      prefix: "openclaw-plugin-http-control-ui-precedence-test-",
+      prefix: "sudoclaw-plugin-http-control-ui-precedence-test-",
       run: async () => {
         const handlePluginRequest = vi.fn(async (req: IncomingMessage, res: ServerResponse) => {
           const pathname = new URL(req.url ?? "/", "http://localhost").pathname;
@@ -556,7 +556,7 @@ describe("gateway plugin HTTP auth boundary", () => {
 
     await withTempConfig({
       cfg: { gateway: { trustedProxies: [] } },
-      prefix: "openclaw-plugin-http-control-ui-shadow-test-",
+      prefix: "sudoclaw-plugin-http-control-ui-shadow-test-",
       run: async () => {
         const handlePluginRequest = vi.fn(async (req: IncomingMessage, res: ServerResponse) => {
           const pathname = new URL(req.url ?? "/", "http://localhost").pathname;
@@ -602,7 +602,7 @@ describe("gateway plugin HTTP auth boundary", () => {
 
     await withTempConfig({
       cfg: { gateway: { trustedProxies: [] } },
-      prefix: "openclaw-plugin-http-auth-canonicalized-test-",
+      prefix: "sudoclaw-plugin-http-auth-canonicalized-test-",
       run: async () => {
         const handlePluginRequest = vi.fn(async (req: IncomingMessage, res: ServerResponse) => {
           const pathname = new URL(req.url ?? "/", "http://localhost").pathname;
@@ -652,7 +652,7 @@ describe("gateway plugin HTTP auth boundary", () => {
 
     await withTempConfig({
       cfg: { gateway: { trustedProxies: [] } },
-      prefix: "openclaw-plugin-http-auth-fuzz-corpus-test-",
+      prefix: "sudoclaw-plugin-http-auth-fuzz-corpus-test-",
       run: async () => {
         const handlePluginRequest = vi.fn(async (req: IncomingMessage, res: ServerResponse) => {
           const pathname = new URL(req.url ?? "/", "http://localhost").pathname;
@@ -703,7 +703,7 @@ describe("gateway plugin HTTP auth boundary", () => {
 
       await withTempConfig({
         cfg: { gateway: { trustedProxies: [] } },
-        prefix: "openclaw-plugin-http-hooks-bindhost-",
+        prefix: "sudoclaw-plugin-http-hooks-bindhost-",
         run: async () => {
           const handleHooksRequest = createHooksRequestHandler({
             getHooksConfig: () => createHooksConfig(),
@@ -749,7 +749,7 @@ describe("gateway plugin HTTP auth boundary", () => {
 
     await withTempConfig({
       cfg: { gateway: { trustedProxies: [] } },
-      prefix: "openclaw-plugin-http-hooks-query-token-",
+      prefix: "sudoclaw-plugin-http-hooks-query-token-",
       run: async () => {
         const handleHooksRequest = createHooksRequestHandler({
           getHooksConfig: () => createHooksConfig(),

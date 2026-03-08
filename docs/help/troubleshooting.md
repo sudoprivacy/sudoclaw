@@ -1,7 +1,7 @@
 ---
-summary: "Symptom first troubleshooting hub for OpenClaw"
+summary: "Symptom first troubleshooting hub for SudoClaw"
 read_when:
-  - OpenClaw is not working and you need the fastest path to a fix
+  - SudoClaw is not working and you need the fastest path to a fix
   - You want a triage flow before diving into deep runbooks
 title: "Troubleshooting"
 ---
@@ -15,24 +15,24 @@ If you only have 2 minutes, use this page as a triage front door.
 Run this exact ladder in order:
 
 ```bash
-openclaw status
-openclaw status --all
-openclaw gateway probe
-openclaw gateway status
-openclaw doctor
-openclaw channels status --probe
-openclaw logs --follow
+sudoclaw status
+sudoclaw status --all
+sudoclaw gateway probe
+sudoclaw gateway status
+sudoclaw doctor
+sudoclaw channels status --probe
+sudoclaw logs --follow
 ```
 
 Good output in one line:
 
-- `openclaw status` → shows configured channels and no obvious auth errors.
-- `openclaw status --all` → full report is present and shareable.
-- `openclaw gateway probe` → expected gateway target is reachable.
-- `openclaw gateway status` → `Runtime: running` and `RPC probe: ok`.
-- `openclaw doctor` → no blocking config/service errors.
-- `openclaw channels status --probe` → channels report `connected` or `ready`.
-- `openclaw logs --follow` → steady activity, no repeating fatal errors.
+- `sudoclaw status` → shows configured channels and no obvious auth errors.
+- `sudoclaw status --all` → full report is present and shareable.
+- `sudoclaw gateway probe` → expected gateway target is reachable.
+- `sudoclaw gateway status` → `Runtime: running` and `RPC probe: ok`.
+- `sudoclaw doctor` → no blocking config/service errors.
+- `sudoclaw channels status --probe` → channels report `connected` or `ready`.
+- `sudoclaw logs --follow` → steady activity, no repeating fatal errors.
 
 ## Anthropic long context 429
 
@@ -44,7 +44,7 @@ go to [/gateway/troubleshooting#anthropic-429-extra-usage-required-for-long-cont
 
 ```mermaid
 flowchart TD
-  A[OpenClaw is not working] --> B{What breaks first}
+  A[SudoClaw is not working] --> B{What breaks first}
   B --> C[No replies]
   B --> D[Dashboard or Control UI will not connect]
   B --> E[Gateway will not start or service not running]
@@ -65,11 +65,11 @@ flowchart TD
 <AccordionGroup>
   <Accordion title="No replies">
     ```bash
-    openclaw status
-    openclaw gateway status
-    openclaw channels status --probe
-    openclaw pairing list --channel <channel> [--account <id>]
-    openclaw logs --follow
+    sudoclaw status
+    sudoclaw gateway status
+    sudoclaw channels status --probe
+    sudoclaw pairing list --channel <channel> [--account <id>]
+    sudoclaw logs --follow
     ```
 
     Good output looks like:
@@ -95,16 +95,16 @@ flowchart TD
 
   <Accordion title="Dashboard or Control UI will not connect">
     ```bash
-    openclaw status
-    openclaw gateway status
-    openclaw logs --follow
-    openclaw doctor
-    openclaw channels status --probe
+    sudoclaw status
+    sudoclaw gateway status
+    sudoclaw logs --follow
+    sudoclaw doctor
+    sudoclaw channels status --probe
     ```
 
     Good output looks like:
 
-    - `Dashboard: http://...` is shown in `openclaw gateway status`
+    - `Dashboard: http://...` is shown in `sudoclaw gateway status`
     - `RPC probe: ok`
     - No auth loop in logs
 
@@ -124,11 +124,11 @@ flowchart TD
 
   <Accordion title="Gateway will not start or service installed but not running">
     ```bash
-    openclaw status
-    openclaw gateway status
-    openclaw logs --follow
-    openclaw doctor
-    openclaw channels status --probe
+    sudoclaw status
+    sudoclaw gateway status
+    sudoclaw logs --follow
+    sudoclaw doctor
+    sudoclaw channels status --probe
     ```
 
     Good output looks like:
@@ -153,11 +153,11 @@ flowchart TD
 
   <Accordion title="Channel connects but messages do not flow">
     ```bash
-    openclaw status
-    openclaw gateway status
-    openclaw logs --follow
-    openclaw doctor
-    openclaw channels status --probe
+    sudoclaw status
+    sudoclaw gateway status
+    sudoclaw logs --follow
+    sudoclaw doctor
+    sudoclaw channels status --probe
     ```
 
     Good output looks like:
@@ -181,12 +181,12 @@ flowchart TD
 
   <Accordion title="Cron or heartbeat did not fire or did not deliver">
     ```bash
-    openclaw status
-    openclaw gateway status
-    openclaw cron status
-    openclaw cron list
-    openclaw cron runs --id <jobId> --limit 20
-    openclaw logs --follow
+    sudoclaw status
+    sudoclaw gateway status
+    sudoclaw cron status
+    sudoclaw cron list
+    sudoclaw cron runs --id <jobId> --limit 20
+    sudoclaw logs --follow
     ```
 
     Good output looks like:
@@ -212,11 +212,11 @@ flowchart TD
 
   <Accordion title="Node is paired but tool fails camera canvas screen exec">
     ```bash
-    openclaw status
-    openclaw gateway status
-    openclaw nodes status
-    openclaw nodes describe --node <idOrNameOrIp>
-    openclaw logs --follow
+    sudoclaw status
+    sudoclaw gateway status
+    sudoclaw nodes status
+    sudoclaw nodes describe --node <idOrNameOrIp>
+    sudoclaw logs --follow
     ```
 
     Good output looks like:
@@ -242,17 +242,17 @@ flowchart TD
 
   <Accordion title="Browser tool fails">
     ```bash
-    openclaw status
-    openclaw gateway status
-    openclaw browser status
-    openclaw logs --follow
-    openclaw doctor
+    sudoclaw status
+    sudoclaw gateway status
+    sudoclaw browser status
+    sudoclaw logs --follow
+    sudoclaw doctor
     ```
 
     Good output looks like:
 
     - Browser status shows `running: true` and a chosen browser/profile.
-    - `openclaw` profile starts or `chrome` relay has an attached tab.
+    - `sudoclaw` profile starts or `chrome` relay has an attached tab.
 
     Common log signatures:
 

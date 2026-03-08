@@ -2,7 +2,7 @@
 read_when:
   - 你想要容器化的 Gateway 网关而不是本地安装
   - 你正在验证 Docker 流程
-summary: OpenClaw 的可选 Docker 设置和新手引导
+summary: SudoClaw 的可选 Docker 设置和新手引导
 title: Docker
 x-i18n:
   generated_at: "2026-02-03T07:51:20Z"
@@ -19,13 +19,13 @@ Docker 是**可选的**。仅当你想要容器化的 Gateway 网关或验证 Do
 
 ## Docker 适合我吗？
 
-- **是**：你想要一个隔离的、可丢弃的 Gateway 网关环境，或在没有本地安装的主机上运行 OpenClaw。
+- **是**：你想要一个隔离的、可丢弃的 Gateway 网关环境，或在没有本地安装的主机上运行 SudoClaw。
 - **否**：你在自己的机器上运行，只想要最快的开发循环。请改用正常的安装流程。
 - **沙箱注意事项**：智能体沙箱隔离也使用 Docker，但它**不需要**完整的 Gateway 网关在 Docker 中运行。参阅[沙箱隔离](/gateway/sandboxing)。
 
 本指南涵盖：
 
-- 容器化 Gateway 网关（完整的 OpenClaw 在 Docker 中）
+- 容器化 Gateway 网关（完整的 SudoClaw 在 Docker 中）
 - 每会话智能体沙箱（主机 Gateway 网关 + Docker 隔离的智能体工具）
 
 沙箱隔离详情：[沙箱隔离](/gateway/sandboxing)
@@ -335,7 +335,7 @@ pnpm test:docker:qr
 - 默认 `docker.network` 是 `"none"`（无出站）。
 - `readOnlyRoot: true` 阻止包安装。
 - `user` 必须是 root 才能运行 `apt-get`（省略 `user` 或设置 `user: "0:0"`）。
-  当 `setupCommand`（或 docker 配置）更改时，OpenClaw 会自动重建容器，除非容器是**最近使用的**（在约 5 分钟内）。热容器会记录警告，包含确切的 `openclaw sandbox recreate ...` 命令。
+  当 `setupCommand`（或 docker 配置）更改时，SudoClaw 会自动重建容器，除非容器是**最近使用的**（在约 5 分钟内）。热容器会记录警告，包含确切的 `openclaw sandbox recreate ...` 命令。
 
 ```json5
 {
@@ -526,7 +526,7 @@ docker build -t my-openclaw-sbx -f Dockerfile.sandbox .
 
 ## 故障排除
 
-- 镜像缺失：使用 [`scripts/sandbox-setup.sh`](https://github.com/openclaw/openclaw/blob/main/scripts/sandbox-setup.sh) 构建或设置 `agents.defaults.sandbox.docker.image`。
+- 镜像缺失：使用 [`scripts/sandbox-setup.sh`](https://github.com/sudoprivacy/sudoclaw/blob/main/scripts/sandbox-setup.sh) 构建或设置 `agents.defaults.sandbox.docker.image`。
 - 容器未运行：它会按需为每个会话自动创建。
 - 沙箱中的权限错误：将 `docker.user` 设置为与你挂载的工作区所有权匹配的 UID:GID（或 chown 工作区文件夹）。
-- 找不到自定义工具：OpenClaw 使用 `sh -lc`（登录 shell）运行命令，这会 source `/etc/profile` 并可能重置 PATH。设置 `docker.env.PATH` 以在前面添加你的自定义工具路径（例如 `/custom/bin:/usr/local/share/npm-global/bin`），或在你的 Dockerfile 中在 `/etc/profile.d/` 下添加脚本。
+- 找不到自定义工具：SudoClaw 使用 `sh -lc`（登录 shell）运行命令，这会 source `/etc/profile` 并可能重置 PATH。设置 `docker.env.PATH` 以在前面添加你的自定义工具路径（例如 `/custom/bin:/usr/local/share/npm-global/bin`），或在你的 Dockerfile 中在 `/etc/profile.d/` 下添加脚本。

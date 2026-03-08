@@ -28,7 +28,7 @@ x-i18n:
 - 默认：`~/.openclaw/workspace`
 - 如果设置了 `OPENCLAW_PROFILE` 且不是 `"default"`，默认值变为
   `~/.openclaw/workspace-<profile>`。
-- 在 `~/.openclaw/openclaw.json` 中覆盖：
+- 在 `~/.sudoprivacy/sudoclaw.json` 中覆盖：
 
 ```json5
 {
@@ -57,7 +57,7 @@ x-i18n:
 
 ## 工作区文件映射（每个文件的含义）
 
-这些是 OpenClaw 在工作区内期望的标准文件：
+这些是 SudoClaw 在工作区内期望的标准文件：
 
 - `AGENTS.md`
   - 智能体的操作指南以及它应该如何使用记忆。
@@ -110,14 +110,14 @@ x-i18n:
 - `canvas/`（可选）
   - 用于节点显示的 Canvas UI 文件（例如 `canvas/index.html`）。
 
-如果任何引导文件缺失，OpenClaw 会在会话中注入"缺失文件"标记并继续。大型引导文件在注入时会被截断；使用 `agents.defaults.bootstrapMaxChars` 调整限制（默认：20000）。
+如果任何引导文件缺失，SudoClaw 会在会话中注入"缺失文件"标记并继续。大型引导文件在注入时会被截断；使用 `agents.defaults.bootstrapMaxChars` 调整限制（默认：20000）。
 `openclaw setup` 可以重新创建缺失的默认值而不覆盖现有文件。
 
 ## 工作区中不包含的内容
 
 这些位于 `~/.openclaw/` 下，不应提交到工作区仓库：
 
-- `~/.openclaw/openclaw.json`（配置）
+- `~/.sudoprivacy/sudoclaw.json`（配置）
 - `~/.openclaw/credentials/`（OAuth token、API 密钥）
 - `~/.openclaw/agents/<agentId>/sessions/`（会话记录 + 元数据）
 - `~/.openclaw/skills/`（托管的 Skills）
@@ -208,7 +208,7 @@ git push
 ## 将工作区迁移到新机器
 
 1. 将仓库克隆到所需路径（默认 `~/.openclaw/workspace`）。
-2. 在 `~/.openclaw/openclaw.json` 中将 `agents.defaults.workspace` 设置为该路径。
+2. 在 `~/.sudoprivacy/sudoclaw.json` 中将 `agents.defaults.workspace` 设置为该路径。
 3. 运行 `openclaw setup --workspace <path>` 来填充任何缺失的文件。
 4. 如果你需要会话，请单独从旧机器复制 `~/.openclaw/agents/<agentId>/sessions/`。
 

@@ -15,7 +15,7 @@ x-i18n:
 
 # Doctor
 
-`openclaw doctor` 是 OpenClaw 的修复 + 迁移工具。它修复过时的配置/状态，检查健康状况，并提供可操作的修复步骤。
+`openclaw doctor` 是 SudoClaw 的修复 + 迁移工具。它修复过时的配置/状态，检查健康状况，并提供可操作的修复步骤。
 
 ## 快速开始
 
@@ -59,7 +59,7 @@ openclaw doctor --deep
 如果你想在写入前查看更改，请先打开配置文件：
 
 ```bash
-cat ~/.openclaw/openclaw.json
+cat ~/.sudoprivacy/sudoclaw.json
 ```
 
 ## 功能概述
@@ -106,7 +106,7 @@ Doctor 将：
 
 - 解释找到了哪些遗留键。
 - 显示它应用的迁移。
-- 使用更新后的 schema 重写 `~/.openclaw/openclaw.json`。
+- 使用更新后的 schema 重写 `~/.sudoprivacy/sudoclaw.json`。
 
 Gateway 网关在检测到遗留配置格式时也会在启动时自动运行 doctor 迁移，因此过时的配置无需手动干预即可修复。
 
@@ -158,7 +158,7 @@ Doctor 检查：
 - **主会话"1 行 JSONL"**：当主记录只有一行时标记（历史未累积）。
 - **多个状态目录**：当多个 `~/.openclaw` 文件夹存在于不同 home 目录或当 `OPENCLAW_STATE_DIR` 指向别处时发出警告（历史可能在安装之间分裂）。
 - **远程模式提醒**：如果 `gateway.mode=remote`，doctor 会提醒你在远程主机上运行它（状态在那里）。
-- **配置文件权限**：当 `~/.openclaw/openclaw.json` 对组/其他用户可读时发出警告，并提供收紧到 `600` 的选项。
+- **配置文件权限**：当 `~/.sudoprivacy/sudoclaw.json` 对组/其他用户可读时发出警告，并提供收紧到 `600` 的选项。
 
 ### 5）模型认证健康（OAuth 过期）
 
@@ -180,8 +180,8 @@ Doctor 还会报告由于以下原因暂时不可用的认证配置文件：
 
 ### 8）Gateway 网关服务迁移和清理提示
 
-Doctor 检测遗留的 Gateway 网关服务（launchd/systemd/schtasks），并提供删除它们并使用当前 Gateway 网关端口安装 OpenClaw 服务的选项。它还可以扫描额外的类 Gateway 网关服务并打印清理提示。
-配置文件命名的 OpenClaw Gateway 网关服务被视为一等公民，不会被标记为"额外的"。
+Doctor 检测遗留的 Gateway 网关服务（launchd/systemd/schtasks），并提供删除它们并使用当前 Gateway 网关端口安装 SudoClaw 服务的选项。它还可以扫描额外的类 Gateway 网关服务并打印清理提示。
+配置文件命名的 SudoClaw Gateway 网关服务被视为一等公民，不会被标记为"额外的"。
 
 ### 9）安全警告
 

@@ -16,7 +16,7 @@ x-i18n:
 
 # 安装器内部机制
 
-OpenClaw 提供两个安装器脚本（托管在 `openclaw.ai`）：
+SudoClaw 提供两个安装器脚本（托管在 `openclaw.ai`）：
 
 - `https://openclaw.ai/install.sh` — "推荐"安装器（默认全局 npm 安装；也可从 GitHub 检出安装）
 - `https://openclaw.ai/install-cli.sh` — 无需 root 权限的 CLI 安装器（安装到带有独立 Node 的前缀目录）
@@ -58,7 +58,7 @@ SHARP_IGNORE_GLOBAL_LIBVIPS=0 curl -fsSL https://openclaw.ai/install.sh | bash
 
 ### 可发现性 / "git 安装"提示
 
-如果你在**已有的 OpenClaw 源码检出目录中**运行安装器（通过 `package.json` + `pnpm-workspace.yaml` 检测），它会提示：
+如果你在**已有的 SudoClaw 源码检出目录中**运行安装器（通过 `package.json` + `pnpm-workspace.yaml` 检测），它会提示：
 
 - 更新并使用此检出（`git`）
 - 或迁移到全局 npm 安装（`npm`）

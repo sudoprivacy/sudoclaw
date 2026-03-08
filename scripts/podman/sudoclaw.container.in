@@ -1,0 +1,28 @@
+# SudoClaw gateway — Podman Quadlet (rootless)
+# Installed by setup-podman.sh into sudoclaw's ~/.config/containers/systemd/
+# {{SUDOCLAW_HOME}} is replaced at install time.
+
+[Unit]
+Description=SudoClaw gateway (rootless Podman)
+
+[Container]
+Image=sudoclaw:local
+ContainerName=sudoclaw
+UserNS=keep-id
+# Keep container UID/GID aligned with the invoking user so mounted config is readable.
+User=%U:%G
+Volume={{SUDOCLAW_HOME}}/.sudoclaw:/home/node/.sudoclaw
+EnvironmentFile={{SUDOCLAW_HOME}}/.sudoclaw/.env
+Environment=HOME=/home/node
+Environment=TERM=xterm-256color
+PublishPort=18789:18789
+PublishPort=18790:18790
+Pull=never
+Exec=node dist/index.js gateway --bind lan --port 18789
+
+[Service]
+TimeoutStartSec=300
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

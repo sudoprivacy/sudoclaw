@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import type { OpenClawConfig } from "../config/config.js";
+import type { SudoClawConfig } from "../config/config.js";
 import { resetLogger, setLoggerOverride } from "../logging/logger.js";
 import {
   buildAllowedModelSet,
@@ -147,7 +147,7 @@ describe("model-selection", () => {
             },
           },
         },
-      } as OpenClawConfig;
+      } as SudoClawConfig;
 
       expect(
         inferUniqueProviderFromConfiguredModels({
@@ -167,7 +167,7 @@ describe("model-selection", () => {
             },
           },
         },
-      } as OpenClawConfig;
+      } as SudoClawConfig;
 
       expect(
         inferUniqueProviderFromConfiguredModels({
@@ -186,7 +186,7 @@ describe("model-selection", () => {
             },
           },
         },
-      } as OpenClawConfig;
+      } as SudoClawConfig;
 
       expect(
         inferUniqueProviderFromConfiguredModels({
@@ -205,7 +205,7 @@ describe("model-selection", () => {
             },
           },
         },
-      } as OpenClawConfig;
+      } as SudoClawConfig;
 
       expect(
         inferUniqueProviderFromConfiguredModels({
@@ -218,7 +218,7 @@ describe("model-selection", () => {
 
   describe("buildModelAliasIndex", () => {
     it("should build alias index from config", () => {
-      const cfg: Partial<OpenClawConfig> = {
+      const cfg: Partial<SudoClawConfig> = {
         agents: {
           defaults: {
             models: {
@@ -230,7 +230,7 @@ describe("model-selection", () => {
       };
 
       const index = buildModelAliasIndex({
-        cfg: cfg as OpenClawConfig,
+        cfg: cfg as SudoClawConfig,
         defaultProvider: "anthropic",
       });
 
@@ -245,7 +245,7 @@ describe("model-selection", () => {
 
   describe("buildAllowedModelSet", () => {
     it("keeps explicitly allowlisted models even when missing from bundled catalog", () => {
-      const cfg: OpenClawConfig = {
+      const cfg: SudoClawConfig = {
         agents: {
           defaults: {
             model: { primary: "openai/gpt-5.2" },
@@ -254,7 +254,7 @@ describe("model-selection", () => {
             },
           },
         },
-      } as OpenClawConfig;
+      } as SudoClawConfig;
 
       const catalog = [
         { provider: "anthropic", id: "claude-sonnet-4-5", name: "Claude Sonnet 4.5" },
@@ -277,7 +277,7 @@ describe("model-selection", () => {
 
   describe("resolveAllowedModelRef", () => {
     it("accepts explicit allowlist refs absent from bundled catalog", () => {
-      const cfg: OpenClawConfig = {
+      const cfg: SudoClawConfig = {
         agents: {
           defaults: {
             model: { primary: "openai/gpt-5.2" },
@@ -286,7 +286,7 @@ describe("model-selection", () => {
             },
           },
         },
-      } as OpenClawConfig;
+      } as SudoClawConfig;
 
       const catalog = [
         { provider: "anthropic", id: "claude-sonnet-4-5", name: "Claude Sonnet 4.5" },
@@ -308,7 +308,7 @@ describe("model-selection", () => {
     });
 
     it("strips trailing auth profile suffix before allowlist matching", () => {
-      const cfg: OpenClawConfig = {
+      const cfg: SudoClawConfig = {
         agents: {
           defaults: {
             models: {
@@ -316,7 +316,7 @@ describe("model-selection", () => {
             },
           },
         },
-      } as OpenClawConfig;
+      } as SudoClawConfig;
 
       const result = resolveAllowedModelRef({
         cfg,
@@ -437,7 +437,7 @@ describe("model-selection", () => {
       setLoggerOverride({ level: "silent", consoleLevel: "warn" });
       const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
       try {
-        const cfg: Partial<OpenClawConfig> = {
+        const cfg: Partial<SudoClawConfig> = {
           agents: {
             defaults: {
               model: { primary: "claude-3-5-sonnet" },
@@ -446,7 +446,7 @@ describe("model-selection", () => {
         };
 
         const result = resolveConfiguredModelRef({
-          cfg: cfg as OpenClawConfig,
+          cfg: cfg as SudoClawConfig,
           defaultProvider: "google",
           defaultModel: "gemini-pro",
         });
@@ -462,9 +462,9 @@ describe("model-selection", () => {
     });
 
     it("should use default provider/model if config is empty", () => {
-      const cfg: Partial<OpenClawConfig> = {};
+      const cfg: Partial<SudoClawConfig> = {};
       const result = resolveConfiguredModelRef({
-        cfg: cfg as OpenClawConfig,
+        cfg: cfg as SudoClawConfig,
         defaultProvider: "openai",
         defaultModel: "gpt-4",
       });
@@ -485,7 +485,7 @@ describe("model-selection", () => {
             },
           },
         },
-      } as OpenClawConfig;
+      } as SudoClawConfig;
 
       expect(
         resolveThinkingDefault({
@@ -515,7 +515,7 @@ describe("model-selection", () => {
             },
           },
         },
-      } as OpenClawConfig;
+      } as SudoClawConfig;
 
       expect(
         resolveThinkingDefault({
@@ -535,7 +535,7 @@ describe("model-selection", () => {
     });
 
     it("defaults Anthropic Claude 4.6 models to adaptive", () => {
-      const cfg = {} as OpenClawConfig;
+      const cfg = {} as SudoClawConfig;
 
       expect(
         resolveThinkingDefault({

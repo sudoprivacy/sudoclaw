@@ -15,7 +15,7 @@ x-i18n:
 
 # 平台
 
-OpenClaw 核心使用 TypeScript 编写。**Node 是推荐的运行时**。
+SudoClaw 核心使用 TypeScript 编写。**Node 是推荐的运行时**。
 不推荐 Bun 用于 Gateway 网关（WhatsApp/Telegram 存在 bug）。
 
 配套应用适用于 macOS（菜单栏应用）和移动节点（iOS/Android）。Windows 和

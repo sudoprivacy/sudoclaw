@@ -14,7 +14,7 @@ x-i18n:
 
 # OpenAI Chat Completions（HTTP）
 
-OpenClaw 的 Gateway 网关可以提供一个小型的 OpenAI 兼容 Chat Completions 端点。
+SudoClaw 的 Gateway 网关可以提供一个小型的 OpenAI 兼容 Chat Completions 端点。
 
 此端点**默认禁用**。请先在配置中启用它。
 
@@ -41,7 +41,7 @@ OpenClaw 的 Gateway 网关可以提供一个小型的 OpenAI 兼容 Chat Comple
 - `model: "openclaw:<agentId>"`（例如：`"openclaw:main"`、`"openclaw:beta"`）
 - `model: "agent:<agentId>"`（别名）
 
-或通过头指定特定的 OpenClaw 智能体：
+或通过头指定特定的 SudoClaw 智能体：
 
 - `x-openclaw-agent-id: <agentId>`（默认：`main`）
 

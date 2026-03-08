@@ -1,9 +1,9 @@
 ---
 read_when:
-  - 学习如何配置 OpenClaw
+  - 学习如何配置 SudoClaw
   - 寻找配置示例
-  - 首次设置 OpenClaw
-summary: 符合模式的常见 OpenClaw 设置配置示例
+  - 首次设置 SudoClaw
+summary: 符合模式的常见 SudoClaw 设置配置示例
 title: 配置示例
 x-i18n:
   generated_at: "2026-02-03T07:48:39Z"
@@ -29,7 +29,7 @@ x-i18n:
 }
 ```
 
-保存到 `~/.openclaw/openclaw.json`，你就可以从该号码私信机器人了。
+保存到 `~/.sudoprivacy/sudoclaw.json`，你就可以从该号码私信机器人了。
 
 ### 推荐的入门配置
 
@@ -96,7 +96,7 @@ x-i18n:
   // 日志
   logging: {
     level: "info",
-    file: "/tmp/openclaw/openclaw.log",
+    file: "/tmp/sudoprivacy/sudoclaw.log",
     consoleLevel: "info",
     consoleStyle: "pretty",
     redactSensitive: "tools",

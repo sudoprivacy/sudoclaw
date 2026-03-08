@@ -1,5 +1,5 @@
 import type { Command } from "commander";
-import type { OpenClawConfig } from "../../config/config.js";
+import type { SudoClawConfig } from "../../config/config.js";
 import { isTruthyEnvValue } from "../../infra/env.js";
 import { getPrimaryCommand, hasHelpOrVersion } from "../argv.js";
 import { reparseProgramFromActionArgs } from "./action-reparse.js";
@@ -15,7 +15,7 @@ type SubCliEntry = {
 };
 
 const shouldRegisterPrimaryOnly = (argv: string[]) => {
-  if (isTruthyEnvValue(process.env.OPENCLAW_DISABLE_LAZY_SUBCOMMANDS)) {
+  if (isTruthyEnvValue(process.env.SUDOCLAW_DISABLE_LAZY_SUBCOMMANDS)) {
     return false;
   }
   if (hasHelpOrVersion(argv)) {
@@ -25,10 +25,10 @@ const shouldRegisterPrimaryOnly = (argv: string[]) => {
 };
 
 const shouldEagerRegisterSubcommands = (_argv: string[]) => {
-  return isTruthyEnvValue(process.env.OPENCLAW_DISABLE_LAZY_SUBCOMMANDS);
+  return isTruthyEnvValue(process.env.SUDOCLAW_DISABLE_LAZY_SUBCOMMANDS);
 };
 
-const loadConfig = async (): Promise<OpenClawConfig> => {
+const loadConfig = async (): Promise<SudoClawConfig> => {
   const mod = await import("../../config/config.js");
   return mod.loadConfig();
 };
@@ -165,7 +165,7 @@ const entries: SubCliEntry[] = [
   },
   {
     name: "docs",
-    description: "Search the live OpenClaw docs",
+    description: "Search the live SudoClaw docs",
     hasSubcommands: false,
     register: async (program) => {
       const mod = await import("../docs-cli.js");
@@ -209,6 +209,15 @@ const entries: SubCliEntry[] = [
     },
   },
   {
+    name: "openclaw",
+    description: "Legacy openclaw command aliases",
+    hasSubcommands: true,
+    register: async (program) => {
+      const mod = await import("../openclaw-cli.js");
+      mod.registerOpenclawCli(program);
+    },
+  },
+  {
     name: "pairing",
     description: "Secure DM pairing (approve inbound requests)",
     hasSubcommands: true,
@@ -224,7 +233,7 @@ const entries: SubCliEntry[] = [
   },
   {
     name: "plugins",
-    description: "Manage OpenClaw plugins and extensions",
+    description: "Manage SudoClaw plugins and extensions",
     hasSubcommands: true,
     register: async (program) => {
       const mod = await import("../plugins-cli.js");
@@ -280,7 +289,7 @@ const entries: SubCliEntry[] = [
   },
   {
     name: "update",
-    description: "Update OpenClaw and inspect update channel status",
+    description: "Update SudoClaw and inspect update channel status",
     hasSubcommands: true,
     register: async (program) => {
       const mod = await import("../update-cli.js");

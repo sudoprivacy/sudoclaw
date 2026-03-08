@@ -4,7 +4,7 @@ import {
   validateGatewayPasswordInput,
 } from "../commands/onboard-helpers.js";
 import type { GatewayAuthChoice } from "../commands/onboard-types.js";
-import type { GatewayBindMode, GatewayTailscaleMode, OpenClawConfig } from "../config/config.js";
+import type { GatewayBindMode, GatewayTailscaleMode, SudoClawConfig } from "../config/config.js";
 import { ensureControlUiAllowedOriginsForNonLoopbackBind } from "../config/gateway-control-ui-origins.js";
 import {
   maybeAddTailnetOriginToControlUiAllowedOrigins,
@@ -38,8 +38,8 @@ const DEFAULT_DANGEROUS_NODE_DENY_COMMANDS = [
 
 type ConfigureGatewayOptions = {
   flow: WizardFlow;
-  baseConfig: OpenClawConfig;
-  nextConfig: OpenClawConfig;
+  baseConfig: SudoClawConfig;
+  nextConfig: SudoClawConfig;
   localPort: number;
   quickstartGateway: QuickstartGatewayDefaults;
   prompter: WizardPrompter;
@@ -47,7 +47,7 @@ type ConfigureGatewayOptions = {
 };
 
 type ConfigureGatewayResult = {
-  nextConfig: OpenClawConfig;
+  nextConfig: SudoClawConfig;
   settings: GatewayWizardSettings;
 };
 
@@ -163,7 +163,7 @@ export async function configureGatewayForOnboarding(
     if (flow === "quickstart") {
       gatewayToken =
         (quickstartGateway.token ??
-          normalizeGatewayTokenInput(process.env.OPENCLAW_GATEWAY_TOKEN)) ||
+          normalizeGatewayTokenInput(process.env.SUDOCLAW_GATEWAY_TOKEN)) ||
         randomToken();
     } else {
       const tokenInput = await prompter.text({
@@ -171,7 +171,7 @@ export async function configureGatewayForOnboarding(
         placeholder: "Needed for multi-machine or non-loopback access",
         initialValue:
           quickstartGateway.token ??
-          normalizeGatewayTokenInput(process.env.OPENCLAW_GATEWAY_TOKEN) ??
+          normalizeGatewayTokenInput(process.env.SUDOCLAW_GATEWAY_TOKEN) ??
           "",
       });
       gatewayToken = normalizeGatewayTokenInput(tokenInput) || randomToken();

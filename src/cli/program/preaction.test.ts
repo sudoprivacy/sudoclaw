@@ -25,7 +25,7 @@ vi.mock("../banner.js", () => ({
 }));
 
 vi.mock("../cli-name.js", () => ({
-  resolveCliName: () => "openclaw",
+  resolveCliName: () => "sudoclaw",
 }));
 
 vi.mock("./config-guard.js", () => ({
@@ -51,9 +51,9 @@ beforeEach(() => {
   originalProcessArgv = [...process.argv];
   originalProcessTitle = process.title;
   originalNodeNoWarnings = process.env.NODE_NO_WARNINGS;
-  originalHideBanner = process.env.OPENCLAW_HIDE_BANNER;
+  originalHideBanner = process.env.SUDOCLAW_HIDE_BANNER;
   delete process.env.NODE_NO_WARNINGS;
-  delete process.env.OPENCLAW_HIDE_BANNER;
+  delete process.env.SUDOCLAW_HIDE_BANNER;
 });
 
 afterEach(() => {
@@ -65,15 +65,15 @@ afterEach(() => {
     process.env.NODE_NO_WARNINGS = originalNodeNoWarnings;
   }
   if (originalHideBanner === undefined) {
-    delete process.env.OPENCLAW_HIDE_BANNER;
+    delete process.env.SUDOCLAW_HIDE_BANNER;
   } else {
-    process.env.OPENCLAW_HIDE_BANNER = originalHideBanner;
+    process.env.SUDOCLAW_HIDE_BANNER = originalHideBanner;
   }
 });
 
 describe("registerPreActionHooks", () => {
   function buildProgram() {
-    const program = new Command().name("openclaw");
+    const program = new Command().name("sudoclaw");
     program.command("status").action(async () => {});
     program.command("doctor").action(async () => {});
     program.command("completion").action(async () => {});
@@ -113,7 +113,7 @@ describe("registerPreActionHooks", () => {
   it("emits banner, resolves config, and enables verbose from --debug", async () => {
     await runCommand({
       parseArgv: ["status"],
-      processArgv: ["node", "openclaw", "status", "--debug"],
+      processArgv: ["node", "sudoclaw", "status", "--debug"],
     });
 
     expect(emitCliBannerMock).toHaveBeenCalledWith("9.9.9-test");
@@ -123,13 +123,13 @@ describe("registerPreActionHooks", () => {
       commandPath: ["status"],
     });
     expect(ensurePluginRegistryLoadedMock).not.toHaveBeenCalled();
-    expect(process.title).toBe("openclaw-status");
+    expect(process.title).toBe("sudoclaw-status");
   });
 
   it("loads plugin registry for plugin-required commands", async () => {
     await runCommand({
       parseArgv: ["message", "send"],
-      processArgv: ["node", "openclaw", "message", "send"],
+      processArgv: ["node", "sudoclaw", "message", "send"],
     });
 
     expect(setVerboseMock).toHaveBeenCalledWith(false);
@@ -144,7 +144,7 @@ describe("registerPreActionHooks", () => {
   it("loads plugin registry for configure command", async () => {
     await runCommand({
       parseArgv: ["configure"],
-      processArgv: ["node", "openclaw", "configure"],
+      processArgv: ["node", "sudoclaw", "configure"],
     });
 
     expect(ensurePluginRegistryLoadedMock).toHaveBeenCalledTimes(1);
@@ -153,7 +153,7 @@ describe("registerPreActionHooks", () => {
   it("loads plugin registry for onboard command", async () => {
     await runCommand({
       parseArgv: ["onboard"],
-      processArgv: ["node", "openclaw", "onboard"],
+      processArgv: ["node", "sudoclaw", "onboard"],
     });
 
     expect(ensurePluginRegistryLoadedMock).toHaveBeenCalledTimes(1);
@@ -162,7 +162,7 @@ describe("registerPreActionHooks", () => {
   it("loads plugin registry for agents command", async () => {
     await runCommand({
       parseArgv: ["agents"],
-      processArgv: ["node", "openclaw", "agents"],
+      processArgv: ["node", "sudoclaw", "agents"],
     });
 
     expect(ensurePluginRegistryLoadedMock).toHaveBeenCalledTimes(1);
@@ -171,15 +171,15 @@ describe("registerPreActionHooks", () => {
   it("skips config guard for doctor, completion, and secrets commands", async () => {
     await runCommand({
       parseArgv: ["doctor"],
-      processArgv: ["node", "openclaw", "doctor"],
+      processArgv: ["node", "sudoclaw", "doctor"],
     });
     await runCommand({
       parseArgv: ["completion"],
-      processArgv: ["node", "openclaw", "completion"],
+      processArgv: ["node", "sudoclaw", "completion"],
     });
     await runCommand({
       parseArgv: ["secrets"],
-      processArgv: ["node", "openclaw", "secrets"],
+      processArgv: ["node", "sudoclaw", "secrets"],
     });
 
     expect(ensureConfigReadyMock).not.toHaveBeenCalled();
@@ -188,7 +188,7 @@ describe("registerPreActionHooks", () => {
   it("skips preaction work when argv indicates help/version", async () => {
     await runCommand({
       parseArgv: ["status"],
-      processArgv: ["node", "openclaw", "--version"],
+      processArgv: ["node", "sudoclaw", "--version"],
     });
 
     expect(emitCliBannerMock).not.toHaveBeenCalled();
@@ -196,11 +196,11 @@ describe("registerPreActionHooks", () => {
     expect(ensureConfigReadyMock).not.toHaveBeenCalled();
   });
 
-  it("hides banner when OPENCLAW_HIDE_BANNER is truthy", async () => {
-    process.env.OPENCLAW_HIDE_BANNER = "1";
+  it("hides banner when SUDOCLAW_HIDE_BANNER is truthy", async () => {
+    process.env.SUDOCLAW_HIDE_BANNER = "1";
     await runCommand({
       parseArgv: ["status"],
-      processArgv: ["node", "openclaw", "status"],
+      processArgv: ["node", "sudoclaw", "status"],
     });
 
     expect(emitCliBannerMock).not.toHaveBeenCalled();
@@ -210,7 +210,7 @@ describe("registerPreActionHooks", () => {
   it("suppresses doctor stdout for any --json output command", async () => {
     await runCommand({
       parseArgv: ["message", "send", "--json"],
-      processArgv: ["node", "openclaw", "message", "send", "--json"],
+      processArgv: ["node", "sudoclaw", "message", "send", "--json"],
     });
 
     expect(ensureConfigReadyMock).toHaveBeenCalledWith({
@@ -223,7 +223,7 @@ describe("registerPreActionHooks", () => {
 
     await runCommand({
       parseArgv: ["update", "status", "--json"],
-      processArgv: ["node", "openclaw", "update", "status", "--json"],
+      processArgv: ["node", "sudoclaw", "update", "status", "--json"],
     });
 
     expect(ensureConfigReadyMock).toHaveBeenCalledWith({
@@ -236,7 +236,7 @@ describe("registerPreActionHooks", () => {
   it("does not treat config set --json (strict-parse alias) as json output mode", async () => {
     await runCommand({
       parseArgv: ["config", "set", "gateway.auth.mode", "{bad", "--json"],
-      processArgv: ["node", "openclaw", "config", "set", "gateway.auth.mode", "{bad", "--json"],
+      processArgv: ["node", "sudoclaw", "config", "set", "gateway.auth.mode", "{bad", "--json"],
     });
 
     expect(ensureConfigReadyMock).toHaveBeenCalledWith({

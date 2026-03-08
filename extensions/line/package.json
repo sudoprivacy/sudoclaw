@@ -1,10 +1,10 @@
 {
-  "name": "@openclaw/line",
+  "name": "@sudoclaw/line",
   "version": "2026.3.1",
   "private": true,
-  "description": "OpenClaw LINE channel plugin",
+  "description": "SudoClaw LINE channel plugin",
   "type": "module",
-  "openclaw": {
+  "sudoclaw": {
     "extensions": [
       "./index.ts"
     ],
@@ -19,7 +19,7 @@
       "quickstartAllowFrom": true
     },
     "install": {
-      "npmSpec": "@openclaw/line",
+      "npmSpec": "@sudoclaw/line",
       "localPath": "extensions/line",
       "defaultChoice": "npm"
     }

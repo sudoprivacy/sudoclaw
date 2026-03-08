@@ -3,15 +3,15 @@ FROM node:22-bookworm@sha256:cd7bcd2e7a1e6f72052feb023c7f6b722205d3fcab7bbcbd2d1
 # OCI base-image metadata for downstream image consumers.
 # If you change these annotations, also update:
 # - docs/install/docker.md ("Base image metadata" section)
-# - https://docs.openclaw.ai/install/docker
+# - https://docs.sudoclaw.ai/install/docker
 LABEL org.opencontainers.image.base.name="docker.io/library/node:22-bookworm" \
   org.opencontainers.image.base.digest="sha256:cd7bcd2e7a1e6f72052feb023c7f6b722205d3fcab7bbcbd2d1bfdab10b1e935" \
-  org.opencontainers.image.source="https://github.com/openclaw/openclaw" \
-  org.opencontainers.image.url="https://openclaw.ai" \
-  org.opencontainers.image.documentation="https://docs.openclaw.ai/install/docker" \
+  org.opencontainers.image.source="https://github.com/sudoprivacy/sudoclaw" \
+  org.opencontainers.image.url="https://sudoclaw.ai" \
+  org.opencontainers.image.documentation="https://docs.sudoclaw.ai/install/docker" \
   org.opencontainers.image.licenses="MIT" \
-  org.opencontainers.image.title="OpenClaw" \
-  org.opencontainers.image.description="OpenClaw gateway and CLI runtime container image"
+  org.opencontainers.image.title="SudoClaw" \
+  org.opencontainers.image.description="SudoClaw gateway and CLI runtime container image"
 
 # Install Bun (required for build scripts)
 RUN curl -fsSL https://bun.sh/install | bash
@@ -22,10 +22,10 @@ RUN corepack enable
 WORKDIR /app
 RUN chown node:node /app
 
-ARG OPENCLAW_DOCKER_APT_PACKAGES=""
-RUN if [ -n "$OPENCLAW_DOCKER_APT_PACKAGES" ]; then \
+ARG SUDOCLAW_DOCKER_APT_PACKAGES=""
+RUN if [ -n "$SUDOCLAW_DOCKER_APT_PACKAGES" ]; then \
       apt-get update && \
-      DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends $OPENCLAW_DOCKER_APT_PACKAGES && \
+      DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends $SUDOCLAW_DOCKER_APT_PACKAGES && \
       apt-get clean && \
       rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*; \
     fi
@@ -41,12 +41,12 @@ USER node
 RUN NODE_OPTIONS=--max-old-space-size=2048 pnpm install --frozen-lockfile
 
 # Optionally install Chromium and Xvfb for browser automation.
-# Build with: docker build --build-arg OPENCLAW_INSTALL_BROWSER=1 ...
+# Build with: docker build --build-arg SUDOCLAW_INSTALL_BROWSER=1 ...
 # Adds ~300MB but eliminates the 60-90s Playwright install on every container start.
 # Must run after pnpm install so playwright-core is available in node_modules.
 USER root
-ARG OPENCLAW_INSTALL_BROWSER=""
-RUN if [ -n "$OPENCLAW_INSTALL_BROWSER" ]; then \
+ARG SUDOCLAW_INSTALL_BROWSER=""
+RUN if [ -n "$SUDOCLAW_INSTALL_BROWSER" ]; then \
       apt-get update && \
       DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends xvfb && \
       mkdir -p /home/node/.cache/ms-playwright && \
@@ -69,13 +69,13 @@ RUN for dir in /app/extensions /app/.agent /app/.agents; do \
     done
 RUN pnpm build
 # Force pnpm for UI build (Bun may fail on ARM/Synology architectures)
-ENV OPENCLAW_PREFER_PNPM=1
+ENV SUDOCLAW_PREFER_PNPM=1
 RUN pnpm ui:build
 
 # Expose the CLI binary without requiring npm global writes as non-root.
 USER root
-RUN ln -sf /app/openclaw.mjs /usr/local/bin/openclaw \
- && chmod 755 /app/openclaw.mjs
+RUN ln -sf /app/sudoclaw.mjs /usr/local/bin/sudoclaw \
+ && chmod 755 /app/sudoclaw.mjs
 
 ENV NODE_ENV=production
 
@@ -93,6 +93,6 @@ USER node
 #   - Override --bind to "lan" (0.0.0.0) and set auth credentials
 #
 # For container platforms requiring external health checks:
-#   1. Set OPENCLAW_GATEWAY_TOKEN or OPENCLAW_GATEWAY_PASSWORD env var
-#   2. Override CMD: ["node","openclaw.mjs","gateway","--allow-unconfigured","--bind","lan"]
-CMD ["node", "openclaw.mjs", "gateway", "--allow-unconfigured"]
+#   1. Set SUDOCLAW_GATEWAY_TOKEN or SUDOCLAW_GATEWAY_PASSWORD env var
+#   2. Override CMD: ["node","sudoclaw.mjs","gateway","--allow-unconfigured","--bind","lan"]
+CMD ["node", "sudoclaw.mjs", "gateway", "--allow-unconfigured"]

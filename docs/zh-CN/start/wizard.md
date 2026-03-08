@@ -15,7 +15,7 @@ x-i18n:
 
 # 新手引导向导（CLI）
 
-新手引导向导是在 macOS、Linux 或 Windows（通过 WSL2；强烈推荐）上设置 OpenClaw 的**推荐**方式。
+新手引导向导是在 macOS、Linux 或 Windows（通过 WSL2；强烈推荐）上设置 SudoClaw 的**推荐**方式。
 它可以在一个引导式流程中配置本地 Gateway 网关或远程 Gateway 网关连接，以及渠道、Skills 和工作区默认值。
 
 主要入口：
@@ -75,7 +75,7 @@ openclaw agents add <name>
 ## 流程详情（本地）
 
 1. **现有配置检测**
-   - 如果 `~/.openclaw/openclaw.json` 存在，选择**保留 / 修改 / 重置**。
+   - 如果 `~/.sudoprivacy/sudoclaw.json` 存在，选择**保留 / 修改 / 重置**。
    - 重新运行向导**不会**清除任何内容，除非你明确选择**重置**（或传递 `--reset`）。
    - 如果配置无效或包含遗留键名，向导会停止并要求你在继续之前运行 `openclaw doctor`。
    - 重置使用 `trash`（永不使用 `rm`）并提供范围选项：
@@ -302,7 +302,7 @@ Gateway 网关通过 RPC 暴露向导流程（`wizard.start`、`wizard.next`、`
 
 ## 向导写入的内容
 
-`~/.openclaw/openclaw.json` 中的典型字段：
+`~/.sudoprivacy/sudoclaw.json` 中的典型字段：
 
 - `agents.defaults.workspace`
 - `agents.defaults.model` / `models.providers`（如果选择了 Minimax）

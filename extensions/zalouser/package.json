@@ -1,12 +1,12 @@
 {
-  "name": "@openclaw/zalouser",
+  "name": "@sudoclaw/zalouser",
   "version": "2026.3.1",
-  "description": "OpenClaw Zalo Personal Account plugin via zca-cli",
+  "description": "SudoClaw Zalo Personal Account plugin via zca-cli",
   "type": "module",
   "dependencies": {
     "@sinclair/typebox": "0.34.48"
   },
-  "openclaw": {
+  "sudoclaw": {
     "extensions": [
       "./index.ts"
     ],
@@ -24,7 +24,7 @@
       "quickstartAllowFrom": true
     },
     "install": {
-      "npmSpec": "@openclaw/zalouser",
+      "npmSpec": "@sudoclaw/zalouser",
       "localPath": "extensions/zalouser",
       "defaultChoice": "npm"
     }

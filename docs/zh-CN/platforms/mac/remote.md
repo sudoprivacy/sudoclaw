@@ -1,7 +1,7 @@
 ---
 read_when:
   - 设置或调试远程 mac 控制时
-summary: macOS 应用通过 SSH 控制远程 OpenClaw Gateway 网关的流程
+summary: macOS 应用通过 SSH 控制远程 SudoClaw Gateway 网关的流程
 title: 远程控制
 x-i18n:
   generated_at: "2026-02-03T07:52:53Z"
@@ -12,14 +12,14 @@ x-i18n:
   workflow: 15
 ---
 
-# 远程 OpenClaw（macOS ⇄ 远程主机）
+# 远程 SudoClaw（macOS ⇄ 远程主机）
 
-此流程让 macOS 应用作为运行在另一台主机（桌面/服务器）上的 OpenClaw Gateway 网关的完整远程控制。这是应用的 **Remote over SSH**（远程运行）功能。所有功能——健康检查、语音唤醒转发和 Web Chat——都重用来自 _Settings → General_ 的相同远程 SSH 配置。
+此流程让 macOS 应用作为运行在另一台主机（桌面/服务器）上的 SudoClaw Gateway 网关的完整远程控制。这是应用的 **Remote over SSH**（远程运行）功能。所有功能——健康检查、语音唤醒转发和 Web Chat——都重用来自 _Settings → General_ 的相同远程 SSH 配置。
 
 ## 模式
 
 - **Local (this Mac)**：一切都在笔记本电脑上运行。不涉及 SSH。
-- **Remote over SSH（默认）**：OpenClaw 命令在远程主机上执行。mac 应用使用 `-o BatchMode` 加上你选择的身份/密钥打开 SSH 连接，并进行本地端口转发。
+- **Remote over SSH（默认）**：SudoClaw 命令在远程主机上执行。mac 应用使用 `-o BatchMode` 加上你选择的身份/密钥打开 SSH 连接，并进行本地端口转发。
 - **Remote direct (ws/wss)**：无 SSH 隧道。mac 应用直接连接到 Gateway 网关 URL（例如，通过 Tailscale Serve 或公共 HTTPS 反向代理）。
 
 ## 远程传输
@@ -31,14 +31,14 @@ x-i18n:
 
 ## 远程主机上的先决条件
 
-1. 安装 Node + pnpm 并构建/安装 OpenClaw CLI（`pnpm install && pnpm build && pnpm link --global`）。
+1. 安装 Node + pnpm 并构建/安装 SudoClaw CLI（`pnpm install && pnpm build && pnpm link --global`）。
 2. 确保 `openclaw` 在非交互式 shell 的 PATH 中（如需要，请符号链接到 `/usr/local/bin` 或 `/opt/homebrew/bin`）。
 3. 使用密钥认证打开 SSH。我们推荐使用 **Tailscale** IP 以实现离开局域网时的稳定可达性。
 
 ## macOS 应用设置
 
 1. 打开 _Settings → General_。
-2. 在 **OpenClaw runs** 下，选择 **Remote over SSH** 并设置：
+2. 在 **SudoClaw runs** 下，选择 **Remote over SSH** 并设置：
    - **Transport**：**SSH tunnel** 或 **Direct (ws/wss)**。
    - **SSH target**：`user@host`（可选 `:port`）。
      - 如果 Gateway 网关在同一局域网上并广播 Bonjour，从发现列表中选择它以自动填充此字段。

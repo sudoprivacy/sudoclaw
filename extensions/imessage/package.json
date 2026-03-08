@@ -1,10 +1,10 @@
 {
-  "name": "@openclaw/imessage",
+  "name": "@sudoclaw/imessage",
   "version": "2026.3.1",
   "private": true,
-  "description": "OpenClaw iMessage channel plugin",
+  "description": "SudoClaw iMessage channel plugin",
   "type": "module",
-  "openclaw": {
+  "sudoclaw": {
     "extensions": [
       "./index.ts"
     ]

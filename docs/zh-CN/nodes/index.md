@@ -87,7 +87,7 @@ openclaw node run --host 127.0.0.1 --port 18790 --display-name "Build Node"
 
 注意事项：
 
-- 令牌是 Gateway 网关配置中的 `gateway.auth.token`（Gateway 网关主机上的 `~/.openclaw/openclaw.json`）。
+- 令牌是 Gateway 网关配置中的 `gateway.auth.token`（Gateway 网关主机上的 `~/.sudoprivacy/sudoclaw.json`）。
 - `openclaw node run` 读取 `OPENCLAW_GATEWAY_TOKEN` 进行认证。
 
 ### 启动节点主机（服务）
@@ -259,7 +259,7 @@ openclaw nodes location get --node <idOrNameOrIp> --accuracy precise --max-age 1
 低级调用：
 
 ```bash
-openclaw nodes invoke --node <idOrNameOrIp> --command sms.send --params '{"to":"+15555550123","message":"Hello from OpenClaw"}'
+openclaw nodes invoke --node <idOrNameOrIp> --command sms.send --params '{"to":"+15555550123","message":"Hello from SudoClaw"}'
 ```
 
 注意事项：
@@ -321,7 +321,7 @@ openclaw config unset agents.list[0].tools.exec.node
 
 ## 无头节点主机（跨平台）
 
-OpenClaw 可以运行**无头节点主机**（无 UI），它连接到 Gateway 网关
+SudoClaw 可以运行**无头节点主机**（无 UI），它连接到 Gateway 网关
 WebSocket 并暴露 `system.run` / `system.which`。这在 Linux/Windows
 上或在服务器旁运行最小节点时很有用。
 

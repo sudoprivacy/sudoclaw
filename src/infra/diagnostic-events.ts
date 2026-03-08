@@ -1,4 +1,4 @@
-import type { OpenClawConfig } from "../config/config.js";
+import type { SudoClawConfig } from "../config/config.js";
 
 export type DiagnosticSessionState = "idle" | "processing" | "waiting";
 
@@ -176,19 +176,19 @@ type DiagnosticEventsGlobalState = {
 
 function getDiagnosticEventsState(): DiagnosticEventsGlobalState {
   const globalStore = globalThis as typeof globalThis & {
-    __openclawDiagnosticEventsState?: DiagnosticEventsGlobalState;
+    __sudoclawDiagnosticEventsState?: DiagnosticEventsGlobalState;
   };
-  if (!globalStore.__openclawDiagnosticEventsState) {
-    globalStore.__openclawDiagnosticEventsState = {
+  if (!globalStore.__sudoclawDiagnosticEventsState) {
+    globalStore.__sudoclawDiagnosticEventsState = {
       seq: 0,
       listeners: new Set<(evt: DiagnosticEventPayload) => void>(),
       dispatchDepth: 0,
     };
   }
-  return globalStore.__openclawDiagnosticEventsState;
+  return globalStore.__sudoclawDiagnosticEventsState;
 }
 
-export function isDiagnosticsEnabled(config?: OpenClawConfig): boolean {
+export function isDiagnosticsEnabled(config?: SudoClawConfig): boolean {
   return config?.diagnostics?.enabled === true;
 }
 

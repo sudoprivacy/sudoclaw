@@ -1,9 +1,9 @@
 {
-  "name": "@openclaw/irc",
+  "name": "@sudoclaw/irc",
   "version": "2026.3.1",
-  "description": "OpenClaw IRC channel plugin",
+  "description": "SudoClaw IRC channel plugin",
   "type": "module",
-  "openclaw": {
+  "sudoclaw": {
     "extensions": [
       "./index.ts"
     ]

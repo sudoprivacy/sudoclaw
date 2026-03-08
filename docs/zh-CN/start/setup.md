@@ -2,7 +2,7 @@
 read_when:
   - 设置新机器
   - 你想要"最新最好的"而不破坏你的个人设置
-summary: 设置指南：在保持最新的同时保持你的 OpenClaw 设置个性化
+summary: 设置指南：在保持最新的同时保持你的 SudoClaw 设置个性化
 title: 设置
 x-i18n:
   generated_at: "2026-02-03T07:54:27Z"
@@ -19,7 +19,7 @@ x-i18n:
 
 ## 太长不看
 
-- **个性化设置存放在仓库之外：** `~/.openclaw/workspace`（工作区）+ `~/.openclaw/openclaw.json`（配置）。
+- **个性化设置存放在仓库之外：** `~/.openclaw/workspace`（工作区）+ `~/.sudoprivacy/sudoclaw.json`（配置）。
 - **稳定工作流：** 安装 macOS 应用；让它运行内置的 Gateway 网关。
 - **前沿工作流：** 通过 `pnpm gateway:watch` 自己运行 Gateway 网关，然后让 macOS 应用以本地模式连接。
 
@@ -33,7 +33,7 @@ x-i18n:
 
 如果你想要"100% 为我定制"*并且*易于更新，将你的自定义内容保存在：
 
-- **配置：** `~/.openclaw/openclaw.json`（JSON/JSON5 格式）
+- **配置：** `~/.sudoprivacy/sudoclaw.json`（JSON/JSON5 格式）
 - **工作区：** `~/.openclaw/workspace`（Skills、提示、记忆；将其设为私有 git 仓库）
 
 引导一次：
@@ -52,7 +52,7 @@ openclaw setup
 
 ## 稳定工作流（macOS 应用优先）
 
-1. 安装并启动 **OpenClaw.app**（菜单栏）。
+1. 安装并启动 **SudoClaw.app**（菜单栏）。
 2. 完成新手引导/权限检查清单（TCC 提示）。
 3. 确保 Gateway 网关是**本地**并正在运行（应用管理它）。
 4. 链接表面（示例：WhatsApp）：
@@ -94,7 +94,7 @@ pnpm gateway:watch
 
 ### 2) 将 macOS 应用指向你正在运行的 Gateway 网关
 
-在 **OpenClaw.app** 中：
+在 **SudoClaw.app** 中：
 
 - 连接模式：**本地**
   应用将连接到在配置端口上运行的 Gateway 网关。
@@ -149,5 +149,5 @@ sudo loginctl enable-linger $USER
 - [Gateway 网关运行手册](/gateway)（标志、监督、端口）
 - [Gateway 网关配置](/gateway/configuration)（配置模式 + 示例）
 - [Discord](/channels/discord) 和 [Telegram](/channels/telegram)（回复标签 + replyToMode 设置）
-- [OpenClaw 助手设置](/start/openclaw)
+- [SudoClaw 助手设置](/start/openclaw)
 - [macOS 应用](/platforms/macos)（Gateway 网关生命周期）

@@ -72,7 +72,7 @@ openclaw devices approve <requestId>
 - Skills：状态、启用/禁用、安装、API 密钥更新（`skills.*`）
 - 节点：列表 + 能力（`node.list`）
 - 执行批准：编辑 Gateway 网关或节点允许列表 + `exec host=gateway/node` 的询问策略（`exec.approvals.*`）
-- 配置：查看/编辑 `~/.openclaw/openclaw.json`（`config.get`、`config.set`）
+- 配置：查看/编辑 `~/.sudoprivacy/sudoclaw.json`（`config.get`、`config.set`）
 - 配置：应用 + 带验证的重启（`config.apply`）并唤醒上次活动的会话
 - 配置写入包含基础哈希保护，以防止覆盖并发编辑
 - 配置 schema + 表单渲染（`config.schema`，包括插件 + 渠道 schema）；原始 JSON 编辑器仍然可用
@@ -104,7 +104,7 @@ openclaw gateway --tailscale serve
 
 - `https://<magicdns>/`（或你配置的 `gateway.controlUi.basePath`）
 
-默认情况下，当 `gateway.auth.allowTailscale` 为 `true` 时，Serve 请求可以通过 Tailscale 身份头（`tailscale-user-login`）进行认证。OpenClaw 通过使用 `tailscale whois` 解析 `x-forwarded-for` 地址并与头匹配来验证身份，并且只在请求通过 Tailscale 的 `x-forwarded-*` 头到达 loopback 时接受这些。如果你想即使对于 Serve 流量也要求 token/密码，请设置 `gateway.auth.allowTailscale: false`（或强制 `gateway.auth.mode: "password"`）。
+默认情况下，当 `gateway.auth.allowTailscale` 为 `true` 时，Serve 请求可以通过 Tailscale 身份头（`tailscale-user-login`）进行认证。SudoClaw 通过使用 `tailscale whois` 解析 `x-forwarded-for` 地址并与头匹配来验证身份，并且只在请求通过 Tailscale 的 `x-forwarded-*` 头到达 loopback 时接受这些。如果你想即使对于 Serve 流量也要求 token/密码，请设置 `gateway.auth.allowTailscale: false`（或强制 `gateway.auth.mode: "password"`）。
 
 ### 绑定到 tailnet + token
 
@@ -120,7 +120,7 @@ openclaw gateway --bind tailnet --token "$(openssl rand -hex 32)"
 
 ## 不安全的 HTTP
 
-如果你通过普通 HTTP 打开仪表板（`http://<lan-ip>` 或 `http://<tailscale-ip>`），浏览器在**非安全上下文**中运行并阻止 WebCrypto。默认情况下，OpenClaw **阻止**没有设备身份的控制 UI 连接。
+如果你通过普通 HTTP 打开仪表板（`http://<lan-ip>` 或 `http://<tailscale-ip>`），浏览器在**非安全上下文**中运行并阻止 WebCrypto。默认情况下，SudoClaw **阻止**没有设备身份的控制 UI 连接。
 
 **推荐修复：** 使用 HTTPS（Tailscale Serve）或在本地打开 UI：
 

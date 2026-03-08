@@ -1,5 +1,5 @@
 import Foundation
-import OpenClawKit
+import SudoClawKit
 
 @MainActor
 final class NodeCapabilityRouter {

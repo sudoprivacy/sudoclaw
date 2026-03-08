@@ -15,7 +15,7 @@ x-i18n:
 
 # OpenResponses API（HTTP）
 
-OpenClaw 的 Gateway 网关可以提供兼容 OpenResponses 的 `POST /v1/responses` 端点。
+SudoClaw 的 Gateway 网关可以提供兼容 OpenResponses 的 `POST /v1/responses` 端点。
 
 此端点**默认禁用**。请先在配置中启用。
 
@@ -42,7 +42,7 @@ OpenClaw 的 Gateway 网关可以提供兼容 OpenResponses 的 `POST /v1/respon
 - `model: "openclaw:<agentId>"`（示例：`"openclaw:main"`、`"openclaw:beta"`）
 - `model: "agent:<agentId>"`（别名）
 
-或通过头指定特定的 OpenClaw 智能体：
+或通过头指定特定的 SudoClaw 智能体：
 
 - `x-openclaw-agent-id: <agentId>`（默认：`main`）
 

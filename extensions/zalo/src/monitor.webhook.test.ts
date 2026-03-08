@@ -1,6 +1,6 @@
 import { createServer, type RequestListener } from "node:http";
 import type { AddressInfo } from "node:net";
-import type { OpenClawConfig, PluginRuntime } from "openclaw/plugin-sdk";
+import type { SudoClawConfig, PluginRuntime } from "sudoclaw/plugin-sdk";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   clearZaloWebhookSecurityStateForTest,
@@ -51,7 +51,7 @@ function registerTarget(params: {
   return registerZaloWebhookTarget({
     token: "tok",
     account: DEFAULT_ACCOUNT,
-    config: {} as OpenClawConfig,
+    config: {} as SudoClawConfig,
     runtime: {},
     core: {} as PluginRuntime,
     secret: params.secret ?? "secret",

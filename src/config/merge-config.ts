@@ -1,4 +1,4 @@
-import type { OpenClawConfig } from "./config.js";
+import type { SudoClawConfig } from "./config.js";
 import type { WhatsAppConfig } from "./types.js";
 
 export type MergeSectionOptions<T> = {
@@ -24,10 +24,10 @@ export function mergeConfigSection<T extends Record<string, unknown>>(
 }
 
 export function mergeWhatsAppConfig(
-  cfg: OpenClawConfig,
+  cfg: SudoClawConfig,
   patch: Partial<WhatsAppConfig>,
   options?: MergeSectionOptions<WhatsAppConfig>,
-): OpenClawConfig {
+): SudoClawConfig {
   return {
     ...cfg,
     channels: {

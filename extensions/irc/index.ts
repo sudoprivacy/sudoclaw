@@ -1,5 +1,5 @@
-import type { ChannelPlugin, OpenClawPluginApi } from "openclaw/plugin-sdk";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk";
+import type { ChannelPlugin, SudoClawPluginApi } from "sudoclaw/plugin-sdk";
+import { emptyPluginConfigSchema } from "sudoclaw/plugin-sdk";
 import { ircPlugin } from "./src/channel.js";
 import { setIrcRuntime } from "./src/runtime.js";
 
@@ -8,7 +8,7 @@ const plugin = {
   name: "IRC",
   description: "IRC channel plugin",
   configSchema: emptyPluginConfigSchema(),
-  register(api: OpenClawPluginApi) {
+  register(api: SudoClawPluginApi) {
     setIrcRuntime(api.runtime);
     api.registerChannel({ plugin: ircPlugin as ChannelPlugin });
   },

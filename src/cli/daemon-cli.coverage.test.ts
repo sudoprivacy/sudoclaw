@@ -97,15 +97,15 @@ describe("daemon-cli coverage", () => {
 
   beforeEach(() => {
     envSnapshot = captureEnv([
-      "OPENCLAW_STATE_DIR",
-      "OPENCLAW_CONFIG_PATH",
-      "OPENCLAW_GATEWAY_PORT",
-      "OPENCLAW_PROFILE",
+      "SUDOCLAW_STATE_DIR",
+      "SUDOCLAW_CONFIG_PATH",
+      "SUDOCLAW_GATEWAY_PORT",
+      "SUDOCLAW_PROFILE",
     ]);
-    process.env.OPENCLAW_STATE_DIR = "/tmp/openclaw-cli-state";
-    process.env.OPENCLAW_CONFIG_PATH = "/tmp/openclaw-cli-state/openclaw.json";
-    delete process.env.OPENCLAW_GATEWAY_PORT;
-    delete process.env.OPENCLAW_PROFILE;
+    process.env.SUDOCLAW_STATE_DIR = "/tmp/sudoclaw-cli-state";
+    process.env.SUDOCLAW_CONFIG_PATH = "/tmp/sudoclaw-cli-state/sudoclaw.json";
+    delete process.env.SUDOCLAW_GATEWAY_PORT;
+    delete process.env.SUDOCLAW_PROFILE;
     serviceReadCommand.mockResolvedValue(null);
   });
 
@@ -133,12 +133,12 @@ describe("daemon-cli coverage", () => {
     serviceReadCommand.mockResolvedValueOnce({
       programArguments: ["/bin/node", "cli", "gateway", "--port", "19001"],
       environment: {
-        OPENCLAW_PROFILE: "dev",
-        OPENCLAW_STATE_DIR: "/tmp/openclaw-daemon-state",
-        OPENCLAW_CONFIG_PATH: "/tmp/openclaw-daemon-state/openclaw.json",
-        OPENCLAW_GATEWAY_PORT: "19001",
+        SUDOCLAW_PROFILE: "dev",
+        SUDOCLAW_STATE_DIR: "/tmp/sudoclaw-daemon-state",
+        SUDOCLAW_CONFIG_PATH: "/tmp/sudoclaw-daemon-state/sudoclaw.json",
+        SUDOCLAW_GATEWAY_PORT: "19001",
       },
-      sourcePath: "/tmp/ai.openclaw.gateway.plist",
+      sourcePath: "/tmp/ai.sudoclaw.gateway.plist",
     });
 
     await runDaemonCommand(["daemon", "status", "--json"]);

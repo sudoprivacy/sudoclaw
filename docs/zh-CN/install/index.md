@@ -1,8 +1,8 @@
 ---
 read_when:
-  - 安装 OpenClaw
+  - 安装 SudoClaw
   - 你想从 GitHub 安装
-summary: 安装 OpenClaw（推荐安装器、全局安装或从源代码安装）
+summary: 安装 SudoClaw（推荐安装器、全局安装或从源代码安装）
 title: 安装
 x-i18n:
   generated_at: "2026-02-03T10:07:43Z"
@@ -100,7 +100,7 @@ openclaw onboard --install-daemon
 ### 3）从源代码（贡献者/开发）
 
 ```bash
-git clone https://github.com/openclaw/openclaw.git
+git clone https://github.com/sudoprivacy/sudoclaw.git
 cd openclaw
 pnpm install
 pnpm ui:build # 首次运行时自动安装 UI 依赖

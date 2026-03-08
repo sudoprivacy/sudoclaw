@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { AcpRuntimeError } from "../../acp/runtime/errors.js";
 import type { AcpSessionStoreEntry } from "../../acp/runtime/session-meta.js";
-import type { OpenClawConfig } from "../../config/config.js";
+import type { SudoClawConfig } from "../../config/config.js";
 import type { SessionBindingRecord } from "../../infra/outbound/session-binding-service.js";
 import type { ReplyDispatcher } from "./reply-dispatcher.js";
 import { buildTestCtx } from "./test-ctx.js";
@@ -17,8 +17,8 @@ const managerMocks = vi.hoisted(() => ({
 }));
 
 const policyMocks = vi.hoisted(() => ({
-  resolveAcpDispatchPolicyError: vi.fn<(cfg: OpenClawConfig) => AcpRuntimeError | null>(() => null),
-  resolveAcpAgentPolicyError: vi.fn<(cfg: OpenClawConfig, agent: string) => AcpRuntimeError | null>(
+  resolveAcpDispatchPolicyError: vi.fn<(cfg: SudoClawConfig) => AcpRuntimeError | null>(() => null),
+  resolveAcpAgentPolicyError: vi.fn<(cfg: SudoClawConfig, agent: string) => AcpRuntimeError | null>(
     () => null,
   ),
 }));
@@ -36,12 +36,12 @@ const ttsMocks = vi.hoisted(() => ({
     const params = paramsUnknown as { payload: unknown };
     return params.payload;
   }),
-  resolveTtsConfig: vi.fn((_cfg: OpenClawConfig) => ({ mode: "final" })),
+  resolveTtsConfig: vi.fn((_cfg: SudoClawConfig) => ({ mode: "final" })),
 }));
 
 const sessionMetaMocks = vi.hoisted(() => ({
   readAcpSessionEntry: vi.fn<
-    (params: { sessionKey: string; cfg?: OpenClawConfig }) => AcpSessionStoreEntry | null
+    (params: { sessionKey: string; cfg?: SudoClawConfig }) => AcpSessionStoreEntry | null
   >(() => null),
 }));
 
@@ -54,9 +54,9 @@ vi.mock("../../acp/control-plane/manager.js", () => ({
 }));
 
 vi.mock("../../acp/policy.js", () => ({
-  resolveAcpDispatchPolicyError: (cfg: OpenClawConfig) =>
+  resolveAcpDispatchPolicyError: (cfg: SudoClawConfig) =>
     policyMocks.resolveAcpDispatchPolicyError(cfg),
-  resolveAcpAgentPolicyError: (cfg: OpenClawConfig, agent: string) =>
+  resolveAcpAgentPolicyError: (cfg: SudoClawConfig, agent: string) =>
     policyMocks.resolveAcpAgentPolicyError(cfg, agent),
 }));
 
@@ -70,11 +70,11 @@ vi.mock("../../infra/outbound/message-action-runner.js", () => ({
 
 vi.mock("../../tts/tts.js", () => ({
   maybeApplyTtsToPayload: (params: unknown) => ttsMocks.maybeApplyTtsToPayload(params),
-  resolveTtsConfig: (cfg: OpenClawConfig) => ttsMocks.resolveTtsConfig(cfg),
+  resolveTtsConfig: (cfg: SudoClawConfig) => ttsMocks.resolveTtsConfig(cfg),
 }));
 
 vi.mock("../../acp/runtime/session-meta.js", () => ({
-  readAcpSessionEntry: (params: { sessionKey: string; cfg?: OpenClawConfig }) =>
+  readAcpSessionEntry: (params: { sessionKey: string; cfg?: SudoClawConfig }) =>
     sessionMetaMocks.readAcpSessionEntry(params),
 }));
 
@@ -110,7 +110,7 @@ function setReadyAcpResolution() {
   });
 }
 
-function createAcpConfigWithVisibleToolTags(): OpenClawConfig {
+function createAcpConfigWithVisibleToolTags(): SudoClawConfig {
   return createAcpTestConfig({
     acp: {
       enabled: true,

@@ -1,4 +1,4 @@
-import OpenClawKit
+import SudoClawKit
 import SwiftUI
 
 struct ScreenTab: View {

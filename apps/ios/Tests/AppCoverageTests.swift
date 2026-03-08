@@ -1,6 +1,6 @@
 import SwiftUI
 import Testing
-@testable import OpenClaw
+@testable import SudoClaw
 
 @Suite struct AppCoverageTests {
     @Test @MainActor func nodeAppModelUpdatesBackgroundedState() {

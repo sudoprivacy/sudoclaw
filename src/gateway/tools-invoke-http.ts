@@ -1,10 +1,10 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { createOpenClawTools } from "../agents/openclaw-tools.js";
 import {
   resolveEffectiveToolPolicy,
   resolveGroupToolPolicy,
   resolveSubagentToolPolicy,
 } from "../agents/pi-tools.policy.js";
+import { createSudoClawTools } from "../agents/sudoclaw-tools.js";
 import {
   applyToolPolicyPipeline,
   buildDefaultToolPolicyPipelineSteps,
@@ -210,11 +210,11 @@ export async function handleToolsInvokeHttpRequest(
 
   // Resolve message channel/account hints (optional headers) for policy inheritance.
   const messageChannel = normalizeMessageChannel(
-    getHeader(req, "x-openclaw-message-channel") ?? "",
+    getHeader(req, "x-sudoclaw-message-channel") ?? "",
   );
-  const accountId = getHeader(req, "x-openclaw-account-id")?.trim() || undefined;
-  const agentTo = getHeader(req, "x-openclaw-message-to")?.trim() || undefined;
-  const agentThreadId = getHeader(req, "x-openclaw-thread-id")?.trim() || undefined;
+  const accountId = getHeader(req, "x-sudoclaw-account-id")?.trim() || undefined;
+  const agentTo = getHeader(req, "x-sudoclaw-message-to")?.trim() || undefined;
+  const agentThreadId = getHeader(req, "x-sudoclaw-thread-id")?.trim() || undefined;
 
   const {
     agentId,
@@ -246,7 +246,7 @@ export async function handleToolsInvokeHttpRequest(
     : undefined;
 
   // Build tool list (core + plugin tools).
-  const allTools = createOpenClawTools({
+  const allTools = createSudoClawTools({
     agentSessionKey: sessionKey,
     agentChannel: messageChannel ?? undefined,
     agentAccountId: accountId,

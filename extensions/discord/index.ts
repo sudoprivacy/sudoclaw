@@ -1,5 +1,5 @@
-import type { OpenClawPluginApi } from "openclaw/plugin-sdk";
-import { emptyPluginConfigSchema } from "openclaw/plugin-sdk";
+import type { SudoClawPluginApi } from "sudoclaw/plugin-sdk";
+import { emptyPluginConfigSchema } from "sudoclaw/plugin-sdk";
 import { discordPlugin } from "./src/channel.js";
 import { setDiscordRuntime } from "./src/runtime.js";
 import { registerDiscordSubagentHooks } from "./src/subagent-hooks.js";
@@ -9,7 +9,7 @@ const plugin = {
   name: "Discord",
   description: "Discord channel plugin",
   configSchema: emptyPluginConfigSchema(),
-  register(api: OpenClawPluginApi) {
+  register(api: SudoClawPluginApi) {
     setDiscordRuntime(api.runtime);
     api.registerChannel({ plugin: discordPlugin });
     registerDiscordSubagentHooks(api);

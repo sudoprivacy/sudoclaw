@@ -1,10 +1,10 @@
 {
-  "name": "@openclaw/llm-task",
+  "name": "@sudoclaw/llm-task",
   "version": "2026.3.1",
   "private": true,
-  "description": "OpenClaw JSON-only LLM task plugin",
+  "description": "SudoClaw JSON-only LLM task plugin",
   "type": "module",
-  "openclaw": {
+  "sudoclaw": {
     "extensions": [
       "./index.ts"
     ]

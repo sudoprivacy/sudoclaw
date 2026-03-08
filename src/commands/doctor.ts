@@ -9,13 +9,13 @@ import {
   resolveHooksGmailModel,
 } from "../agents/model-selection.js";
 import { formatCliCommand } from "../cli/command-format.js";
-import type { OpenClawConfig } from "../config/config.js";
+import type { SudoClawConfig } from "../config/config.js";
 import { CONFIG_PATH, readConfigFileSnapshot, writeConfigFile } from "../config/config.js";
 import { logConfigUpdated } from "../config/logging.js";
 import { resolveGatewayService } from "../daemon/service.js";
 import { resolveGatewayAuth } from "../gateway/auth.js";
 import { buildGatewayConnectionDetails } from "../gateway/call.js";
-import { resolveOpenClawPackageRoot } from "../infra/openclaw-root.js";
+import { resolveSudoClawPackageRoot } from "../infra/sudoclaw-root.js";
 import type { RuntimeEnv } from "../runtime.js";
 import { defaultRuntime } from "../runtime.js";
 import { note } from "../terminal/note.js";
@@ -61,7 +61,7 @@ import { ensureSystemdUserLingerInteractive } from "./systemd-linger.js";
 const intro = (message: string) => clackIntro(stylePromptTitle(message) ?? message);
 const outro = (message: string) => clackOutro(stylePromptTitle(message) ?? message);
 
-function resolveMode(cfg: OpenClawConfig): "local" | "remote" {
+function resolveMode(cfg: SudoClawConfig): "local" | "remote" {
   return cfg.gateway?.mode === "remote" ? "remote" : "local";
 }
 
@@ -71,9 +71,9 @@ export async function doctorCommand(
 ) {
   const prompter = createDoctorPrompter({ runtime, options });
   printWizardHeader(runtime);
-  intro("OpenClaw doctor");
+  intro("SudoClaw doctor");
 
-  const root = await resolveOpenClawPackageRoot({
+  const root = await resolveSudoClawPackageRoot({
     moduleUrl: import.meta.url,
     argv1: process.argv[1],
     cwd: process.cwd(),
@@ -99,7 +99,7 @@ export async function doctorCommand(
     options,
     confirm: (p) => prompter.confirm(p),
   });
-  let cfg: OpenClawConfig = configResult.cfg;
+  let cfg: SudoClawConfig = configResult.cfg;
   const cfgForPersistence = structuredClone(cfg);
   const sourceConfigValid = configResult.sourceConfigValid ?? true;
 
@@ -107,11 +107,11 @@ export async function doctorCommand(
   if (!cfg.gateway?.mode) {
     const lines = [
       "gateway.mode is unset; gateway start will be blocked.",
-      `Fix: run ${formatCliCommand("openclaw configure")} and set Gateway mode (local/remote).`,
-      `Or set directly: ${formatCliCommand("openclaw config set gateway.mode local")}`,
+      `Fix: run ${formatCliCommand("sudoclaw configure")} and set Gateway mode (local/remote).`,
+      `Or set directly: ${formatCliCommand("sudoclaw config set gateway.mode local")}`,
     ];
     if (!fs.existsSync(configPath)) {
-      lines.push(`Missing config: run ${formatCliCommand("openclaw setup")} first.`);
+      lines.push(`Missing config: run ${formatCliCommand("sudoclaw setup")} first.`);
     }
     note(lines.join("\n"), "Gateway");
   }
@@ -304,7 +304,7 @@ export async function doctorCommand(
       runtime.log(`Backup: ${shortenHomePath(backupPath)}`);
     }
   } else if (!prompter.shouldRepair) {
-    runtime.log(`Run "${formatCliCommand("openclaw doctor --fix")}" to apply changes.`);
+    runtime.log(`Run "${formatCliCommand("sudoclaw doctor --fix")}" to apply changes.`);
   }
 
   if (options.workspaceSuggestions !== false) {

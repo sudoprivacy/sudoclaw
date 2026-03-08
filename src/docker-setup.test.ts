@@ -39,7 +39,7 @@ exit 0
 }
 
 async function createDockerSetupSandbox(): Promise<DockerSetupSandbox> {
-  const rootDir = await mkdtemp(join(tmpdir(), "openclaw-docker-setup-"));
+  const rootDir = await mkdtemp(join(tmpdir(), "sudoclaw-docker-setup-"));
   const scriptPath = join(rootDir, "docker-setup.sh");
   const dockerfilePath = join(rootDir, "Dockerfile");
   const composePath = join(rootDir, "docker-compose.yml");
@@ -51,7 +51,7 @@ async function createDockerSetupSandbox(): Promise<DockerSetupSandbox> {
   await writeFile(dockerfilePath, "FROM scratch\n");
   await writeFile(
     composePath,
-    "services:\n  openclaw-gateway:\n    image: noop\n  openclaw-cli:\n    image: noop\n",
+    "services:\n  sudoclaw-gateway:\n    image: noop\n  sudoclaw-cli:\n    image: noop\n",
   );
   await writeDockerStub(binDir, logPath);
 
@@ -69,9 +69,9 @@ function createEnv(
     LC_ALL: process.env.LC_ALL,
     TMPDIR: process.env.TMPDIR,
     DOCKER_STUB_LOG: sandbox.logPath,
-    OPENCLAW_GATEWAY_TOKEN: "test-token",
-    OPENCLAW_CONFIG_DIR: join(sandbox.rootDir, "config"),
-    OPENCLAW_WORKSPACE_DIR: join(sandbox.rootDir, "openclaw"),
+    SUDOCLAW_GATEWAY_TOKEN: "test-token",
+    SUDOCLAW_CONFIG_DIR: join(sandbox.rootDir, "config"),
+    SUDOCLAW_WORKSPACE_DIR: join(sandbox.rootDir, "sudoclaw"),
   };
 
   for (const [key, value] of Object.entries(overrides)) {
@@ -133,27 +133,27 @@ describe("docker-setup.sh", () => {
     const activeSandbox = requireSandbox(sandbox);
 
     const result = runDockerSetup(activeSandbox, {
-      OPENCLAW_DOCKER_APT_PACKAGES: "ffmpeg build-essential",
-      OPENCLAW_EXTRA_MOUNTS: undefined,
-      OPENCLAW_HOME_VOLUME: "openclaw-home",
+      SUDOCLAW_DOCKER_APT_PACKAGES: "ffmpeg build-essential",
+      SUDOCLAW_EXTRA_MOUNTS: undefined,
+      SUDOCLAW_HOME_VOLUME: "sudoclaw-home",
     });
     expect(result.status).toBe(0);
     const envFile = await readFile(join(activeSandbox.rootDir, ".env"), "utf8");
-    expect(envFile).toContain("OPENCLAW_DOCKER_APT_PACKAGES=ffmpeg build-essential");
-    expect(envFile).toContain("OPENCLAW_EXTRA_MOUNTS=");
-    expect(envFile).toContain("OPENCLAW_HOME_VOLUME=openclaw-home");
+    expect(envFile).toContain("SUDOCLAW_DOCKER_APT_PACKAGES=ffmpeg build-essential");
+    expect(envFile).toContain("SUDOCLAW_EXTRA_MOUNTS=");
+    expect(envFile).toContain("SUDOCLAW_HOME_VOLUME=sudoclaw-home");
     const extraCompose = await readFile(
       join(activeSandbox.rootDir, "docker-compose.extra.yml"),
       "utf8",
     );
-    expect(extraCompose).toContain("openclaw-home:/home/node");
+    expect(extraCompose).toContain("sudoclaw-home:/home/node");
     expect(extraCompose).toContain("volumes:");
-    expect(extraCompose).toContain("openclaw-home:");
+    expect(extraCompose).toContain("sudoclaw-home:");
     const log = await readFile(activeSandbox.logPath, "utf8");
-    expect(log).toContain("--build-arg OPENCLAW_DOCKER_APT_PACKAGES=ffmpeg build-essential");
-    expect(log).toContain("run --rm openclaw-cli onboard --mode local --no-install-daemon");
-    expect(log).toContain("run --rm openclaw-cli config set gateway.mode local");
-    expect(log).toContain("run --rm openclaw-cli config set gateway.bind lan");
+    expect(log).toContain("--build-arg SUDOCLAW_DOCKER_APT_PACKAGES=ffmpeg build-essential");
+    expect(log).toContain("run --rm sudoclaw-cli onboard --mode local --no-install-daemon");
+    expect(log).toContain("run --rm sudoclaw-cli config set gateway.mode local");
+    expect(log).toContain("run --rm sudoclaw-cli config set gateway.bind lan");
   });
 
   it("precreates config identity dir for CLI device auth writes", async () => {
@@ -162,8 +162,8 @@ describe("docker-setup.sh", () => {
     const workspaceDir = join(activeSandbox.rootDir, "workspace-identity");
 
     const result = runDockerSetup(activeSandbox, {
-      OPENCLAW_CONFIG_DIR: configDir,
-      OPENCLAW_WORKSPACE_DIR: workspaceDir,
+      SUDOCLAW_CONFIG_DIR: configDir,
+      SUDOCLAW_WORKSPACE_DIR: workspaceDir,
     });
 
     expect(result.status).toBe(0);
@@ -177,8 +177,8 @@ describe("docker-setup.sh", () => {
     const workspaceDir = join(activeSandbox.rootDir, "workspace-agent-dirs");
 
     const result = runDockerSetup(activeSandbox, {
-      OPENCLAW_CONFIG_DIR: configDir,
-      OPENCLAW_WORKSPACE_DIR: workspaceDir,
+      SUDOCLAW_CONFIG_DIR: configDir,
+      SUDOCLAW_WORKSPACE_DIR: workspaceDir,
     });
 
     expect(result.status).toBe(0);
@@ -195,58 +195,58 @@ describe("docker-setup.sh", () => {
     expect(onboardIdx).toBeGreaterThan(chownIdx);
   });
 
-  it("reuses existing config token when OPENCLAW_GATEWAY_TOKEN is unset", async () => {
+  it("reuses existing config token when SUDOCLAW_GATEWAY_TOKEN is unset", async () => {
     const activeSandbox = requireSandbox(sandbox);
     const configDir = join(activeSandbox.rootDir, "config-token-reuse");
     const workspaceDir = join(activeSandbox.rootDir, "workspace-token-reuse");
     await mkdir(configDir, { recursive: true });
     await writeFile(
-      join(configDir, "openclaw.json"),
+      join(configDir, "sudoclaw.json"),
       JSON.stringify({ gateway: { auth: { mode: "token", token: "config-token-123" } } }),
     );
 
     const result = runDockerSetup(activeSandbox, {
-      OPENCLAW_GATEWAY_TOKEN: undefined,
-      OPENCLAW_CONFIG_DIR: configDir,
-      OPENCLAW_WORKSPACE_DIR: workspaceDir,
+      SUDOCLAW_GATEWAY_TOKEN: undefined,
+      SUDOCLAW_CONFIG_DIR: configDir,
+      SUDOCLAW_WORKSPACE_DIR: workspaceDir,
     });
 
     expect(result.status).toBe(0);
     const envFile = await readFile(join(activeSandbox.rootDir, ".env"), "utf8");
-    expect(envFile).toContain("OPENCLAW_GATEWAY_TOKEN=config-token-123");
+    expect(envFile).toContain("SUDOCLAW_GATEWAY_TOKEN=config-token-123");
   });
 
-  it("rejects injected multiline OPENCLAW_EXTRA_MOUNTS values", async () => {
+  it("rejects injected multiline SUDOCLAW_EXTRA_MOUNTS values", async () => {
     const activeSandbox = requireSandbox(sandbox);
 
     const result = runDockerSetup(activeSandbox, {
-      OPENCLAW_EXTRA_MOUNTS: "/tmp:/tmp\n  evil-service:\n    image: alpine",
+      SUDOCLAW_EXTRA_MOUNTS: "/tmp:/tmp\n  evil-service:\n    image: alpine",
     });
 
     expect(result.status).not.toBe(0);
-    expect(result.stderr).toContain("OPENCLAW_EXTRA_MOUNTS cannot contain control characters");
+    expect(result.stderr).toContain("SUDOCLAW_EXTRA_MOUNTS cannot contain control characters");
   });
 
-  it("rejects invalid OPENCLAW_EXTRA_MOUNTS mount format", async () => {
+  it("rejects invalid SUDOCLAW_EXTRA_MOUNTS mount format", async () => {
     const activeSandbox = requireSandbox(sandbox);
 
     const result = runDockerSetup(activeSandbox, {
-      OPENCLAW_EXTRA_MOUNTS: "bad mount spec",
+      SUDOCLAW_EXTRA_MOUNTS: "bad mount spec",
     });
 
     expect(result.status).not.toBe(0);
     expect(result.stderr).toContain("Invalid mount format");
   });
 
-  it("rejects invalid OPENCLAW_HOME_VOLUME names", async () => {
+  it("rejects invalid SUDOCLAW_HOME_VOLUME names", async () => {
     const activeSandbox = requireSandbox(sandbox);
 
     const result = runDockerSetup(activeSandbox, {
-      OPENCLAW_HOME_VOLUME: "bad name",
+      SUDOCLAW_HOME_VOLUME: "bad name",
     });
 
     expect(result.status).not.toBe(0);
-    expect(result.stderr).toContain("OPENCLAW_HOME_VOLUME must match");
+    expect(result.stderr).toContain("SUDOCLAW_HOME_VOLUME must match");
   });
 
   it("avoids associative arrays so the script remains Bash 3.2-compatible", async () => {
@@ -283,7 +283,7 @@ describe("docker-setup.sh", () => {
 
   it("keeps docker-compose CLI network namespace settings in sync", async () => {
     const compose = await readFile(join(repoRoot, "docker-compose.yml"), "utf8");
-    expect(compose).toContain('network_mode: "service:openclaw-gateway"');
-    expect(compose).toContain("depends_on:\n      - openclaw-gateway");
+    expect(compose).toContain('network_mode: "service:sudoclaw-gateway"');
+    expect(compose).toContain("depends_on:\n      - sudoclaw-gateway");
   });
 });

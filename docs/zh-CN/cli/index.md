@@ -2,7 +2,7 @@
 read_when:
   - 添加或修改 CLI 命令或选项
   - 为新命令界面编写文档
-summary: OpenClaw `openclaw` 命令、子命令和选项的 CLI 参考
+summary: SudoClaw `openclaw` 命令、子命令和选项的 CLI 参考
 title: CLI 参考
 x-i18n:
   generated_at: "2026-02-03T07:47:54Z"
@@ -77,7 +77,7 @@ x-i18n:
 
 ## 颜色调色板
 
-OpenClaw 在 CLI 输出中使用龙虾调色板。
+SudoClaw 在 CLI 输出中使用龙虾调色板。
 
 - `accent`（#FF5A2D）：标题、标签、主要高亮。
 - `accentBright`（#FF7A3D）：命令名称、强调。
@@ -578,7 +578,7 @@ Gmail Pub/Sub 钩子设置 + 运行器。参见 [/automation/gmail-pubsub](/auto
 
 ### 用量跟踪
 
-当 OAuth/API 凭证可用时，OpenClaw 可以显示提供商用量/配额。
+当 OAuth/API 凭证可用时，SudoClaw 可以显示提供商用量/配额。
 
 显示位置：
 
@@ -693,7 +693,7 @@ Gmail Pub/Sub 钩子设置 + 运行器。参见 [/automation/gmail-pubsub](/auto
 
 - `gateway status` 默认使用服务解析的端口/配置探测 Gateway 网关 RPC（使用 `--url/--token/--password` 覆盖）。
 - `gateway status` 支持 `--no-probe`、`--deep` 和 `--json` 用于脚本化。
-- `gateway status` 在检测到旧版或额外的 Gateway 网关服务时也会显示（`--deep` 添加系统级扫描）。配置文件命名的 OpenClaw 服务被视为一等公民，不会被标记为"额外"。
+- `gateway status` 在检测到旧版或额外的 Gateway 网关服务时也会显示（`--deep` 添加系统级扫描）。配置文件命名的 SudoClaw 服务被视为一等公民，不会被标记为"额外"。
 - `gateway status` 打印 CLI 使用的配置路径与服务可能使用的配置（服务环境），以及解析的探测目标 URL。
 - `gateway install|uninstall|start|stop|restart` 支持 `--json` 用于脚本化（默认输出保持人类友好）。
 - `gateway install` 默认使用 Node 运行时；**不建议**使用 bun（WhatsApp/Telegram bug）。

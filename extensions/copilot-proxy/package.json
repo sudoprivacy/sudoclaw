@@ -1,10 +1,10 @@
 {
-  "name": "@openclaw/copilot-proxy",
+  "name": "@sudoclaw/copilot-proxy",
   "version": "2026.3.1",
   "private": true,
-  "description": "OpenClaw Copilot Proxy provider plugin",
+  "description": "SudoClaw Copilot Proxy provider plugin",
   "type": "module",
-  "openclaw": {
+  "sudoclaw": {
     "extensions": [
       "./index.ts"
     ]

@@ -29,22 +29,22 @@ function makePermissionRequest(
 }
 
 describe("resolveAcpClientSpawnEnv", () => {
-  it("sets OPENCLAW_SHELL marker and preserves existing env values", () => {
+  it("sets SUDOCLAW_SHELL marker and preserves existing env values", () => {
     const env = resolveAcpClientSpawnEnv({
       PATH: "/usr/bin",
-      USER: "openclaw",
+      USER: "sudoclaw",
     });
 
-    expect(env.OPENCLAW_SHELL).toBe("acp-client");
+    expect(env.SUDOCLAW_SHELL).toBe("acp-client");
     expect(env.PATH).toBe("/usr/bin");
-    expect(env.USER).toBe("openclaw");
+    expect(env.USER).toBe("sudoclaw");
   });
 
-  it("overrides pre-existing OPENCLAW_SHELL to acp-client", () => {
+  it("overrides pre-existing SUDOCLAW_SHELL to acp-client", () => {
     const env = resolveAcpClientSpawnEnv({
-      OPENCLAW_SHELL: "wrong",
+      SUDOCLAW_SHELL: "wrong",
     });
-    expect(env.OPENCLAW_SHELL).toBe("acp-client");
+    expect(env.SUDOCLAW_SHELL).toBe("acp-client");
   });
 });
 
@@ -118,7 +118,7 @@ describe("resolvePermissionRequest", () => {
           rawInput: { path: "docs/security.md" },
         },
       }),
-      { prompt, log: () => {}, cwd: "/tmp/openclaw-acp-cwd" },
+      { prompt, log: () => {}, cwd: "/tmp/sudoclaw-acp-cwd" },
     );
     expect(prompt).not.toHaveBeenCalled();
     expect(res).toEqual({ outcome: { outcome: "selected", optionId: "allow" } });
@@ -132,10 +132,10 @@ describe("resolvePermissionRequest", () => {
           toolCallId: "tool-read-inside-cwd-file-url",
           title: "read: ignored-by-raw-input",
           status: "pending",
-          rawInput: { path: "file:///tmp/openclaw-acp-cwd/docs/security.md" },
+          rawInput: { path: "file:///tmp/sudoclaw-acp-cwd/docs/security.md" },
         },
       }),
-      { prompt, log: () => {}, cwd: "/tmp/openclaw-acp-cwd" },
+      { prompt, log: () => {}, cwd: "/tmp/sudoclaw-acp-cwd" },
     );
     expect(prompt).not.toHaveBeenCalled();
     expect(res).toEqual({ outcome: { outcome: "selected", optionId: "allow" } });
@@ -152,7 +152,7 @@ describe("resolvePermissionRequest", () => {
           rawInput: { path: "../.ssh/id_rsa" },
         },
       }),
-      { prompt, log: () => {}, cwd: "/tmp/openclaw-acp-cwd/workspace" },
+      { prompt, log: () => {}, cwd: "/tmp/sudoclaw-acp-cwd/workspace" },
     );
     expect(prompt).toHaveBeenCalledTimes(1);
     expect(prompt).toHaveBeenCalledWith("read", "read: ignored-by-raw-input");

@@ -1,4 +1,4 @@
-import type { AcpRuntimeEvent, AcpSessionUpdateTag } from "openclaw/plugin-sdk";
+import type { AcpRuntimeEvent, AcpSessionUpdateTag } from "sudoclaw/plugin-sdk";
 import {
   asOptionalBoolean,
   asOptionalString,

@@ -1,4 +1,4 @@
-import { fetchWithSsrFGuard } from "openclaw/plugin-sdk";
+import { fetchWithSsrFGuard } from "sudoclaw/plugin-sdk";
 
 type GuardedJsonApiRequestParams = {
   url: string;

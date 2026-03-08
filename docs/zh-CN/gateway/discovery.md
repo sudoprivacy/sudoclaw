@@ -16,7 +16,7 @@ x-i18n:
 
 # 设备发现 & 传输协议
 
-OpenClaw 有两个表面上看起来相似的不同问题：
+SudoClaw 有两个表面上看起来相似的不同问题：
 
 1. **操作员远程控制**：macOS 菜单栏应用控制运行在其他地方的 Gateway 网关。
 2. **节点配对**：iOS/Android（以及未来的节点）发现 Gateway 网关并安全配对。
@@ -78,7 +78,7 @@ Bonjour 是尽力而为的，不会跨网络。它仅用于"同一 LAN"的便利
 禁用/覆盖：
 
 - `OPENCLAW_DISABLE_BONJOUR=1` 禁用广播。
-- `~/.openclaw/openclaw.json` 中的 `gateway.bind` 控制 Gateway 网关绑定模式。
+- `~/.sudoprivacy/sudoclaw.json` 中的 `gateway.bind` 控制 Gateway 网关绑定模式。
 - `OPENCLAW_SSH_PORT` 覆盖 TXT 中广播的 SSH 端口（默认为 22）。
 - `OPENCLAW_TAILNET_DNS` 发布 `tailnetDns` 提示（MagicDNS）。
 - `OPENCLAW_CLI_PATH` 覆盖广播的 CLI 路径。

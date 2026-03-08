@@ -1,6 +1,6 @@
-import type { OpenClawConfig } from "./config.js";
+import type { SudoClawConfig } from "./config.js";
 
-export function ensurePluginAllowlisted(cfg: OpenClawConfig, pluginId: string): OpenClawConfig {
+export function ensurePluginAllowlisted(cfg: SudoClawConfig, pluginId: string): SudoClawConfig {
   const allow = cfg.plugins?.allow;
   if (!Array.isArray(allow) || allow.includes(pluginId)) {
     return cfg;

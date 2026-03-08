@@ -1,8 +1,8 @@
 ---
 read_when:
-  - 你想在 OpenClaw 中使用 MiniMax 模型
+  - 你想在 SudoClaw 中使用 MiniMax 模型
   - 你需要 MiniMax 设置指南
-summary: 在 OpenClaw 中使用 MiniMax M2.1
+summary: 在 SudoClaw 中使用 MiniMax M2.1
 title: MiniMax
 x-i18n:
   generated_at: "2026-02-03T10:08:52Z"
@@ -55,7 +55,7 @@ openclaw onboard --auth-choice minimax-portal
 - **Global** - 国际用户（`api.minimax.io`）
 - **CN** - 中国用户（`api.minimaxi.com`）
 
-详情参见 [MiniMax OAuth 插件 README](https://github.com/openclaw/openclaw/tree/main/extensions/minimax-portal-auth)。
+详情参见 [MiniMax OAuth 插件 README](https://github.com/sudoprivacy/sudoclaw/tree/main/extensions/minimax-portal-auth)。
 
 ### MiniMax M2.1（API 密钥）
 

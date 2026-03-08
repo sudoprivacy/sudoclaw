@@ -6,7 +6,7 @@ import {
   type RuntimeEnv,
   WEBHOOK_ANOMALY_COUNTER_DEFAULTS,
   WEBHOOK_RATE_LIMIT_DEFAULTS,
-} from "openclaw/plugin-sdk";
+} from "sudoclaw/plugin-sdk";
 
 export const wsClients = new Map<string, Lark.WSClient>();
 export const httpServers = new Map<string, http.Server>();

@@ -1,10 +1,10 @@
 {
-  "name": "@openclaw/telegram",
+  "name": "@sudoclaw/telegram",
   "version": "2026.3.1",
   "private": true,
-  "description": "OpenClaw Telegram channel plugin",
+  "description": "SudoClaw Telegram channel plugin",
   "type": "module",
-  "openclaw": {
+  "sudoclaw": {
     "extensions": [
       "./index.ts"
     ]

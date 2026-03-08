@@ -1,4 +1,4 @@
-export type OpenClawVersion = {
+export type SudoClawVersion = {
   major: number;
   minor: number;
   patch: number;
@@ -7,7 +7,7 @@ export type OpenClawVersion = {
 
 const VERSION_RE = /^v?(\d+)\.(\d+)\.(\d+)(?:-(\d+))?/;
 
-export function parseOpenClawVersion(raw: string | null | undefined): OpenClawVersion | null {
+export function parseSudoClawVersion(raw: string | null | undefined): SudoClawVersion | null {
   if (!raw) {
     return null;
   }
@@ -24,12 +24,12 @@ export function parseOpenClawVersion(raw: string | null | undefined): OpenClawVe
   };
 }
 
-export function compareOpenClawVersions(
+export function compareSudoClawVersions(
   a: string | null | undefined,
   b: string | null | undefined,
 ): number | null {
-  const parsedA = parseOpenClawVersion(a);
-  const parsedB = parseOpenClawVersion(b);
+  const parsedA = parseSudoClawVersion(a);
+  const parsedB = parseSudoClawVersion(b);
   if (!parsedA || !parsedB) {
     return null;
   }

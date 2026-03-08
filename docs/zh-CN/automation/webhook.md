@@ -1,7 +1,7 @@
 ---
 read_when:
   - 添加或更改 webhook 端点
-  - 将外部系统接入 OpenClaw
+  - 将外部系统接入 SudoClaw
 summary: 用于唤醒和隔离智能体运行的 Webhook 入口
 title: Webhooks
 x-i18n:

@@ -240,12 +240,12 @@ export function buildServiceEnvironment(params: {
 }): Record<string, string | undefined> {
   const { env, port, token, launchdLabel } = params;
   const platform = params.platform ?? process.platform;
-  const profile = env.OPENCLAW_PROFILE;
+  const profile = env.SUDOCLAW_PROFILE;
   const resolvedLaunchdLabel =
     launchdLabel || (platform === "darwin" ? resolveGatewayLaunchAgentLabel(profile) : undefined);
   const systemdUnit = `${resolveGatewaySystemdServiceName(profile)}.service`;
-  const stateDir = env.OPENCLAW_STATE_DIR;
-  const configPath = env.OPENCLAW_CONFIG_PATH;
+  const stateDir = env.SUDOCLAW_STATE_DIR;
+  const configPath = env.SUDOCLAW_CONFIG_PATH;
   // Keep a usable temp directory for supervised services even when the host env omits TMPDIR.
   const tmpDir = env.TMPDIR?.trim() || os.tmpdir();
   const proxyEnv = readServiceProxyEnvironment(env);
@@ -260,16 +260,16 @@ export function buildServiceEnvironment(params: {
     PATH: buildMinimalServicePath({ env }),
     ...proxyEnv,
     NODE_EXTRA_CA_CERTS: nodeCaCerts,
-    OPENCLAW_PROFILE: profile,
-    OPENCLAW_STATE_DIR: stateDir,
-    OPENCLAW_CONFIG_PATH: configPath,
-    OPENCLAW_GATEWAY_PORT: String(port),
-    OPENCLAW_GATEWAY_TOKEN: token,
-    OPENCLAW_LAUNCHD_LABEL: resolvedLaunchdLabel,
-    OPENCLAW_SYSTEMD_UNIT: systemdUnit,
-    OPENCLAW_SERVICE_MARKER: GATEWAY_SERVICE_MARKER,
-    OPENCLAW_SERVICE_KIND: GATEWAY_SERVICE_KIND,
-    OPENCLAW_SERVICE_VERSION: VERSION,
+    SUDOCLAW_PROFILE: profile,
+    SUDOCLAW_STATE_DIR: stateDir,
+    SUDOCLAW_CONFIG_PATH: configPath,
+    SUDOCLAW_GATEWAY_PORT: String(port),
+    SUDOCLAW_GATEWAY_TOKEN: token,
+    SUDOCLAW_LAUNCHD_LABEL: resolvedLaunchdLabel,
+    SUDOCLAW_SYSTEMD_UNIT: systemdUnit,
+    SUDOCLAW_SERVICE_MARKER: GATEWAY_SERVICE_MARKER,
+    SUDOCLAW_SERVICE_KIND: GATEWAY_SERVICE_KIND,
+    SUDOCLAW_SERVICE_VERSION: VERSION,
   };
 }
 
@@ -280,9 +280,12 @@ export function buildNodeServiceEnvironment(params: {
   const { env } = params;
   const platform = params.platform ?? process.platform;
   const gatewayToken =
-    env.OPENCLAW_GATEWAY_TOKEN?.trim() || env.CLAWDBOT_GATEWAY_TOKEN?.trim() || undefined;
-  const stateDir = env.OPENCLAW_STATE_DIR;
-  const configPath = env.OPENCLAW_CONFIG_PATH;
+    env.SUDOCLAW_GATEWAY_TOKEN?.trim() ||
+    env.OPENCLAW_GATEWAY_TOKEN?.trim() ||
+    env.CLAWDBOT_GATEWAY_TOKEN?.trim() ||
+    undefined;
+  const stateDir = env.SUDOCLAW_STATE_DIR;
+  const configPath = env.SUDOCLAW_CONFIG_PATH;
   const tmpDir = env.TMPDIR?.trim() || os.tmpdir();
   const proxyEnv = readServiceProxyEnvironment(env);
   // On macOS, launchd services don't inherit the shell environment, so Node's undici/fetch
@@ -296,16 +299,16 @@ export function buildNodeServiceEnvironment(params: {
     PATH: buildMinimalServicePath({ env }),
     ...proxyEnv,
     NODE_EXTRA_CA_CERTS: nodeCaCerts,
-    OPENCLAW_STATE_DIR: stateDir,
-    OPENCLAW_CONFIG_PATH: configPath,
-    OPENCLAW_GATEWAY_TOKEN: gatewayToken,
-    OPENCLAW_LAUNCHD_LABEL: resolveNodeLaunchAgentLabel(),
-    OPENCLAW_SYSTEMD_UNIT: resolveNodeSystemdServiceName(),
-    OPENCLAW_WINDOWS_TASK_NAME: resolveNodeWindowsTaskName(),
-    OPENCLAW_TASK_SCRIPT_NAME: NODE_WINDOWS_TASK_SCRIPT_NAME,
-    OPENCLAW_LOG_PREFIX: "node",
-    OPENCLAW_SERVICE_MARKER: NODE_SERVICE_MARKER,
-    OPENCLAW_SERVICE_KIND: NODE_SERVICE_KIND,
-    OPENCLAW_SERVICE_VERSION: VERSION,
+    SUDOCLAW_STATE_DIR: stateDir,
+    SUDOCLAW_CONFIG_PATH: configPath,
+    SUDOCLAW_GATEWAY_TOKEN: gatewayToken,
+    SUDOCLAW_LAUNCHD_LABEL: resolveNodeLaunchAgentLabel(),
+    SUDOCLAW_SYSTEMD_UNIT: resolveNodeSystemdServiceName(),
+    SUDOCLAW_WINDOWS_TASK_NAME: resolveNodeWindowsTaskName(),
+    SUDOCLAW_TASK_SCRIPT_NAME: NODE_WINDOWS_TASK_SCRIPT_NAME,
+    SUDOCLAW_LOG_PREFIX: "node",
+    SUDOCLAW_SERVICE_MARKER: NODE_SERVICE_MARKER,
+    SUDOCLAW_SERVICE_KIND: NODE_SERVICE_KIND,
+    SUDOCLAW_SERVICE_VERSION: VERSION,
   };
 }

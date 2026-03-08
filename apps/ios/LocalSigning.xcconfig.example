@@ -1,14 +1,14 @@
 // Copy to LocalSigning.xcconfig for personal local signing overrides.
 // This file is only an example and should stay committed.
 
-OPENCLAW_CODE_SIGN_STYLE = Automatic
-OPENCLAW_DEVELOPMENT_TEAM = P5Z8X89DJL
+SUDOCLAW_CODE_SIGN_STYLE = Automatic
+SUDOCLAW_DEVELOPMENT_TEAM = P5Z8X89DJL
 
-OPENCLAW_APP_BUNDLE_ID = ai.openclaw.ios.test.mariano
-OPENCLAW_SHARE_BUNDLE_ID = ai.openclaw.ios.test.mariano.share
-OPENCLAW_WATCH_APP_BUNDLE_ID = ai.openclaw.ios.test.mariano.watchkitapp
-OPENCLAW_WATCH_EXTENSION_BUNDLE_ID = ai.openclaw.ios.test.mariano.watchkitapp.extension
+SUDOCLAW_APP_BUNDLE_ID = ai.sudoclaw.ios.test.mariano
+SUDOCLAW_SHARE_BUNDLE_ID = ai.sudoclaw.ios.test.mariano.share
+SUDOCLAW_WATCH_APP_BUNDLE_ID = ai.sudoclaw.ios.test.mariano.watchkitapp
+SUDOCLAW_WATCH_EXTENSION_BUNDLE_ID = ai.sudoclaw.ios.test.mariano.watchkitapp.extension
 
 // Leave empty with automatic signing.
-OPENCLAW_APP_PROFILE =
-OPENCLAW_SHARE_PROFILE =
+SUDOCLAW_APP_PROFILE =
+SUDOCLAW_SHARE_PROFILE =

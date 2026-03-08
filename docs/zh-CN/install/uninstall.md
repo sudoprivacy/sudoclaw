@@ -1,8 +1,8 @@
 ---
 read_when:
-  - 你想从机器上移除 OpenClaw
+  - 你想从机器上移除 SudoClaw
   - 卸载后 Gateway 网关服务仍在运行
-summary: 完全卸载 OpenClaw（CLI、服务、状态、工作区）
+summary: 完全卸载 SudoClaw（CLI、服务、状态、工作区）
 title: 卸载
 x-i18n:
   generated_at: "2026-02-03T07:50:10Z"
@@ -74,7 +74,7 @@ bun remove -g openclaw
 6. 如果你安装了 macOS 应用：
 
 ```bash
-rm -rf /Applications/OpenClaw.app
+rm -rf /Applications/SudoClaw.app
 ```
 
 注意事项：
@@ -109,11 +109,11 @@ systemctl --user daemon-reload
 
 ### Windows（计划任务）
 
-默认任务名称是 `OpenClaw Gateway`（或 `OpenClaw Gateway (<profile>)`）。
+默认任务名称是 `SudoClaw Gateway`（或 `SudoClaw Gateway (<profile>)`）。
 任务脚本位于你的状态目录下。
 
 ```powershell
-schtasks /Delete /F /TN "OpenClaw Gateway"
+schtasks /Delete /F /TN "SudoClaw Gateway"
 Remove-Item -Force "$env:USERPROFILE\.openclaw\gateway.cmd"
 ```
 

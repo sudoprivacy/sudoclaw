@@ -1,6 +1,6 @@
 ---
 read_when:
-  - 你希望 OpenClaw 通过 Nostr 接收私信
+  - 你希望 SudoClaw 通过 Nostr 接收私信
   - 你正在设置去中心化消息
 summary: 通过 NIP-04 加密消息的 Nostr 私信渠道
 title: Nostr
@@ -17,7 +17,7 @@ x-i18n:
 
 **状态：** 可选插件（默认禁用）。
 
-Nostr 是一个去中心化的社交网络协议。此渠道使 OpenClaw 能够通过 NIP-04 接收和回复加密私信（DMs）。
+Nostr 是一个去中心化的社交网络协议。此渠道使 SudoClaw 能够通过 NIP-04 接收和回复加密私信（DMs）。
 
 ## 安装（按需）
 
@@ -101,7 +101,7 @@ export NOSTR_PRIVATE_KEY="nsec1..."
       "privateKey": "${NOSTR_PRIVATE_KEY}",
       "profile": {
         "name": "openclaw",
-        "displayName": "OpenClaw",
+        "displayName": "SudoClaw",
         "about": "Personal assistant DM bot",
         "picture": "https://example.com/avatar.png",
         "banner": "https://example.com/banner.png",

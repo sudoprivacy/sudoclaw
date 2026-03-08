@@ -1,10 +1,10 @@
 {
-  "name": "@openclaw/whatsapp",
+  "name": "@sudoclaw/whatsapp",
   "version": "2026.3.1",
   "private": true,
-  "description": "OpenClaw WhatsApp channel plugin",
+  "description": "SudoClaw WhatsApp channel plugin",
   "type": "module",
-  "openclaw": {
+  "sudoclaw": {
     "extensions": [
       "./index.ts"
     ]

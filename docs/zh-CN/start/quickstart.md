@@ -1,7 +1,7 @@
 ---
 read_when:
   - 你希望以最快的方式从安装到运行一个可用的 Gateway 网关
-summary: 安装 OpenClaw，完成 Gateway 网关新手引导，并配对你的第一个渠道。
+summary: 安装 SudoClaw，完成 Gateway 网关新手引导，并配对你的第一个渠道。
 title: 快速开始
 x-i18n:
   generated_at: "2026-02-04T17:53:21Z"
@@ -13,7 +13,7 @@ x-i18n:
 ---
 
 <Note>
-OpenClaw 需要 Node 22 或更新版本。
+SudoClaw 需要 Node 22 或更新版本。
 </Note>
 
 ## 安装
@@ -61,7 +61,7 @@ OpenClaw 需要 Node 22 或更新版本。
 ## 从源码安装（开发）
 
 ```bash
-git clone https://github.com/openclaw/openclaw.git
+git clone https://github.com/sudoprivacy/sudoclaw.git
 cd openclaw
 pnpm install
 pnpm ui:build # 首次运行时会自动安装 UI 依赖
@@ -84,5 +84,5 @@ openclaw gateway --port 19001
 需要一个正在运行的 Gateway 网关。
 
 ```bash
-openclaw message send --target +15555550123 --message "Hello from OpenClaw"
+openclaw message send --target +15555550123 --message "Hello from SudoClaw"
 ```

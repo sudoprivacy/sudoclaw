@@ -1,6 +1,6 @@
-name: OpenClaw
+name: SudoClaw
 options:
-  bundleIdPrefix: ai.openclaw
+  bundleIdPrefix: ai.sudoclaw
   deploymentTarget:
     iOS: "18.0"
   xcodeVersion: "16.0"
@@ -10,23 +10,23 @@ settings:
     SWIFT_VERSION: "6.0"
 
 packages:
-  OpenClawKit:
-    path: ../shared/OpenClawKit
+  SudoClawKit:
+    path: ../shared/SudoClawKit
   Swabble:
     path: ../../Swabble
 
 schemes:
-  OpenClaw:
+  SudoClaw:
     shared: true
     build:
       targets:
-        OpenClaw: all
+        SudoClaw: all
     test:
       targets:
-        - OpenClawTests
+        - SudoClawTests
 
 targets:
-  OpenClaw:
+  SudoClaw:
     type: application
     platform: iOS
     configFiles:
@@ -35,14 +35,14 @@ targets:
     sources:
       - path: Sources
     dependencies:
-      - target: OpenClawShareExtension
+      - target: SudoClawShareExtension
         embed: true
-      - target: OpenClawWatchApp
-      - package: OpenClawKit
-      - package: OpenClawKit
-        product: OpenClawChatUI
-      - package: OpenClawKit
-        product: OpenClawProtocol
+      - target: SudoClawWatchApp
+      - package: SudoClawKit
+      - package: SudoClawKit
+        product: SudoClawChatUI
+      - package: SudoClawKit
+        product: SudoClawProtocol
       - package: Swabble
         product: SwabbleKit
       - sdk: AppIntents.framework
@@ -75,23 +75,23 @@ targets:
     settings:
       base:
         CODE_SIGN_IDENTITY: "Apple Development"
-        CODE_SIGN_ENTITLEMENTS: Sources/OpenClaw.entitlements
-        CODE_SIGN_STYLE: "$(OPENCLAW_CODE_SIGN_STYLE)"
-        DEVELOPMENT_TEAM: "$(OPENCLAW_DEVELOPMENT_TEAM)"
-        PRODUCT_BUNDLE_IDENTIFIER: "$(OPENCLAW_APP_BUNDLE_ID)"
-        PROVISIONING_PROFILE_SPECIFIER: "$(OPENCLAW_APP_PROFILE)"
+        CODE_SIGN_ENTITLEMENTS: Sources/SudoClaw.entitlements
+        CODE_SIGN_STYLE: "$(SUDOCLAW_CODE_SIGN_STYLE)"
+        DEVELOPMENT_TEAM: "$(SUDOCLAW_DEVELOPMENT_TEAM)"
+        PRODUCT_BUNDLE_IDENTIFIER: "$(SUDOCLAW_APP_BUNDLE_ID)"
+        PROVISIONING_PROFILE_SPECIFIER: "$(SUDOCLAW_APP_PROFILE)"
         SWIFT_VERSION: "6.0"
         SWIFT_STRICT_CONCURRENCY: complete
         ENABLE_APPINTENTS_METADATA: NO
     info:
       path: Sources/Info.plist
       properties:
-        CFBundleDisplayName: OpenClaw
+        CFBundleDisplayName: SudoClaw
         CFBundleIconName: AppIcon
         CFBundleURLTypes:
-          - CFBundleURLName: ai.openclaw.ios
+          - CFBundleURLName: ai.sudoclaw.ios
             CFBundleURLSchemes:
-              - openclaw
+              - sudoclaw
         CFBundleShortVersionString: "2026.3.1"
         CFBundleVersion: "20260301"
         UILaunchScreen: {}
@@ -101,17 +101,17 @@ targets:
           - audio
           - remote-notification
         BGTaskSchedulerPermittedIdentifiers:
-          - ai.openclaw.ios.bgrefresh
-        NSLocalNetworkUsageDescription: OpenClaw discovers and connects to your OpenClaw gateway on the local network.
+          - ai.sudoclaw.ios.bgrefresh
+        NSLocalNetworkUsageDescription: SudoClaw discovers and connects to your SudoClaw gateway on the local network.
         NSAppTransportSecurity:
           NSAllowsArbitraryLoadsInWebContent: true
         NSBonjourServices:
-          - _openclaw-gw._tcp
-        NSCameraUsageDescription: OpenClaw can capture photos or short video clips when requested via the gateway.
-        NSLocationWhenInUseUsageDescription: OpenClaw uses your location when you allow location sharing.
-        NSLocationAlwaysAndWhenInUseUsageDescription: OpenClaw can share your location in the background when you enable Always.
-        NSMicrophoneUsageDescription: OpenClaw needs microphone access for voice wake.
-        NSSpeechRecognitionUsageDescription: OpenClaw uses on-device speech recognition for voice wake.
+          - _sudoclaw-gw._tcp
+        NSCameraUsageDescription: SudoClaw can capture photos or short video clips when requested via the gateway.
+        NSLocationWhenInUseUsageDescription: SudoClaw uses your location when you allow location sharing.
+        NSLocationAlwaysAndWhenInUseUsageDescription: SudoClaw can share your location in the background when you enable Always.
+        NSMicrophoneUsageDescription: SudoClaw needs microphone access for voice wake.
+        NSSpeechRecognitionUsageDescription: SudoClaw uses on-device speech recognition for voice wake.
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
           - UIInterfaceOrientationPortraitUpsideDown
@@ -123,7 +123,7 @@ targets:
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
 
-  OpenClawShareExtension:
+  SudoClawShareExtension:
     type: app-extension
     platform: iOS
     configFiles:
@@ -132,22 +132,22 @@ targets:
     sources:
       - path: ShareExtension
     dependencies:
-      - package: OpenClawKit
+      - package: SudoClawKit
       - sdk: AppIntents.framework
     settings:
       base:
         CODE_SIGN_IDENTITY: "Apple Development"
-        CODE_SIGN_STYLE: "$(OPENCLAW_CODE_SIGN_STYLE)"
-        DEVELOPMENT_TEAM: "$(OPENCLAW_DEVELOPMENT_TEAM)"
+        CODE_SIGN_STYLE: "$(SUDOCLAW_CODE_SIGN_STYLE)"
+        DEVELOPMENT_TEAM: "$(SUDOCLAW_DEVELOPMENT_TEAM)"
         ENABLE_APPINTENTS_METADATA: NO
-        PRODUCT_BUNDLE_IDENTIFIER: "$(OPENCLAW_SHARE_BUNDLE_ID)"
-        PROVISIONING_PROFILE_SPECIFIER: "$(OPENCLAW_SHARE_PROFILE)"
+        PRODUCT_BUNDLE_IDENTIFIER: "$(SUDOCLAW_SHARE_BUNDLE_ID)"
+        PROVISIONING_PROFILE_SPECIFIER: "$(SUDOCLAW_SHARE_PROFILE)"
         SWIFT_VERSION: "6.0"
         SWIFT_STRICT_CONCURRENCY: complete
     info:
       path: ShareExtension/Info.plist
       properties:
-        CFBundleDisplayName: OpenClaw Share
+        CFBundleDisplayName: SudoClaw Share
         CFBundleShortVersionString: "2026.3.1"
         CFBundleVersion: "20260301"
         NSExtension:
@@ -160,31 +160,31 @@ targets:
               NSExtensionActivationSupportsImageWithMaxCount: 10
               NSExtensionActivationSupportsMovieWithMaxCount: 1
 
-  OpenClawWatchApp:
+  SudoClawWatchApp:
     type: application.watchapp2
     platform: watchOS
     deploymentTarget: "11.0"
     sources:
       - path: WatchApp
     dependencies:
-      - target: OpenClawWatchExtension
+      - target: SudoClawWatchExtension
     configFiles:
       Debug: Config/Signing.xcconfig
       Release: Config/Signing.xcconfig
     settings:
       base:
         ENABLE_APPINTENTS_METADATA: NO
-        PRODUCT_BUNDLE_IDENTIFIER: "$(OPENCLAW_WATCH_APP_BUNDLE_ID)"
+        PRODUCT_BUNDLE_IDENTIFIER: "$(SUDOCLAW_WATCH_APP_BUNDLE_ID)"
     info:
       path: WatchApp/Info.plist
       properties:
-        CFBundleDisplayName: OpenClaw
+        CFBundleDisplayName: SudoClaw
         CFBundleShortVersionString: "2026.3.1"
         CFBundleVersion: "20260301"
-        WKCompanionAppBundleIdentifier: "$(OPENCLAW_APP_BUNDLE_ID)"
+        WKCompanionAppBundleIdentifier: "$(SUDOCLAW_APP_BUNDLE_ID)"
         WKWatchKitApp: true
 
-  OpenClawWatchExtension:
+  SudoClawWatchExtension:
     type: watchkit2-extension
     platform: watchOS
     deploymentTarget: "11.0"
@@ -198,19 +198,19 @@ targets:
       Release: Config/Signing.xcconfig
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: "$(OPENCLAW_WATCH_EXTENSION_BUNDLE_ID)"
+        PRODUCT_BUNDLE_IDENTIFIER: "$(SUDOCLAW_WATCH_EXTENSION_BUNDLE_ID)"
     info:
       path: WatchExtension/Info.plist
       properties:
-        CFBundleDisplayName: OpenClaw
+        CFBundleDisplayName: SudoClaw
         CFBundleShortVersionString: "2026.3.1"
         CFBundleVersion: "20260301"
         NSExtension:
           NSExtensionAttributes:
-            WKAppBundleIdentifier: "$(OPENCLAW_WATCH_APP_BUNDLE_ID)"
+            WKAppBundleIdentifier: "$(SUDOCLAW_WATCH_APP_BUNDLE_ID)"
           NSExtensionPointIdentifier: com.apple.watchkit
 
-  OpenClawTests:
+  SudoClawTests:
     type: bundle.unit-test
     platform: iOS
     configFiles:
@@ -219,23 +219,23 @@ targets:
     sources:
       - path: Tests
     dependencies:
-      - target: OpenClaw
+      - target: SudoClaw
       - package: Swabble
         product: SwabbleKit
       - sdk: AppIntents.framework
     settings:
       base:
         CODE_SIGN_IDENTITY: "Apple Development"
-        CODE_SIGN_STYLE: "$(OPENCLAW_CODE_SIGN_STYLE)"
-        DEVELOPMENT_TEAM: "$(OPENCLAW_DEVELOPMENT_TEAM)"
-        PRODUCT_BUNDLE_IDENTIFIER: ai.openclaw.ios.tests
+        CODE_SIGN_STYLE: "$(SUDOCLAW_CODE_SIGN_STYLE)"
+        DEVELOPMENT_TEAM: "$(SUDOCLAW_DEVELOPMENT_TEAM)"
+        PRODUCT_BUNDLE_IDENTIFIER: ai.sudoclaw.ios.tests
         SWIFT_VERSION: "6.0"
         SWIFT_STRICT_CONCURRENCY: complete
-        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/OpenClaw.app/OpenClaw"
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/SudoClaw.app/SudoClaw"
         BUNDLE_LOADER: "$(TEST_HOST)"
     info:
       path: Tests/Info.plist
       properties:
-        CFBundleDisplayName: OpenClawTests
+        CFBundleDisplayName: SudoClawTests
         CFBundleShortVersionString: "2026.3.1"
         CFBundleVersion: "20260301"

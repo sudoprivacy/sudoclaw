@@ -28,7 +28,7 @@ describe("sessions", () => {
   };
 
   beforeAll(async () => {
-    fixtureRoot = await fs.mkdtemp(path.join(os.tmpdir(), "openclaw-sessions-suite-"));
+    fixtureRoot = await fs.mkdtemp(path.join(os.tmpdir(), "sudoclaw-sessions-suite-"));
   });
 
   afterAll(async () => {
@@ -36,7 +36,7 @@ describe("sessions", () => {
   });
 
   const withStateDir = <T>(stateDir: string, fn: () => T): T =>
-    withEnv({ OPENCLAW_STATE_DIR: stateDir }, fn);
+    withEnv({ SUDOCLAW_STATE_DIR: stateDir }, fn);
 
   async function createSessionStoreFixture(params: {
     prefix: string;
@@ -92,11 +92,11 @@ describe("sessions", () => {
       buildGroupDisplayName({
         provider: "discord",
         groupChannel: "#general",
-        space: "friends-of-openclaw",
+        space: "friends-of-sudoclaw",
         id: "123",
         key: "discord:group:123",
       }),
-    ).toBe("discord:friends-of-openclaw#general");
+    ).toBe("discord:friends-of-sudoclaw#general");
   });
 
   const resolveSessionKeyCases = [
@@ -500,9 +500,9 @@ describe("sessions", () => {
     expect(entry.lastProvider).toBeUndefined();
   });
 
-  it("derives session transcripts dir from OPENCLAW_STATE_DIR", () => {
+  it("derives session transcripts dir from SUDOCLAW_STATE_DIR", () => {
     const dir = resolveSessionTranscriptsDir(
-      { OPENCLAW_STATE_DIR: "/custom/state" } as NodeJS.ProcessEnv,
+      { SUDOCLAW_STATE_DIR: "/custom/state" } as NodeJS.ProcessEnv,
       () => "/home/ignored",
     );
     expect(dir).toBe(path.join(path.resolve("/custom/state"), "agents", "main", "sessions"));
@@ -535,7 +535,7 @@ describe("sessions", () => {
   });
 
   it("resolves cross-agent absolute sessionFile paths", () => {
-    const stateDir = path.resolve("/home/user/.openclaw");
+    const stateDir = path.resolve("/home/user/.sudoclaw");
     withStateDir(stateDir, () => {
       const bot2Session = path.join(stateDir, "agents", "bot2", "sessions", "sess-1.jsonl");
       // Agent bot1 resolves a sessionFile that belongs to agent bot2
@@ -548,7 +548,7 @@ describe("sessions", () => {
     });
   });
 
-  it("resolves cross-agent paths when OPENCLAW_STATE_DIR differs from stored paths", () => {
+  it("resolves cross-agent paths when SUDOCLAW_STATE_DIR differs from stored paths", () => {
     withStateDir(path.resolve("/different/state"), () => {
       const originalBase = path.resolve("/original/state");
       const bot2Session = path.join(originalBase, "agents", "bot2", "sessions", "sess-1.jsonl");
@@ -600,7 +600,7 @@ describe("sessions", () => {
   });
 
   it("resolveSessionFilePathOptions keeps explicit agentId alongside absolute store path", () => {
-    const storePath = "/tmp/openclaw/agents/main/sessions/sessions.json";
+    const storePath = "/tmp/sudoclaw/agents/main/sessions/sessions.json";
     const resolved = resolveSessionFilePathOptions({
       agentId: "bot2",
       storePath,
@@ -610,7 +610,7 @@ describe("sessions", () => {
   });
 
   it("resolves sibling agent absolute sessionFile using alternate agentId from options", () => {
-    const stateDir = path.resolve("/home/user/.openclaw");
+    const stateDir = path.resolve("/home/user/.sudoclaw");
     withStateDir(stateDir, () => {
       const mainStorePath = path.join(stateDir, "agents", "main", "sessions", "sessions.json");
       const bot2Session = path.join(stateDir, "agents", "bot2", "sessions", "sess-1.jsonl");
@@ -625,7 +625,7 @@ describe("sessions", () => {
   });
 
   it("falls back to derived transcript path when sessionFile is outside agent sessions directories", () => {
-    withStateDir(path.resolve("/home/user/.openclaw"), () => {
+    withStateDir(path.resolve("/home/user/.sudoclaw"), () => {
       const sessionFile = resolveSessionFilePath(
         "sess-1",
         { sessionFile: path.resolve("/etc/passwd") },
@@ -633,7 +633,7 @@ describe("sessions", () => {
       );
       expect(sessionFile).toBe(
         path.join(
-          path.resolve("/home/user/.openclaw"),
+          path.resolve("/home/user/.sudoclaw"),
           "agents",
           "bot1",
           "sessions",

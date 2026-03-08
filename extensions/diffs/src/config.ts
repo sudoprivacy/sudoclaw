@@ -1,4 +1,4 @@
-import type { OpenClawPluginConfigSchema } from "openclaw/plugin-sdk";
+import type { SudoClawPluginConfigSchema } from "sudoclaw/plugin-sdk";
 import {
   DIFF_INDICATORS,
   DIFF_LAYOUTS,
@@ -92,7 +92,7 @@ const DIFFS_PLUGIN_CONFIG_JSON_SCHEMA = {
   },
 } as const;
 
-export const diffsPluginConfigSchema: OpenClawPluginConfigSchema = {
+export const diffsPluginConfigSchema: SudoClawPluginConfigSchema = {
   safeParse(value: unknown) {
     if (value === undefined) {
       return { success: true, data: undefined };

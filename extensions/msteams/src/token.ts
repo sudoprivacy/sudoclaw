@@ -1,4 +1,4 @@
-import type { MSTeamsConfig } from "openclaw/plugin-sdk";
+import type { MSTeamsConfig } from "sudoclaw/plugin-sdk";
 
 export type MSTeamsCredentials = {
   appId: string;

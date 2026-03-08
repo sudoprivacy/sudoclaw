@@ -1,7 +1,7 @@
 ---
 read_when:
   - 调查运行时问题或故障
-summary: OpenClaw 常见故障的快速故障排除指南
+summary: SudoClaw 常见故障的快速故障排除指南
 title: 故障排除
 x-i18n:
   generated_at: "2026-02-03T10:09:42Z"
@@ -14,7 +14,7 @@ x-i18n:
 
 # 故障排除 🔧
 
-当 OpenClaw 出现异常时，以下是解决方法。
+当 SudoClaw 出现异常时，以下是解决方法。
 
 如果你只想快速分类问题，请先查看常见问题的[最初的六十秒](/help/faq#first-60-seconds-if-somethings-broken)。本页深入介绍运行时故障和诊断。
 
@@ -119,10 +119,10 @@ Doctor/service 将显示运行时状态（PID/最后退出）和日志提示。
 **日志：**
 
 - 优先：`openclaw logs --follow`
-- 文件日志（始终）：`/tmp/openclaw/openclaw-YYYY-MM-DD.log`（或你配置的 `logging.file`）
+- 文件日志（始终）：`/tmp/sudoprivacy/sudoclaw-YYYY-MM-DD.log`（或你配置的 `logging.file`）
 - macOS LaunchAgent（如果已安装）：`$OPENCLAW_STATE_DIR/logs/gateway.log` 和 `gateway.err.log`
 - Linux systemd（如果已安装）：`journalctl --user -u openclaw-gateway[-<profile>].service -n 200 --no-pager`
-- Windows：`schtasks /Query /TN "OpenClaw Gateway (<profile>)" /V /FO LIST`
+- Windows：`schtasks /Query /TN "SudoClaw Gateway (<profile>)" /V /FO LIST`
 
 **启用更多日志：**
 
@@ -295,7 +295,7 @@ openclaw gateway status
 
 ### "Agent failed before reply: Unknown model: anthropic/claude-haiku-3-5"
 
-OpenClaw 有意拒绝**较旧/不安全的模型**（尤其是那些更容易受到提示词注入攻击的模型）。如果你看到此错误，该模型名称已不再支持。
+SudoClaw 有意拒绝**较旧/不安全的模型**（尤其是那些更容易受到提示词注入攻击的模型）。如果你看到此错误，该模型名称已不再支持。
 
 **修复：**
 
@@ -322,7 +322,7 @@ openclaw status
 # 消息必须匹配 mentionPatterns 或显式提及；默认值在渠道 groups/guilds 中。
 # 多智能体：`agents.list[].groupChat.mentionPatterns` 覆盖全局模式。
 grep -n "agents\\|groupChat\\|mentionPatterns\\|channels\\.whatsapp\\.groups\\|channels\\.telegram\\.groups\\|channels\\.imessage\\.groups\\|channels\\.discord\\.guilds" \
-  "${OPENCLAW_CONFIG_PATH:-$HOME/.openclaw/openclaw.json}"
+  "${OPENCLAW_CONFIG_PATH:-$HOME/.sudoprivacy/sudoclaw.json}"
 ```
 
 **检查 3：** 检查日志
@@ -330,7 +330,7 @@ grep -n "agents\\|groupChat\\|mentionPatterns\\|channels\\.whatsapp\\.groups\\|c
 ```bash
 openclaw logs --follow
 # 或者如果你想快速过滤：
-tail -f "$(ls -t /tmp/openclaw/openclaw-*.log | head -1)" | grep "blocked\\|skip\\|unauthorized"
+tail -f "$(ls -t /tmp/sudoprivacy/sudoclaw-*.log | head -1)" | grep "blocked\\|skip\\|unauthorized"
 ```
 
 ### 配对码未到达
@@ -443,12 +443,12 @@ ls -la /path/to/your/image.jpg
 **检查 3：** 检查媒体日志
 
 ```bash
-grep "media\\|fetch\\|download" "$(ls -t /tmp/openclaw/openclaw-*.log | head -1)" | tail -20
+grep "media\\|fetch\\|download" "$(ls -t /tmp/sudoprivacy/sudoclaw-*.log | head -1)" | tail -20
 ```
 
 ### 高内存使用
 
-OpenClaw 在内存中保留对话历史。
+SudoClaw 在内存中保留对话历史。
 
 **修复：** 定期重启或设置会话限制：
 
@@ -464,7 +464,7 @@ OpenClaw 在内存中保留对话历史。
 
 ### "Gateway won't start — configuration invalid"
 
-当配置包含未知键、格式错误的值或无效类型时，OpenClaw 现在拒绝启动。
+当配置包含未知键、格式错误的值或无效类型时，SudoClaw 现在拒绝启动。
 这是为了安全而故意设计的。
 
 用 Doctor 修复：
@@ -602,13 +602,13 @@ curl -fsSL https://openclaw.ai/install.sh | bash
 ### Cloud Code Assist API 错误：invalid tool schema（400）。现在怎么办？
 
 这几乎总是**工具模式兼容性**问题。Cloud Code Assist
-端点接受 JSON Schema 的严格子集。OpenClaw 在当前 `main` 中清理/规范化工具
+端点接受 JSON Schema 的严格子集。SudoClaw 在当前 `main` 中清理/规范化工具
 模式，但修复尚未包含在最后一个版本中（截至
 2026 年 1 月 13 日）。
 
 修复清单：
 
-1. **更新 OpenClaw**：
+1. **更新 SudoClaw**：
    - 如果你可以从源代码运行，拉取 `main` 并重启 Gateway 网关。
    - 否则，等待包含模式清理器的下一个版本。
 2. 避免不支持的关键字如 `anyOf/oneOf/allOf`、`patternProperties`、
@@ -631,7 +631,7 @@ tccutil reset All bot.molt.mac.debug
 ```
 
 **修复 2：强制使用新的 Bundle ID**
-如果重置不起作用，在 [`scripts/package-mac-app.sh`](https://github.com/openclaw/openclaw/blob/main/scripts/package-mac-app.sh) 中更改 `BUNDLE_ID`（例如，添加 `.test` 后缀）并重新构建。这会强制 macOS 将其视为新应用。
+如果重置不起作用，在 [`scripts/package-mac-app.sh`](https://github.com/sudoprivacy/sudoclaw/blob/main/scripts/package-mac-app.sh) 中更改 `BUNDLE_ID`（例如，添加 `.test` 后缀）并重新构建。这会强制 macOS 将其视为新应用。
 
 ### Gateway 网关卡在"Starting..."
 
@@ -674,7 +674,7 @@ npm install -g openclaw@<version>
 
 ```bash
 # 在配置中打开跟踪日志：
-#   ${OPENCLAW_CONFIG_PATH:-$HOME/.openclaw/openclaw.json} -> { logging: { level: "trace" } }
+#   ${OPENCLAW_CONFIG_PATH:-$HOME/.sudoprivacy/sudoclaw.json} -> { logging: { level: "trace" } }
 #
 # 然后运行详细命令将调试输出镜像到标准输出：
 openclaw gateway --verbose
@@ -685,8 +685,8 @@ openclaw channels login --verbose
 
 | 日志                             | 位置                                                                                                                                                                                                                                                                                                                      |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Gateway 网关文件日志（结构化）   | `/tmp/openclaw/openclaw-YYYY-MM-DD.log`（或 `logging.file`）                                                                                                                                                                                                                                                              |
-| Gateway 网关服务日志（监管程序） | macOS：`$OPENCLAW_STATE_DIR/logs/gateway.log` + `gateway.err.log`（默认：`~/.openclaw/logs/...`；配置文件使用 `~/.openclaw-<profile>/logs/...`）<br />Linux：`journalctl --user -u openclaw-gateway[-<profile>].service -n 200 --no-pager`<br />Windows：`schtasks /Query /TN "OpenClaw Gateway (<profile>)" /V /FO LIST` |
+| Gateway 网关文件日志（结构化）   | `/tmp/sudoprivacy/sudoclaw-YYYY-MM-DD.log`（或 `logging.file`）                                                                                                                                                                                                                                                           |
+| Gateway 网关服务日志（监管程序） | macOS：`$OPENCLAW_STATE_DIR/logs/gateway.log` + `gateway.err.log`（默认：`~/.openclaw/logs/...`；配置文件使用 `~/.openclaw-<profile>/logs/...`）<br />Linux：`journalctl --user -u openclaw-gateway[-<profile>].service -n 200 --no-pager`<br />Windows：`schtasks /Query /TN "SudoClaw Gateway (<profile>)" /V /FO LIST` |
 | 会话文件                         | `$OPENCLAW_STATE_DIR/agents/<agentId>/sessions/`                                                                                                                                                                                                                                                                          |
 | 媒体缓存                         | `$OPENCLAW_STATE_DIR/media/`                                                                                                                                                                                                                                                                                              |
 | 凭证                             | `$OPENCLAW_STATE_DIR/credentials/`                                                                                                                                                                                                                                                                                        |
@@ -710,7 +710,7 @@ lsof -nP -iTCP:18789 -sTCP:LISTEN
 # 最近活动（RPC 日志尾部）
 openclaw logs --follow
 # 如果 RPC 宕机的备用方案
-tail -20 /tmp/openclaw/openclaw-*.log
+tail -20 /tmp/sudoprivacy/sudoclaw-*.log
 ```
 
 ## 重置所有内容
@@ -734,7 +734,7 @@ openclaw gateway restart           # 或：openclaw gateway
 1. 首先检查日志：`/tmp/openclaw/`（默认：`openclaw-YYYY-MM-DD.log`，或你配置的 `logging.file`）
 2. 在 GitHub 上搜索现有问题
 3. 提交新问题时包含：
-   - OpenClaw 版本
+   - SudoClaw 版本
    - 相关日志片段
    - 重现步骤
    - 你的配置（隐藏密钥！）

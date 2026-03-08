@@ -1,9 +1,9 @@
 {
-  "name": "@openclaw/mattermost",
+  "name": "@sudoclaw/mattermost",
   "version": "2026.3.1",
-  "description": "OpenClaw Mattermost channel plugin",
+  "description": "SudoClaw Mattermost channel plugin",
   "type": "module",
-  "openclaw": {
+  "sudoclaw": {
     "extensions": [
       "./index.ts"
     ],
@@ -17,7 +17,7 @@
       "order": 65
     },
     "install": {
-      "npmSpec": "@openclaw/mattermost",
+      "npmSpec": "@sudoclaw/mattermost",
       "localPath": "extensions/mattermost",
       "defaultChoice": "npm"
     }

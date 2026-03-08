@@ -15,14 +15,14 @@ x-i18n:
 
 # Hooks
 
-Hooks 提供了一个可扩展的事件驱动系统，用于响应智能体命令和事件自动执行操作。Hooks 从目录中自动发现，可以通过 CLI 命令管理，类似于 OpenClaw 中 Skills 的工作方式。
+Hooks 提供了一个可扩展的事件驱动系统，用于响应智能体命令和事件自动执行操作。Hooks 从目录中自动发现，可以通过 CLI 命令管理，类似于 SudoClaw 中 Skills 的工作方式。
 
 ## 入门指南
 
 Hooks 是在事件发生时运行的小脚本。有两种类型：
 
 - **Hooks**（本页）：当智能体事件触发时在 Gateway 网关内运行，如 `/new`、`/reset`、`/stop` 或生命周期事件。
-- **Webhooks**：外部 HTTP webhooks，让其他系统触发 OpenClaw 中的工作。参见 [Webhook Hooks](/automation/webhook) 或使用 `openclaw webhooks` 获取 Gmail 助手命令。
+- **Webhooks**：外部 HTTP webhooks，让其他系统触发 SudoClaw 中的工作。参见 [Webhook Hooks](/automation/webhook) 或使用 `openclaw webhooks` 获取 Gmail 助手命令。
 
 Hooks 也可以捆绑在插件中；参见 [插件](/tools/plugin#plugin-hooks)。
 
@@ -42,13 +42,13 @@ hooks 系统允许你：
 - 在发出 `/new` 时将会话上下文保存到记忆
 - 记录所有命令以供审计
 - 在智能体生命周期事件上触发自定义自动化
-- 在不修改核心代码的情况下扩展 OpenClaw 的行为
+- 在不修改核心代码的情况下扩展 SudoClaw 的行为
 
 ## 入门
 
 ### 捆绑的 Hooks
 
-OpenClaw 附带三个自动发现的捆绑 hooks：
+SudoClaw 附带三个自动发现的捆绑 hooks：
 
 - **💾 session-memory**：当你发出 `/new` 时将会话上下文保存到智能体工作区（默认 `~/.openclaw/workspace/memory/`）
 - **📝 command-logger**：将所有命令事件记录到 `~/.openclaw/logs/commands.log`
@@ -88,7 +88,7 @@ Hooks 从三个目录自动发现（按优先级顺序）：
 
 1. **工作区 hooks**：`<workspace>/hooks/`（每智能体，最高优先级）
 2. **托管 hooks**：`~/.openclaw/hooks/`（用户安装，跨工作区共享）
-3. **捆绑 hooks**：`<openclaw>/dist/hooks/bundled/`（随 OpenClaw 附带）
+3. **捆绑 hooks**：`<openclaw>/dist/hooks/bundled/`（随 SudoClaw 附带）
 
 托管 hook 目录可以是**单个 hook** 或 **hook 包**（包目录）。
 
@@ -219,7 +219,7 @@ export default myHandler;
     senderId?: string,
     workspaceDir?: string,
     bootstrapFiles?: WorkspaceBootstrapFile[],
-    cfg?: OpenClawConfig
+    cfg?: SudoClawConfig
   }
 }
 ```
@@ -247,7 +247,7 @@ export default myHandler;
 
 ### 工具结果 Hooks（插件 API）
 
-这些 hooks 不是事件流监听器；它们让插件在 OpenClaw 持久化工具结果之前同步调整它们。
+这些 hooks 不是事件流监听器；它们让插件在 SudoClaw 持久化工具结果之前同步调整它们。
 
 - **`tool_result_persist`**：在工具结果写入会话记录之前转换它们。必须是同步的；返回更新后的工具结果负载或 `undefined` 保持原样。参见 [智能体循环](/concepts/agent-loop)。
 
@@ -877,6 +877,6 @@ node -e "import('./path/to/handler.ts').then(console.log)"
 ## 另请参阅
 
 - [CLI 参考：hooks](/cli/hooks)
-- [捆绑 Hooks README](https://github.com/openclaw/openclaw/tree/main/src/hooks/bundled)
+- [捆绑 Hooks README](https://github.com/sudoprivacy/sudoclaw/tree/main/src/hooks/bundled)
 - [Webhook Hooks](/automation/webhook)
 - [配置](/gateway/configuration#hooks)

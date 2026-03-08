@@ -34,7 +34,7 @@ openclaw gateway --force
 pnpm gateway:watch
 ```
 
-- 配置热重载监视 `~/.openclaw/openclaw.json`（或 `OPENCLAW_CONFIG_PATH`）。
+- 配置热重载监视 `~/.sudoprivacy/sudoclaw.json`（或 `OPENCLAW_CONFIG_PATH`）。
   - 默认模式：`gateway.reload.mode="hybrid"`（热应用安全更改，关键更改时重启）。
   - 热重载在需要时通过 **SIGUSR1** 使用进程内重启。
   - 使用 `gateway.reload.mode="off"` 禁用。
@@ -72,7 +72,7 @@ pnpm gateway:watch
 
 - macOS：`bot.molt.<profile>`（旧版 `com.openclaw.*` 可能仍然存在）
 - Linux：`openclaw-gateway-<profile>.service`
-- Windows：`OpenClaw Gateway (<profile>)`
+- Windows：`SudoClaw Gateway (<profile>)`
 
 安装元数据嵌入在服务配置中：
 
@@ -237,14 +237,14 @@ openclaw logs --follow
 - `gateway status` 打印配置路径 + 探测目标以避免"localhost vs LAN 绑定"混淆和配置文件不匹配。
 - `gateway status` 在服务看起来正在运行但端口已关闭时包含最后一行 Gateway 网关错误。
 - `logs` 通过 RPC 尾随 Gateway 网关文件日志（无需手动 `tail`/`grep`）。
-- 如果检测到其他类似 Gateway 网关的服务，CLI 会发出警告，除非它们是 OpenClaw 配置文件服务。
+- 如果检测到其他类似 Gateway 网关的服务，CLI 会发出警告，除非它们是 SudoClaw 配置文件服务。
   我们仍然建议大多数设置**每台机器一个 Gateway 网关**；使用隔离的配置文件/端口进行冗余或救援机器人。参见[多个 Gateway 网关](/gateway/multiple-gateways)。
   - 清理：`openclaw gateway uninstall`（当前服务）和 `openclaw doctor`（旧版迁移）。
 - `gateway install` 在已安装时是无操作的；使用 `openclaw gateway install --force` 重新安装（配置文件/env/路径更改）。
 
 捆绑的 mac 应用：
 
-- OpenClaw.app 可以捆绑基于 Node 的 Gateway 网关中继并安装标记为
+- SudoClaw.app 可以捆绑基于 Node 的 Gateway 网关中继并安装标记为
   `bot.molt.gateway`（或 `bot.molt.<profile>`；旧版 `com.openclaw.*` 标签仍能干净卸载）的按用户 LaunchAgent。
 - 要干净地停止它，使用 `openclaw gateway stop`（或 `launchctl bootout gui/$UID/bot.molt.gateway`）。
 - 要重启，使用 `openclaw gateway restart`（或 `launchctl kickstart -k gui/$UID/bot.molt.gateway`）。
@@ -253,7 +253,7 @@ openclaw logs --follow
 
 ## 监管（systemd 用户单元）
 
-OpenClaw 在 Linux/WSL2 上默认安装 **systemd 用户服务**。我们
+SudoClaw 在 Linux/WSL2 上默认安装 **systemd 用户服务**。我们
 建议单用户机器使用用户服务（更简单的 env，按用户配置）。
 对于多用户或常驻服务器使用**系统服务**（无需 lingering，
 共享监管）。
@@ -265,7 +265,7 @@ OpenClaw 在 Linux/WSL2 上默认安装 **systemd 用户服务**。我们
 
 ```
 [Unit]
-Description=OpenClaw Gateway (profile: <profile>, v<version>)
+Description=SudoClaw Gateway (profile: <profile>, v<version>)
 After=network-online.target
 Wants=network-online.target
 
